@@ -3,7 +3,7 @@
 ## Project Overview
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Date:** 2025-2025  
+**Date:** 2025-2025 
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -24,6 +24,121 @@ The Quickest Path project aims to develop a software solution that calculates th
 - Develop an efficient algorithm to find the quickest path.
 - Ensure the software can handle large datasets.
 - Provide a user-friendly interface for input and output.
+
+## Project Folder Structure
+
+```bash
+2024-2025-project-3-quickest-path-team-2
+├── .gitignore
+├── bin
+├── documents
+│  ├── functional
+│  ├── images
+│  │  ├── functional
+│  │  ├── management
+│  │  ├── quality_Assurance
+│  │  └── technical
+│  ├── management
+│  ├── quality_Assurance
+│  ├── technical
+│  │  └── technical_specification.md
+│  └── user_Manual
+├── README.md
+├── src
+│  ├── data
+│  │  └── example.csv
+│  ├── software.cpp
+│  └── software.hpp
+└── test
+  └── test.cpp
+``` 
+
+## Conventions
+There are the conventions to follow during the project.
+
+### Naming Conventions
+|   Type    |   Example     |   Convention name |
+|:-         |:-             |:-                 |
+|Folder     |folder_Name    |camel_Snake_Case   |
+|File       |file_name      |snake_case         |
+|DEFINE     |DEFINE_WELL    |CONSTANT_CASE      |
+|typedef    |TPDF_STRING    |CONSTANT_CASE      |
+|const      |BestConstEver  |PascalCase         |
+|variable   |bestVarEver    |camelCase          |
+|function   |good_function()|snake_case         |
+|struct     |s_Struct       |camel_Snake_Case   |
+
+
+> [!WARNING]  
+> The types **DEFINE** and **typedef** uses the same convention, however typedef have for the first word an abbreviation then indicate the type used.
+
+>[!CAUTION]
+> Each structure have to have in their name the pre-fix "s_".
+
+### Files Conventions
+>[!NOTE]
+> Each .cpp file have to be joined with it's equivalent named .hpp, for instance if the file software.cpp is created the file software.hpp **HAVE** to be created.
+
+There is an example to use the different files.
+
+
+```cpp
+software.cpp
+    #include "software.hpp"
+    #define NICE_TEXT = "Hello,"
+
+
+    int declare_the_function(int bestIntEver) {
+        int newBestIntEver = bestIntEver;
+        newBestIntEver += bestIntEver;
+        return newBestIntEver;
+    }
+
+    void print_some_text(string NICE_TEXT) {
+        if (NICE_TEXT != "\0") {
+            std::cout << NICE_TEXT << " world!" << std::endl;
+        }
+        sdt::cout << "NICE_TEXT is empty." << std::endl;
+    }
+```
+>[!IMPORTANT]
+>The .cpp file is only used to implement the logical interaction in.
+> 
+```cpp
+software.hpp
+    #pragma once
+    #include <iostream>
+    
+    typedef struct Student{
+        string name;
+        unsigned short age;
+    } s_Student;
+
+    /*
+        This function double the value of itself.
+        params:
+            int bestIntEver
+        return: 
+            int newBestIntEver
+    */
+    int declare_the_function(int bestIntEver);
+    
+    /*
+        Permit the print the text given as parameter.
+        params:
+            string niceText;
+    */
+    void print_some_text(string niceText);
+```
+>[!CAUTION]
+>The .hpp file permit only to declare functions and comment the utility of each ones, giving also the parameters and what it return.
+
+> [!TIP]
+> ``` cpp
+> #pragma once
+> ```
+> Is a preprocessor directive used to prevent header files from being included multiple times.
+
 
 ## Requirements
 ### Functional Requirements
