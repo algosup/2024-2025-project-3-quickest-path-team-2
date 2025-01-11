@@ -2,11 +2,11 @@
 
 ---
 
-<h3>What's a RACI Matrix?</h3>
+## What's a RACI Matrix?
 
 A RACI Matrix serves as a table that provides clear delineation of the impact and roles and responsibilities of each team member, client, or stakeholder in the project.
 
-<h3>The Matrix</h3>
+## The Matrix
 
 | Name                      | Project Manager | Program Manager | Technical Leader | Software Engineer | Quality Assurance | Technical Writter| Client | Stakeholders |
 | ------------------------- | --------------- | --------------- | ---------------- | ----------------- | ----------------- |--------------| ------ | ------------ |
@@ -21,7 +21,7 @@ A RACI Matrix serves as a table that provides clear delineation of the impact an
 | User Manual        |                 | I               | C                | R             | C / I       | A / R      | I      |              |
 | Testing plan              | I               | C               | C                | C                 | A / R       | C      | I      |              |
 
-<h3>The Matrix Keys</h3>
+## The Matrix Keys
 
 | Letter                    | Name        | Description                                               |
 | ------------------------- | ----------- | --------------------------------------------------------- |

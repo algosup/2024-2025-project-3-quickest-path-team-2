@@ -1,0 +1,79 @@
+# Weekly report project: "Quickest Path". 
+# Week 1 (6th of january to 10th of january).
+
+## Overview
+
+### Project discovery
+
+This week our client gave us the call for tender in which we must produce an Algoritm able to calculate in time the quickest path between two landmarks in this case the roads of the United States of America.
+
+### Research procedure
+
+Since it's the beggining of a new project ressearch are mendatory to make sure that all requirement are understood with clarity by all team members.
+
+Most of us doesn't know how to create an algorithm, therefore we have done research about which type of algorithm shall we produce precisely. 
+
+### Conventions and organisation
+
+#### Coding covention
+
+The different coding conventions have been initiated to ensure clarity and conformity of the code and to make sur no issue are produced by coding differenciation.
+
+#### Folder organisation and conventions
+
+The overall project organisation has been structured for coordination between team members.
+
+*the entirety of the conventions are written on the technical specification*
+
+
+### Data validation tool
+
+A first version of the data validation tool has been produced to check if all information in the datasource are correct.
+
+### Signature system
+
+For copyright purposes we established two different signature, one obvious and the other one hidden so no one can just delete them out of our code.
+
+
+## Project Planning and management
+
+### KPI'S management 
+
+| KPI's                    | Progress |
+| ------------------------ | -------- |
+| Research                 | 100%       |
+| Functional specification | 5%       |
+| Technical specification  | 15%       |
+| Test Plan                | 0%       |
+| Data Validation Tool     | 90%     |
+| Algorithm development    | 0%       |
+| REST API development     | 0%       |
+| Weekly reports           | 20%      |
+
+### Gantt Charts
+
+A Gantt chart has been initiated to manage the project schedule in the most adventageous conditions as possible for our team.
+
+![Gantt Chart picture](/Documents/images/management/gantt_chart.png)
+
+A Gantt chart specified to the different aspect of the project code as also been added.
+
+![Code Gantt Chart picture](/Documents/images/management/code_gantt_chart.png)
+
+*You can get an acces to the two gantt charts [**here**](https://lucid.app/lucidspark/c79d5448-567f-43aa-923f-5bfc95fbbe10/edit?viewport_loc=-904%2C603%2C4042%2C2307%2CuDe-dIt-NWfS&invitationId=inv_b19ead6a-938a-4258-b436-b893ba401626)*
+
+### Team members time management
+To follow-up team's time management, a table has been created allowing us:
+
+- To track The different project time
+- Record team's overtime and absence
+- To calculate how much time team members have to catch up
+
+![Time management table](/Documents/images/management/time_management_table.png)
+
+## Objectives for next week
+
+Our objectives for next week are :
+- Do most of the functional specification and Test Plan.
+
+- Start the Algorithm

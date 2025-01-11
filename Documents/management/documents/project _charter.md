@@ -42,16 +42,23 @@ The objective of this project is to develop a <u>high-performance software solut
 
 | In Scope                         |
 | -------------------------------- |
-|Time and Space Complexity: Big O notation for the main algorithms.|
 |REST API Implementation: Demonstrating the ability to handle multiple formats (XML and JSON). |
-|Test Suite: Tests to validate correctness, performance, and compliance with the 10% approximation rule. |
-|Data Validation Tool: A utility to verify the integrity of the provided CSV file. 
+|Do a Test Suite with the 10% approximation rule. |
+|Produce a Data Validation Tool to check the datas in the given datasource|
+The product must works swiftly on typical laptops |
 
+<br>
+
+| Nice to have                            |
+| --------------------------------------- |
+| A visual design of the product          |
+
+<br>
 
 | Out of Scope                            |
 | --------------------------------------- |
-| Http design|
-|
+| The product works on Android and IOS    |
+| 
 
 ### Projects Milestones
 
