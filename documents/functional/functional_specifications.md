@@ -12,6 +12,8 @@
 
 ---
 
+</div>
+
 <details>
 <summary>Table of Contents</summary>
 
@@ -20,12 +22,14 @@
     - [1.1 Project Overview](#11-project-overview)
     - [1.2 Document Purpose](#12-document-purpose)
     - [1.3 Personas](#13-personas)
+    - [1.4 Stakeholders and Representatives](#14-stakeholders-and-representatives)
   - [2. Application Overview](#2-application-overview)
     - [2.1 What is our software used for?](#21-what-is-our-software-used-for)
     - [2.2 What the application used to work?](#22-what-the-application-used-to-work)
   - [3. Hardware/Software](#3-hardwaresoftware)
     - [3.1 Hardware](#31-hardware)
     - [3.2 Software](#32-software)
+    - [3.3 Signature](#33-signature)
   - [4. How to use it?](#4-how-to-use-it)
   - [5. Platforms compatibility](#5-platforms-compatibility)
     - [5.1 Windows](#51-windows)
@@ -39,31 +43,54 @@
   - [Glossary](#glossary)
 
 </details>
-</div>
 
 ## 1.Introduction
 
-<!--Add the name of all the persons in the Team-->
+This document is the functional specifications of the 3rd Project of the year called Quickest Path. You can found bellow the name and the role of each member of the team:
+
+| Name              | Role              | Description                                                                                                                                                                              | GitHub Link | LinkedIn Link |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| Mattéo LEFIN      | Project Manager   | Responsible for project management, including timelines, planning, and team coordination. Have a role in the choices of the functional aspects of the project                            | link        | link          |
+| Enoal ADAM        | Program Manager   | Decides of the functional aspects of the project, interfaces and so on. Manages functional specification development and client communication for the project.                           | link        | link          |
+| Guillaume DESPAUX | Technical Leader  | Guides technical decisions and translates functional requirements into scalable technical solutions. Choices the coding standards, how the language will be use into the project.        | link        | link          |
+| Mathis LEBEL      | Software Engineer | Develops and implements codebase, ensures code quality and is governed by technical aspects to create the software.                                                                      | link        | link          |
+| Michel RIFF       | Quality Assurance | Creates tests to validate the quality of the software, that is to say, search for any types of problems, find how to optimize the code and report these issues to the Software Engineer. | link        | link          |
+| Camille GAYAT     | Technical Writer  | Creates an understandable end-user documentation to facilitate the usage of the software.                                                                                                | link        | link          |
 
 ### 1.1 Project Overview
 
+The aim of the project is to create a software that find the quickest path between two landmarks in the United States. To achieve this request, we have to use the C++ language[^1]. We decide to name our software "QPS", aka "Quickest Path System", a played of words among GPS "Global Positioning System" and the name of the project "Quickest Path".
+
 ### 1.2 Document Purpose
 
-<!--Need to add a "If you reach for technical aspects of the project, refer you to the technical specification-->
+This document is here to provide all the functional specification of the project. We will cover topics such as who is able to use the software, how you can use the software (briefly), how it functionally works and the features we decide to skip for now but which can be implemented later.
+If you reach for technical aspects of the project, such as how the C++ works, the project conventions, how the algorithm is use specifically, please refer you to the [technical specification](../technical/technical_specification.md)
 
 ### 1.3 Personas
+
+**Workers** : All the workers who use an application to commute in order to avoid traffic jams and take the shortest/quickest route.
+**Travel buffs** : Persons who love travel around his country or the world and want to find the quickest way to go to his destination.
+**Map enthusiasts** : All the people who adore maps and love being part of a user community for a specific application.
+
+### 1.4 Stakeholders and Representatives
+
+| Representative           | Role   | Expectation                                                  |
+| ------------------------ | ------ | ------------------------------------------------------------ |
+| Franck JEANNIN (ALGOSUP) | Client | Project timelines respected and a usable software at the end |
 
 ## 2. Application Overview
 
 ### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
 
-### 2.2 What the application used to work?<!--The Algorithm and so on-->
+### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
 
 ## 3. Hardware/Software<!--Can be more precise-->
 
 ### 3.1 Hardware<!--Might be a performance section-->
 
-### 3.2 Software<!--Can be "User interface (UI)" for the Software--> 
+### 3.2 Software<!--Can be "User interface (UI)" for the Software ; UI is a nice to have but we have already the plan-->
+
+### 3.3 Signature<!--What I made Friday-->
 
 ## 4. How to use it?<!--How to use it briefly (use the CMD e.g.) but not how use it clearly-->
 
