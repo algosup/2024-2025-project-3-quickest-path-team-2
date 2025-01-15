@@ -26,9 +26,9 @@
   - [2. Application Overview](#2-application-overview)
     - [2.1 What is our software used for?](#21-what-is-our-software-used-for)
     - [2.2 What the application used to work?](#22-what-the-application-used-to-work)
-  - [3. Hardware/Software](#3-hardwaresoftware)
-    - [3.1 Hardware](#31-hardware)
-    - [3.2 Software](#32-software)
+  - [3. Software Aspects](#3-software-aspects)
+    - [3.1 Performance](#31-performance)
+    - [3.2 User Interface (aka UI)](#32-user-interface-aka-ui)
     - [3.3 Signature](#33-signature)
   - [4. How to use it?](#4-how-to-use-it)
   - [5. Platforms compatibility](#5-platforms-compatibility)
@@ -98,13 +98,29 @@ The final result looks like this --> <img src="..\images\functional\Final_Dijkst
 
 Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^6].
 
-## 3. Hardware/Software<!--Can be more precise-->
+## 3. Software Aspects
 
-### 3.1 Hardware<!--Might be a performance section-->
+This section will treat about the software performances, its interface and how we have turn the technical aspects into a user friendly interface into the command prompt[^7] *(abbreviated CMD after)*, an important aspect to avoid the user to be lost.
 
-### 3.2 Software<!--Can be "User interface (UI)" for the Software ; UI is a nice to have but we have already the plan-->
+### 3.1 Performance
+
+The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification file (including the landmarks), the CMD must finish the checking into 1 minutes maximum. After this time, consider the software as bugged and restart the process.
+When you enter your depart point and your destination, the API[^8] must respond within 1 second. As before, if you're still waiting after this period, please restart your research.
+Finally, the software have to indicate you the most optimized path, the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, this is why we strive to offer you the best service as possible!
+
+### 3.2 User Interface (aka UI)<!--UI is a nice to have but we have already the plan-->
+
+Firstly, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [7. Future improvements](#7-future-improvements) to know all enhancements we have planned to add so far).
+All the operations will happen on the CMD (the major interface of the software). Once the path file checked and your starting point defined as well as your arrival point on the CMD, a kind of internet page will be displayed with all the information the JSON[^4]/XML[^3] file has to contain.
+While you're waiting for the verification precess, a percentage bar <!--Need to be reviewed--> will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
+<!--Can be organized in major points-->
 
 ### 3.3 Signature<!--What I made Friday-->
+
+To ensure you have correctly downloaded our software, we added a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) and also into the interface on the CMD as you can see just below
+![The CMD Signature](..\images\functional\CMD_Signature.png)
+If this logo isn't here, you've probably downloaded a counterfeit software!
+<!--Need to see with the others if I also add the signature into the code-->
 
 ## 4. How to use it?<!--How to use it briefly (use the CMD e.g.) but not how use it clearly-->
 
@@ -129,3 +145,31 @@ Since this algorithm is needed to be implement by each person when he created hi
 ## 8. Complementary Information<!--Link to the others doc-->
 
 ## Glossary
+
+[^1]: 
+
+[^2]:
+
+[^3]:
+
+[^4]:
+
+[^5]:
+
+[^6]:
+
+[^7]:
+
+[^8]:
+
+[^9]:
+
+[^10]:
+
+[^11]:
+
+[^12]:
+
+[^13]:
+
+[^14]:
