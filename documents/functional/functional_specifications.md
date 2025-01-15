@@ -80,9 +80,23 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 ## 2. Application Overview
 
+In this section, we will talk about the software (in broad outline). To do this, some technical terms are going to be employed to ensure the consistency of the explanations. If you don't know the used worlds, you can take a gaze to the Glossary at the end (by the little chips next to them).
+
 ### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
 
+The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path.
+To know the error rate or any percentage directly link to a performance section, please look at [3.1 Hardware](#31-hardware).
+
 ### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
+
+To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
+<center>
+
+![Dijkstra Algorithm](..\images\functional\Disjktsra_Algorithm.gif) </center>
+
+The final result looks like this --> <img src="..\images\functional\Final_Dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+
+Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^6].
 
 ## 3. Hardware/Software<!--Can be more precise-->
 
