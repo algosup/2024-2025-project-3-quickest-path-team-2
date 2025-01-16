@@ -46,10 +46,6 @@
     - [7.3 Flexibility](#73-flexibility)
   - [8. Future improvements](#8-future-improvements)
   - [9. MoSCoW table](#9-moscow-table)
-    - [9.1 Must Have](#91-must-have)
-    - [9.2 Should Have](#92-should-have)
-    - [9.3 Could Have](#93-could-have)
-    - [9.4 Don't Have](#94-dont-have)
   - [10. Complementary Information](#10-complementary-information)
   - [Glossary](#glossary)
 
@@ -95,7 +91,7 @@ In this section, we will talk about the software (in broad outline). To do this,
 
 ### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
 
-The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3]) and you will be able to know the optimized path.
+The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path.
 To know the error rate or any percentage directly link to a performance section, please look at [3.1 Hardware](#31-hardware).
 
 ### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
@@ -129,7 +125,7 @@ Here, we will more speak as an interface than an UI strictly speaking because th
 While you're waiting for the verification precess, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
 #### C. Main program
-All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format  will be displayed.
+All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
 
 <!--Can be organized in major points-->
 
@@ -169,17 +165,65 @@ If this logo and our signature aren't here, you've probably downloaded a counter
 
 ## 9. MoSCoW table
 
-### 9.1 Must Have
+<style>
+  table {
+    width: 100%;
+  }
+  th, td {
+    width: 50%;
+  }
+</style>
 
-- Verification process of the CSV File
-- A fast (within reason) verification process
-- 
+<table>
+  <thead>
+    <tr>
+      <th>Must Have</th>
+      <th>Should Have</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        - A functional Dijkstra algorithm written in C++<br>
+        - Verification process of the CSV File<br>
+        - A fast (within reason) verification process<br>
+        - A pre-treatment process<br>
+        - A REST API able to accept requests and send responses in a JSON/XML format.<br>
+        - The time between 2 landmarks without exceeding a margin of error of 10%
+      </td>
+      <td>
+        - A loading bar that displayed the progress of the verification process<br>
+        - If there is any error, report it to the user<br>
+        - A readable response of the REST API (not in only one line)<br>
+        - A logo and a signature to validate to the user that he has correctly downloaded OUR software.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### 9.2 Should Have
-
-### 9.3 Could Have
-
-### 9.4 Don't Have
+<table>
+  <thead>
+    <tr>
+      <th>Could Have</th>
+      <th>Won't Have</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        - A downloadable method of the JSON/XML format response. <br>
+        - Before starting the pre-treatment process, a choice of the CSV the user want to utilize. <br> 
+        - User friendly requests to write on the command prompt. <br>
+        -  A local tab (kind of internet page) displaying the response <br>
+        - Indicate the margin of error of the process (if it exists)
+      </td>
+      <td>
+        - An application with graphical UI and so on <br>
+        - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## 10. Complementary Information<!--Link to the others doc-->
 
