@@ -35,8 +35,6 @@
     - [3.3 Signature](#33-signature)
   - [4. How to use it?](#4-how-to-use-it)
   - [5. Platforms compatibility](#5-platforms-compatibility)
-    - [5.1 Windows](#51-windows)
-    - [5.2 MacOS](#52-macos)
   - [6. Functional requirements](#6-functional-requirements)
     - [6.1 REST API implementation](#61-rest-api-implementation)
     - [6.2 Verification processing](#62-verification-processing)
@@ -92,7 +90,7 @@ In this section, we will talk about the software (in broad outline). To do this,
 ### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
 
 The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path.
-To know the error rate or any percentage directly link to a performance section, please look at [3.1 Hardware](#31-hardware).
+To know the error rate or any percentage directly link to a performance section, please look at the [performance](#31-performance) section.
 
 ### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
 
@@ -119,7 +117,7 @@ Finally, the software have to indicate you the most optimized path/the quickest 
 ### 3.2 User Interface (aka UI)<!--UI is a nice to have but we have already the plan-->
 
 #### A. Definition
-Here, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [7. Future improvements](#7-future-improvements) to know all enhancements we have planned to add so far).
+Here, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
 
 #### B. Verification
 While you're waiting for the verification precess, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
@@ -139,15 +137,29 @@ If this logo and our signature aren't here, you've probably downloaded a counter
 
 ## 4. How to use it?<!--How to use it briefly (use the command prompt e.g.) but not how use it clearly-->
 
+To use the software, you firstly need to verify the CSV file you want to use in order to check if it isn't corrupt.
+After this verification and if your file is safe to use, you can start the data pre-treatment process to minimize the research of the quickest way between you 2 points.
+Once is done, you can write the command to receive the JSON type data (by default) for the most optimized route you want to know.
+
+For further information, and/or more precise steps, please refer to the [User Manual](../user_Manual/user_manual.pdf).
+
 ## 5. Platforms compatibility<!--Platforms where the software are used and sure to be used on-->
 
-<!--Can transform the following under-titles in a array ; ALSO, indicate that the mobile platforms won't be compatible with the software for now-->
+Below are the platforms on which the software has been used and will definitely run:
 
-### 5.1 Windows
+|Specification|Windows|MacOS|
+|---|---|---|
+|Operating System[^9] Version|11 24H2|?|
+|Processor|Intel Core I7 10th Gen (1.30 Ghz Base)|?|
+|RAM|16 GB|?|
+|Storage|SSD 512 GB|?|
+|Resolution|1920x1080px|?|
 
-### 5.2 MacOS
+As you can see, no mobile platforms is indicate. Indeed, they are a future improvement because for now, the software is not compatible with them. If you want more information, you can check the [future improvements](#8-future-improvements) section.
 
 ## 6. Functional requirements
+
+In this section, we will speak about all the functional requirements that there are in the project. For this, we will become a little more technical than before (without being too much either). Fell free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
 ### 6.1 REST API implementation
 
@@ -215,8 +227,9 @@ If this logo and our signature aren't here, you've probably downloaded a counter
         - Before starting the pre-treatment process, a choice of the CSV the user want to utilize. <br> 
         - User friendly requests to write on the command prompt. <br>
         -  A local tab (kind of internet page) displaying the response <br>
-        - Indicate the margin of error of the process (if it exists)
-      </td>
+        - Indicate the margin of error of the process (if it exists) <br>
+        - A mobile version <!--Not sure at all-->
+      </td> 
       <td>
         - An application with graphical UI and so on <br>
         - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks
