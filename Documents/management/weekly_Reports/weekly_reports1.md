@@ -60,7 +60,7 @@ A Gantt chart specified to the different aspect of the project code as also been
 
 ![Code Gantt Chart picture](/Documents/images/management/code_gantt_chart.png)
 
-*You can get an acces to the two gantt charts [**here**](https://lucid.app/lucidspark/c79d5448-567f-43aa-923f-5bfc95fbbe10/edit?viewport_loc=-904%2C603%2C4042%2C2307%2CuDe-dIt-NWfS&invitationId=inv_b19ead6a-938a-4258-b436-b893ba401626)*
+*You can get an acces to the two gantt charts [**here**](/Documents/management/documents/gantt_charts.pdf)*.
 
 ### Team members time management
 To follow-up team's time management, a table has been created allowing us:
