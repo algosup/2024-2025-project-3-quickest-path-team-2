@@ -8,7 +8,7 @@
 **Team** : 2 <br>
 **Created by** : Enoal ADAM <br>
 **Creation Date** : 01/06/2024 <br>
-**Updated** : 01/06/2024 <br>
+**Updated** : 01/16/2024 <br>
 
 ---
 
@@ -29,17 +29,28 @@
   - [3. Software Aspects](#3-software-aspects)
     - [3.1 Performance](#31-performance)
     - [3.2 User Interface (aka UI)](#32-user-interface-aka-ui)
+      - [A. Definition](#a-definition)
+      - [B. Verification](#b-verification)
+      - [C. Main program](#c-main-program)
     - [3.3 Signature](#33-signature)
   - [4. How to use it?](#4-how-to-use-it)
   - [5. Platforms compatibility](#5-platforms-compatibility)
     - [5.1 Windows](#51-windows)
     - [5.2 MacOS](#52-macos)
-  - [6. Non-functional requirements](#6-non-functional-requirements)
-    - [6.1 Response/Performance \& Reliability](#61-responseperformance--reliability)
-    - [6.2 Testability](#62-testability)
-    - [6.3 Flexibility](#63-flexibility)
-  - [7. Future improvements](#7-future-improvements)
-  - [8. Complementary Information](#8-complementary-information)
+  - [6. Functional requirements](#6-functional-requirements)
+    - [6.1 REST API implementation](#61-rest-api-implementation)
+    - [6.2 Verification processing](#62-verification-processing)
+  - [7. Non-functional requirements](#7-non-functional-requirements)
+    - [7.1 Response/Performance \& Reliability](#71-responseperformance--reliability)
+    - [7.2 Testability](#72-testability)
+    - [7.3 Flexibility](#73-flexibility)
+  - [8. Future improvements](#8-future-improvements)
+  - [9. MoSCoW table](#9-moscow-table)
+    - [9.1 Must Have](#91-must-have)
+    - [9.2 Should Have](#92-should-have)
+    - [9.3 Could Have](#93-could-have)
+    - [9.4 Don't Have](#94-dont-have)
+  - [10. Complementary Information](#10-complementary-information)
   - [Glossary](#glossary)
 
 </details>
@@ -84,7 +95,7 @@ In this section, we will talk about the software (in broad outline). To do this,
 
 ### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
 
-The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path.
+The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3]) and you will be able to know the optimized path.
 To know the error rate or any percentage directly link to a performance section, please look at [3.1 Hardware](#31-hardware).
 
 ### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
@@ -100,29 +111,37 @@ Since this algorithm is needed to be implement by each person when he created hi
 
 ## 3. Software Aspects
 
-This section will treat about the software performances, its interface and how we have turn the technical aspects into a user friendly interface into the command prompt[^7] *(abbreviated CMD after)*, an important aspect to avoid the user to be lost.
+This section will treat about the software performances, its interface and how we have turn the technical aspects into a user friendly interface into the command prompt[^7], an important aspect to avoid the user to be lost.
 
 ### 3.1 Performance
 
-The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification file (including the landmarks), the CMD must finish the checking into 1 minutes maximum. After this time, consider the software as bugged and restart the process.
-When you enter your depart point and your destination, the API[^8] must respond within 1 second. As before, if you're still waiting after this period, please restart your research.
-Finally, the software have to indicate you the most optimized path, the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, this is why we strive to offer you the best service as possible!
+The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification file (including the landmarks), the command prompt must finish the checking as fast as possible, depending of the file size.
+Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program once you want to research for the quickest path.
+When you enter your depart point and your destination, the API[^8] must respond within 1 second.
+Finally, the software have to indicate you the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, this is why we strive to offer you the best service as possible!
 
 ### 3.2 User Interface (aka UI)<!--UI is a nice to have but we have already the plan-->
 
-Firstly, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [7. Future improvements](#7-future-improvements) to know all enhancements we have planned to add so far).
-All the operations will happen on the CMD (the major interface of the software). Once the path file checked and your starting point defined as well as your arrival point on the CMD, a kind of internet page will be displayed with all the information the JSON[^4]/XML[^3] file has to contain.
-While you're waiting for the verification precess, a percentage bar <!--Need to be reviewed--> will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
+#### A. Definition
+Here, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [7. Future improvements](#7-future-improvements) to know all enhancements we have planned to add so far).
+
+#### B. Verification
+While you're waiting for the verification precess, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
+
+#### C. Main program
+All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format  will be displayed.
+
 <!--Can be organized in major points-->
 
 ### 3.3 Signature<!--What I made Friday-->
 
-To ensure you have correctly downloaded our software, we added a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) and also into the interface on the CMD as you can see just below
-![The CMD Signature](..\images\functional\CMD_Signature.png)
-If this logo isn't here, you've probably downloaded a counterfeit software!
-<!--Need to see with the others if I also add the signature into the code-->
+To ensure you have correctly downloaded our software, we added a signature/logo into the interface on the command prompt as you can see just below
+![The command prompt Signature](..\images\functional\CMD_Signature.png)
+We also add a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) much more difficult to spot and remove.
 
-## 4. How to use it?<!--How to use it briefly (use the CMD e.g.) but not how use it clearly-->
+If this logo and our signature aren't here, you've probably downloaded a counterfeit software!
+
+## 4. How to use it?<!--How to use it briefly (use the command prompt e.g.) but not how use it clearly-->
 
 ## 5. Platforms compatibility<!--Platforms where the software are used and sure to be used on-->
 
@@ -132,17 +151,37 @@ If this logo isn't here, you've probably downloaded a counterfeit software!
 
 ### 5.2 MacOS
 
-## 6. Non-functional requirements
+## 6. Functional requirements
 
-### 6.1 Response/Performance & Reliability
+### 6.1 REST API implementation
 
-### 6.2 Testability<!--Redirecting through the Test plan is a good thing-->
+### 6.2 Verification processing
 
-### 6.3 Flexibility<!--The possibility to implement/improve our software ; can indicate that i'm going to develop on the Future Improvement just after-->
+## 7. Non-functional requirements
 
-## 7. Future improvements
+### 7.1 Response/Performance & Reliability
 
-## 8. Complementary Information<!--Link to the others doc-->
+### 7.2 Testability<!--Redirecting through the Test plan is a good thing-->
+
+### 7.3 Flexibility<!--The possibility to implement/improve our software ; can indicate that i'm going to develop on the Future Improvement just after-->
+
+## 8. Future improvements
+
+## 9. MoSCoW table
+
+### 9.1 Must Have
+
+- Verification process of the CSV File
+- A fast (within reason) verification process
+- 
+
+### 9.2 Should Have
+
+### 9.3 Could Have
+
+### 9.4 Don't Have
+
+## 10. Complementary Information<!--Link to the others doc-->
 
 ## Glossary
 
