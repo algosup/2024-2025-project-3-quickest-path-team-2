@@ -211,9 +211,6 @@ In this section, we will speak about all the functional requirements that there 
       </td>
     </tr>
   </tbody>
-</table>
-
-<table>
   <thead>
     <tr>
       <th>Could Have</th>
