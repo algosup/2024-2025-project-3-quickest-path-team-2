@@ -73,9 +73,32 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 ### 1.3 Personas
 
-**Workers** : All the workers who use an application to commute in order to avoid traffic jams and take the shortest/quickest route.
-**Travel buffs** : Persons who love travel around his country or the world and want to find the quickest way to go to his destination.
-**Map enthusiasts** : All the people who adore maps and love being part of a user community for a specific application.
+<details>
+<summary><strong>William the project manager</strong></summary>
+
+| **William** | **Description** | **Behavior** | **Needs** |
+|-------------|-----------------|--------------|-------------------------|
+| <center><img src="../images/functional/persona_1.jpeg" alt="Persona1" style="width: 1715px"></center> | William is a 42-year-old project manager living in New York, thriving in the bustling metropolitan environment. He prefers traditional methods for managing tasks, including commuting, and occasionally uses a smart commuting app for traffic updates. | William’s day is shaped by careful planning and efficiency. He follows a set routine, prioritizing tasks to meet deadlines. While he typically uses traditional methods for commuting, he checks a commuting app for traffic updates when needed. Outside of work, William relies on reliable methods to navigate local events and errands, making the most of his free time. | - Quick and Accurate Routes <br></br> - Real-Time Updates <br></br> - Ease of Use |
+
+</details>
+
+<details>
+<summary><strong>Karen, the photographer</strong></summary>
+
+| **Karen**   | **Description** | **Behavior** | **Needs** |
+|-------------|-----------------|--------------|-------------------------| 
+| <img src="../images/functional/persona_2.jpeg" alt="Persona2" style="width: 2500px"> | Karen is a 30-year-old freelance photographer passionate about traveling who enjoys exploring the diverse landscapes of the United States. She lives in a caravan and as a casual user of technology, she occasionally relies on a navigation app to find quicker routes and make the most of her time in new destinations. Outside of traveling, she enjoys immersing herself in local cultures. | Karen’s daily life is centered around flexibility and spontaneity. She enjoys planning her travels but prefers to go with the flow rather than sticking to a strict schedule. As a casual user of technology, she uses a navigation app for quicker routes when exploring new places. Outside of travel, Karen enjoys immersing herself in local cultures and events, making plans on the spot and navigating with simplicity. | - Real-Time Information <br></br> - Quick and Flexible Routes <br></br> - Offline functionality |
+
+</details>
+
+<details>
+<summary><strong>Walter, the student</strong></summary>
+
+| **Walter**  | **Description** | **Behavior** | **Needs** |
+|-------------|-----------------|--------------|-------------------------|
+| <img src="../images/functional/persona_3.jpeg" alt="Persona3" style="width: 2500px"> | Walter is a 21-year-old student in geography living in a small town, he is passionate about maps who enjoys exploring the intricacies of cartography. He actively uses a specialized mapping app to enhance his knowledge and connect with a vibrant user community. Walter shares insights, participates in discussions, and constantly engages with the technology to deepen his connection to his favorite hobby. | Walter’s daily life is driven by his passion for maps. He regularly uses a mapping app to explore new features, contribute to discussions, and learn from the mapping community. Outside of this hobby, he enjoys applying his geographic knowledge in everyday situations, using technology to improve his understanding of places and routes. | - Customizable options <br></br> - Advanced mapping features <br></br> - Community integration |
+
+</details>
 
 ### 1.4 Stakeholders and Representatives
 
@@ -97,9 +120,9 @@ To know the error rate or any percentage directly link to a performance section,
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 <center>
 
-![Dijkstra Algorithm](..\images\functional\Disjktsra_Algorithm.gif") </center>
+![Dijkstra Algorithm](..\images\functional\dijktsra_algorithm.gif) </center>
 
-The final result looks like this --> <img src="../images/functional/Final_Dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+The final result looks like this --> <img src="..\images\functional\final_dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
 
 Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^6].
 
@@ -128,7 +151,7 @@ All the operations will happen on the command prompt (the major interface of the
 ### 3.3 Signature
 
 To ensure you have correctly downloaded our software, we added a signature/logo into the interface on the command prompt as you can see just below
-![The command prompt Signature](../images/functional/CMD_Signature.png)
+![The command prompt Signature](../images/functional/cmd_signature.png)
 We also add a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) much more difficult to spot and remove.
 
 If this logo and our signature aren't here, you've probably downloaded a counterfeit software!
@@ -162,8 +185,6 @@ As you can see, no mobile platforms is indicate. Indeed, they are a future impro
 In this section, we will speak about all the functional requirements that there are in the project. For this, we will become a little more technical than before (without being too much either). Fell free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
 ### 6.1 REST API implementation
-
-
 
 ### 6.2 Verification processing
 
