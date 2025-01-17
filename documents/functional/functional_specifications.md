@@ -76,27 +76,27 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 <details>
 <summary><strong>William the project manager</strong></summary>
 
-| **William** | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------|
-| <center><img src="../images/functional/persona_1.jpeg" alt="Persona1" style="width: 1715px"></center> | William is a 42-year-old project manager living in New York, thriving in the bustling metropolitan environment. He prefers traditional methods for managing tasks, including commuting, and occasionally uses a smart commuting app for traffic updates. | William’s day is shaped by careful planning and efficiency. He follows a set routine, prioritizing tasks to meet deadlines. While he typically uses traditional methods for commuting, he checks a commuting app for traffic updates when needed. Outside of work, William relies on reliable methods to navigate local events and errands, making the most of his free time. | - Quick and Accurate Routes <br></br> - Real-Time Updates <br></br> - Ease of Use |
+| **William**                                                                                           | **Description**                                                                                                                                                                                                                                          | **Behavior**                                                                                                                                                                                                                                                                                                                                                                  | **Needs**                                                                         |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| <center><img src="../images/functional/persona_1.jpeg" alt="Persona1" style="width: 1715px"></center> | William is a 42-year-old project manager living in New York, thriving in the bustling metropolitan environment. He prefers traditional methods for managing tasks, including commuting, and occasionally uses a smart commuting app for traffic updates. | William’s day is shaped by careful planning and efficiency. He follows a set routine, prioritizing tasks to meet deadlines. While he typically uses traditional methods for commuting, he checks a commuting app for traffic updates when needed. Outside of work, William relies on reliable methods to navigate local events and errands, making the most of his free time. | - Quick and Accurate Routes <br> - Real-Time Updates <br> - Ease of Use |
 
 </details>
 
 <details>
 <summary><strong>Karen, the photographer</strong></summary>
 
-| **Karen**   | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------| 
-| <img src="../images/functional/persona_2.jpeg" alt="Persona2" style="width: 2500px"> | Karen is a 30-year-old freelance photographer passionate about traveling who enjoys exploring the diverse landscapes of the United States. She lives in a caravan and as a casual user of technology, she occasionally relies on a navigation app to find quicker routes and make the most of her time in new destinations. Outside of traveling, she enjoys immersing herself in local cultures. | Karen’s daily life is centered around flexibility and spontaneity. She enjoys planning her travels but prefers to go with the flow rather than sticking to a strict schedule. As a casual user of technology, she uses a navigation app for quicker routes when exploring new places. Outside of travel, Karen enjoys immersing herself in local cultures and events, making plans on the spot and navigating with simplicity. | - Real-Time Information <br></br> - Quick and Flexible Routes <br></br> - Offline functionality |
+| **Karen**                                                                            | **Description**                                                                                                                                                                                                                                                                                                                                                                                   | **Behavior**                                                                                                                                                                                                                                                                                                                                                                                                                   | **Needs**                                                                                       |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| <img src="../images/functional/persona_2.jpeg" alt="Persona2" style="width: 2500px"> | Karen is a 30-year-old freelance photographer passionate about traveling who enjoys exploring the diverse landscapes of the United States. She lives in a caravan and as a casual user of technology, she occasionally relies on a navigation app to find quicker routes and make the most of her time in new destinations. Outside of traveling, she enjoys immersing herself in local cultures. | Karen’s daily life is centered around flexibility and spontaneity. She enjoys planning her travels but prefers to go with the flow rather than sticking to a strict schedule. As a casual user of technology, she uses a navigation app for quicker routes when exploring new places. Outside of travel, Karen enjoys immersing herself in local cultures and events, making plans on the spot and navigating with simplicity. | - Real-Time Information <br> - Quick and Flexible Routes <br> - Offline functionality |
 
 </details>
 
 <details>
 <summary><strong>Walter, the student</strong></summary>
 
-| **Walter**  | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------|
-| <img src="../images/functional/persona_3.jpeg" alt="Persona3" style="width: 2500px"> | Walter is a 21-year-old student in geography living in a small town, he is passionate about maps who enjoys exploring the intricacies of cartography. He actively uses a specialized mapping app to enhance his knowledge and connect with a vibrant user community. Walter shares insights, participates in discussions, and constantly engages with the technology to deepen his connection to his favorite hobby. | Walter’s daily life is driven by his passion for maps. He regularly uses a mapping app to explore new features, contribute to discussions, and learn from the mapping community. Outside of this hobby, he enjoys applying his geographic knowledge in everyday situations, using technology to improve his understanding of places and routes. | - Customizable options <br></br> - Advanced mapping features <br></br> - Community integration |
+| **Walter**                                                                           | **Description**                                                                                                                                                                                                                                                                                                                                                                                                      | **Behavior**                                                                                                                                                                                                                                                                                                                                    | **Needs**                                                                                      |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| <img src="../images/functional/persona_3.jpeg" alt="Persona3" style="width: 2500px"> | Walter is a 21-year-old student in geography living in a small town, he is passionate about maps who enjoys exploring the intricacies of cartography. He actively uses a specialized mapping app to enhance his knowledge and connect with a vibrant user community. Walter shares insights, participates in discussions, and constantly engages with the technology to deepen his connection to his favorite hobby. | Walter’s daily life is driven by his passion for maps. He regularly uses a mapping app to explore new features, contribute to discussions, and learn from the mapping community. Outside of this hobby, he enjoys applying his geographic knowledge in everyday situations, using technology to improve his understanding of places and routes. | - Customizable options <br> - Advanced mapping features <br> - Community integration |
 
 </details>
 
@@ -168,13 +168,13 @@ For further information, and/or more precise steps, please refer to the [User Ma
 
 Below are the platforms on which the software has been used and will definitely run:
 
-|Specification|Windows|MacOS|
-|---|---|---|
-|Operating System[^9] Version|11 24H2|Sequoia 15.2|
-|Processor|Intel Core I7 10th Gen (1.30 Ghz Base)|Apple M3 10 Cores|
-|RAM|16 GB|16 GB|
-|Storage|SSD 512 GB|SSD 512 GB|
-|Resolution|1920x1080px|2560x1664px|
+| Specification                | Windows                                | MacOS             |
+| ---------------------------- | -------------------------------------- | ----------------- |
+| Operating System[^9] Version | 11 24H2                                | Sequoia 15.2      |
+| Processor                    | Intel Core I7 10th Gen (1.30 Ghz Base) | Apple M3 10 Cores |
+| RAM                          | 16 GB                                  | 16 GB             |
+| Storage                      | SSD 512 GB                             | SSD 512 GB        |
+| Resolution                   | 1920x1080px                            | 2560x1664px       |
 
 All information contained in this document is based on observations made from these devices.
 
@@ -185,6 +185,30 @@ As you can see, no mobile platforms is indicate. Indeed, they are a future impro
 In this section, we will speak about all the functional requirements that there are in the project. For this, we will become a little more technical than before (without being too much either). Fell free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
 ### 6.1 REST API implementation
+
+- **URL**: ``http://127.0.0.1:8080/quickest_path_system`` ; ``http://localhost:8080/quickest_path_system``
+- **Method** : GET
+- **Headers**: ``application/json`` or ``application/xml`` are supported
+- **Parameters**:
+| Name       | Type    | Value                            |
+| ---------- | ------- | -------------------------------- |
+| format     | string  | json or xml (as indicated above) |
+| landmark_1 | integer | Number between 1 and 23947347    |
+| landmark_2 | integer | Number between 1 and 23947347    |
+
+```
+GET /quickest_path_system?format=json&landmark_1=270595&landmark_2=30580 HTTP/1.1
+```
+>[!NOTE]
+> Host: 127.0.0.1:8080 (localhost)
+> Accept: application/json
+```
+GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
+```
+>[!NOTE]
+> Host: 127.0.0.1:8080 (localhost)
+> Accept: application/xml
+
 
 ### 6.2 Verification processing
 
