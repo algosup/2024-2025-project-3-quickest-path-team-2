@@ -97,9 +97,9 @@ To know the error rate or any percentage directly link to a performance section,
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 <center>
 
-![Dijkstra Algorithm](..\images\functional\Disjktsra_Algorithm.gif) </center>
+![Dijkstra Algorithm](..\images\functional\Disjktsra_Algorithm.gif") </center>
 
-The final result looks like this --> <img src="..\images\functional\Final_Dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+The final result looks like this --> <img src="../images/functional/Final_Dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
 
 Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^6].
 
@@ -109,7 +109,7 @@ This section will treat about the software performances, its interface and how w
 
 ### 3.1 Performance
 
-The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification file (including the landmarks), the command prompt must finish the checking as fast as possible, depending of the file size.
+The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending of the file size.
 Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program once you want to research for the quickest path.
 When you enter your depart point and your destination, the API[^8] must respond within 1 second.
 Finally, the software have to indicate you the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, this is why we strive to offer you the best service as possible!
@@ -125,17 +125,15 @@ While you're waiting for the verification precess, a percentage bar will be disp
 #### C. Main program
 All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
 
-<!--Can be organized in major points-->
-
-### 3.3 Signature<!--What I made Friday-->
+### 3.3 Signature
 
 To ensure you have correctly downloaded our software, we added a signature/logo into the interface on the command prompt as you can see just below
-![The command prompt Signature](..\images\functional\CMD_Signature.png)
+![The command prompt Signature](../images/functional/CMD_Signature.png)
 We also add a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) much more difficult to spot and remove.
 
 If this logo and our signature aren't here, you've probably downloaded a counterfeit software!
 
-## 4. How to use it?<!--How to use it briefly (use the command prompt e.g.) but not how use it clearly-->
+## 4. How to use it?
 
 To use the software, you firstly need to verify the CSV file you want to use in order to check if it isn't corrupt.
 After this verification and if your file is safe to use, you can start the data pre-treatment process to minimize the research of the quickest way between you 2 points.
@@ -143,17 +141,19 @@ Once is done, you can write the command to receive the JSON type data (by defaul
 
 For further information, and/or more precise steps, please refer to the [User Manual](../user_Manual/user_manual.pdf).
 
-## 5. Platforms compatibility<!--Platforms where the software are used and sure to be used on-->
+## 5. Platforms compatibility
 
 Below are the platforms on which the software has been used and will definitely run:
 
 |Specification|Windows|MacOS|
 |---|---|---|
-|Operating System[^9] Version|11 24H2|?|
-|Processor|Intel Core I7 10th Gen (1.30 Ghz Base)|?|
-|RAM|16 GB|?|
-|Storage|SSD 512 GB|?|
-|Resolution|1920x1080px|?|
+|Operating System[^9] Version|11 24H2|Sequoia 15.2|
+|Processor|Intel Core I7 10th Gen (1.30 Ghz Base)|Apple M3 10 Cores|
+|RAM|16 GB|16 GB|
+|Storage|SSD 512 GB|SSD 512 GB|
+|Resolution|1920x1080px|2560x1664px|
+
+All information contained in this document is based on observations made from these devices.
 
 As you can see, no mobile platforms is indicate. Indeed, they are a future improvement because for now, the software is not compatible with them. If you want more information, you can check the [future improvements](#8-future-improvements) section.
 
@@ -162,6 +162,8 @@ As you can see, no mobile platforms is indicate. Indeed, they are a future impro
 In this section, we will speak about all the functional requirements that there are in the project. For this, we will become a little more technical than before (without being too much either). Fell free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
 ### 6.1 REST API implementation
+
+
 
 ### 6.2 Verification processing
 
@@ -177,15 +179,6 @@ In this section, we will speak about all the functional requirements that there 
 
 ## 9. MoSCoW table
 
-<style>
-  table {
-    width: 100%;
-  }
-  th, td {
-    width: 50%;
-  }
-</style>
-
 <table>
   <thead>
     <tr>
@@ -196,17 +189,17 @@ In this section, we will speak about all the functional requirements that there 
   <tbody>
     <tr>
       <td>
-        - A functional Dijkstra algorithm written in C++<br>
-        - Verification process of the CSV File<br>
-        - A fast (within reason) verification process<br>
-        - A pre-treatment process<br>
-        - A REST API able to accept requests and send responses in a JSON/XML format.<br>
-        - The time between 2 landmarks without exceeding a margin of error of 10%
+        - A functional Dijkstra algorithm written in C++. <br>
+        - Verification process of the CSV File. <br>
+        - A verification process. <br>
+        - A pre-treatment process. <br>
+        - A REST API able to accept requests and send responses in a JSON/XML format. <br>
+        - The time between 2 landmarks without exceeding a margin of error of 10%.
       </td>
       <td>
-        - A loading bar that displayed the progress of the verification process<br>
-        - If there is any error, report it to the user<br>
-        - A readable response of the REST API (not in only one line)<br>
+        - A loading bar that displayed the progress of the verification process. <br>
+        - If there is any error, report it to the user. <br>
+        - A readable response of the REST API (not in only one line). <br>
         - A logo and a signature to validate to the user that he has correctly downloaded OUR software.
       </td>
     </tr>
@@ -223,13 +216,13 @@ In this section, we will speak about all the functional requirements that there 
         - A downloadable method of the JSON/XML format response. <br>
         - Before starting the pre-treatment process, a choice of the CSV the user want to utilize. <br> 
         - User friendly requests to write on the command prompt. <br>
-        -  A local tab (kind of internet page) displaying the response <br>
-        - Indicate the margin of error of the process (if it exists) <br>
-        - A mobile version <!--Not sure at all-->
+        -  A local tab (kind of internet page) displaying the response. <br>
+        - Indicate the margin of error of the process (if it exists).
       </td> 
       <td>
-        - An application with graphical UI and so on <br>
-        - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks
+        - An application with graphical UI and so on. <br>
+        - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks. <br>
+        - A mobile version.
       </td>
     </tr>
   </tbody>
