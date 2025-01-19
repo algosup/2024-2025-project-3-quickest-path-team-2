@@ -8,7 +8,7 @@
 **Team** : 2 <br>
 **Created by** : Enoal ADAM <br>
 **Creation Date** : 01/06/2024 <br>
-**Updated** : 01/16/2024 <br>
+**Updated** : 01/19/2024 <br>
 
 ---
 
@@ -42,9 +42,10 @@
       - [C. Response examples](#c-response-examples)
     - [6.2 Verification processing](#62-verification-processing)
   - [7. Non-functional requirements](#7-non-functional-requirements)
-    - [7.1 Response/Performance \& Reliability](#71-responseperformance--reliability)
-    - [7.2 Testability](#72-testability)
-    - [7.3 Flexibility](#73-flexibility)
+    - [7.1 Response \& Performance](#71-response--performance)
+    - [7.2 Reliability](#72-reliability)
+    - [7.3 Testability](#73-testability)
+    - [7.4 Flexibility](#74-flexibility)
   - [8. Future improvements](#8-future-improvements)
   - [9. MoSCoW table](#9-moscow-table)
   - [10. Complementary Information](#10-complementary-information)
@@ -71,7 +72,7 @@ The aim of the project is to create a software that find the quickest path betwe
 
 ### 1.2 Document Purpose
 
-This document is here to provide all the functional specification of the project. We will cover topics such as who is able to use the software, how you can use the software (briefly), how it functionally works and the features we decide to skip for now but which can be implemented later.
+This document is here to provide all the functional specification of the project. We will cover topics such as who is able to use the software, how you can use the software (briefly), how it functionally works and the features we decide to skip for now but which can be implemented later. <br>
 If you reach for technical aspects of the project, such as how the C++ works, the project conventions, how the algorithm is use specifically, please refer you to the [technical specification](../technical/technical_specification.md)
 
 ### 1.3 Personas
@@ -113,12 +114,12 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 In this section, we will talk about the software (in broad outline). To do this, some technical terms are going to be employed to ensure the consistency of the explanations. If you don't know the used worlds, you can take a gaze to the Glossary at the end (by the little chips next to them).
 
-### 2.1 What is our software used for?<!--Like a GPS to move between 2 points-->
+### 2.1 What is our software used for?
 
-The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path.
+The software is a GPS like, a software that use some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be send in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path. <br>
 To know the error rate or any percentage directly link to a performance section, please look at the [performance](#31-performance) section.
 
-### 2.2 What the application used to work?<!--The Algorithm (can be explained with a graph), the code (language) and more-->
+### 2.2 What the application used to work?
 
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 <center>
@@ -135,12 +136,12 @@ This section will treat about the software performances, its interface and how w
 
 ### 3.1 Performance
 
-The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending of the file size.
-Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program once you want to research for the quickest path.
-When you enter your depart point and your destination, the API[^8] must respond within 1 second.
+The software have to respects criteria to be competitive and follow ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending of the file size. <br>
+Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program once you want to research for the quickest path. <br>
+When you enter your depart point and your destination, the API[^8] must respond within 1 second. <br>
 Finally, the software have to indicate you the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, this is why we strive to offer you the best service as possible!
 
-### 3.2 User Interface (aka UI)<!--UI is a nice to have but we have already the plan-->
+### 3.2 User Interface (aka UI)
 
 #### A. Definition
 Here, we will more speak as an interface than an UI strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
@@ -155,6 +156,7 @@ All the operations will happen on the command prompt (the major interface of the
 
 To ensure you have correctly downloaded our software, we added a signature/logo into the interface on the command prompt as you can see just below
 ![The command prompt Signature](../images/functional/cmd_signature.png)
+
 We also add a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) much more difficult to spot and remove.
 
 If this logo and our signature aren't here, you've probably downloaded a counterfeit software!
@@ -224,7 +226,7 @@ GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
 Here are examples of the response format the API can send you (related to the examples above).
 
 **JSON format**:
-```
+```json
 {
   "time": 108,
   "steps": [
@@ -235,7 +237,7 @@ Here are examples of the response format the API can send you (related to the ex
 ```
 
 **XML format**:
-```
+```xml
 <response>
   <time>276</time>
   <steps>
@@ -253,13 +255,48 @@ Here are examples of the response format the API can send you (related to the ex
 
 ### 6.2 Verification processing
 
+The verification process make sure that the CSV file you provide and want to use is not corrupted and usable. It verify the info by the following features
+
+- heh
+- heh
+- heh
+- heh
+
+If your file is invalid and can't be used with our software, the error will be shown in detail with the error type and the problematic line.
+However, if your file is usable and don't comport any errors or issues, the process will complete and indicate that there are no errors.
+
 ## 7. Non-functional requirements
 
-### 7.1 Response/Performance & Reliability
+This section regroup all the non-functional requirements of the project, including the Response (Performance) and reliability, the testability and the flexibility of QPS.
 
-### 7.2 Testability<!--Redirecting through the Test plan is a good thing-->
+### 7.1 Response & Performance
 
-### 7.3 Flexibility<!--The possibility to implement/improve our software ; can indicate that i'm going to develop on the Future Improvement just after-->
+- The API have to respond in 1 second on a normal laptop.
+- The response must be in a JSON or XML format depending of the user's choice.
+- The given route need to be the fastest within a 10% margin of error.
+- The verification tool have to return a graph and check if the connectivity of each point is correct.
+
+### 7.2 Reliability
+
+- The verification process indicate if there are any errors so as not to mislead the customer
+- The format chosen by the user have to be correct, that's to say, the program should return a viable format exempt of errors.
+- All the sent error (by the REST API) specify what is the problem (type and problematic line).
+
+
+### 7.3 Testability<!--Redirecting through the Test plan is a good thing-->
+
+A [test plan](../quality_Assurance/test_plan.md) is written by the QA, listing how the code is verified and what is his method allowing anyone who have the competences to check the code too without changing the verification method. The checking process includes all tests which are closely or loosely related to the software.
+
+Therefore, this section refers to how the program's functionalities can be easily test and the ability to resume the test phase if the QA had to leave.
+
+### 7.4 Flexibility<!--Indicate that i'm going to develop on the Future Improvement just after-->
+
+This section indicates how much the code can be improved by future enhancements allowing any developer to add his print to the project if he feels like it. It also refers to the ability to the code to evolve following the needs and fixing any problems that is reported by both the user or the QA.
+
+When the software engineer write the code, he must ensure the following points:
+
+- The possibility to improve the software by extensions, future improvements *(the next section lists them)*.
+- The fact that is possible there are some bugs and should be fixed.
 
 ## 8. Future improvements
 
