@@ -37,6 +37,9 @@
   - [5. Platforms compatibility](#5-platforms-compatibility)
   - [6. Functional requirements](#6-functional-requirements)
     - [6.1 REST API implementation](#61-rest-api-implementation)
+      - [A. Route Description](#a-route-description)
+      - [B. Requests Examples](#b-requests-examples)
+      - [C. Response examples](#c-response-examples)
     - [6.2 Verification processing](#62-verification-processing)
   - [7. Non-functional requirements](#7-non-functional-requirements)
     - [7.1 Response/Performance \& Reliability](#71-responseperformance--reliability)
@@ -76,27 +79,27 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 <details>
 <summary><strong>William the project manager</strong></summary>
 
-| **William** | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------|
-| <center><img src="../images/functional/persona_1.jpeg" alt="Persona1" style="width: 1715px"></center> | William is a 42-year-old project manager living in New York, thriving in the bustling metropolitan environment. He prefers traditional methods for managing tasks, including commuting, and occasionally uses a smart commuting app for traffic updates. | William’s day is shaped by careful planning and efficiency. He follows a set routine, prioritizing tasks to meet deadlines. While he typically uses traditional methods for commuting, he checks a commuting app for traffic updates when needed. Outside of work, William relies on reliable methods to navigate local events and errands, making the most of his free time. | - Quick and accurate routes, Real-time updates, Ease of use. |
+| **William**                                                                                           | **Description**                                                                                                                                                                                                                                          | **Behavior**                                                                                                                                                                                                                                                                                                                                                                  | **Needs**                                                                         |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| <center><img src="../images/functional/persona_1.jpeg" alt="Persona1" style="width: 1715px"></center> | William is a 42-year-old project manager living in New York, thriving in the bustling metropolitan environment. He prefers traditional methods for managing tasks, including commuting, and occasionally uses a smart commuting app for traffic updates. | William’s day is shaped by careful planning and efficiency. He follows a set routine, prioritizing tasks to meet deadlines. While he typically uses traditional methods for commuting, he checks a commuting app for traffic updates when needed. Outside of work, William relies on reliable methods to navigate local events and errands, making the most of his free time. | - Quick and Accurate Routes <br> - Real-Time Updates <br> - Ease of Use |
 
 </details>
 
 <details>
 <summary><strong>Karen, the photographer</strong></summary>
 
-| **Karen**   | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------| 
-| <img src="../images/functional/persona_2.jpeg" alt="Persona2" style="width: 2500px"> | Karen is a 30-year-old freelance photographer passionate about traveling who enjoys exploring the diverse landscapes of the United States. She lives in a caravan and as a casual user of technology, she occasionally relies on a navigation app to find quicker routes and make the most of her time in new destinations. Outside of traveling, she enjoys immersing herself in local cultures. | Karen’s daily life is centered around flexibility and spontaneity. She enjoys planning her travels but prefers to go with the flow rather than sticking to a strict schedule. As a casual user of technology, she uses a navigation app for quicker routes when exploring new places. Outside of travel, Karen enjoys immersing herself in local cultures and events, making plans on the spot and navigating with simplicity. | - Real-time information, Quick and flexible routes, Offline functionality. |
+| **Karen**                                                                            | **Description**                                                                                                                                                                                                                                                                                                                                                                                   | **Behavior**                                                                                                                                                                                                                                                                                                                                                                                                                   | **Needs**                                                                                       |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| <img src="../images/functional/persona_2.jpeg" alt="Persona2" style="width: 2500px"> | Karen is a 30-year-old freelance photographer passionate about traveling who enjoys exploring the diverse landscapes of the United States. She lives in a caravan and as a casual user of technology, she occasionally relies on a navigation app to find quicker routes and make the most of her time in new destinations. Outside of traveling, she enjoys immersing herself in local cultures. | Karen’s daily life is centered around flexibility and spontaneity. She enjoys planning her travels but prefers to go with the flow rather than sticking to a strict schedule. As a casual user of technology, she uses a navigation app for quicker routes when exploring new places. Outside of travel, Karen enjoys immersing herself in local cultures and events, making plans on the spot and navigating with simplicity. | - Real-Time Information <br> - Quick and Flexible Routes <br> - Offline functionality |
 
 </details>
 
 <details>
 <summary><strong>Walter, the student</strong></summary>
 
-| **Walter**  | **Description** | **Behavior** | **Needs** |
-|-------------|-----------------|--------------|-------------------------|
-| <img src="../images/functional/persona_3.jpeg" alt="Persona3" style="width: 2500px"> | Walter is a 21-year-old student in geography living in a small town, he is passionate about maps who enjoys exploring the intricacies of cartography. He actively uses a specialized mapping app to enhance his knowledge and connect with a vibrant user community. Walter shares insights, participates in discussions, and constantly engages with the technology to deepen his connection to his favorite hobby. | Walter’s daily life is driven by his passion for maps. He regularly uses a mapping app to explore new features, contribute to discussions, and learn from the mapping community. Outside of this hobby, he enjoys applying his geographic knowledge in everyday situations, using technology to improve his understanding of places and routes. | - Customizable options, Advanced mapping features, Community integration. |
+| **Walter**                                                                           | **Description**                                                                                                                                                                                                                                                                                                                                                                                                      | **Behavior**                                                                                                                                                                                                                                                                                                                                    | **Needs**                                                                                      |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| <img src="../images/functional/persona_3.jpeg" alt="Persona3" style="width: 2500px"> | Walter is a 21-year-old student in geography living in a small town, he is passionate about maps who enjoys exploring the intricacies of cartography. He actively uses a specialized mapping app to enhance his knowledge and connect with a vibrant user community. Walter shares insights, participates in discussions, and constantly engages with the technology to deepen his connection to his favorite hobby. | Walter’s daily life is driven by his passion for maps. He regularly uses a mapping app to explore new features, contribute to discussions, and learn from the mapping community. Outside of this hobby, he enjoys applying his geographic knowledge in everyday situations, using technology to improve his understanding of places and routes. | - Customizable options <br> - Advanced mapping features <br> - Community integration |
 
 </details>
 
@@ -186,29 +189,67 @@ In this section, we will speak about all the functional requirements that there 
 
 ### 6.1 REST API implementation
 
+#### A. Route Description
+
 - **URL**: ``http://127.0.0.1:8080/quickest_path_system`` ; ``http://localhost:8080/quickest_path_system``
 - **Method** : GET
 - **Headers**: ``application/json`` or ``application/xml`` are supported
 - **Parameters**:
+
 | Name       | Type    | Value                            |
 | ---------- | ------- | -------------------------------- |
 | format     | string  | json or xml (as indicated above) |
 | landmark_1 | integer | Number between 1 and 23947347    |
 | landmark_2 | integer | Number between 1 and 23947347    |
 
+#### B. Requests Examples
+
+Here are examples of the requests you can write to obtain a valid response.
+
 ```
 GET /quickest_path_system?format=json&landmark_1=270595&landmark_2=30580 HTTP/1.1
 ```
 >[!NOTE]
-> Host: 127.0.0.1:8080 (localhost)
-> Accept: application/json
+> - Host: 127.0.0.1:8080 (localhost) <br>
+> - Accept: application/json
 ```
 GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
 ```
 >[!NOTE]
-> Host: 127.0.0.1:8080 (localhost)
-> Accept: application/xml
+> - Host: 127.0.0.1:8080 (localhost) <br>
+> - Accept: application/xml
 
+#### C. Response examples
+
+Here are examples of the response format the API can send you (related to the examples above).
+
+**JSON format**:
+```
+{
+  "time": 108,
+  "steps": [
+    { "landmark": 270595, "distance": 54 },
+    { "landmark": 30580, "distance": 54 }
+  ]
+}
+```
+
+**XML format**:
+```
+<response>
+  <time>276</time>
+  <steps>
+    <step>
+      <landmark>20006</landmark>
+      <distance>138</distance>
+    </step>
+    <step>
+      <landmark>209007</landmark>
+      <distance>138</distance>
+    </step>
+  </steps>
+</response>
+```
 
 ### 6.2 Verification processing
 
