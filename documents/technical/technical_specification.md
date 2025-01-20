@@ -56,6 +56,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 │  └── user_Manual                              
 ├── README.md   # a resume of what the project stand for and how to use it
 ├── src # folder where all the code will be implemented
+│  ├── build # folder where all the build files will be stored
 │  ├── data # folder where .csv file will be stored
 │  │  └── example.csv                           
 │  ├── includes # folder where .hpp file will be stored
@@ -210,7 +211,7 @@ We will use the following technologies:
    - C++17
    - Standard libraries
 2. REST API
-    - Libraries #TODO
+    - Libraries
     - GET method
 3. CSV
    - .csv file format
@@ -373,58 +374,204 @@ To check if the data provided is a DAG we have to use the following steps:
 
 1. Check if csv is available.
 2. Check if the csv is not empty.
-3. Separate the csv in parts that contains the 10% of the data.
-4. Create an **Adjacency Matrix** to save connections that exists.
-5. Verify if landmark_1 and landmark_2 are not the same.
-6. Verify if the time is not negative or equal to 0.
-7. Verify if the line's data is already in the Adjacency Matrix.
-8. Save each line in the Adjacency Matrix.
-9. Start over step 5 until the end of the chunk.
-10. Start over step 3 until the end of the csv.
-
->[!TIP]
-> The Adjacency Matrix is a two dimensional array that contains the connections between the nodes, the first dimension is the landmark_1 and the second is the landmark_2.
-
->[!WARNING]
-> The Adjacency Matrix is a vector to save connections that exists and store in response the weight of each path.
->
->```cmd
->Adjacency Matrix Example:
->
->   1  2  3  4  5  6  7  8  9 landmark_1
->1 0  0 89  0 12  0  0  0 34
->2 0  0 67  0  0  0  0  0  0
->3 0  0  0  0 56  0  0  0  0
->4 0  0  0  0  0 78  0  0  0
->5 0  0  0  0  0  0  0 23  0
->6 0  0  0  0  0  0  0  0 45
->7 0  0  0  0  0  0  0  0  0
->8 0  0  0  0  0  0  0  0  0
->9 0 12  0  0  0  0  0 34  0
->landmark_2
->```
-vector<vector<int> >;
->[!NOTE]
-> The Adjacency Matrix have to filed with [std::unordered_map](https://en.cppreference.com/w/cpp/container/unordered_map) to match the [Big(O)](#^x) Notation of O(1) to access the data:
-> ```cpp
-> std::unordered_map<int, std::unordered_map<int, int>> *AdjacencyMatrix.
->```
+3. Verify if landmark_1 and landmark_2 are not the same.
+4. Verify if the time is not negative or equal to 0.
+5. Verify if the line's data is already in the Adjacency Matrix.
+6. Start over step 3 until the end of the csv.
 
 ## Shortest Path Algorithm
 This part will define the algorithm used to find the quickest path between two nodes and how it should be implemented.
 
 ### Description
-The algorithm we will use are named **Dijkstra**, it permit the find the shortest path between two nodes taking in account the weight of the edges between the nodes of the graph.
+The algorithm we will use is named **Dijkstra**, it permit the find the shortest path between two vertices taking in account the weight of the edges between the vertices of the graph.
 
-```mermaid
+The algorithm is based on the following steps:
+1. Create a set of all vertices with the shortest distance from the source node.
+2. Initialize the distance of the source node to 0 and all other vertices to infinity.
+3. Set the source node as the current node.
+4. For each neighbor of the current node, calculate the distance from the source node.
+5. If the calculated distance is less than the current distance, update the distance.
+6. Mark the current node as visited and remove it from the set.
+7. If the destination node is reached or the set is empty, stop the algorithm.
+8. Repeat steps 3-7 until the destination node is reached.
 
-```
+<div style="text-align: center">
+<img src="../images/technical/dijkstra.gif" alt="Dijkstra Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
+<p>Final Path of weight 28: <span style="color:lime">A -> B -> D -> F -> G -> H -> I -> L -> M -> N -> T</span></p>
+</div>
+
+|Vertices|Shortest Path From A|Visited|
+|:-:|:-:|:-:|
+|<span style="color:lime">A</span>|<span style="color:lime">0</span>|True|
+|<span style="color:lime">B</span>|<span style="color:lime">4</span>|True|
+|<span style="color:red">C</span>|2|True|
+|<span style="color:lime">D</span>|<span style="color:lime">5</span>|True|
+|<span style="color:red">E</span>|6|False|
+|<span style="color:lime">F</span>|<span style="color:lime">2</span>|True|
+|<span style="color:lime">G</span>|<span style="color:lime">8</span>|True|
+|<span style="color:lime">H</span>|<span style="color:lime">15</span>|True|
+|<span style="color:lime">I</span>|<span style="color:lime">18</span>|True|
+|<span style="color:red">J</span>|19|True|
+|<span style="color:red">K</span>|24|False|
+|<span style="color:lime">L</span>|<span style="color:lime">20</span>|True|
+|<span style="color:lime">M</span>|<span style="color:lime">25</span>|True|
+|<span style="color:lime">N</span>|<span style="color:lime">26</span>|True|
+|<span style="color:red">O</span>|35|False|
+|<span style="color:lime">T</span>|<span style="color:lime">28</span>|True|
 
 ### Pseudocode
-Provide pseudocode for the algorithm.
+#### Node Structure
+The nodes will be created as a structure with the following attributes:
+- **landmark1:** The starting node.
+- **landmark2:** The ending node.
+- **weight:** The time taken to travel between the nodes.
+
+```cpp
+typedef struct Node {
+    int landmark1;
+    int landmark2
+    int weight;         
+} s_Node;
+```
+>[!CAUTION]
+> This current structure can be modified to fit the needs of the Adjacency List or the Graph Structure.
+
+#### Adjacency List / Graph Structure
+The adjacency list will be created as an array of nodes with the following attributes:
+- **size:** The number of nodes in the graph.
+- **list:** The array of nodes representing the adjacency list.
+
+```cpp
+typedef struct AdjacencyList {
+    int size;       // Number of nodes in the graph
+    s_Node *list;   // Array of nodes representing the adjacency list
+} s_AdjacencyList;
+```
+>[!IMPORTANT]
+> Time complexity:
+> - **Insertion:** O(1) for each edge
+> - **Lookup:** O(V) for finding an edge where V is the number of vertices
+> - **Space complexity:** O(V + E) where V is the number of vertices and E is the number of edges
+> 
+> Memory management:
+> - Requires manual memory management to free the memory allocated for the nodes and the adjacency list
+---
+<div style="text-align: center">
+<strong>OR with</strong>
+
+</div>
+
+```cpp
+vector< <pair<int, int> > adj[N]; // Adjacency list for vector of pair of int, int with N nodes
+```
+>[!IMPORTANT]
+> Time complexity:
+> - **Insertion:** O(1) for each edge due to dynamic resizing of the vector
+> - **Lookup:** O(V) for finding an edge where V is the number of vertices
+> - **Space complexity:** O(V + E) where V is the number of vertices and E is the number of edges
+> 
+> Memory management:
+> - Automatic memory management by the vector class
+> - More flexible and easier to use than manual memory management
+> - Can be slower due to dynamic resizing of the vector
+---
+<div style="text-align: center">
+<strong>OR with</strong>
+</div>
+
+```cpp
+unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordered_map of int, unordered_map of int, int
+```
+>[!IMPORTANT]
+> Time complexity:
+> - **Insertion:** O(1) for each edge
+> - **Lookup:** O(1) for finding an edge
+> - **Space complexity:** O(V + E) where V is the number of vertices and E is the number of edges
+>
+> Memory management:
+> - Automatic memory management by the unordered_map class
+> - Faster than vector due to constant time lookup
+> - Requires more memory than vector due to hash table overhead
+---
 
 ## REST API
-YES[^1]
+### Overview
+The REST API will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON and XML. The response have to be less than one second. 
+
+### Dependencies
+- CMake[^x]
+- Asio[^x]
+- Boost[^x]
+- Crow[^x]
+
+### Installation
+#### Windows
+#### macOs
+1. You will have to install [Homebrew]("https://brew.sh") to install the dependencies.  
+2. You will have to install the following dependencies:
+```bash
+brew install cmake asio boost   #Install cmake, asio and boost
+```
+3. Download the `crow_all.h` file from the [Crow]("https://github.com/CrowCpp/Crow/releases/tag/v1.2.0") repository.
+4. Place the `crow_all.h` at the same root from your `main.cpp` of your api.
+5. Create a file `CMakeLists.txt` at the same root from your `main.cpp` of your api that will contains the following:
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(CrowExample)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Boost REQUIRED)
+
+include_directories(${Boost_INCLUDE_DIRS} ./include)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+
+add_executable(CrowExample main.cpp)  # Replace `main.cpp` by the name of your main file
+
+```
+6. Create a file `main.cpp` at the same root from your `CMakeLists.txt` that will contains the following:
+```cpp
+#include "crow_all.h"
+    int main() {
+    // Create an instance of the Crow application
+    crow::SimpleApp app;
+
+    // Example of a GET request with the route /api/user
+    CROW_ROUTE(app, "/api/user").methods(crow::HTTPMethod::GET)
+    ([]() {
+        crow::json::wvalue response;
+        response["name"] = "John Doe";
+        response["age"] = 30;
+        response["status"] = "success";
+        return response;
+    });
+
+    // Run the server
+    std::cout << "Server running on http://localhost:8080\n";
+    app.port(8080).multithreaded().run();   
+    return 0;
+}
+```
+7. Run the following command to build the project:
+```bash
+cmake .; make       #From the root folder   (execute the CMakeLists.txt)
+cmake ..; make      #From the build folder  (execute the CMakeLists.txt)
+```
+8. Run the following command to run the project:
+```bash
+./CrowExample      #From the build folder   
+```
+
+#### Linux
+
+### API Endpoints
+Since the API will be using only the GET methods, for a unique endpoint, the following endpoint will be used:
+- **GET `/api/shortest-path?:landmark_1&:landmark_2`** Returns the shortest path and total time between two nodes in JSON format.
+
+>[!NOTE]
+> When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000`
+
 
 ## User Interface
 ### Input
