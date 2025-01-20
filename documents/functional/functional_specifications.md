@@ -135,9 +135,18 @@ To know the error rate or any percentage directly link to a performance section,
 
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 
-![Dijkstra Algorithm](..\images\functional\dijktsra_algorithm.gif)
+<div style="text-align: center">
+<img src="../images/functional/dijkstra_algorithm.gif" alt="Dijkstra Algorithm">
+</div>
 
-The final result looks like this --> <img src="..\images\functional\final_dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+<br>
+
+<div style="display: flex; align-items: center;">
+    <p style="margin-right: 10px;">The final result looks like this --></p>
+    <img src="../images/functional/final_dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+</div>
+
+<br>
 
 Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^1].
 
