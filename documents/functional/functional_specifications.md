@@ -160,13 +160,13 @@ Finally, the software has to indicate the most optimized path/the quickest path,
 
 ### 3.2 User Interface (aka UI)
 
-#### A. Definition
+#### 3.2.1 Definition
 Here, we will more speak as an interface than an UI[^12] strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
 
-#### B. Verification
+#### 3.2.2 Verification
 While you're waiting for the verification precess, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
-#### C. Main program
+#### 3.2.3 Main program
 All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
 
 ### 3.3 Signature
@@ -209,7 +209,7 @@ In this section, we will discuss all the functional requirements of the project.
 
 ### 6.1 REST API implementation
 
-#### A. Route Description
+#### 6.1.1 Route Description
 
 - **URL**: ``http://127.0.0.1:8080/quickest_path_system`` ; ``http://localhost:8080/quickest_path_system``
 - **Method** : GET
@@ -222,7 +222,7 @@ In this section, we will discuss all the functional requirements of the project.
 | landmark_1 | integer | Number between 1 and 23947347    |
 | landmark_2 | integer | Number between 1 and 23947347    |
 
-#### B. Requests Examples
+#### 6.1.2 Requests Examples
 
 Here are examples of the requests[^10] you can write to obtain a valid response.
 
@@ -239,7 +239,7 @@ GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
 > - Host: 127.0.0.1:8080 (localhost) <br>
 > - Accept: application/xml
 
-#### C. Response examples
+#### 6.1.3 Response examples
 
 Here are examples of the response format the API[^7] can send you (related to the examples above).
 
