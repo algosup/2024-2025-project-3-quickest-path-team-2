@@ -135,15 +135,12 @@ To know the error rate or any percentage directly link to a performance section,
 
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 
-<div style="text-align: center">
 <img src="../images/functional/dijkstra_algorithm.gif" alt="Dijkstra Algorithm">
-</div>
 
 <br>
 
-<div style="display: flex; align-items: center;">
-    <p style="margin-right: 10px;">The final result looks like this --></p>
-    <img src="../images/functional/final_dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
+<div style="align-items: center">
+The final result looks like this --> <img src="../images/functional/final_dijkstra.png" alt="Dijkstra Final Path" style="width: 250px">
 </div>
 
 <br>
