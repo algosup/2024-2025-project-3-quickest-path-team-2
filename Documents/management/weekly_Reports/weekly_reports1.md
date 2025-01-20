@@ -41,11 +41,13 @@ For copyright purposes we established two different signature, one obvious and t
 
 | KPI's                    | Progress |
 | ------------------------ | -------- |
-| Research                 | 100%       |
+| Research                 | 100%     |
 | Functional specification | 5%       |
-| Technical specification  | 15%       |
+| Technical specification  | 15%      |
 | Test Plan                | 0%       |
-| Data Validation Tool     | 90%     |
+| Data Validation Tool     | 90%      |
+| User manual              | 0%      |
+|Pre procession            | 0%      |
 | Algorithm development    | 0%       |
 | REST API development     | 0%       |
 | Weekly reports           | 20%      |
