@@ -25,3 +25,4 @@ Icon?
 # Ignore macOS resource fork files
 .Spotlight-V100
 .Trashes
+*.DS_store
