@@ -56,7 +56,7 @@
 
 ## 1.Introduction
 
-This document is the functional specification of the 3rd Project of the year called Quickest Path. You can found below the name and the role of each member of the team:
+This document is the functional specification of the 3rd Project of the year called Quickest Path. You can find below the name and the role of each member of the team:
 
 | Name              | Role              | Description                                                                                                                                                                                  | GitHub Link                                                       | LinkedIn Link                                                                       |
 | ----------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -69,7 +69,7 @@ This document is the functional specification of the 3rd Project of the year cal
 
 ### 1.1 Project Overview
 
-The aim of the project is to create a software that find the quickest path between two landmarks in the United States. To achieve this request, we have to use the C++ language[^1]. We decided to name our software "QPS", aka "Quickest Path System", a play on words among GPS "Global Positioning System" and the name of the project "Quickest Path".
+The aim of the project is to create a software that finds the quickest path between two landmarks in the United States. To achieve this request, we have to use the C++ language[^1]. We decided to name our software "QPS", aka "Quickest Path System", a play on words among GPS "Global Positioning System" and the name of the project "Quickest Path".
 
 ### 1.2 Document Purpose
 
@@ -153,7 +153,7 @@ This section will treat about the software performances, its interface and how w
 
 ### 3.1 Performance
 
-The software has to respect criteria to be competitive and follows ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending on the file size. <br>
+The software has to respect criteria to be competitive and follow our objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending on the file size. <br>
 Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program when you want to search for the quickest path. <br>
 When you enter your departure point and your destination, the API[^7] must respond within 1 second. <br>
 Finally, the software has to indicate the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, which is why we strive to offer you the best service possible!
@@ -164,7 +164,7 @@ Finally, the software has to indicate the most optimized path/the quickest path,
 Here, we will more speak as an interface than an UI[^12] strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
 
 #### 3.2.2 Verification
-While you're waiting for the verification process, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
+While you're waiting for the verification process, a percentage bar will be displayed to avoid leaving you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
 #### 3.2.3 Main program
 All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
@@ -227,13 +227,13 @@ In this section, we will discuss all the functional requirements of the project.
 Here are examples of the requests[^10] you can write to obtain a valid response.
 
 ```
-GET /quickest_path_system?format=json&landmark_1=270595&landmark_2=30580 HTTP/1.1
+GET /api/shortest-path?landmark_1=1&landmark_2=1000/json
 ```
 >[!NOTE]
 > - Host: 127.0.0.1:8080 (localhost) <br>
 > - Accept: application/json
 ```
-GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
+GET /api/shortest-path?landmark_1=1&landmark_2=1000/xml
 ```
 >[!NOTE]
 > - Host: 127.0.0.1:8080 (localhost) <br>
@@ -244,31 +244,48 @@ GET /quickest_path_system?format=xml&landmark_1=20006&landmark_2=209007 HTTP/1.1
 Here are examples of the response format the API[^7] can send you (related to the examples above).
 
 **JSON format**:
-```json
+ ```json
 {
-  "time": 108,
-  "steps": [
-    { "landmark": 270595, "distance": 54 },
-    { "landmark": 30580, "distance": 54 }
+  "path": [
+    {
+      "landmark_1": 1,
+      "landmark_2": 250,
+      "time": 200
+    },
+    {
+      "landmark_1": 250,
+      "landmark_2": 200,
+      "time": 1000
+    },
+    {
+      "landmark_1": 200,
+      "landmark_2": 1000,
+      "time": 64229
+    }
   ]
 }
 ```
 
 **XML format**:
 ```xml
-<response>
-  <time>276</time>
-  <steps>
-    <step>
-      <landmark>20006</landmark>
-      <distance>138</distance>
-    </step>
-    <step>
-      <landmark>209007</landmark>
-      <distance>138</distance>
-    </step>
-  </steps>
-</response>
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+  <path>
+    <landmark_1>1</landmark_1>
+    <landmark_2>250</landmark_2>
+    <time>200</time>
+  </path>
+  <path>
+    <landmark_1>250</landmark_1>
+    <landmark_2>200</landmark_2>
+    <time>1000</time>
+  </path>
+  <path>
+    <landmark_1>200</landmark_1>
+    <landmark_2>1000</landmark_2>
+    <time>64229</time>
+  </path>
+</paths>
 ```
 
 ### 6.2 Verification processing
