@@ -22,33 +22,33 @@
     - [1.1 Project Overview](#11-project-overview)
     - [1.2 Document Purpose](#12-document-purpose)
     - [1.3 Personas](#13-personas)
-    - [1.4 Stakeholders and Representatives](#14-stakeholders-and-representatives)
+    - [1.4 Stakeholders And Representatives](#14-stakeholders-and-representatives)
     - [1.5 Deadlines](#15-deadlines)
   - [2. Application Overview](#2-application-overview)
-    - [2.1 What is our software used for?](#21-what-is-our-software-used-for)
-    - [2.2 What does the application use to work?](#22-what-does-the-application-use-to-work)
+    - [2.1 What Is Our Software Used For?](#21-what-is-our-software-used-for)
+    - [2.2 What Does The Application Use To Work?](#22-what-does-the-application-use-to-work)
   - [3. Software Aspects](#3-software-aspects)
     - [3.1 Performance](#31-performance)
     - [3.2 User Interface (aka UI)](#32-user-interface-aka-ui)
       - [3.2.1 Definition](#321-definition)
       - [3.2.2 Verification](#322-verification)
-      - [3.2.3 Main program](#323-main-program)
-    - [3.3 Signature](#33-signature)
-  - [4. How to use it?](#4-how-to-use-it)
-  - [5. Platforms compatibility](#5-platforms-compatibility)
-  - [6. Functional requirements](#6-functional-requirements)
-    - [6.1 REST API implementation](#61-rest-api-implementation)
+      - [3.2.3 Main Program](#323-main-program)
+    - [3.3 Logo](#33-logo)
+  - [4. How To Use It?](#4-how-to-use-it)
+  - [5. Platforms Compatibility](#5-platforms-compatibility)
+  - [6. Functional Requirements](#6-functional-requirements)
+    - [6.1 REST API Implementation](#61-rest-api-implementation)
       - [6.1.1 Route Description](#611-route-description)
       - [6.1.2 Requests Examples](#612-requests-examples)
-      - [6.1.3 Response examples](#613-response-examples)
-    - [6.2 Verification processing](#62-verification-processing)
-  - [7. Non-functional requirements](#7-non-functional-requirements)
+      - [6.1.3 Response Examples](#613-response-examples)
+    - [6.2 Verification Processing](#62-verification-processing)
+  - [7. Non-functional Requirements](#7-non-functional-requirements)
     - [7.1 Response \& Performance](#71-response--performance)
     - [7.2 Reliability](#72-reliability)
     - [7.3 Testability](#73-testability)
     - [7.4 Flexibility](#74-flexibility)
-  - [8. Future improvements](#8-future-improvements)
-  - [9. MoSCoW table](#9-moscow-table)
+  - [8. Future Improvements](#8-future-improvements)
+  - [9. MoSCoW Table](#9-moscow-table)
   - [10. Complementary Information](#10-complementary-information)
   - [Glossary](#glossary)
 
@@ -105,7 +105,7 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 </details>
 
-### 1.4 Stakeholders and Representatives
+### 1.4 Stakeholders And Representatives
 
 | Representative           | Role   | Expectation                                                  |
 | ------------------------ | ------ | ------------------------------------------------------------ |
@@ -126,12 +126,12 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 In this section, we will talk about the software (in broad outline). To do this, some technical terms are going to be employed to ensure the consistency of the explanations. If you don't know the words used, you can take a glance at the Glossary at the end (by the little chips next to them).
 
-### 2.1 What is our software used for?
+### 2.1 What Is Our Software Used For?
 
 The software is a GPS like, a software that uses some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will ask you to enter your current place and where you want to go. The answer will be sent in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path. <br>
 To know the error rate or any percentage directly link to a performance section, please look at the [performance](#31-performance) section.
 
-### 2.2 What does the application use to work?
+### 2.2 What Does The Application Use To Work?
 
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 
@@ -166,20 +166,18 @@ Here, we will more speak as an interface than an UI[^12] strictly speaking becau
 #### 3.2.2 Verification
 While you're waiting for the verification process, a percentage bar will be displayed to avoid leaving you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
-#### 3.2.3 Main program
+#### 3.2.3 Main Program
 All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
 
-### 3.3 Signature
+### 3.3 Logo
 
-To ensure you have correctly downloaded our software, we added a signature/logo into the interface on the command prompt as you can see just below
+To ensure you have correctly downloaded our software, we added a logo into the interface on the command prompt as you can see just below
 
 ![The command prompt Signature](../images/functional/cmd_signature.png)
 
-We also add a signature into the code (check the [technical specification](../technical/technical_specification.md) for further information) much more difficult to spot and remove.
+If this logo isn't here, you've probably downloaded a counterfeit software!
 
-If this logo and our signature aren't here, you've probably downloaded a counterfeit software!
-
-## 4. How to use it?
+## 4. How To Use It?
 
 To use the software, you firstly need to verify the CSV[^8] file you want to use in order to check if it isn't corrupt.
 After this verification and if your file is safe to use, you can start the data pre-treatment process to minimize the research of the quickest way between your 2 points.
@@ -187,7 +185,7 @@ Once it is done, you can write the command to receive the JSON type data (by def
 
 For further information and/or more precise steps, please refer to the [User Manual](../user_Manual/user_manual.pdf).
 
-## 5. Platforms compatibility
+## 5. Platforms Compatibility
 
 Below are the platforms on which the software has been used and is guaranteed to run:
 
@@ -203,11 +201,11 @@ All information contained in this document is based on observations made from th
 
 As you can see, no mobile platforms is indicated. Indeed, they are a future improvement because for now, the software is not compatible with them. If you want more information, you can check the [future improvements](#8-future-improvements) section.
 
-## 6. Functional requirements
+## 6. Functional Requirements
 
 In this section, we will discuss all the functional requirements of the project. For this, we will become a little more technical than before (without being too much either). Feel free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
-### 6.1 REST API implementation
+### 6.1 REST API Implementation
 
 #### 6.1.1 Route Description
 
@@ -239,7 +237,7 @@ GET /api/shortest-path?landmark_1=1&landmark_2=1000/xml
 > - Host: 127.0.0.1:8080 (localhost) <br>
 > - Accept: application/xml
 
-#### 6.1.3 Response examples
+#### 6.1.3 Response Examples
 
 Here are examples of the response format the API[^7] can send you (related to the examples above).
 
@@ -288,7 +286,7 @@ Here are examples of the response format the API[^7] can send you (related to th
 </paths>
 ```
 
-### 6.2 Verification processing
+### 6.2 Verification Processing
 
 The verification process makes sure that the CSV[^8] file you provide and want to use is not corrupted and usable. It verifies the info by the following features:
 
@@ -300,7 +298,7 @@ The verification process makes sure that the CSV[^8] file you provide and want t
 If your file is invalid and can't be used with our software, the error will be shown in detail with the error type and the problematic line.
 However, if your file is usable and don't comport any errors or issues, the process will complete and indicate that there are no errors.
 
-## 7. Non-functional requirements
+## 7. Non-functional Requirements
 
 This section regroup all the non-functional requirements of the project, including the response (performance) and reliability, the testability and the flexibility of QPS.
 
@@ -333,7 +331,7 @@ When the software engineer writes the code, he must ensure the following points:
 - The possibility to improve the software through extensions and future improvements *(the next section lists them)*.
 - The fact that it is possible there are some bugs that should be fixed.
 
-## 8. Future improvements
+## 8. Future Improvements
 
 All the functionalities which are mentioned above this section in this document will be implemented in the software (unless otherwise stated). However, having a limited time of 6 weeks, we need to choose the functionalities we want to add in the software. <br>
 Here is an exhaustive list of the features that can be implemented later:
@@ -351,7 +349,7 @@ Here is an exhaustive list of the features that can be implemented later:
 
 This list might contain features that will be implemented after the deadlines or will never be integrated.
 
-## 9. MoSCoW table
+## 9. MoSCoW Table
 
 <table>
   <thead>
