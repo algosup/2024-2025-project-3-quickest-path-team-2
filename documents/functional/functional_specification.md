@@ -346,19 +346,19 @@ This list might contain features that will be implemented after the deadlines or
   <tbody>
     <tr>
       <td>
-        - A functional Dijkstra<sup>[5]</sup> algorithm written in C++. <br>
-        - Verification process of the CSV<sup>[8]</sup> File. <br>
+        - A functional Dijkstra algorithm written in C++. <br>
+        - Verification process of the CSV File. <br>
         - A verification process. <br>
         - A pre-treatment process. <br>
-        - A REST API<sup>[11]</sup> able to accept requests and send responses in a JSON<sup>[3]</sup>/XML<sup>[4]</sup> format. <br>
+        - A REST API able to accept requests and send responses in a JSON/XML format. <br>
         - The time between 2 landmarks without exceeding a margin of error of 10%.
       </td>
       <td>
         - A loading bar that displays the progress of the verification process. <br>
         - If there is any error, report it to the user. <br>
-        - A readable response of the REST API<sup>[11]</sup> (not in only one line). <br>
+        - A readable response of the REST API (not in only one line). <br>
         - A logo and a signature to validate to the user that he has correctly downloaded OUR software. <br>
-        - A history feature (not for the user but for the API<sup>[7]</sup>), to avoid searching for the same route twice (and reduce the time of the search).
+        - A history feature (not for the user but for the API), to avoid searching for the same route twice (and reduce the time of the search).
       </td>
     </tr>
   </tbody>
