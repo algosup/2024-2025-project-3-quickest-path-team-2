@@ -1,44 +1,41 @@
 #include "includes/graph.hpp"
+#include <vector>
+#include <limits>
 #include <queue>
-#include <stdexcept>
-#include <algorithm>
+#include <iostream>
 
-// Ajout d'une arête entre deux nœuds
 void Graph::add_edge(int source, int target, int weight) {
-    adjList[source].push_back({target, weight});
-    adjList[target].push_back({source, weight});
+    if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {
+        adjList.resize(std::max(source, target) + 1);
+    }
+    adjList[source].emplace_back(target, weight);
+    adjList[target].emplace_back(source, weight);
 }
 
-// Vérifier si un nœud existe
-bool Graph::node_exists(int node) const {
-    return adjList.find(node) != adjList.end();
-}
-
-// Recherche du chemin le plus court entre deux nœuds avec Dijkstra
 std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
-    const int INF = std::numeric_limits<int>::max();
+    constexpr int INF = std::numeric_limits<int>::max();
 
-    if (!node_exists(source) || !node_exists(target)) {
-        throw std::out_of_range("Source or target node does not exist in the graph.");
+    if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {
+        throw std::out_of_range("Source or target node is out of bounds.");
     }
 
-    std::unordered_map<int, int> dist;       // Distance minimale depuis la source
-    std::unordered_map<int, int> previous;   // Pour reconstruire le chemin
-    std::unordered_map<int, bool> processed;  // Tableau pour marquer les nœuds traités
+    size_t n = adjList.size();
+    std::vector<int> dist(n, INF);
+    std::vector<int> previous(n, -1);
     dist[source] = 0;
 
-    // File de priorité pour l'algorithme de Dijkstra
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
-    minHeap.push({0, source});
+    using NodeDistPair = std::pair<int, int>;
+    std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, std::greater<>> minHeap;
+    minHeap.emplace(0, source);
 
     while (!minHeap.empty()) {
-        int current = minHeap.top().second;
-        int currentDist = minHeap.top().first;
+        auto [currentDist, current] = minHeap.top();
         minHeap.pop();
 
-        if (processed[current]) continue;
-        processed[current] = true;
+        // Si la distance extraite est déjà supérieure, on passe
+        if (currentDist > dist[current]) continue;
 
+        // Si la cible est atteinte, on reconstruit directement le chemin
         if (current == target) {
             totalTime = dist[current];
             std::vector<int> path;
@@ -53,10 +50,10 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             int neighbor = edge.target;
             int newDist = currentDist + edge.weight;
 
-            if (newDist < dist[neighbor] || dist.find(neighbor) == dist.end()) {
+            if (newDist < dist[neighbor]) {
                 dist[neighbor] = newDist;
                 previous[neighbor] = current;
-                minHeap.push({newDist, neighbor});
+                minHeap.emplace(newDist, neighbor);
             }
         }
     }

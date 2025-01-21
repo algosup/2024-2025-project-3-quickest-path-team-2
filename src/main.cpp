@@ -1,29 +1,49 @@
+#include "includes/graph.hpp"
 #include <iostream>
+#include <string>
+#include <chrono>
 #include <fstream>
 #include <stdexcept>
-#include <chrono>
-#include <string>
-#include "includes/graph.hpp"
-#include "includes/utils.hpp"
 
-bool preprocess_data_with_progress(const std::string& filePath, int maxLines, Graph& graph, size_t& totalLinesProcessed) {
-    std::ifstream inputFile(filePath);
+using namespace std;
+using namespace chrono;
+
+// Fonction pour afficher une barre de progression
+void display_progress_bar(size_t current, size_t total) {
+    const int barWidth = 50;
+    float progress = static_cast<float>(current) / total;
+    int position = static_cast<int>(progress * barWidth);
+
+    cout << "\r[";
+    for (int i = 0; i < barWidth; ++i) {
+        if (i < position) cout << "=";
+        else if (i == position) cout << ">";
+        else cout << " ";
+    }
+    cout << "] " << int(progress * 100.0) << "% (" << current << "/" << total << ")";
+    cout.flush();
+}
+
+// Prétraitement des données
+bool preprocess_data_with_progress(const string& filePath, int maxLines, Graph& graph, size_t& totalLinesProcessed) {
+    ifstream inputFile(filePath);
     if (!inputFile.is_open()) {
-        throw std::runtime_error("Error: Unable to open file " + filePath);
+        throw runtime_error("Error: Unable to open file " + filePath);
     }
 
-    std::string line;
+    // Compter les lignes dans le fichier
     size_t totalLines = 0;
-    while (std::getline(inputFile, line)) {
+    string line;
+    while (getline(inputFile, line)) {
         ++totalLines;
         if (maxLines > 0 && totalLines >= static_cast<size_t>(maxLines)) break;
     }
-
     inputFile.clear();
-    inputFile.seekg(0, std::ios::beg);
+    inputFile.seekg(0, ios::beg);
 
+    // Charger les données dans le graphe
     size_t currentLine = 0;
-    while (std::getline(inputFile, line) && (maxLines <= 0 || currentLine < static_cast<size_t>(maxLines))) {
+    while (getline(inputFile, line) && (maxLines <= 0 || currentLine < static_cast<size_t>(maxLines))) {
         ++currentLine;
 
         int source, target, weight;
@@ -35,70 +55,67 @@ bool preprocess_data_with_progress(const std::string& filePath, int maxLines, Gr
     }
 
     inputFile.close();
-    std::cout << std::endl;
+    cout << endl;
 
     totalLinesProcessed = currentLine;
     return true;
 }
 
 int main() {
-    std::string inputFilePath = "data/usa_roads.csv";  // Remplacez par le chemin de votre fichier CSV
+    string inputFilePath = "data/usa_roads.csv";  // Remplacez par le chemin de votre fichier CSV
     int maxLines = 28854314;  // Nombre maximal de lignes à traiter (ou -1 pour tout charger)
 
     Graph graph;
-    size_t totalLinesProcessed = 0;
 
+    size_t totalLinesProcessed = 0;
     try {
-        std::cout << "Prétraitement des données en cours..." << std::endl;
-        auto startTime = std::chrono::high_resolution_clock::now();
+        cout << "Prétraitement des données en cours..." << endl;
+        auto startTime = high_resolution_clock::now();
 
         preprocess_data_with_progress(inputFilePath, maxLines, graph, totalLinesProcessed);
 
-        auto endTime = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = endTime - startTime;
+        auto endTime = high_resolution_clock::now();
+        duration<double> elapsed = endTime - startTime;
 
-        std::cout << "Prétraitement terminé avec succès !" << std::endl;
-        std::cout << "Nombre total de lignes traitées : " << totalLinesProcessed << std::endl;
-        std::cout << "Temps écoulé : " << elapsed.count() << " secondes." << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Erreur: " << e.what() << std::endl;
+        cout << "Prétraitement terminé avec succès !" << endl;
+        cout << "Nombre total de lignes traitées : " << totalLinesProcessed << endl;
+        cout << "Temps écoulé : " << elapsed.count() << " secondes." << endl;
+    } catch (const exception& e) {
+        cerr << "Erreur: " << e.what() << endl;
         return 1;
     }
 
+    // Boucle principale pour entrer les requêtes de chemin le plus court
     while (true) {
         int source, target;
-        std::cout << "Entrez le point de départ (ou -1 pour quitter) : ";
-        std::cin >> source;
+        cout << "Entrez le point de départ (ou -1 pour quitter) : ";
+        cin >> source;
         if (source == -1) break;
 
-        std::cout << "Entrez le point d'arrivée : ";
-        std::cin >> target;
+        cout << "Entrez le point d'arrivée : ";
+        cin >> target;
 
-        std::cout << "Recherche du chemin le plus court..." << std::endl;
-        auto startTime = std::chrono::high_resolution_clock::now();
+        cout << "Recherche du chemin le plus court..." << endl;
+        auto startTime = high_resolution_clock::now();
 
         int totalTime = 0;
-        try {
-            auto path = graph.shortest_path(source, target, totalTime);
+        auto path = graph.shortest_path(source, target, totalTime);
 
-            auto endTime = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> elapsed = endTime - startTime;
+        auto endTime = high_resolution_clock::now();
+        duration<double> elapsed = endTime - startTime;
 
-            if (path.empty()) {
-                std::cout << "Aucun chemin trouvé entre " << source << " et " << target << "." << std::endl;
-            } else {
-                std::cout << "Chemin le plus court de " << source << " à " << target << " : ";
-                for (int node : path) {
-                    std::cout << node << " ";
-                }
-                std::cout << "\nTemps total : " << totalTime << " unités." << std::endl;
-                std::cout << "Recherche terminée en " << elapsed.count() << " secondes." << std::endl;
+        if (path.empty()) {
+            cout << "Aucun chemin trouvé entre " << source << " et " << target << "." << endl;
+        } else {
+            cout << "Chemin le plus court de " << source << " à " << target << " : ";
+            for (int node : path) {
+                cout << node << " ";
             }
-        } catch (const std::exception& e) {
-            std::cerr << "Erreur lors de la recherche du chemin : " << e.what() << std::endl;
+            cout << "\nTemps total : " << totalTime << " unités." << endl;
+            cout << "Recherche terminée en " << elapsed.count() << " secondes." << endl;
         }
     }
 
-    std::cout << "Programme terminé. Merci d'avoir utilisé notre service !" << std::endl;
+    cout << "Programme terminé. Merci d'avoir utilisé notre service !" << endl;
     return 0;
 }
