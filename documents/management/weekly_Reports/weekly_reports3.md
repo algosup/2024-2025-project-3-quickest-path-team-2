@@ -3,6 +3,9 @@
 
 ## Overview
 
+### Technical Specification
+
+### Test plan
 
 ## Project Planning and management
 
@@ -11,15 +14,20 @@
 | KPI's                    | Progress |
 | ------------------------ | -------- |
 | Research                 | 100%     |
-| Functional specification | 5%       |
-| Technical specification  | 15%      |
-| Test Plan                | 0%       |
+| Functional specification | 100%     |
+| Technical specification  | 100%     |
+| Test Plan                | 100%     |
 | Data Validation Tool     | 90%      |
 | User manual              | 0%       |
-|Pre procession            | 0%       |
+|Pre procession            | 100%     |
 | Algorithm development    | 0%       |
 | REST API development     | 0%       |
 | Weekly reports           | 60%      |
+
+
+### README
+
+### Critical path
 
 ## Objectives for next week
 
