@@ -1,6 +1,6 @@
 <div align="center">
 
-# Functional Specifications
+# Functional Specification
 
 ---
 
@@ -17,7 +17,7 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [Functional Specifications](#functional-specifications)
+- [Functional Specification](#functional-specification)
   - [1.Introduction](#1introduction)
     - [1.1 Project Overview](#11-project-overview)
     - [1.2 Document Purpose](#12-document-purpose)
@@ -26,21 +26,21 @@
     - [1.5 Deadlines](#15-deadlines)
   - [2. Application Overview](#2-application-overview)
     - [2.1 What is our software used for?](#21-what-is-our-software-used-for)
-    - [2.2 What the application used to work?](#22-what-the-application-used-to-work)
+    - [2.2 What does the application use to work?](#22-what-does-the-application-use-to-work)
   - [3. Software Aspects](#3-software-aspects)
     - [3.1 Performance](#31-performance)
     - [3.2 User Interface (aka UI)](#32-user-interface-aka-ui)
-      - [3.2.1 Definition](#a-definition)
-      - [3.2.2 Verification](#b-verification)
-      - [3.2.3 Main program](#c-main-program)
+      - [3.2.1 Definition](#321-definition)
+      - [3.2.2 Verification](#322-verification)
+      - [3.2.3 Main program](#323-main-program)
     - [3.3 Signature](#33-signature)
   - [4. How to use it?](#4-how-to-use-it)
   - [5. Platforms compatibility](#5-platforms-compatibility)
   - [6. Functional requirements](#6-functional-requirements)
     - [6.1 REST API implementation](#61-rest-api-implementation)
-      - [6.1.1 Route Description](#a-route-description)
-      - [6.1.2 Requests Examples](#b-requests-examples)
-      - [6.1.3 Response examples](#c-response-examples)
+      - [6.1.1 Route Description](#611-route-description)
+      - [6.1.2 Requests Examples](#612-requests-examples)
+      - [6.1.3 Response examples](#613-response-examples)
     - [6.2 Verification processing](#62-verification-processing)
   - [7. Non-functional requirements](#7-non-functional-requirements)
     - [7.1 Response \& Performance](#71-response--performance)
@@ -56,30 +56,30 @@
 
 ## 1.Introduction
 
-This document is the functional specifications of the 3rd Project of the year called Quickest Path. You can found bellow the name and the role of each member of the team:
+This document is the functional specification of the 3rd Project of the year called Quickest Path. You can found below the name and the role of each member of the team:
 
 | Name              | Role              | Description                                                                                                                                                                                  | GitHub Link                                                       | LinkedIn Link                                                                       |
 | ----------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Mattéo LEFIN      | Project Manager   | Responsible for project management, including timelines, planning, and team coordination. Has a role in the choices of the functional aspects of the project.                                | [Mattéo's GitHub Profile](https://github.com/Mattstar64)          | [Mattéo's GitHub Profile](https://www.linkedin.com/in/matt%C3%A9o-lefin-380272293/) |
-| Enoal ADAM        | Program Manager   | Decides of the functional aspects of the project, interfaces and so on. Manages functional specification development and client communication for the project.                               | [Enoal's GitHub Profile](https://github.com/EnoGame29)            | [Enoal's GitHub Profile](https://www.linkedin.com/in/enoal-adam-02552932a/)         |
-| Guillaume DESPAUX | Technical Leader  | Guides technical decisions and translates functional requirements into scalable technical solutions. Choices the coding standards, how the language will be use into the project.            | [Guillaume's GitHub Profile](https://github.com/GuillaumeDespaux) | [Guillaume's GitHub Profile](https://www.linkedin.com/in/guillaume-despaux/)        |
-| Mathis LEBEL      | Software Engineer | Develops and implements codebase, ensures code quality and is governed by technical aspects to create the software.                                                                          | [Mathis' GitHub Profile](https://github.com/mathislebel)          | [Mathis' GitHub Profile](https://www.linkedin.com/in/mathis-lebel-429114293/)       |
-| Michel RIFF       | Quality Assurance | Creates tests to validate the quality of the software; that is to say, searches for any types of problems, finds how to optimize the code and reports these issues to the Software Engineer. | [Michel's GitHub Profile](https://github.com/MichelRiff)          | [Michel's GitHub Profile](https://www.linkedin.com/in/michel-riff-693007293/)       |
-| Camille GAYAT     | Technical Writer  | Creates an understandable end-user documentation to facilitate the usage of the software.                                                                                                    | [Camille's GitHub Profile](https://github.com/CamilleGayat)       | [Camille's GitHub Profile](https://www.linkedin.com/in/camille-g-a89114293/)        |
+| Mattéo LEFIN      | Project Manager   | Responsible for project management, including timelines, planning, and team coordination. Has a role in the choices of the functional aspects of the project.                                | [Mattéo's GitHub Profile](https://github.com/Mattstar64)          | [Mattéo's LinkedIn Profile](https://www.linkedin.com/in/matt%C3%A9o-lefin-380272293/) |
+| Enoal ADAM        | Program Manager   | Decides of the functional aspects of the project, interfaces and so on. Manages functional specification development and client communication for the project.                               | [Enoal's GitHub Profile](https://github.com/EnoGame29)            | [Enoal's LinkedIn Profile](https://www.linkedin.com/in/enoal-adam-02552932a/)         |
+| Guillaume DESPAUX | Technical Leader  | Guides technical decisions and translates functional requirements into scalable technical solutions. Choices the coding standards, how the language will be used into the project.            | [Guillaume's GitHub Profile](https://github.com/GuillaumeDespaux) | [Guillaume's LinkedIn Profile](https://www.linkedin.com/in/guillaume-despaux/)        |
+| Mathis LEBEL      | Software Engineer | Develops and implements codebase, ensures code quality and is governed by technical aspects to create the software.                                                                          | [Mathis' GitHub Profile](https://github.com/mathislebel)          | [Mathis' LinkedIn Profile](https://www.linkedin.com/in/mathis-lebel-429114293/)       |
+| Michel RIFF       | Quality Assurance | Creates tests to validate the quality of the software; that is to say, searches for any types of problems, finds how to optimize the code and reports these issues to the Software Engineer. | [Michel's GitHub Profile](https://github.com/MichelRiff)          | [Michel's LinkedIn Profile](https://www.linkedin.com/in/michel-riff-693007293/)       |
+| Camille GAYAT     | Technical Writer  | Creates an understandable end-user documentation to facilitate the usage of the software.                                                                                                    | [Camille's GitHub Profile](https://github.com/CamilleGayat)       | [Camille's LinkedIn Profile](https://www.linkedin.com/in/camille-g-a89114293/)        |
 
 ### 1.1 Project Overview
 
-The aim of the project is to create a software that find the quickest path between two landmarks in the United States. To achieve this request, we have to use the C++ language[^1]. We decide to name our software "QPS", aka "Quickest Path System", a played of words among GPS "Global Positioning System" and the name of the project "Quickest Path".
+The aim of the project is to create a software that find the quickest path between two landmarks in the United States. To achieve this request, we have to use the C++ language[^1]. We decided to name our software "QPS", aka "Quickest Path System", a play on words among GPS "Global Positioning System" and the name of the project "Quickest Path".
 
 ### 1.2 Document Purpose
 
-This document is here to provide all the functional specifications of the project. We will cover topics such as who is able to use the software, how you can use the software (briefly), how it functionally works and the features we decide to skip for now but which can be implemented later. <br>
-If you reach for technical aspects of the project, such as how the C++ works, the project conventions, how the algorithm is used specifically, please refer you to the [technical specification](../technical/technical_specification.md).
+This document is here to provide all the functional specification of the project. We will cover topics such as who is able to use the software, how you can use the software (briefly), how it functionally works and the features we decided to skip for now but which can be implemented later. <br>
+If you reach for technical aspects of the project, such as how the C++ works, the project conventions, how the algorithm is used specifically, please refer to the [technical specification](../technical/technical_specification.md).
 
 ### 1.3 Personas
 
 <details>
-<summary><strong>William the project manager</strong></summary>
+<summary><strong>William the Project Manager</strong></summary>
 
 | **William**                                                                                           | **Description**                                                                                                                                                                                                                                          | **Behavior**                                                                                                                                                                                                                                                                                                                                                                  | **Needs**                                                               |
 | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -115,12 +115,12 @@ If you reach for technical aspects of the project, such as how the C++ works, th
 
 | Name                      | Type     | Deadline                                                                     |
 | ------------------------- | -------- | ---------------------------------------------------------------------------- |
-| Functional Specifications | Document | February 7th 2025                                                            |
-| Technical Specifications  | Document | February 7th 2025                                                            |
+| Functional specification | Document | February 7th 2025                                                            |
+| Technical specification  | Document | February 7th 2025                                                            |
 | Test Plan                 | Document | February 7th 2025                                                            |
 | User Manual               | Document | February 7th 2025                                                            |
 | Software(s)               | Product  | February 7th 2025                                                            |
-| Weekly Reports            | Document | Every Friday evening (January 10th, 17th, 24th, 31th and February 7th, 14th) |
+| Weekly Reports            | Document | Every Friday evening (January 10th, 17th, 24th, 31st and February 7th, 14th) |
 
 ## 2. Application Overview
 
@@ -128,10 +128,10 @@ In this section, we will talk about the software (in broad outline). To do this,
 
 ### 2.1 What is our software used for?
 
-The software is a GPS like, a software that uses some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will be ask you to enter your current place and where you want to go. The answer will be sent in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path. <br>
+The software is a GPS like, a software that uses some algorithms[^2] to define for you the quickest path between two points, landmarks to be precise. When you start it, after some verifications on our side, it will ask you to enter your current place and where you want to go. The answer will be sent in a specific format (JSON[^3] or XML[^4]) and you will be able to know the optimized path. <br>
 To know the error rate or any percentage directly link to a performance section, please look at the [performance](#31-performance) section.
 
-### 2.2 What the application used to work?
+### 2.2 What does the application use to work?
 
 To operate, the software is based on algorithms, a finite sequence of specific instructions, the Dijkstra[^5] one. Here is a graph to explain how the algorithm works:
 
@@ -145,17 +145,17 @@ The final result looks like this --> <img src="../images/functional/final_dijkst
 
 <br>
 
-Since this algorithm is needed to be implement by each person when he created his code to use it, we decided to code ours using the C++ language[^1].
+Since this algorithm is needed to be implemented by each person when he created his code to use it, we decided to code ours using the C++ language[^1].
 
 ## 3. Software Aspects
 
-This section will treat about the software performances, its interface and how we have turn the technical aspects into a user friendly interface into the command prompt[^6], an important aspect to avoid the user to be lost.
+This section will treat about the software performances, its interface and how we have turned the technical aspects into a user friendly interface into the command prompt[^6], an important aspect to avoid the user to be lost.
 
 ### 3.1 Performance
 
-The software has to respects criteria to be competitive and follows ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending on the file size. <br>
+The software has to respect criteria to be competitive and follows ours objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending on the file size. <br>
 Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program when you want to search for the quickest path. <br>
-When you enter your depart point and your destination, the API[^7] must respond within 1 second. <br>
+When you enter your departure point and your destination, the API[^7] must respond within 1 second. <br>
 Finally, the software has to indicate the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, which is why we strive to offer you the best service possible!
 
 ### 3.2 User Interface (aka UI)
@@ -164,7 +164,7 @@ Finally, the software has to indicate the most optimized path/the quickest path,
 Here, we will more speak as an interface than an UI[^12] strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
 
 #### 3.2.2 Verification
-While you're waiting for the verification precess, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
+While you're waiting for the verification process, a percentage bar will be displayed to don't leave you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
 #### 3.2.3 Main program
 All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
@@ -183,7 +183,7 @@ If this logo and our signature aren't here, you've probably downloaded a counter
 
 To use the software, you firstly need to verify the CSV[^8] file you want to use in order to check if it isn't corrupt.
 After this verification and if your file is safe to use, you can start the data pre-treatment process to minimize the research of the quickest way between your 2 points.
-Once is done, you can write the command to receive the JSON type data (by default) for the most optimized route you want to know.
+Once it is done, you can write the command to receive the JSON type data (by default) for the most optimized route you want to know.
 
 For further information and/or more precise steps, please refer to the [User Manual](../user_Manual/user_manual.pdf).
 
@@ -201,11 +201,11 @@ Below are the platforms on which the software has been used and is guaranteed to
 
 All information contained in this document is based on observations made from these devices.
 
-As you can see, no mobile platforms is indicate. Indeed, they are a future improvement because for now, the software is not compatible with them. If you want more information, you can check the [future improvements](#8-future-improvements) section.
+As you can see, no mobile platforms is indicated. Indeed, they are a future improvement because for now, the software is not compatible with them. If you want more information, you can check the [future improvements](#8-future-improvements) section.
 
 ## 6. Functional requirements
 
-In this section, we will discuss all the functional requirements of the project. For this, we will become a little more technical than before (without being too much either). Fell free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
+In this section, we will discuss all the functional requirements of the project. For this, we will become a little more technical than before (without being too much either). Feel free to go to the [Glossary](#glossary) section to know all the definitions of technical words.
 
 ### 6.1 REST API implementation
 
@@ -273,10 +273,10 @@ Here are examples of the response format the API[^7] can send you (related to th
 
 ### 6.2 Verification processing
 
-The verification process make sure that the CSV[^8] file you provide and want to use is not corrupted and usable. It verifies the info by the following features:
+The verification process makes sure that the CSV[^8] file you provide and want to use is not corrupted and usable. It verifies the info by the following features:
 
 - Check if the CSV[^8] is available and not empty;
-- Verify if the time between to points is not equal to 0 or is negative;
+- Verify if the time between two points is not equal to 0 or is negative;
 - Look if the Graph is disconnected somewhere (all the landmarks should have at least one connection with another landmark);
 - Check if the Landmark 1 and 2 are not the same.
 
@@ -289,7 +289,7 @@ This section regroup all the non-functional requirements of the project, includi
 
 ### 7.1 Response & Performance
 
-- The API[^7] have to respond in 1 second on a normal laptop.
+- The API[^7] has to respond in 1 second on a normal laptop.
 - The response must be in a JSON or XML format depending of the user's choice.
 - The given route need to be the fastest within a 10% margin of error.
 - The verification tool have to return a graph and check if the connectivity of each point is correct.
@@ -297,7 +297,7 @@ This section regroup all the non-functional requirements of the project, includi
 ### 7.2 Reliability
 
 - The verification process indicates if there are any errors so as not to mislead the customer.
-- The format chosen by the user have to be correct, that's to say, the program should return a viable format exempt of errors.
+- The format chosen by the user has to be correct, that's to say, the program should return a viable format exempt of errors.
 - All the sent error (by the REST API[^11]) specify what is the problem (type and problematic line).
 
 
@@ -305,7 +305,7 @@ This section regroup all the non-functional requirements of the project, includi
 
 A [test plan](../quality_Assurance/test_plan.md) is written by the Quality Assurance (abbreviate QA after), listing how the code is verified and what is his method allowing anyone who have the competences to also check the code without changing the verification method. The checking process includes all tests which are closely or loosely related to the software.
 
-Therefore, this section refers to how the program's functionalities can be easily test and the ability to resume the test phase if the QA had to leave.
+Therefore, this section refers to how the program's functionalities can be easily tested and the ability to resume the test phase if the QA had to leave.
 
 ### 7.4 Flexibility
 
@@ -346,19 +346,19 @@ This list might contain features that will be implemented after the deadlines or
   <tbody>
     <tr>
       <td>
-        - A functional Dijkstra[^5] algorithm written in C++. <br>
-        - Verification process of the CSV[^8] File. <br>
+        - A functional Dijkstra<sup>[5]</sup> algorithm written in C++. <br>
+        - Verification process of the CSV<sup>[8]</sup> File. <br>
         - A verification process. <br>
         - A pre-treatment process. <br>
-        - A REST API[^11] able to accept requests and send responses in a JSON[^3]/XML[^4] format. <br>
+        - A REST API<sup>[11]</sup> able to accept requests and send responses in a JSON<sup>[3]</sup>/XML<sup>[4]</sup> format. <br>
         - The time between 2 landmarks without exceeding a margin of error of 10%.
       </td>
       <td>
-        - A loading bar that displayed the progress of the verification process. <br>
+        - A loading bar that displays the progress of the verification process. <br>
         - If there is any error, report it to the user. <br>
-        - A readable response of the REST API[^11] (not in only one line). <br>
+        - A readable response of the REST API<sup>[11]</sup> (not in only one line). <br>
         - A logo and a signature to validate to the user that he has correctly downloaded OUR software. <br>
-        - A history feature (not for the user but for the API[^7]), to avoid searching for the same route twice (and reduce the time of the search).
+        - A history feature (not for the user but for the API<sup>[7]</sup>), to avoid searching for the same route twice (and reduce the time of the search).
       </td>
     </tr>
   </tbody>
@@ -371,15 +371,15 @@ This list might contain features that will be implemented after the deadlines or
   <tbody>
     <tr>
       <td>
-        - A downloadable method of the JSON[^3]/XML[^4] format response. <br>
-        - Before starting the pre-treatment process, a choice of the CSV[^8] file the user want to utilize. <br> 
+        - A downloadable method of the JSON<sup>[3]</sup>/XML<sup>[4]</sup> format response. <br>
+        - Before starting the pre-treatment process, a choice of the CSV<sup>[8]</sup> file the user wants to utilize. <br> 
         - User friendly requests to write on the command prompt. <br>
         -  A local tab (kind of internet page) displaying the response. <br>
         - Indicate the margin of error of the process (if it exists). <br>
         - A history feature for the user.
       </td> 
       <td>
-        - An application with graphical UI[^12] and so on. <br>
+        - An application with graphical UI<sup>[12]</sup> and so on. <br>
         - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks. <br>
         - A mobile version.
       </td>
