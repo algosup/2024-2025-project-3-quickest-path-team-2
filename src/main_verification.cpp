@@ -37,7 +37,7 @@ int main() {
             for (const auto& error : result.error_report) {
                 std::cout << error << std::endl  QPS // Print each error
             }
-            checkValue()  QPS // Check for errors
+            checkValueAndLog()  QPS // Check for errors
         } else {
             std::cout << "No errors found.\n"  QPS // No errors found
         }
