@@ -105,7 +105,7 @@ bool preprocess_data(const string& filePath, int maxLines, const string& outputJ
 
     ifstream inputFile(filePath);
     if (!inputFile.is_open()) {
-        throw runtime_error("Error: Unable to open file " + filePath);
+        throw runtime_error("Error: Unable to find the CSV file!" + filePath);
     }
 
     // Process data in chunks directly from the file stream to avoid large memory usage

@@ -98,7 +98,7 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             }
         }
 
-        // Terminate if the best cost is finalized
+        // Finish if the best cost is finalized
         if (meetingNode != -1) break;
     }
 

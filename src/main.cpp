@@ -18,7 +18,7 @@ void display_logo(const string& file_path) {
         }
         logo_file.close();
     } else {
-        cerr << "Erreur : Impossible d'ouvrir le fichier du logo." << endl;
+        cerr << "Error: Unable to open logo file." << endl;
     }
 }
 
@@ -42,7 +42,7 @@ void display_progress_bar(size_t current, size_t total) {
 bool preprocess_data_with_progress(const string& filePath, int maxLines, Graph& graph, size_t& totalLinesProcessed) {
     ifstream inputFile(filePath);
     if (!inputFile.is_open()) {
-        throw runtime_error("Error: Unable to open file " + filePath);
+        throw runtime_error("Error: Unable to find the CSV file!" + filePath);
     }
 
     // Compter les lignes dans le fichier
