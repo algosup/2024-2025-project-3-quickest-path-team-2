@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 
-<div style="text-align: center">
+<div align="center">
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
@@ -27,9 +27,9 @@
     - [6.2. Files Conventions](#62-files-conventions)
   - [7. Requirements](#7-requirements)
   - [8. System Architecture](#8-system-architecture)
-    - [8.1 Overview](#81-overview)
-    - [8.2 Components](#82-components)
-    - [8.3Technologies](#83technologies)
+    - [8.1. Overview](#81-overview)
+    - [8.2. Components](#82-components)
+    - [8.3. Technologies](#83-technologies)
   - [9. Processing Flow](#9-processing-flow)
   - [10. Data Handling](#10-data-handling)
     - [10.1. CSV File Format](#101-csv-file-format)
@@ -44,7 +44,7 @@
       - [10.3.1. Graph Validation](#1031-graph-validation)
       - [10.3.2. Connectivity Check](#1032-connectivity-check)
   - [11. Shortest Path Algorithm](#11-shortest-path-algorithm)
-    - [11.1. Dijkstra Algorithm](#111-dijkstra-algorithm)
+    - [11.1. Dijkstra\[^11\] Algorithm](#111-dijkstra11-algorithm)
     - [11.2. Pseudocode](#112-pseudocode)
       - [11.2.1. Node Structure](#1121-node-structure)
       - [11.2.2. Adjacency List / Graph Structure](#1122-adjacency-list--graph-structure)
@@ -72,7 +72,7 @@
 
 ## 3. Introduction
 
-The Quickest Path project aims to develop a software solution that calculates the fastest path between two nodes based on data provided in a CSV[^1] file using C++[^2], the program have to use an REST API[^3] and response in Json[^4] and XML[^5] formats.
+The Quickest Path project aims to develop a software solution that calculates the fastest path between two nodes based on data provided in a CSV[^1] file using C++[^2], the program have to use an REST API[^3] and response in JSON[^4] and XML[^5] formats.
 
 ## 4. Objectives
 
@@ -80,7 +80,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 - Ensure the software can handle large datasets.
 - Analyze the data given to ensure a proper integrity of data.
 - Provide a user-friendly interface for input and output.
-- Provide answer through an API using the GET[^6] methods.
+- Provide answer through an API[^3] using the GET[^6] methods.
 
 ## 5. Project Folder Structure
 
@@ -133,6 +133,7 @@ There are the conventions to follow during the project.
 
 > [!WARNING]  
 > The types **DEFINE** and **typedef** uses the same convention, however typedef have for the first word an abbreviation then we indicate the type used.
+
 >[!CAUTION]
 > Each structure have to have in their name the pre-fix "s_".
 
@@ -188,7 +189,7 @@ software.cpp
 
 >[!IMPORTANT]
 >The .cpp file is only used to implement the logical interaction in.
->
+
 ```cpp
 software.hpp
     #pragma once
@@ -247,34 +248,34 @@ Before continuing reading, it is highest recommended to read the [functional spe
 
 ## 8. System Architecture
 
-### 8.1 Overview
+### 8.1. Overview
 
-- **Input:** CSV file containing node connections and times.
+- **Input:** CSV[^1] file containing node connections and times.
 - **Processing:** Algorithm to calculate the quickest path.
 - **Output:** Display of the quickest path and time.
 
-### 8.2 Components
+### 8.2. Components
 
-1. **Data Importer:** Reads and parses the CSV file.
+1. **Data Importer:** Reads and parses the CSV[^1] file.
 2. **Path Calculator:** Implements the algorithm to find the quickest path.
 3. **User Interface:** Allows users to input nodes and view results.
 
-### 8.3Technologies
+### 8.3. Technologies
 
 We will use the following technologies:
 
-1. C++
-   - C++17
-   - Standard libraries
-2. REST API
-    - Libraries
-    - GET method
-3. CSV
-   - .csv file format
-4. JSON
-   - .json file format
-5. XML
-   - .xml file format
+- C++[^2]
+  - C++17[^7]
+  - Standard libraries
+- REST API
+  - Libraries
+  - GET method
+- CSV[^1]
+  - .csv file format
+- JSON[^4]
+  - .json file format
+- XML[^5]
+  - .xml file format
 
 ## 9. Processing Flow
 
@@ -322,7 +323,7 @@ sequenceDiagram
 
 ### 10.2. Data Validation
 
-When CSV provided we have to make different checks to ensure the data are correct and usable and follows the connectivity check rules. We also have to check if the data provided is a Directed Acyclic Graph (DAG) to ensure the algorithm will work properly.
+When CSV[^1] provided we have to make different checks to ensure the data are correct and usable and follows the connectivity check rules. We also have to check if the data provided is a Directed Acyclic Graph (DAG[^8]) to ensure the algorithm will work properly.
 
 #### 10.2.1. Loops
 
@@ -333,7 +334,7 @@ loop =  landmark_1, landmark_2, time
         501, 105, 250 -> Second time declared
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -367,7 +368,7 @@ landmark missing =  landmark_1, landmark_2, time
             321, , 200  -> landmark_2 is missing
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -394,7 +395,7 @@ time missing = landmark_1, landmark_2, time
             501, 105,   -> time is missing
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -412,7 +413,7 @@ time negative = landmark_1, landmark_2, time
                 501, 105, -200 -> time can not be negative
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -430,7 +431,7 @@ time equal 0 = landmark_1, landmark_2, time
                 501, 105, 0 -> time can not be equal to 0 
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -452,7 +453,7 @@ disconnected =  landmark_1, landmark_2, time
                 654, 123, 105
 ```
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph
@@ -485,9 +486,9 @@ graph
 
 #### 10.3.1. Graph Validation
 
-To check if the data provided by the CSV is a DAG we have to use the DFS (Depth First Search) algorithm to check if the graph is not a cycle.
+To check if the data provided by the CSV[^1] is a DAG[^8] we have to use the DFS[^9] (Depth First Search) algorithm to check if the graph is not a cycle.
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph TD
@@ -534,9 +535,9 @@ graph TD
 > If the data given have a cyclic path the algorithm will not work properly. To do so we have to transform each edges into directional edges, even if the data provided is defined as by-directional.
 
 >[!NOTE]
-> For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG.
+> For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG[^8].
 
-<div style="text-align: center">
+<div align="center">
 
 ```mermaid
 graph TD
@@ -581,7 +582,7 @@ graph TD
 
 #### 10.3.2. Connectivity Check
 
-To ensure the graph is connected, we need to verify that all nodes are reachable from any starting node. This can be achieved using the BFS (Breadth First Search) algorithm. The BFS algorithm will traverse the graph level by level, starting from a given node, and visit all its neighbors before moving to the next level. If all nodes are visited during this traversal, the graph is connected. Otherwise, it is disconnected.
+To ensure the graph is connected, we need to verify that all nodes are reachable from any starting node. This can be achieved using the BFS[^10] (Breadth First Search) algorithm. The BFS[^10] algorithm will traverse the graph level by level, starting from a given node, and visit all its neighbors before moving to the next level. If all nodes are visited during this traversal, the graph is connected. Otherwise, it is disconnected.
 
 Here is a visual representation of a disconnected graph:
 
@@ -675,9 +676,9 @@ graph
 
 This part will define the algorithm used to find the quickest path between two nodes and how it should be implemented.
 
-### 11.1. Dijkstra Algorithm
+### 11.1. Dijkstra[^11] Algorithm
 
-The algorithm we will use is named **Dijkstra**. It finds the shortest path between two vertices, taking into account the weight of the edges between the vertices of the graph.
+The algorithm we will use is named **Dijkstra[^11]**. It finds the shortest path between two vertices, taking into account the weight of the edges between the vertices of the graph.
 
 The algorithm is based on the following steps:
 
@@ -776,10 +777,13 @@ graph TD
     AI --> AN[Distance to E: 7]
 ```
 </details>
+
+---
+
 There is an example of the algorithm in action:
 
-<div style="text-align: center">
-<img src="../images/technical/dijkstra.gif" alt="Dijkstra Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
+<div align="center">
+<img src="../images/technical/dijkstra.gif" alt="Dijkstra[^11] Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
 <p>Final Path of weight 28: <span style="color:lime">A -> B -> D -> F -> G -> H -> I -> L -> M -> N -> T</span></p>
 </div>
 
@@ -828,7 +832,7 @@ typedef struct Node {
 The adjacency list will be created as an array of nodes with the following attributes:
 
 >[!WARNING]
-> The following space propose multiple way to create the project basis, each have their own advantages and disadvantages. I let multiple ways to do it in order to give ideas to the team.
+> The following space propose multiple way to create the project basis, each have their own advantages and disadvantages. I let multiple ways to do it in order to give ideas to the team. Also each proposition have their own BigO[^16] notation.
 
 - **size:** The number of nodes in the graph.
 - **list:** The array of nodes representing the adjacency list.
@@ -852,7 +856,7 @@ typedef struct AdjacencyList {
 > - Requires manual memory management to free the memory allocated for the nodes and the adjacency list
 >
 ---
-<div style="text-align: center">
+<div align="center">
 <strong>OR with</strong>
 
 </div>
@@ -875,7 +879,7 @@ vector<vector<pair<int, int> > > adj[N]; // Adjacency list for vector of vector 
 > - Can be slower due to dynamic resizing of the vector
 >
 ---
-<div style="text-align: center">
+<div align="center">
 <strong>OR with</strong>
 </div>
 
@@ -902,14 +906,14 @@ unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordere
 
 ### 12.1. Overview
 
-The REST API will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON and XML. The response have to be less than one second.
+The REST API[^3] will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON[^4] and XML[^5]. The response have to be less than one second.
 
 ### 12.2. Dependencies
 
-- CMake[^x]
-- Asio[^x]
-- Boost[^x]
-- Crow[^x]
+- CMake[^12]
+- Asio[^13]
+- Boost[^14]
+- Crow[^15]
 
 ### 12.3. Installation
 
@@ -924,7 +928,7 @@ The REST API will respond to the user request with the shortest path and the tot
     brew install cmake asio boost   #Install cmake, asio and boost
     ```
 
-3. Download the `crow_all.h` file from the [Crow]("https://github.com/CrowCpp/Crow/releases/tag/v1.2.0") repository.
+3. Download the `crow_all.h` file from the Crow[^15] repository by clicking [here](https://github.com/CrowCpp/crow/releases/tag/v1.2.0).
 4. Place the `crow_all.h` at the same root from your `main.cpp` of your api.
 5. Create a file `CMakeLists.txt` at the same root from your `main.cpp` of your api that will contains the following:
 
@@ -934,7 +938,7 @@ The REST API will respond to the user request with the shortest path and the tot
 
     set(CMAKE_CXX_STANDARD 14)
 
-    find_package(Boost REQUIRED)
+    find_package(Boost[^14] REQUIRED)
 
     include_directories(${Boost_INCLUDE_DIRS} ./include)
 
@@ -949,7 +953,7 @@ The REST API will respond to the user request with the shortest path and the tot
     ```cpp
     #include "crow_all.h"
         int main() {
-        // Create an instance of the Crow application
+        // Create an instance of the Crow[^15] application
         crow::SimpleApp app;
 
         // Example of a GET request with the route /api/user
@@ -1016,9 +1020,9 @@ There is the global view of how the next part will be implemented.
 graph TD
     A[USER INTERFACE] --> B[API]
     B --> C[Response]
-    C --> D[JSON]
+    C --> D[JSON[^4]]
     D --> G
-    C --> E[XML]
+    C --> E[XML[^5]]
     C --> F[Simplify]
     F --> G[Display]
     G --> A
@@ -1027,7 +1031,7 @@ graph TD
 
 #### 12.5.1. HTML (prototype)
 
-The following HTML code can be used to test the API using a web browser:
+The following HTML code can be used to test the API[^3] using a web browser:
 
 ```html
 <!DOCTYPE html>
@@ -1051,7 +1055,7 @@ The following HTML code can be used to test the API using a web browser:
         <input type="submit" value="Submit">
     </form>
 
-    <h2>JSON Response</h2>
+    <h2>JSON[^4] Response</h2>
     <form action="http://localhost:8080/api/shortest-path/json" method="get">
         <label for="landmark_1_json">Landmark 1:</label>
         <input type="text" id="landmark_1_json" name="landmark_1" required>
@@ -1062,7 +1066,7 @@ The following HTML code can be used to test the API using a web browser:
         <input type="submit" value="Submit">
     </form>
 
-    <h2>XML Response</h2>
+    <h2>XML[^5] Response</h2>
     <form action="http://localhost:8080/api/shortest-path/xml" method="get">
         <label for="landmark_1_xml">Landmark 1:</label>
         <input type="text" id="landmark_1_xml" name="landmark_1" required>
@@ -1078,7 +1082,7 @@ The following HTML code can be used to test the API using a web browser:
 
 #### 12.5.2. Command Line
 
-The following commands can be used to test the API using the command line:
+The following commands can be used to test the API[^3] using the command line:
 
 ```bash
 # Simplified Response
@@ -1086,12 +1090,12 @@ curl http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000
 ```
 
 ```bash
-# JSON Response
+# JSON[^4] Response
 curl http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000
 ```
 
 ```bash
-# XML Response
+# XML[^5] Response
 curl http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000
 ```
 
@@ -1116,8 +1120,8 @@ do {
     if (confirmation == "Y" || confirmation == "y") {
         short format;
         cout << string("Select the format of the response:\n");
-        cout << string("1. JSON\n");
-        cout << string("2. XML\n");
+        cout << string("1. JSON[^4]\n");
+        cout << string("2. XML[^5]\n");
         cout << string("3. Simplify\n");
         cout << string("0. Cancel\n");
         cin >> format;
@@ -1133,14 +1137,14 @@ do {
                 case 2:
                     // Send the request to the API
                     string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
-                    cout << string("Request sent to the API: ") << url << endl;
+                    cout << string("Request sent to the API[^3]: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 3:
                     // Send the request to the API
                     string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
-                    cout << string("Request sent to the API: ") << url << endl;
+                    cout << string("Request sent to the API[^3]: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
@@ -1169,9 +1173,9 @@ do {
 
 ### 12.6. API Endpoints & Response
 
-Since the API will be using only the GET methods, for a unique endpoint GET, the following endpoints will be used:
+Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint GET[^6], the following endpoints will be used:
 
-- **GET `/api/shortest-path?:landmark_1&:landmark_2`** Returns the shortest path and total time between two nodes in JSON format like this:
+- **GET `/api/shortest-path?:landmark_1&:landmark_2`** Returns the shortest path and total time between two nodes in JSON[^4] format like this:
 
     ```json
     {
@@ -1183,7 +1187,7 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
 >[!NOTE]
 > When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&:landmark_2=1000`
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/json`** Returns the paths and time between each nodes in JSON format.
+- **GET `/api/shortest-path?:landmark_1&landmark_2/json`** Returns the paths and time between each nodes in JSON[^4] format.
 
     ```json
     {
@@ -1207,7 +1211,7 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
     }
     ```
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/xml`** Returns the paths and time between each nodes in XML format.
+- **GET `/api/shortest-path?:landmark_1&landmark_2/xml`** Returns the paths and time between each nodes in XML[^5] format.
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -1232,7 +1236,7 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
     ```
 
 >[!CAUTION]
-> The previous endpoints for the `JSON` and `XML` format will not provide file download option. The user will have to copy the response and save it in a file.
+> The previous endpoints for the `JSON`[^4] and `XML`[^5] format will not provide file download option. The user will have to copy the response and save it in a file.
 
 >[!IMPORTANT]
 > This can be modified and needed later.
@@ -1245,11 +1249,11 @@ To deploy the Quickest Path project, ensure the following environment setup:
 
 1. **Operating System:** The project can be deployed on Windows, macOS, or Linux.
 2. **Dependencies:** Ensure all dependencies are installed:
-    - CMake
-    - Asio
-    - Boost
-    - Crow
-3. **Compiler:** A C++17 compatible compiler (e.g., GCC, Clang, MSVC).
+    - CMake[^12]
+    - Asio[^13]
+    - Boost[^14]
+    - Crow[^15]
+3. **Compiler:** A C++[^2]17 compatible compiler (e.g., GCC[^17] ...).
 
 ### 13.2. Steps
 
@@ -1284,27 +1288,38 @@ To deploy the Quickest Path project, ensure the following environment setup:
 - **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
 - **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
-
-
 ## 14. Indexes
 
-[^1]: ewwedfewf
-[^2]:dwqdqdq
-[^3]:dwddwqdqdwq
-[^4]:wqdqdwq
-[^5]:dqw
-[^6]:dqw
-[^7]:wq
-[^8]:qwd
-[^9]:d
-[^10]:dwq
-[^11]:dwq
-[^12]:dwq
-[^13]:wq
-[^14]:dqwd
-[^15]:wqd
-[^16]:dwedwq
-[^17]:dwq
-[^18]:wqdwqdwq
-[^19]:dwqdqw
-[^20]:dwdq
+[^1]: Comma-Separated Values: A file format used to store tabular data.
+
+[^2]: C++ Programming Language: A general-purpose programming language.
+
+[^3]: Representational State Transfer Application Programming Interface: A set of rules for creating web services.
+
+[^4]: JavaScript Object Notation: A lightweight data interchange format.
+
+[^5]: Extensible Markup Language: A markup language that defines a set of rules for encoding documents.
+
+[^6]: Hypertext Transfer Protocol GET Method: A request method used to request data from a server.
+
+[^7]: C++17 Standard: A version of the C++ programming language standard.
+
+[^8]: Directed Acyclic Graph: A graph with directed edges and no cycles.
+
+[^9]: Depth First Search: An algorithm for traversing or searching tree or graph data structures.
+
+[^10]: Breadth First Search: An algorithm for traversing or searching tree or graph data structures.
+
+[^11]: Dijkstra's Algorithm: An algorithm for finding the shortest paths between nodes in a graph.
+
+[^12]: Cross-Platform Make: A build automation tool.
+
+[^13]: Asynchronous Input/Output: A form of input/output processing that permits other processing to continue before the transmission has finished.
+
+[^14]: Boost C++ Libraries: A set of libraries for the C++ programming language.
+
+[^15]: Crow C++ Microframework: A C++ microframework for web development.
+
+[^16]: Big O Notation: A mathematical notation that describes the limiting behavior of a function.
+
+[^17]: GNU Compiler Collection: A compiler system produced by the GNU Project.
