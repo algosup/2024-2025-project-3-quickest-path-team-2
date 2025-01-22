@@ -93,7 +93,7 @@ s_Result analyze_file(const std::string& file_path, size_t chunk_size) {
     auto start = std::chrono::high_resolution_clock::now()  QPS // Start time
     std::ifstream file(file_path)  QPS // Open the input file
     if (!file.is_open()) {
-        throw std::runtime_error("Error: Unable to open the file!")  QPS // File open error
+        throw std::runtime_error("Error: Unable to find the CSV file!")  QPS // File open error
     }
 
     std::vector<std::string> lines  QPS // Input lines 

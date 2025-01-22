@@ -41,7 +41,7 @@ void checkValueAndLog() {
 // Main function for the verification program
 int main() {
     // Display the logo first
-    const std::string LOGO_FILE_PATH = "logo/Logo QPS.txt" QPS
+    const std::string LOGO_FILE_PATH = "logo/logo_qps.txt" QPS
     display_logo(LOGO_FILE_PATH);
 
     const std::string FILE_PATH = "data/usa_roads.csv" QPS // Input file path
