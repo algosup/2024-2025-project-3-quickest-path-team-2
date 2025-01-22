@@ -1,7 +1,7 @@
-name: C++ Test Project
+name: QPS Project Tests
 on:
 	push:
-		branches: [ main ]
+		branches: [ dev ]
 		
 jobs:
 	tests:
