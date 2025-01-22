@@ -1,26 +1,22 @@
 name: QPS Project Tests
 on:
-	push:
-		branches: [ dev ]
-		
+  push:
+    branches: [ dev ]
+
 jobs:
-	tests:
-		runs-on: ubuntu-latest
-		
-		steps:
-			- name: Checkout
-				uses: actions/checkout@v2
-				
-			- name: Setup Node
-				uses: actions/setup-node@v2
-				with:
-					node-version: 20
-
-			- name: Install Build Tools
-				run: sudo apt-get update && sudo apt-get install -y build-essential
-
-			- name: Program verification Tests
-				run: |
-					cd src
-					g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp -Wall -Werror
-					./main_verification
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+      - name: Install Build Tools
+        run: sudo apt-get update && sudo apt-get install -y build-essential
+      - name: Program verification Tests
+        run: |
+          cd src
+          g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp -Wall -Werror
+          ./main_verification
