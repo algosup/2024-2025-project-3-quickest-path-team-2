@@ -2,6 +2,7 @@
 #include <vector>
 #include <limits>
 #include <queue>
+#include <algorithm>
 #include <iostream>
 
 void Graph::add_edge(int source, int target, int weight) {

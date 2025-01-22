@@ -8,6 +8,20 @@
 using namespace std;
 using namespace chrono;
 
+// Fonction pour afficher le logo
+void display_logo(const string& file_path) {
+    ifstream logo_file(file_path);
+    if (logo_file.is_open()) {
+        string line;
+        while (getline(logo_file, line)) {
+            cout << line << endl;
+        }
+        logo_file.close();
+    } else {
+        cerr << "Erreur : Impossible d'ouvrir le fichier du logo." << endl;
+    }
+}
+
 // Fonction pour afficher une barre de progression
 void display_progress_bar(size_t current, size_t total) {
     const int barWidth = 50;
@@ -62,6 +76,9 @@ bool preprocess_data_with_progress(const string& filePath, int maxLines, Graph& 
 }
 
 int main() {
+    string logoFilePath = "logo/Logo QPS.txt";  // Chemin du fichier contenant le logo
+    display_logo(logoFilePath);
+
     string inputFilePath = "data/usa_roads.csv";  // Remplacez par le chemin de votre fichier CSV
     int maxLines = 28854314;  // Nombre maximal de lignes à traiter (ou -1 pour tout charger)
 
