@@ -19,7 +19,7 @@ this should take aproximatly 50 seconds to complete the verification process
 
 // Function to check, for the tests cases
 void checkValueAndLog() {
-		std:: << "Warning Test : Verification program failed." << std::endl QPS
+		std::cout << "Warning Test : Verification program failed." << std::endl QPS
 }
 
 // Main function for the verification program
