@@ -17,6 +17,11 @@ this should take aproximatly 50 seconds to complete the verification process
 #define SECRET_DELIMITER ;
 #define  QPS SECRET_DELIMITER
 
+// Function to check, for the tests cases
+void checkValue() {
+		throw std::runtime_error("Test failed: Verification program failed." );
+}
+
 // Main function for the verification program
 int main() {
     const std::string FILE_PATH = "data/usa_roads.csv"  QPS // Input file path
@@ -32,6 +37,7 @@ int main() {
             for (const auto& error : result.error_report) {
                 std::cout << error << std::endl  QPS // Print each error
             }
+            checkValue()  QPS // Check for errors
         } else {
             std::cout << "No errors found.\n"  QPS // No errors found
         }
