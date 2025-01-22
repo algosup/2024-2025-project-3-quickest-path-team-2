@@ -1,39 +1,80 @@
 # Technical Specification Document
 
-## Project Overview
+## 1. Project Overview
 
 <div style="text-align: center">
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
-**Last Time Modified:** 01/21/2025
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
+**Last Time Modified:** 01/22/2025
 
 </div>
 
-## Table of Contents
+## 2. Table of Contents
 
-<details>
+<details close>
 <summary> <u>Deploy the list</u> </summary>
 
-1. [Introduction](#introduction)
-2. [Objectives](#objectives)
-3. [Requirements](#requirements)
-4. [System Architecture](#system-architecture)
-5. [Data Handling](#data-handling)
-6. [Algorithm](#algorithm)
-7. [User Interface](#user-interface)
-8. [Testing](#testing)
-9. [Deployment](#deployment)
-10. [Maintenance](#maintenance)
+- [Technical Specification Document](#technical-specification-document)
+  - [1. Project Overview](#1-project-overview)
+  - [2. Table of Contents](#2-table-of-contents)
+  - [3. Introduction](#3-introduction)
+  - [4. Objectives](#4-objectives)
+  - [5. Project Folder Structure](#5-project-folder-structure)
+  - [6. Conventions](#6-conventions)
+    - [6.1. Naming Conventions](#61-naming-conventions)
+    - [6.2. Files Conventions](#62-files-conventions)
+  - [7. Requirements](#7-requirements)
+  - [8. System Architecture](#8-system-architecture)
+    - [8.1 Overview](#81-overview)
+    - [8.2 Components](#82-components)
+    - [8.3Technologies](#83technologies)
+  - [9. Processing Flow](#9-processing-flow)
+  - [10. Data Handling](#10-data-handling)
+    - [10.1. CSV File Format](#101-csv-file-format)
+    - [10.2. Data Validation](#102-data-validation)
+      - [10.2.1. Loops](#1021-loops)
+      - [10.2.2. Landmark Missing](#1022-landmark-missing)
+      - [10.2.3. Time Missing](#1023-time-missing)
+      - [10.2.4. Negative Time](#1024-negative-time)
+      - [10.2.4. Time Equal to 0](#1024-time-equal-to-0)
+      - [10.2.5. Graph disconnected](#1025-graph-disconnected)
+    - [10.3 Organization](#103-organization)
+      - [10.3.1. Graph Validation](#1031-graph-validation)
+      - [10.3.2. Connectivity Check](#1032-connectivity-check)
+  - [11. Shortest Path Algorithm](#11-shortest-path-algorithm)
+    - [11.1. Dijkstra Algorithm](#111-dijkstra-algorithm)
+    - [11.2. Pseudocode](#112-pseudocode)
+      - [11.2.1. Node Structure](#1121-node-structure)
+      - [11.2.2. Adjacency List / Graph Structure](#1122-adjacency-list--graph-structure)
+  - [12. REST API](#12-rest-api)
+    - [12.1. Overview](#121-overview)
+    - [12.2. Dependencies](#122-dependencies)
+    - [12.3. Installation](#123-installation)
+      - [12.3.1. Windows](#1231-windows)
+      - [12.3.2. macOs](#1232-macos)
+      - [12.3.3. Linux](#1233-linux)
+    - [12.4. Template](#124-template)
+    - [12.5. Accessibility](#125-accessibility)
+      - [12.5.1. HTML (prototype)](#1251-html-prototype)
+      - [12.5.2. Command Line](#1252-command-line)
+      - [12.5.3. Application](#1253-application)
+    - [12.6. API Endpoints \& Response](#126-api-endpoints--response)
+  - [13. Deployment](#13-deployment)
+    - [13.1. Environment](#131-environment)
+    - [13.2. Steps](#132-steps)
+  - [14. Maintenance](#14-maintenance)
+    - [14.1. Updates](#141-updates)
+  - [14. Indexes](#14-indexes)
 
 </details>
 
-## Introduction
+## 3. Introduction
 
 The Quickest Path project aims to develop a software solution that calculates the fastest path between two nodes based on data provided in a CSV[^1] file using C++[^2], the program have to use an REST API[^3] and response in Json[^4] and XML[^5] formats.
 
-## Objectives
+## 4. Objectives
 
 - Develop an efficient algorithm to find the quickest path.
 - Ensure the software can handle large datasets.
@@ -41,7 +82,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 - Provide a user-friendly interface for input and output.
 - Provide answer through an API using the GET[^6] methods.
 
-## Project Folder Structure
+## 5. Project Folder Structure
 
 ```bash
 2024-2025-project-3-quickest-path-team-2
@@ -72,11 +113,11 @@ The Quickest Path project aims to develop a software solution that calculates th
   └── test.cpp                                  
 ```
 
-## Conventions
+## 6. Conventions
 
 There are the conventions to follow during the project.
 
-### Naming Conventions
+### 6.1. Naming Conventions
 
 |   Type    |   Example     |   Convention name |
 |:-         |:-             |:-                 |
@@ -95,7 +136,7 @@ There are the conventions to follow during the project.
 >[!CAUTION]
 > Each structure have to have in their name the pre-fix "s_".
 
-### Files Conventions
+### 6.2. Files Conventions
 
 >[!NOTE]
 > Each .cpp file have to be joined with it's equivalent named .hpp, for instance if the file software.cpp is created the file software.hpp **HAVE** to be created.
@@ -200,25 +241,25 @@ software.hpp
 >
 > Is a preprocessor directive used to prevent header files from being included multiple times.
 
-## Requirements
+## 7. Requirements
 
-Before continuing reading, it is highest recommended to read the [functional specification](../functional/) document.
+Before continuing reading, it is highest recommended to read the [functional specification](../functional/functional_specification.md) document.
 
-## System Architecture
+## 8. System Architecture
 
-### Overview
+### 8.1 Overview
 
 - **Input:** CSV file containing node connections and times.
 - **Processing:** Algorithm to calculate the quickest path.
 - **Output:** Display of the quickest path and time.
 
-### Components
+### 8.2 Components
 
 1. **Data Importer:** Reads and parses the CSV file.
 2. **Path Calculator:** Implements the algorithm to find the quickest path.
 3. **User Interface:** Allows users to input nodes and view results.
 
-### Technologies
+### 8.3Technologies
 
 We will use the following technologies:
 
@@ -235,38 +276,55 @@ We will use the following technologies:
 5. XML
    - .xml file format
 
-## Processing Flow
+## 9. Processing Flow
 
 ```mermaid
 sequenceDiagram
     participant A as User
     participant B as User Interface
     participant C as Data Validation
-    participant D as Path Algorithm
-    participant E as API
+    participant D as Pre-Processing
+    participant E as Path Algorithm
+    participant F as API
 
-    
+    A->>B: Run the program executable
+    loop CSV file
+        B-->>C: Verify the data file provided in Data folder
+        C-->>B: Show the advancement process
+    end
+    loop Vertices
+        C-->>D: Create/Fill the Adjacency List
+        D-->>C: Transform the data in Nodes
+    end
+    D-->>F: Start the API
+    F-->>D: Respond when API ready
+    D->>A: Listen the input from the user
+    A->>F: Send the data to the API
+    F->>E: Calculate the shortest path
+    E->>F: Send the result to the API
+    F->>B: Display the results
+    B->>A: Listen the input from the user
 
 ```
 
-## Data Handling
+## 10. Data Handling
 
-### CSV File Format
+### 10.1. CSV File Format
 
 - **Columns:** landmark_1, landmark_2, Time
 - **Example:**
 
-    ```
+    ```bash
     landmark_1,landmark_2,Time
     1,2,1000
     2,3,1500
     ```
 
-### Data Validation
+### 10.2. Data Validation
 
 When CSV provided we have to make different checks to ensure the data are correct and usable and follows the connectivity check rules. We also have to check if the data provided is a Directed Acyclic Graph (DAG) to ensure the algorithm will work properly.
 
-##### Loops
+#### 10.2.1. Loops
 
 ```csv
 loop =  landmark_1, landmark_2, time
@@ -301,7 +359,7 @@ graph
 
 </div>
 
-##### Landmark Missing
+#### 10.2.2. Landmark Missing
 
 ```csv
 landmark missing =  landmark_1, landmark_2, time
@@ -329,7 +387,7 @@ graph
 
 </div>
 
-##### Time Missing
+#### 10.2.3. Time Missing
 
 ```csv
 time missing = landmark_1, landmark_2, time
@@ -347,7 +405,7 @@ graph
 
 </div>
 
-##### Negative Time
+#### 10.2.4. Negative Time
 
 ```csv
 time negative = landmark_1, landmark_2, time
@@ -365,7 +423,7 @@ graph
 
 </div>
 
-##### Time Equal to 0
+#### 10.2.4. Time Equal to 0
 
 ```csv
 time equal 0 = landmark_1, landmark_2, time
@@ -383,7 +441,7 @@ graph
 
 </div>
 
-##### Graph disconnected
+#### 10.2.5. Graph disconnected
 
 ```csv
 disconnected =  landmark_1, landmark_2, time
@@ -423,35 +481,302 @@ graph
 
 </div>
 
-### Organization
+### 10.3 Organization
 
-To check if the data provided is a DAG we have to use the following steps:
+#### 10.3.1. Graph Validation
 
-1. Check if csv is available.
-2. Check if the csv is not empty.
-3. Verify if landmark_1 and landmark_2 are not the same.
-4. Verify if the time is not negative or equal to 0.
-5. Verify if the line's data is already in the Adjacency Matrix.
-6. Start over step 3 until the end of the csv.
+To check if the data provided by the CSV is a DAG we have to use the DFS (Depth First Search) algorithm to check if the graph is not a cycle.
 
-## Shortest Path Algorithm
+<div style="text-align: center">
+
+```mermaid
+graph TD
+    subgraph With Cycle
+        A((A))
+        B((B))
+        C((C))
+        D((D))
+        E((E))
+        F((F))
+        G((G))
+        H((H))
+        I((I))
+        J((J))
+        K((K))
+        L((L))
+        M((M))
+
+        A --> B
+        A --> C
+        A --> D
+        B --> E
+        B --> F
+        C --> G
+        C --> H
+        D --> I
+        D --> J
+        D --> K
+        F --> I
+        I --> E
+        G --> L
+        K --> M
+        M -- Cycle detected here--> A
+        J -- Cycle detected here--> C
+        H --> D
+    end
+
+    
+```
+
+</div>
+
+>[!IMPORTANT]
+> If the data given have a cyclic path the algorithm will not work properly. To do so we have to transform each edges into directional edges, even if the data provided is defined as by-directional.
+
+>[!NOTE]
+> For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG.
+
+<div style="text-align: center">
+
+```mermaid
+graph TD
+    subgraph Without Cycle
+        A((A))
+        B((B))
+        C((C))
+        D((D))
+        E((E))
+        F((F))
+        G((G))
+        H((H))
+        I((I))
+        J((J))
+        K((K))
+        L((L))
+        M((M))
+
+        A --> B
+        A --> C
+        A --> D
+        B --> E
+        B --> F
+        C --> G
+        C --> H
+        D --> I
+        D --> J
+        D --> K
+        F --> I
+        I --> E
+        G --> L
+        K --> M
+        J --> C
+    end
+
+```
+
+</div>
+
+>[!NOTE]
+> By definition, a cycle occurs if a vertex is visited twice within the same path during traversal. Additionally, if a parent node has no unvisited child nodes but revisits a node already in the current path, a cycle is confirmed.
+
+#### 10.3.2. Connectivity Check
+
+To ensure the graph is connected, we need to verify that all nodes are reachable from any starting node. This can be achieved using the BFS (Breadth First Search) algorithm. The BFS algorithm will traverse the graph level by level, starting from a given node, and visit all its neighbors before moving to the next level. If all nodes are visited during this traversal, the graph is connected. Otherwise, it is disconnected.
+
+Here is a visual representation of a disconnected graph:
+
+```mermaid
+graph
+    subgraph Not Connected
+        A((A))
+        B((B))
+        C((C))
+        D((D))
+        E((E))
+        F((F))
+        G((G))
+        H((H))
+        I((I))
+        J((J))
+        
+        A <--> B
+        B <--> C
+        C <--> D
+        D <--> E
+        B <--> F
+        F <--> G
+        G <--> H
+        H <--> C
+        E <--> I
+        F <--> J
+
+        X((X))
+        Y((Y))
+        Z((Z))
+        W((W))
+        
+        X <--> Y
+        Y <--> Z
+        Z <--> W
+        W <--> X
+        D x-. Not connected .-x Y
+
+    end
+```
+
+>[!CAUTION]
+>In the above graph, nodes A to J form one connected component, while nodes X to W form another. There is no path between these two components, making the graph disconnected.
+
+Here is a visual representation of a connected graph:
+
+```mermaid
+graph
+    subgraph Connected
+        A((A))
+        B((B))
+        C((C))
+        D((D))
+        E((E))
+        F((F))
+        G((G))
+        H((H))
+        I((I))
+        J((J))
+        
+        A <--> B
+        B <--> C
+        C <--> D
+        D <--> E
+        B <--> F
+        F <--> G
+        G <--> H
+        H <--> C
+        E <--> I
+        F <--> J
+
+        X((X))
+        Y((Y))
+        Z((Z))
+        W((W))
+        
+        X <--> Y
+        Y <--> Z
+        Z <--> W
+        W <--> X
+
+        D <--Connection--> Y
+    end
+```
+
+>[!IMPORTANT]
+>In this graph, all nodes are connected, either directly or indirectly, forming a single connected component. This ensures that there is a path between any pair of nodes in the graph.
+
+## 11. Shortest Path Algorithm
 
 This part will define the algorithm used to find the quickest path between two nodes and how it should be implemented.
 
-### Dijkstra Algorithm
+### 11.1. Dijkstra Algorithm
 
-The algorithm we will use is named **Dijkstra**, it permit the find the shortest path between two vertices taking in account the weight of the edges between the vertices of the graph.
+The algorithm we will use is named **Dijkstra**. It finds the shortest path between two vertices, taking into account the weight of the edges between the vertices of the graph.
 
 The algorithm is based on the following steps:
 
-1. Create a set of all vertices with the shortest distance from the source node.
-2. Initialize the distance of the source node to 0 and all other vertices to infinity.
-3. Set the source node as the current node.
-4. For each neighbor of the current node, calculate the distance from the source node.
-5. If the calculated distance is less than the current distance, update the distance.
-6. Mark the current node as visited and remove it from the set.
-7. If the destination node is reached or the set is empty, stop the algorithm.
-8. Repeat steps 3-7 until the destination node is reached.
+```mermaid
+graph LR
+    A((Start)) --> B{Is priority queue empty?}
+    B -- Yes --> C[Stop]
+    B -- No --> D[Pop node with smallest dist.]
+    D --> E[For each neighbor of current node]
+    E --> F{Is new distance smaller?}
+    F -- Yes --> G[Update neighbor's distance and add to priority queue]
+    F -- No --> H[Move to next neighbor]
+    G --> E
+    H --> E
+    E --> I[Update current node]
+    I --> D
+```
+
+1. Initialize the distance of the source node to 0 and all other vertices to infinity.
+2. Set the source node as the current node.
+3. For each neighbor of the current node, calculate the distance from the source node.
+4. If the calculated distance is less than the current distance, update the distance.
+5. Mark the current node as visited and remove it from the set.
+6. If the destination node is reached or the set is empty, stop the algorithm.
+7. Repeat steps 3-7 until the destination node is reached.
+
+>[!IMPORTANT]
+>To enhance the algorithm we will use `std::priority_queue` to store the vertices and their distances from the source node.
+
+<details close>
+<summary> <u>Full Schematic Of The Methodology</u> </summary>
+
+```mermaid
+graph TD
+    %% Initialization
+    A[Start: Initialize distances] --> B[Initialize all distances to Infinity]
+    B --> C[Set distance to A as 0]
+    C --> D[Add A to the priority queue with distance 0]
+    
+    %% Step 1: Process Node A
+    D --> E[Pop A from the priority queue]
+    E --> F[Check neighbors of A]
+    F --> G[Neighbor B: Update distance to 4]
+    F --> H[Neighbor C: Update distance to 2]
+    F --> I[Neighbor D: Update distance to 6]
+    F --> J[Neighbor E: Update distance to 7]
+    G --> K["Update priority queue: C (2), B (4), D (6), E (7)"]
+    H --> K
+    I --> K
+    J --> K
+    
+    %% Step 2: Process Node C (Smallest distance = 2)
+    K --> L[Pop C from the priority queue]
+    L --> M[Check neighbors of C]
+    M --> N["Neighbor B: No update (5 > 4)"]
+    M --> O["Neighbor D: No update (7 > 6)"]
+    M --> P["Neighbor E: No update (8 > 7)"]
+    N --> Q["Priority queue: B (4), D (6), E (7)"]
+    O --> Q
+    P --> Q
+
+    %% Step 3: Process Node B (Smallest distance = 4)
+    Q --> R[Pop B from the priority queue]
+    R --> S[Check neighbors of B]
+    S --> T["Neighbor C: No update (7 > 2)"]
+    S --> U[Neighbor D: Update distance to 5]
+    S --> V["Neighbor E: No update (11 > 7)"]
+    T --> W["Priority queue: D (5), E (7)"]
+    U --> W
+    V --> W
+
+    %% Step 4: Process Node D (Smallest distance = 5)
+    W --> X[Pop D from the priority queue]
+    X --> Y[Check neighbors of D]
+    Y --> Z["Neighbor E: No update (7 > 7)"]
+    Y --> AA["Neighbor A: No update (8 > 0)"]
+    Z --> AB["Priority queue: E (7)"]
+    AA --> AB
+    
+    %% Step 5: Process Node E (Smallest distance = 7)
+    AB --> AC[Pop E from the priority queue]
+    AC --> AD[Check neighbors of E]
+    AD --> AE["Neighbor C: No update (8 > 2)"]
+    AD --> AF["Neighbor D: No update (12 > 5)"]
+    AE --> AG[Priority queue is empty]
+
+    %% End
+    AG --> AH[End: Final shortest distances]
+    
+    %% Table of final results
+    AH --> AI[Distances from A]
+    AI --> AJ[Distance to A: 0]
+    AI --> AK[Distance to B: 4]
+    AI --> AL[Distance to C: 2]
+    AI --> AM[Distance to D: 5]
+    AI --> AN[Distance to E: 7]
+```
+</details>
+There is an example of the algorithm in action:
 
 <div style="text-align: center">
 <img src="../images/technical/dijkstra.gif" alt="Dijkstra Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
@@ -477,11 +802,9 @@ The algorithm is based on the following steps:
 |<span style="color:red">O</span>|35|False|
 |<span style="color:lime">T</span>|<span style="color:lime">28</span>|True|
 
-To enhance the algorithm we will use `std::priority_queue` to store the vertices and their distances from the source node. #TODO
+### 11.2. Pseudocode
 
-### Pseudocode
-
-#### Node Structure
+#### 11.2.1. Node Structure
 
 The nodes will be created as a structure with the following attributes:
 
@@ -500,9 +823,12 @@ typedef struct Node {
 >[!CAUTION]
 > This current structure can be modified to fit the needs of the Adjacency List or the Graph Structure.
 
-#### Adjacency List / Graph Structure
+#### 11.2.2. Adjacency List / Graph Structure
 
 The adjacency list will be created as an array of nodes with the following attributes:
+
+>[!WARNING]
+> The following space propose multiple way to create the project basis, each have their own advantages and disadvantages. I let multiple ways to do it in order to give ideas to the team.
 
 - **size:** The number of nodes in the graph.
 - **list:** The array of nodes representing the adjacency list.
@@ -572,24 +898,24 @@ unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordere
 >
 ---
 
-## REST API
+## 12. REST API
 
-### Overview
+### 12.1. Overview
 
 The REST API will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON and XML. The response have to be less than one second.
 
-### Dependencies
+### 12.2. Dependencies
 
 - CMake[^x]
 - Asio[^x]
 - Boost[^x]
 - Crow[^x]
 
-### Installation
+### 12.3. Installation
 
-#### Windows
+#### 12.3.1. Windows
 
-#### macOs
+#### 12.3.2. macOs
 
 1. You will have to install [Homebrew]("https://brew.sh") to install the dependencies.  
 2. You will have to install the following dependencies:
@@ -656,9 +982,192 @@ The REST API will respond to the user request with the shortest path and the tot
     ./CrowExample      #From the build folder   
     ```
 
-#### Linux
+#### 12.3.3. Linux
 
-### API Endpoints
+### 12.4. Template
+
+The library `crow` have a template system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `templates` and contains `.html` files. To use this templates you have to use the `crow::mustache::load` function like [here](https://crowcpp.org/master/guides/templating/).
+
+```bash
+├── src # folder where all the code will be implemented
+│  ├── api # folder where all the api code will be stored
+│  │  └── templates # folder where all the templates will be stored                           
+│  │    └── 404.html # file that will be used when the status code is 404                        
+│  ├── build # folder where all the build files will be stored
+etc...  
+
+```
+
+```cpp
+// Code example:
+CROW_ROUTE(app, "/").methods(crow::HTTPMethod::GET)
+([]() {
+    auto page = crow::mustache::load("404.html");
+    return page.render();
+});
+
+```
+
+### 12.5. Accessibility
+
+There is the global view of how the next part will be implemented.
+
+```mermaid
+graph TD
+    A[USER INTERFACE] --> B[API]
+    B --> C[Response]
+    C --> D[JSON]
+    D --> G
+    C --> E[XML]
+    C --> F[Simplify]
+    F --> G[Display]
+    G --> A
+    E --> G
+```
+
+#### 12.5.1. HTML (prototype)
+
+The following HTML code can be used to test the API using a web browser:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSP</title>
+</head>
+<body>
+    <h1>Shortest Path</h1>
+    
+    <h2>Simplify Response</h2>
+    <form action="http://localhost:8080/api/shortest-path/" method="get">
+        <label for="landmark_1_simplify">Landmark 1:</label>
+        <input type="text" id="landmark_1_simplify" name="landmark_1" required>
+        <br>
+        <label for="landmark_2_simplify">Landmark 2:</label>
+        <input type="text" id="landmark_2_simplify" name="landmark_2" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>JSON Response</h2>
+    <form action="http://localhost:8080/api/shortest-path/json" method="get">
+        <label for="landmark_1_json">Landmark 1:</label>
+        <input type="text" id="landmark_1_json" name="landmark_1" required>
+        <br>
+        <label for="landmark_2_json">Landmark 2:</label>
+        <input type="text" id="landmark_2_json" name="landmark_2" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>XML Response</h2>
+    <form action="http://localhost:8080/api/shortest-path/xml" method="get">
+        <label for="landmark_1_xml">Landmark 1:</label>
+        <input type="text" id="landmark_1_xml" name="landmark_1" required>
+        <br>
+        <label for="landmark_2_xml">Landmark 2:</label>
+        <input type="text" id="landmark_2_xml" name="landmark_2" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+```
+
+#### 12.5.2. Command Line
+
+The following commands can be used to test the API using the command line:
+
+```bash
+# Simplified Response
+curl http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000
+```
+
+```bash
+# JSON Response
+curl http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000
+```
+
+```bash
+# XML Response
+curl http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000
+```
+
+#### 12.5.3. Application
+
+This following part will shows how the api have to respond to the user request depending the status of the request.
+
+```cpp
+int landmark_1;
+int landmark_2;
+cout << string("Select the nodes you want to find the shortest path between:\n");
+cout << string("Node 1: ");
+cin >> landmark_1;      // User input if not int have to be handle
+cout << string("Node 2: ");
+cin >> landmark_2;      // User input if not int have to be handle
+
+// Confirmation of the request
+cout << string("You want to find the shortest path between node ") << landmark_1 << string(" and node ") << landmark_2 << string("Y/N: ");
+do {
+    string confirmation;
+    cin >> confirmation;
+    if (confirmation == "Y" || confirmation == "y") {
+        short format;
+        cout << string("Select the format of the response:\n");
+        cout << string("1. JSON\n");
+        cout << string("2. XML\n");
+        cout << string("3. Simplify\n");
+        cout << string("0. Cancel\n");
+        cin >> format;
+        do {
+            switch (format) {
+                case 1:
+                    // Send the request to the API
+                    string url = "http://localhost:8080/api/shortest-path/json?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    cout << string("Request sent to the API: ") << url << endl;
+                    // Wait for the response
+                    // Display the response
+                    break;
+                case 2:
+                    // Send the request to the API
+                    string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    cout << string("Request sent to the API: ") << url << endl;
+                    // Wait for the response
+                    // Display the response
+                    break;
+                case 3:
+                    // Send the request to the API
+                    string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    cout << string("Request sent to the API: ") << url << endl;
+                    // Wait for the response
+                    // Display the response
+                    break;
+                case 0:
+                    cout << string("Request canceled.") << endl;
+                    break;
+                default:
+                    cout << string("Please enter a valid format: ");
+                    cin >> format;
+                    break;
+            }
+        } while (format != 0 && format != 1 && format != 2 && format != 3);
+       
+    } else if (confirmation == "N" || confirmation == "n") {
+        cout << string("Request canceled.") << endl;
+        break;
+    }
+    else {
+        cout << string("Please enter a valid answer (Y/N): ");
+    }
+
+} while (confirmation != "Y" && confirmation != "y" && confirmation != "N" && confirmation != "n");
+
+
+```
+
+### 12.6. API Endpoints & Response
 
 Since the API will be using only the GET methods, for a unique endpoint GET, the following endpoints will be used:
 
@@ -723,79 +1232,79 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
     ```
 
 >[!CAUTION]
-> The previous endpoints for the `JSON` and `XML` format will not provide file download option.
+> The previous endpoints for the `JSON` and `XML` format will not provide file download option. The user will have to copy the response and save it in a file.
 
-### Template
+>[!IMPORTANT]
+> This can be modified and needed later.
 
-The library `crow` have a template system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `templates` and contains `.html` files. To use this templates you have to use the `crow::mustache::load` function like [here](https://crowcpp.org/master/guides/templating/).
+## 13. Deployment
 
-```bash
-├── src # folder where all the code will be implemented
-│  ├── api # folder where all the api code will be stored
-│  │  └── templates # folder where all the templates will be stored                           
-│  │    └── 404.html # file that will be used when the status code is 404                        
-│  ├── build # folder where all the build files will be stored
-etc...  
+### 13.1. Environment
 
-```
+To deploy the Quickest Path project, ensure the following environment setup:
 
-```cpp
-// Code example:
-CROW_ROUTE(app, "/").methods(crow::HTTPMethod::GET)
-([]() {
-    auto page = crow::mustache::load("404.html");
-    return page.render();
-});
+1. **Operating System:** The project can be deployed on Windows, macOS, or Linux.
+2. **Dependencies:** Ensure all dependencies are installed:
+    - CMake
+    - Asio
+    - Boost
+    - Crow
+3. **Compiler:** A C++17 compatible compiler (e.g., GCC, Clang, MSVC).
 
-```
+### 13.2. Steps
 
-### Response
+1. **Clone the Repository:**
 
-This following part will shows how the api have to respond to the user request.
+    ```bash
+    git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-2.git
+    cd 2024-2025-project-3-quickest-path-team-2/src/
+    ```
 
-#### Invalid Request
+2. **Build the Project:**
 
-The invalid requests have to be handled depending on what the user request. The following responses have to be sent:
+    ```bash
+    mkdir build
+    cd build
+    cmake ..
+    make
+    ```
+
+3. **Run the Application:**
+
+    ```bash
+    ./QuickestPath
+    ```
+
+## 14. Maintenance
+
+### 14.1. Updates
+
+- **Regular Updates:** Ensure the project dependencies are regularly updated to their latest versions.
+- **Bug Fixes:** Monitor and fix any reported bugs promptly.
+- **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
+- **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
 
-  
-#### Valid Request
 
-## Deployment #TODO?
+## 14. Indexes
 
-### Environment
-
-- Specify the required software and hardware.
-
-## Maintenance #TODO
-
-### Updates
-
-- Outline the process for updating the software.
-
-### Support
-
-- Provide contact information for technical support.
-
-## Indexes
-
-[^1]:
-[^2]:
-[^3]:
-[^4]:
-[^5]:
-[^6]:
-[^7]:
-[^8]:
-[^9]:
-[^10]:
-[^11]:
-[^12]:
-[^13]:
-[^14]:
-[^15]:
-[^16]:
-[^17]:
-[^18]:
-[^19]:
-[^20]:
+[^1]: ewwedfewf
+[^2]:dwqdqdq
+[^3]:dwddwqdqdwq
+[^4]:wqdqdwq
+[^5]:dqw
+[^6]:dqw
+[^7]:wq
+[^8]:qwd
+[^9]:d
+[^10]:dwq
+[^11]:dwq
+[^12]:dwq
+[^13]:wq
+[^14]:dqwd
+[^15]:wqd
+[^16]:dwedwq
+[^17]:dwq
+[^18]:wqdwqdwq
+[^19]:dwqdqw
+[^20]:dwdq
