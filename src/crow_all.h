@@ -169,7 +169,7 @@ namespace crow
 
         virtual ~returnable(){};
     };
-} // namespace crow
+} // Namespace crow
 
 
 #include <stdio.h>
@@ -234,7 +234,7 @@ inline int qs_strncmp(const char * s, const char * qs, size_t n)
         if ( ! CROW_QS_ISQSCHR(u2) ) {  u2 = '\0';  }
 
         if ( u1 == '+' ) {  u1 = ' ';  }
-        if ( u1 == '%' ) // easier/safer than scanf
+        if ( u1 == '%' ) // Easier/safer than scanf
         {
             unyb = static_cast<unsigned char>(*s++);
             lnyb = static_cast<unsigned char>(*s++);
@@ -245,7 +245,7 @@ inline int qs_strncmp(const char * s, const char * qs, size_t n)
         }
 
         if ( u2 == '+' ) {  u2 = ' ';  }
-        if ( u2 == '%' ) // easier/safer than scanf
+        if ( u2 == '%' ) // Easier/safer than scanf
         {
             unyb = static_cast<unsigned char>(*qs++);
             lnyb = static_cast<unsigned char>(*qs++);
@@ -274,14 +274,14 @@ inline size_t qs_parse(char* qs, char* qs_kv[], size_t qs_kv_size, bool parse_ur
 
     for(i=0; i<qs_kv_size; i++)  qs_kv[i] = NULL;
 
-    // find the beginning of the k/v substrings or the fragment
+    // Find the beginning of the k/v substrings or the fragment
     substr_ptr = parse_url ? qs + strcspn(qs, "?#") : qs;
     if (parse_url)
     {
         if (substr_ptr[0] != '\0')
             substr_ptr++;
         else
-            return 0; // no query or fragment
+            return 0; // No query or fragment
     }
 
     i=0;
@@ -294,12 +294,12 @@ inline size_t qs_parse(char* qs, char* qs_kv[], size_t qs_kv_size, bool parse_ur
         i++;
     }
 
-    // we only decode the values in place, the keys could have '='s in them
+    // We only decode the values in place, the keys could have '='s in them
     // which will hose our ability to distinguish keys from values later
     for(j=0; j<i; j++)
     {
         substr_ptr = qs_kv[j] + strcspn(qs_kv[j], "=&#");
-        if ( substr_ptr[0] == '&' || substr_ptr[0] == '\0')  // blank value: skip decoding
+        if ( substr_ptr[0] == '&' || substr_ptr[0] == '\0')  // Blank value: skip decoding
             substr_ptr[0] = '\0';
         else
             qs_decode(++substr_ptr);
@@ -320,7 +320,7 @@ inline int qs_decode(char * qs)
     while( CROW_QS_ISQSCHR(qs[j]) )
     {
         if ( qs[j] == '+' ) {  qs[i] = ' ';  }
-        else if ( qs[j] == '%' ) // easier/safer than scanf
+        else if ( qs[j] == '%' ) // Easier/safer than scanf
         {
             if ( ! CROW_QS_ISHEX(qs[j+1]) || ! CROW_QS_ISHEX(qs[j+2]) )
             {
@@ -354,13 +354,13 @@ inline char * qs_k2v(const char * key, char * const * qs_kv, size_t qs_kv_size, 
 #else  // _qsSORTING
     for(i=0; i<qs_kv_size; i++)
     {
-        // we rely on the unambiguous '=' to find the value in our k/v pair
+        // We rely on the unambiguous '=' to find the value in our k/v pair
         if ( qs_strncmp(key, qs_kv[i], key_len) == 0 )
         {
             skip = strcspn(qs_kv[i], "=");
             if ( qs_kv[i][skip] == '=' )
                 skip++;
-            // return (zero-char value) ? ptr to trailing '\0' : ptr to value
+            // Return (zero-char value) ? ptr to trailing '\0' : ptr to value
             if(nth == 0)
                 return qs_kv[i] + skip;
             else
@@ -420,7 +420,7 @@ inline char * qs_scanvalue(const char * key, const char * qs, char * val, size_t
     size_t i, key_len;
     const char * tmp;
 
-    // find the beginning of the k/v substrings
+    // Find the beginning of the k/v substrings
     if ( (tmp = strchr(qs, '?')) != NULL )
         qs = tmp + 1;
 
@@ -607,7 +607,7 @@ namespace crow
         ///
         /// For example calling `get_dict(yourname)` on `?yourname[sub1]=42&yourname[sub2]=84` would give a map containing `{sub1 : 42, sub2 : 84}`.
         ///
-        /// if your query string has both empty brackets and ones with a key inside, use pop_list() to get all the values without a key before running this method.
+        /// If your query string has both empty brackets and ones with a key inside, use pop_list() to get all the values without a key before running this method.
         std::unordered_map<std::string, std::string> get_dict(const std::string& name) const
         {
             std::unordered_map<std::string, std::string> ret;
@@ -978,7 +978,7 @@ namespace sha1
 }
 #endif
 
-// settings for crow
+// Settings for crow
 // TODO(ipkn) replace with runtime config. libucl?
 
 /* #ifdef - enables debug mode */
@@ -1011,7 +1011,7 @@ namespace sha1
 #define CROW_STATIC_ENDPOINT "/static/<path>"
 #endif
 
-// compiler flags
+// Compiler flags
 #if defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
 #define CROW_CAN_USE_CPP14
 #endif
@@ -1866,9 +1866,9 @@ namespace crow
             };
 
             // Not padded
-            if (size % 4 == 2)             // missing last 2 characters
+            if (size % 4 == 2)             // Missing last 2 characters
                 size = (size / 4 * 3) + 1; // Not subtracting extra characters because they're truncated in int division
-            else if (size % 4 == 3)        // missing last character
+            else if (size % 4 == 3)        // Missing last character
                 size = (size / 4 * 3) + 2; // Not subtracting extra characters because they're truncated in int division
 
             // Padded
@@ -2285,7 +2285,7 @@ namespace crow
 
 
         InternalMethodCount,
-        // should not add an item below this line: used for array count
+        // Should not add an item below this line: used for array count
     };
 
     constexpr const char* method_strings[] =
