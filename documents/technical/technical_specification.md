@@ -6,8 +6,8 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
-**Last Time Modified:** 01/22/2025
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
+**Last Time Modified:** 01/23/2025
 
 </div>
 
@@ -44,7 +44,7 @@
       - [10.3.1. Graph Validation](#1031-graph-validation)
       - [10.3.2. Connectivity Check](#1032-connectivity-check)
   - [11. Shortest Path Algorithm](#11-shortest-path-algorithm)
-    - [11.1. Dijkstra\[^11\] Algorithm](#111-dijkstra11-algorithm)
+    - [11.1. Dijkstra Algorithm](#111-dijkstra-algorithm)
     - [11.2. Pseudocode](#112-pseudocode)
       - [11.2.1. Node Structure](#1121-node-structure)
       - [11.2.2. Adjacency List / Graph Structure](#1122-adjacency-list--graph-structure)
@@ -66,7 +66,7 @@
     - [13.2. Steps](#132-steps)
   - [14. Maintenance](#14-maintenance)
     - [14.1. Updates](#141-updates)
-  - [14. Indexes](#14-indexes)
+  - [14. Glossary](#14-glossary)
 
 </details>
 
@@ -676,9 +676,22 @@ graph
 
 This part will define the algorithm used to find the quickest path between two nodes and how it should be implemented.
 
-### 11.1. Dijkstra[^11] Algorithm
+### 11.1. Dijkstra Algorithm
 
-The algorithm we will use is named **Dijkstra[^11]**. It finds the shortest path between two vertices, taking into account the weight of the edges between the vertices of the graph.
+The algorithm we will use is named **Dijkstra**[^11]. It finds the shortest path between two vertices, taking into account the weight of the edges between the vertices of the graph.
+
+>[!NOTE]
+>The time complexity of Dijkstra's algorithm depends on the data structure used to implement the priority queue. Here are the complexities for different implementations:
+>
+>- **Using a binary heap:** O((V + E) log V)
+>- **Using a Fibonacci heap:** O(E + V log V)
+>
+>Where:
+>
+>- V is the number of vertices.
+>- E is the number of edges.
+>
+>The space complexity is O(V + E) due to the storage of the graph and the priority queue.
 
 The algorithm is based on the following steps:
 
@@ -776,6 +789,7 @@ graph TD
     AI --> AM[Distance to D: 5]
     AI --> AN[Distance to E: 7]
 ```
+
 </details>
 
 ---
@@ -790,21 +804,21 @@ There is an example of the algorithm in action:
 |Vertices|Shortest Path From A|Visited|
 |:-:|:-:|:-:|
 |<span style="color:lime">A</span>|<span style="color:lime">0</span>|True|
-|<span style="color:lime">B</span>|<span style="color:lime">4</span>|True|
+|<span style="color:lime">B</span>|<span style="color:lime">4 = 0 + 4</span>|True|
 |<span style="color:red">C</span>|2|True|
-|<span style="color:lime">D</span>|<span style="color:lime">5</span>|True|
+|<span style="color:lime">D</span>|<span style="color:lime">5 = 4 + 1</span>|True|
 |<span style="color:red">E</span>|6|False|
-|<span style="color:lime">F</span>|<span style="color:lime">2</span>|True|
-|<span style="color:lime">G</span>|<span style="color:lime">8</span>|True|
-|<span style="color:lime">H</span>|<span style="color:lime">15</span>|True|
-|<span style="color:lime">I</span>|<span style="color:lime">18</span>|True|
+|<span style="color:lime">F</span>|<span style="color:lime">7 = 5 + 2</span>|True|
+|<span style="color:lime">G</span>|<span style="color:lime">8 = 7 + 1</span>|True|
+|<span style="color:lime">H</span>|<span style="color:lime">15 = 8 + 7</span>|True|
+|<span style="color:lime">I</span>|<span style="color:lime">18 = 15 + 3</span>|True|
 |<span style="color:red">J</span>|19|True|
 |<span style="color:red">K</span>|24|False|
-|<span style="color:lime">L</span>|<span style="color:lime">20</span>|True|
-|<span style="color:lime">M</span>|<span style="color:lime">25</span>|True|
-|<span style="color:lime">N</span>|<span style="color:lime">26</span>|True|
+|<span style="color:lime">L</span>|<span style="color:lime">20 = 18 + 2</span>|True|
+|<span style="color:lime">M</span>|<span style="color:lime">25 = 20 + 5</span>|True|
+|<span style="color:lime">N</span>|<span style="color:lime">26 = 25 + 1</span>|True|
 |<span style="color:red">O</span>|35|False|
-|<span style="color:lime">T</span>|<span style="color:lime">28</span>|True|
+|<span style="color:lime">T</span>|<span style="color:lime">28 = 26 + 2</span>|True|
 
 ### 11.2. Pseudocode
 
@@ -817,10 +831,9 @@ The nodes will be created as a structure with the following attributes:
 - **weight:** The time taken to travel between the nodes.
 
 ```cpp
-typedef struct Node {
-    int landmark1;
-    int landmark2
-    int weight;         
+typedef struct Node {   // Define the current Node
+    Node *landmark2;    // Define where the Node is going
+    int weight;         // Define the weight of the edge
 } s_Node;
 ```
 
@@ -928,7 +941,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
     brew install cmake asio boost   #Install cmake, asio and boost
     ```
 
-3. Download the `crow_all.h` file from the Crow[^15] repository by clicking [here](https://github.com/CrowCpp/crow/releases/tag/v1.2.0).
+3. Download the `crow_all.h` file from the Crow repository by clicking [here](https://github.com/CrowCpp/crow/releases/tag/v1.2.0).
 4. Place the `crow_all.h` at the same root from your `main.cpp` of your api.
 5. Create a file `CMakeLists.txt` at the same root from your `main.cpp` of your api that will contains the following:
 
@@ -938,7 +951,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
 
     set(CMAKE_CXX_STANDARD 14)
 
-    find_package(Boost[^14] REQUIRED)
+    find_package(Boost REQUIRED)
 
     include_directories(${Boost_INCLUDE_DIRS} ./include)
 
@@ -953,7 +966,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
     ```cpp
     #include "crow_all.h"
         int main() {
-        // Create an instance of the Crow[^15] application
+        // Create an instance of the Crow application
         crow::SimpleApp app;
 
         // Example of a GET request with the route /api/user
@@ -995,8 +1008,8 @@ The library `crow` have a template system that can be used to respond to the use
 ```bash
 ├── src # folder where all the code will be implemented
 │  ├── api # folder where all the api code will be stored
-│  │  └── templates # folder where all the templates will be stored                           
-│  │    └── 404.html # file that will be used when the status code is 404                        
+│  │  └── static # folder where all the pages will be stored                           
+│  │    └── index.html # file that will be used when the home page is requested
 │  ├── build # folder where all the build files will be stored
 etc...  
 
@@ -1020,9 +1033,9 @@ There is the global view of how the next part will be implemented.
 graph TD
     A[USER INTERFACE] --> B[API]
     B --> C[Response]
-    C --> D[JSON[^4]]
+    C --> D[JSON]
     D --> G
-    C --> E[XML[^5]]
+    C --> E[XML]
     C --> F[Simplify]
     F --> G[Display]
     G --> A
@@ -1033,52 +1046,7 @@ graph TD
 
 The following HTML code can be used to test the API[^3] using a web browser:
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QSP</title>
-</head>
-<body>
-    <h1>Shortest Path</h1>
-    
-    <h2>Simplify Response</h2>
-    <form action="http://localhost:8080/api/shortest-path/" method="get">
-        <label for="landmark_1_simplify">Landmark 1:</label>
-        <input type="text" id="landmark_1_simplify" name="landmark_1" required>
-        <br>
-        <label for="landmark_2_simplify">Landmark 2:</label>
-        <input type="text" id="landmark_2_simplify" name="landmark_2" required>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <h2>JSON[^4] Response</h2>
-    <form action="http://localhost:8080/api/shortest-path/json" method="get">
-        <label for="landmark_1_json">Landmark 1:</label>
-        <input type="text" id="landmark_1_json" name="landmark_1" required>
-        <br>
-        <label for="landmark_2_json">Landmark 2:</label>
-        <input type="text" id="landmark_2_json" name="landmark_2" required>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <h2>XML[^5] Response</h2>
-    <form action="http://localhost:8080/api/shortest-path/xml" method="get">
-        <label for="landmark_1_xml">Landmark 1:</label>
-        <input type="text" id="landmark_1_xml" name="landmark_1" required>
-        <br>
-        <label for="landmark_2_xml">Landmark 2:</label>
-        <input type="text" id="landmark_2_xml" name="landmark_2" required>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
-```
+[Click here to see the HTML file.](../images/technical/index.md)
 
 #### 12.5.2. Command Line
 
@@ -1137,14 +1105,14 @@ do {
                 case 2:
                     // Send the request to the API
                     string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
-                    cout << string("Request sent to the API[^3]: ") << url << endl;
+                    cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 3:
                     // Send the request to the API
                     string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
-                    cout << string("Request sent to the API[^3]: ") << url << endl;
+                    cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
@@ -1270,7 +1238,7 @@ To deploy the Quickest Path project, ensure the following environment setup:
     mkdir build
     cd build
     cmake ..
-    make
+    make    # Where the Makefile is located
     ```
 
 3. **Run the Application:**
@@ -1288,7 +1256,7 @@ To deploy the Quickest Path project, ensure the following environment setup:
 - **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
 - **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
-## 14. Indexes
+## 14. Glossary
 
 [^1]: Comma-Separated Values: A file format used to store tabular data.
 

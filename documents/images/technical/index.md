@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,3 +43,5 @@
     </form>
 </body>
 </html>
+```
+[Click here to go on: 12.5.1. HTML (prototype) of the technical specification](../../technical/technical_specification.md#1251-html-prototype)
