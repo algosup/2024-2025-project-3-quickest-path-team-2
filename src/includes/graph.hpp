@@ -5,18 +5,23 @@
 
 struct Edge {
     int target;
-    int weight; 
+    int weight;
 
     Edge(int target, int weight) : target(target), weight(weight) {}
 };
 
 class Graph {
 public:
+    Graph(); 
+
     void add_edge(int source, int target, int weight);
     std::vector<int> shortest_path(int source, int target, int& totalTime);
 
+
+
 private:
-    std::vector<std::vector<Edge>> adjList;
+std::vector<std::vector<Edge>> adjList;
 };
 
-#endif
+#endif // GRAPH_HPP
+
