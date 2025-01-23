@@ -42,7 +42,7 @@ for this this code I use this different includes:
 #include <vector>
 #include <string>
 
-// Macros for obfuscation
+// Macros pour obfuscation
 #define SECRET_DELIMITER ;
 #define QPS SECRET_DELIMITER
 

@@ -7,12 +7,12 @@
 #include <unordered_set>
 
 /**
- * @brief Preprocess the data from a CSV file and store them in a graph.
+ * @brief Prétraite les données d'un fichier CSV et les stocke dans un graphe.
  * 
- * @param filePath Path to the CSV file.
- * @param maxLines Maximum number of lines to process (0 = all lines).
- * @param graph Reference to the graph in which the data are stored.
- * @return true if the preprocessing is successful, false otherwise.
+ * @param filePath Chemin du fichier CSV.
+ * @param maxLines Nombre maximum de lignes à traiter (0 = toutes les lignes).
+ * @param graph Référence au graphe dans lequel les données sont stockées.
+ * @return true si le prétraitement est réussi, false sinon.
  */
 bool preprocess_data(const std::string& filePath, int maxLines, Graph& graph);
 
