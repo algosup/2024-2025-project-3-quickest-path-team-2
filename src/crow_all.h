@@ -157,7 +157,7 @@ namespace crow
 
 namespace crow
 {
-    /// An abstract class that allows any other class to be returned by a handler.
+    // An abstract class that allows any other class to be returned by a handler.
     struct returnable
     {
         std::string content_type;
@@ -461,7 +461,7 @@ inline char * qs_scanvalue(const char * key, const char * qs, char * val, size_t
 namespace crow
 {
     struct request;
-    /// A class to represent any data coming after the `?` in the request URL into key-value pairs.
+    // A class to represent any data coming after the `?` in the request URL into key-value pairs.
     class query_string
     {
     public:
@@ -534,17 +534,17 @@ namespace crow
             return os;
         }
 
-        /// Get a value from a name, used for `?name=value`.
+        // Get a value from a name, used for `?name=value`.
 
-        ///
-        /// Note: this method returns the value of the first occurrence of the key only, to return all occurrences, see \ref get_list().
+        //
+        // Note: this method returns the value of the first occurrence of the key only, to return all occurrences, see \ref get_list().
         char* get(const std::string& name) const
         {
             char* ret = qs_k2v(name.c_str(), key_value_pairs_.data(), key_value_pairs_.size());
             return ret;
         }
 
-        /// Works similar to \ref get() except it removes the item from the query string.
+        // Works similar to \ref get() except it removes the item from the query string.
         char* pop(const std::string& name)
         {
             char* ret = get(name);
@@ -563,10 +563,10 @@ namespace crow
             return ret;
         }
 
-        /// Returns a list of values, passed as `?name[]=value1&name[]=value2&...name[]=valuen` with n being the size of the list.
+        // Returns a list of values, passed as `?name[]=value1&name[]=value2&...name[]=valuen` with n being the size of the list.
 
-        ///
-        /// Note: Square brackets in the above example are controlled by `use_brackets` boolean (true by default). If set to false, the example becomes `?name=value1,name=value2...name=valuen`
+        //
+        // Note: Square brackets in the above example are controlled by `use_brackets` boolean (true by default). If set to false, the example becomes `?name=value1,name=value2...name=valuen`
         std::vector<char*> get_list(const std::string& name, bool use_brackets = true) const
         {
             std::vector<char*> ret;
@@ -584,7 +584,7 @@ namespace crow
             return ret;
         }
 
-        /// Similar to \ref get_list() but it removes the
+        // Similar to \ref get_list() but it removes the
         std::vector<char*> pop_list(const std::string& name, bool use_brackets = true)
         {
             std::vector<char*> ret = get_list(name, use_brackets);
@@ -602,12 +602,12 @@ namespace crow
             return ret;
         }
 
-        /// Works similar to \ref get_list() except the brackets are mandatory must not be empty.
+        // Works similar to \ref get_list() except the brackets are mandatory must not be empty.
 
-        ///
-        /// For example calling `get_dict(yourname)` on `?yourname[sub1]=42&yourname[sub2]=84` would give a map containing `{sub1 : 42, sub2 : 84}`.
-        ///
-        /// If your query string has both empty brackets and ones with a key inside, use pop_list() to get all the values without a key before running this method.
+        //
+        // For example calling `get_dict(yourname)` on `?yourname[sub1]=42&yourname[sub2]=84` would give a map containing `{sub1 : 42, sub2 : 84}`.
+        //
+        // If your query string has both empty brackets and ones with a key inside, use pop_list() to get all the values without a key before running this method.
         std::unordered_map<std::string, std::string> get_dict(const std::string& name) const
         {
             std::unordered_map<std::string, std::string> ret;
@@ -623,7 +623,7 @@ namespace crow
             return ret;
         }
 
-        /// Works the same as \ref get_dict() but removes the values from the query string.
+        // Works the same as \ref get_dict() but removes the values from the query string.
         std::unordered_map<std::string, std::string> pop_dict(const std::string& name)
         {
             std::unordered_map<std::string, std::string> ret = get_dict(name);
@@ -1079,7 +1079,7 @@ namespace crow
 #endif
     using tcp = asio::ip::tcp;
 
-    /// A wrapper for the asio::ip::tcp::socket and asio::ssl::stream
+    // A wrapper for the asio::ip::tcp::socket and asio::ssl::stream
     struct SocketAdaptor
     {
         using context = void;
@@ -1092,13 +1092,13 @@ namespace crow
             return GET_IO_SERVICE(socket_);
         }
 
-        /// Get the TCP socket handling data trasfers, regardless of what layer is handling transfers on top of the socket.
+        // Get the TCP socket handling data trasfers, regardless of what layer is handling transfers on top of the socket.
         tcp::socket& raw_socket()
         {
             return socket_;
         }
 
-        /// Get the object handling data transfers, this can be either a TCP socket or an SSL stream (if SSL is enabled).
+        // Get the object handling data transfers, this can be either a TCP socket or an SSL stream (if SSL is enabled).
         tcp::socket& socket()
         {
             return socket_;
@@ -1262,22 +1262,22 @@ namespace crow
 
 namespace crow
 {
-    /// @cond SKIP
+    // @cond SKIP
     namespace black_magic
     {
 #ifndef CROW_MSVC_WORKAROUND
-        /// Out of Range Exception for const_str
+        // Out of Range Exception for const_str
         struct OutOfRange
         {
             OutOfRange(unsigned /*pos*/, unsigned /*length*/) {}
         };
-        /// Helper function to throw an exception if i is larger than len
+        // Helper function to throw an exception if i is larger than len
         constexpr unsigned requires_in_range(unsigned i, unsigned len)
         {
             return i >= len ? throw OutOfRange(i, len) : i;
         }
 
-        /// A constant string implementation.
+        // A constant string implementation.
         class const_str
         {
             const char* const begin_;
@@ -1314,7 +1314,7 @@ namespace crow
             return s[p] == '>' ? p : find_closing_tag(s, p + 1);
         }
 
-        /// Check that the CROW_ROUTE string is valid
+        // Check that the CROW_ROUTE string is valid
         constexpr bool is_valid(const_str s, unsigned i = 0, int f = 0)
         {
             return i == s.size()   ? f == 0 :
@@ -1797,7 +1797,7 @@ namespace crow
             template<size_t i>
             using arg = typename std::tuple_element<i, std::tuple<Args...>>::type;
         };
-        /// @endcond
+        // @endcond
 
         inline static std::string base64encode(const unsigned char* data, size_t size, const char* key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
         {
@@ -2105,8 +2105,8 @@ namespace crow
         }
 
 
-        /// Return a copy of the given string with its
-        /// leading and trailing whitespaces removed.
+        // Return a copy of the given string with its
+        // leading and trailing whitespaces removed.
         inline static std::string trim(const std::string& v)
         {
             if (v.empty())
@@ -2147,7 +2147,7 @@ namespace crow
 
 namespace crow
 {
-    /// Hashing function for ci_map (unordered_multimap).
+    // Hashing function for ci_map (unordered_multimap).
     struct ci_hash
     {
         size_t operator()(const std::string& key) const
@@ -2169,7 +2169,7 @@ namespace crow
         }
     };
 
-    /// Equals function for ci_map (unordered_multimap).
+    // Equals function for ci_map (unordered_multimap).
     struct ci_key_eq
     {
         bool operator()(const std::string& l, const std::string& r) const
@@ -2404,7 +2404,7 @@ namespace crow
         MAX
     };
 
-    /// @cond SKIP
+    // @cond SKIP
     struct routing_params
     {
         std::vector<int64_t> int_params;
@@ -2456,7 +2456,7 @@ namespace crow
     {
         return string_params[index];
     }
-    /// @endcond
+    // @endcond
 
     struct routing_handle_result
     {
@@ -2552,7 +2552,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
     namespace asio = boost::asio;
 #endif
 
-    /// Find and return the value associated with the key. (returns an empty string if nothing is found)
+    // Find and return the value associated with the key. (returns an empty string if nothing is found)
     template<typename T>
     inline const std::string& get_header_value(const T& headers, const std::string& key)
     {
@@ -2564,31 +2564,31 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         return empty;
     }
 
-    /// An HTTP request.
+    // An HTTP request.
     struct request
     {
         HTTPMethod method;
-        std::string raw_url;     ///< The full URL containing the `?` and URL parameters.
-        std::string url;         ///< The endpoint without any parameters.
-        query_string url_params; ///< The parameters associated with the request. (everything after the `?` in the URL)
+        std::string raw_url;     //< The full URL containing the `?` and URL parameters.
+        std::string url;         //< The endpoint without any parameters.
+        query_string url_params; //< The parameters associated with the request. (everything after the `?` in the URL)
         ci_map headers;
         std::string body;
-        std::string remote_ip_address; ///< The IP address from which the request was sent.
+        std::string remote_ip_address; //< The IP address from which the request was sent.
         unsigned char http_ver_major, http_ver_minor;
-        bool keep_alive,    ///< Whether or not the server should send a `connection: Keep-Alive` header to the client.
-          close_connection, ///< Whether or not the server should shut down the TCP connection once a response is sent.
-          upgrade;          ///< Whether or noth the server should change the HTTP connection to a different connection.
+        bool keep_alive,    //< Whether or not the server should send a `connection: Keep-Alive` header to the client.
+          close_connection, //< Whether or not the server should shut down the TCP connection once a response is sent.
+          upgrade;          //< Whether or noth the server should change the HTTP connection to a different connection.
 
         void* middleware_context{};
         void* middleware_container{};
         asio::io_service* io_service{};
 
-        /// Construct an empty request. (sets the method to `GET`)
+        // Construct an empty request. (sets the method to `GET`)
         request():
           method(HTTPMethod::Get)
         {}
 
-        /// Construct a request with all values assigned.
+        // Construct a request with all values assigned.
         request(HTTPMethod method, std::string raw_url, std::string url, query_string url_params, ci_map headers, std::string body, unsigned char http_major, unsigned char http_minor, bool has_keep_alive, bool has_close_connection, bool is_upgrade):
           method(method), raw_url(std::move(raw_url)), url(std::move(url)), url_params(std::move(url_params)), headers(std::move(headers)), body(std::move(body)), http_ver_major(http_major), http_ver_minor(http_minor), keep_alive(has_keep_alive), close_connection(has_close_connection), upgrade(is_upgrade)
         {}
@@ -2608,23 +2608,23 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             return http_ver_major == major && http_ver_minor == minor;
         }
 
-        /// Get the body as parameters in QS format.
+        // Get the body as parameters in QS format.
 
-        ///
-        /// This is meant to be used with requests of type "application/x-www-form-urlencoded"
+        //
+        // This is meant to be used with requests of type "application/x-www-form-urlencoded"
         const query_string get_body_params() const
         {
             return query_string(body, false);
         }
 
-        /// Send data to whoever made this request with a completion handler and return immediately.
+        // Send data to whoever made this request with a completion handler and return immediately.
         template<typename CompletionHandler>
         void post(CompletionHandler handler)
         {
             io_service->post(handler);
         }
 
-        /// Send data to whoever made this request with a completion handler.
+        // Send data to whoever made this request with a completion handler.
         template<typename CompletionHandler>
         void dispatch(CompletionHandler handler)
         {
@@ -2642,26 +2642,26 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 namespace crow
 {
 
-    /// Encapsulates anything related to processing and organizing `multipart/xyz` messages
+    // Encapsulates anything related to processing and organizing `multipart/xyz` messages
     namespace multipart
     {
 
         const std::string dd = "--";
 
-        /// The first part in a section, contains metadata about the part
+        // The first part in a section, contains metadata about the part
         struct header
         {
-            std::string value;                                   ///< The first part of the header, usually `Content-Type` or `Content-Disposition`
-            std::unordered_map<std::string, std::string> params; ///< The parameters of the header, come after the `value`
+            std::string value;                                   //< The first part of the header, usually `Content-Type` or `Content-Disposition`
+            std::unordered_map<std::string, std::string> params; //< The parameters of the header, come after the `value`
 
-            operator int() const { return std::stoi(value); }    ///< Returns \ref value as integer
-            operator double() const { return std::stod(value); } ///< Returns \ref value as double
+            operator int() const { return std::stoi(value); }    //< Returns \ref value as integer
+            operator double() const { return std::stod(value); } //< Returns \ref value as double
         };
 
-        /// Multipart header map (key is header key).
+        // Multipart header map (key is header key).
         using mph_map = std::unordered_multimap<std::string, header, ci_hash, ci_key_eq>;
 
-        /// Find and return the value object associated with the key. (returns an empty class if nothing is found)
+        // Find and return the value object associated with the key. (returns an empty class if nothing is found)
         template<typename O, typename T>
         inline const O& get_header_value_object(const T& headers, const std::string& key)
         {
@@ -2673,24 +2673,24 @@ namespace crow
             return empty;
         }
 
-        /// Same as \ref get_header_value_object() but for \ref multipart.header
+        // Same as \ref get_header_value_object() but for \ref multipart.header
         template<typename T>
         inline const header& get_header_object(const T& headers, const std::string& key)
         {
             return get_header_value_object<header>(headers, key);
         }
 
-        ///One part of the multipart message
+        //One part of the multipart message
 
-        ///
-        /// It is usually separated from other sections by a `boundary`
+        //
+        // It is usually separated from other sections by a `boundary`
         struct part
         {
-            mph_map headers;  ///< (optional) The first part before the data, Contains information regarding the type of data and encoding
-            std::string body; ///< The actual data in the part
+            mph_map headers;  //< (optional) The first part before the data, Contains information regarding the type of data and encoding
+            std::string body; //< The actual data in the part
 
-            operator int() const { return std::stoi(body); }    ///< Returns \ref body as integer
-            operator double() const { return std::stod(body); } ///< Returns \ref body as double
+            operator int() const { return std::stoi(body); }    //< Returns \ref body as integer
+            operator double() const { return std::stod(body); } //< Returns \ref body as double
 
             const header& get_header_object(const std::string& key) const
             {
@@ -2698,16 +2698,16 @@ namespace crow
             }
         };
 
-        /// Multipart map (key is the name parameter).
+        // Multipart map (key is the name parameter).
         using mp_map = std::unordered_multimap<std::string, part, ci_hash, ci_key_eq>;
 
-        /// The parsed multipart request/response
+        // The parsed multipart request/response
         struct message : public returnable
         {
-            ci_map headers;          ///< The request/response headers
-            std::string boundary;    ///< The text boundary that separates different `parts`
-            std::vector<part> parts; ///< The individual parts of the message
-            mp_map part_map;         ///< The individual parts of the message, organized in a map with the `name` header parameter being the key
+            ci_map headers;          //< The request/response headers
+            std::string boundary;    //< The text boundary that separates different `parts`
+            std::vector<part> parts; //< The individual parts of the message
+            mp_map part_map;         //< The individual parts of the message, organized in a map with the `name` header parameter being the key
 
             const std::string& get_header_value(const std::string& key) const
             {
@@ -2723,7 +2723,7 @@ namespace crow
                     return {};
             }
 
-            /// Represent all parts as a string (**does not include message headers**)
+            // Represent all parts as a string (**does not include message headers**)
             std::string dump() const override
             {
                 std::stringstream str;
@@ -2738,7 +2738,7 @@ namespace crow
                 return str.str();
             }
 
-            /// Represent an individual part as a string
+            // Represent an individual part as a string
             std::string dump(int part_) const
             {
                 std::stringstream str;
@@ -2757,7 +2757,7 @@ namespace crow
                 return str.str();
             }
 
-            /// Default constructor using default values
+            // Default constructor using default values
             message(const ci_map& headers, const std::string& boundary, const std::vector<part>& sections):
               returnable("multipart/form-data; boundary=CROW-BOUNDARY"), headers(headers), boundary(boundary), parts(sections)
             {
@@ -2771,7 +2771,7 @@ namespace crow
                 }
             }
 
-            /// Create a multipart message from a request data
+            // Create a multipart message from a request data
             message(const request& req):
               returnable("multipart/form-data; boundary=CROW-BOUNDARY"),
               headers(req.headers),
@@ -2810,7 +2810,7 @@ namespace crow
                     size_t found = body.find(delimiter);
                     if (found == std::string::npos)
                     {
-                        // did not find delimiter; probably an ill-formed body; ignore the rest
+                        // Did not find delimiter; probably an ill-formed body; ignore the rest
                         break;
                     }
                     std::string section = body.substr(0, found);
@@ -3660,8 +3660,8 @@ reexecute:
     switch (parser->state) {
 
       case s_dead:
-        /* this state is used after a 'Connection: close' message
-         * the parser will error out if it reads another message
+        /* This state is used after a 'Connection: close' message
+         * The parser will error out if it reads another message
          */
         if (CROW_LIKELY(ch == cr || ch == lf))
           break;
@@ -3723,7 +3723,7 @@ reexecute:
         if (ch == ' ' && matcher[parser->index] == '\0') {
           parser->state = s_req_spaces_before_url;
         } else if (ch == matcher[parser->index]) {
-          ; /* nada */
+          ; //nada
         } else if ((ch >= 'A' && ch <= 'Z') || ch == '-') {
 
           switch (parser->method << 16 | parser->index << 8 | ch) {
@@ -3856,7 +3856,7 @@ reexecute:
               parser->state = s_req_http_I;
               break;
             }
-            /* fall through */
+            /* Fall through */
           default:
             CROW_SET_ERRNO(CHPE_INVALID_CONSTANT);
             goto error;
@@ -3915,7 +3915,7 @@ reexecute:
         break;
       }
 
-      /* minor HTTP version */
+      /* Minor HTTP version */
       case s_req_http_minor:
         if (CROW_UNLIKELY(!CROW_IS_NUM(ch))) {
           CROW_SET_ERRNO(CHPE_INVALID_VERSION);
@@ -3926,7 +3926,7 @@ reexecute:
         parser->state = s_req_http_end;
         break;
 
-      /* end of request line */
+      /* End of request line */
       case s_req_http_end:
       {
         if (ch == cr) {
@@ -3944,7 +3944,7 @@ reexecute:
         break;
       }
 
-      /* end of request line */
+      /* End of request line */
       case s_req_line_almost_done:
       {
         if (CROW_UNLIKELY(ch != lf)) {
@@ -3964,7 +3964,7 @@ reexecute:
         }
 
         if (ch == lf) {
-          /* they might be just sending \n instead of \r\n so this would be
+          /* They might be just sending \n instead of \r\n so this would be
            * the second \n to denote the end of headers*/
           parser->state = s_headers_almost_done;
           CROW_REEXECUTE();
@@ -4163,7 +4163,7 @@ reexecute:
           break;
         }
 
-        /* fall through */
+        /* Fall through */
 
       case s_header_value_start:
       {
@@ -4188,7 +4188,7 @@ reexecute:
             break;
 
           case h_transfer_encoding:
-            /* looking for 'Transfer-Encoding: chunked' */
+            /* Looking for 'Transfer-Encoding: chunked' */
             if ('c' == c) {
               parser->header_state = h_matching_transfer_encoding_chunked;
             } else {
@@ -4215,16 +4215,16 @@ reexecute:
             parser->header_state = h_content_length_num;
             break;
 
-          /* when obsolete line folding is encountered for content length
+          /* When obsolete line folding is encountered for content length
            * continue to the s_header_value state */
           case h_content_length_ws:
             break;
 
           case h_connection:
-            /* looking for 'Connection: keep-alive' */
+            /* Looking for 'Connection: keep-alive' */
             if (c == 'k') {
               parser->header_state = h_matching_connection_keep_alive;
-            /* looking for 'Connection: close' */
+            /* Looking for 'Connection: close' */
             } else if (c == 'c') {
               parser->header_state = h_matching_connection_close;
             } else if (c == ' ' || c == '\t') {
@@ -4300,7 +4300,7 @@ reexecute:
             case h_content_length:
               if (ch == ' ') break;
               h_state = h_content_length_num;
-              /* fall through */
+              // Fall through
 
             case h_content_length_num:
             {
@@ -4321,7 +4321,7 @@ reexecute:
               t *= 10;
               t += ch - '0';
 
-              /* Overflow? Test against a conservative limit for simplicity. */
+              // Overflow? Test against a conservative limit for simplicity.
               if (CROW_UNLIKELY((CROW_ULLONG_MAX - 10) / 10 < parser->content_length)) {
                 CROW_SET_ERRNO(CHPE_INVALID_CONTENT_LENGTH);
                 parser->header_state = h_state;
@@ -4338,9 +4338,9 @@ reexecute:
               parser->header_state = h_state;
               goto error;
 
-            /* Transfer-Encoding: chunked */
+            // Transfer-Encoding: chunked
             case h_matching_transfer_encoding_token_start:
-              /* looking for 'Transfer-Encoding: chunked' */
+              // Looking for 'Transfer-Encoding: chunked
               if ('c' == c) {
                 h_state = h_matching_transfer_encoding_chunked;
               } else if (CROW_TOKEN(c)) {
@@ -4351,7 +4351,7 @@ reexecute:
                  */
                 h_state = h_matching_transfer_encoding_token;
               } else if (c == ' ' || c == '\t') {
-                /* Skip lws */
+                // Skip lws
               } else {
                 h_state = h_general;
               }
@@ -4373,7 +4373,7 @@ reexecute:
               }
               break;
 
-            /* looking for 'Connection: keep-alive' */
+            // Looking for 'Connection: keep-alive' 
             case h_matching_connection_keep_alive:
               parser->index++;
               if (parser->index > sizeof(CROW_KEEP_ALIVE)-1 || c != CROW_KEEP_ALIVE[parser->index]) {
@@ -4383,7 +4383,7 @@ reexecute:
               }
               break;
 
-            /* looking for 'Connection: close' */
+            // Looking for 'Connection: close'
             case h_matching_connection_close:
               parser->index++;
               if (parser->index > sizeof(CROW_CLOSE)-1 || c != CROW_CLOSE[parser->index]) {
@@ -4433,14 +4433,14 @@ reexecute:
       {
         if (ch == ' ' || ch == '\t') {
           if (parser->header_state == h_content_length_num) {
-              /* treat obsolete line folding as space */
+              // Treat obsolete line folding as space
               parser->header_state = h_content_length_ws;
           }
           parser->state = s_header_value_start;
           CROW_REEXECUTE();
         }
 
-        /* finished the header */
+        // Finished the header
         switch (parser->header_state) {
           case h_connection_keep_alive:
             parser->flags |= F_CONNECTION_KEEP_ALIVE;
@@ -4472,7 +4472,7 @@ reexecute:
           parser->state = s_header_value_discard_ws;
           break;
         } else {
-          /* header value was empty */
+          // Header value was empty
           CROW_MARK(header_value);
           parser->state = s_header_field_start;
           CROW_CALLBACK_DATA_NOADVANCE(header_value);
@@ -4485,7 +4485,7 @@ reexecute:
         CROW_STRICT_CHECK(ch != lf);
 
         if (parser->flags & F_TRAILING) {
-          /* End of a chunked request */
+          // End of a chunked request
           CROW_CALLBACK_NOTIFY(message_complete);
           break;
         }
@@ -4510,7 +4510,7 @@ reexecute:
         
         parser->state = s_headers_done;
 
-        /* Set this here so that on_headers_complete() callbacks can see it */
+        // Set this here so that on_headers_complete() callbacks can see it
         parser->upgrade =
           (parser->flags & F_UPGRADE || parser->method == (unsigned)HTTPMethod::Connect);
 
@@ -4532,7 +4532,7 @@ reexecute:
               parser->upgrade = 1;
               //break;
 
-            /* fall through */
+            // Fall through
             case 1:
               parser->flags |= F_SKIPBODY;
               break;
@@ -4540,7 +4540,7 @@ reexecute:
             default:
               CROW_SET_ERRNO(CHPE_CB_headers_complete);
               parser->nread = nread;
-              return p - data; /* Error */
+              return p - data; // Error
           }
         }
 
@@ -4559,7 +4559,7 @@ reexecute:
         parser->nread = 0;
         nread = 0;
 
-        /* Exit, the rest of the connect is in a different protocol. */
+        // Exit, the rest of the connect is in a different protocol.
         if (parser->upgrade) {
           CROW_CALLBACK_NOTIFY(message_complete);
           parser->nread = nread;
@@ -4577,7 +4577,7 @@ reexecute:
         {
             if (!lenient)
             {
-                /* RFC 7230 3.3.3 */
+                // RFC 7230 3.3.3
 
                 /* If a Transfer-Encoding header field
              * is present in a request and the chunked transfer coding is not
@@ -4587,11 +4587,11 @@ reexecute:
              */
                 CROW_SET_ERRNO(CHPE_INVALID_TRANSFER_ENCODING);
                 parser->nread = nread;
-                return (p - data); /* Error */
+                return (p - data); // Error
             }
             else
             {
-                /* RFC 7230 3.3.3 */
+                // RFC 7230 3.3.3
 
                 /* If a Transfer-Encoding header field is present in a response and
              * the chunked transfer coding is not the final encoding, the
@@ -4605,17 +4605,17 @@ reexecute:
         {
             if (parser->content_length == 0)
             {
-                /* Content-Length header given but zero: Content-Length: 0\r\n */
+                // Content-Length header given but zero: Content-Length: 0\r\n
                 CROW_CALLBACK_NOTIFY(message_complete);
             }
             else if (parser->content_length != CROW_ULLONG_MAX)
             {
-                /* Content-Length header given and non-zero */
+                // Content-Length header given and non-zero
                 parser->state = s_body_identity;
             }
             else
             {
-                /* Assume content-length 0 - read the next */
+                // Assume content-length 0 - read the next
                 CROW_CALLBACK_NOTIFY(message_complete);
             }
         }
@@ -4659,7 +4659,7 @@ reexecute:
         break;
       }
 
-      /* read until EOF */
+      // Read until EOF
       case s_body_identity_eof:
         CROW_MARK(body);
         p = data + len - 1;
@@ -4713,7 +4713,7 @@ reexecute:
         t *= 16;
         t += unhex_val;
 
-        /* Overflow? Test against a conservative limit for simplicity. */
+        // Overflow? Test against a conservative limit for simplicity.
         if (CROW_UNLIKELY((CROW_ULLONG_MAX - 16) / 16 < parser->content_length)) {
           CROW_SET_ERRNO(CHPE_INVALID_CONTENT_LENGTH);
           goto error;
@@ -4726,7 +4726,7 @@ reexecute:
       case s_chunk_parameters:
       {
         assert(parser->flags & F_CHUNKED);
-        /* just ignore this shit. TODO check for overflow */
+        // Just ignore this shit. TODO check for overflow
         if (ch == cr) {
           parser->state = s_chunk_size_almost_done;
           break;
@@ -4832,17 +4832,17 @@ error:
 inline void
   http_parser_init(http_parser* parser)
 {
-  void *data = parser->data; /* preserve application data */
+  void *data = parser->data; // Preserve application data
   memset(parser, 0, sizeof(*parser));
   parser->data = data;
   parser->state = s_start_req;
   parser->http_errno = CHPE_OK;
 }
 
-/* Return a string name of the given error */
+// Return a string name of the given error
 inline const char *
 http_errno_name(enum http_errno err) {
-/* Map errno values to strings for human-readable output */
+// Map errno values to strings for human-readable output
 #define CROW_HTTP_STRERROR_GEN(n, s) { "CHPE_" #n, s },
 static struct {
   const char *name;
@@ -4855,10 +4855,10 @@ static struct {
   return http_strerror_tab[err].name;
 }
 
-/* Return a string description of the given error */
+// Return a string description of the given error
 inline const char *
 http_errno_description(enum http_errno err) {
-/* Map errno values to strings for human-readable output */
+// Map errno values to strings for human-readable output
 #define CROW_HTTP_STRERROR_GEN(n, s) { "CHPE_" #n, s },
 static struct {
   const char *name;
@@ -4871,13 +4871,13 @@ static struct {
   return http_strerror_tab[err].description;
 }
 
-/* Checks if this is the final chunk of the body. */
+// Checks if this is the final chunk of the body.
 inline int
 http_body_is_final(const struct http_parser *parser) {
     return parser->state == s_message_done;
 }
 
-/* Change the maximum header size provided at compile time. */
+// Change the maximum header size provided at compile time.
 inline void
 http_parser_set_max_header_size(uint32_t size) {
   max_header_size = size;
@@ -4925,10 +4925,9 @@ http_parser_set_max_header_size(uint32_t size) {
 
 namespace crow
 {
-    /// A wrapper for `nodejs/http-parser`.
+    // A wrapper for `nodejs/http-parser`.
 
-    ///
-    /// Used to generate a \ref crow.request from the TCP socket buffer.
+    // Used to generate a \ref crow.request from the TCP socket buffer.
     template<typename Handler>
     struct HTTPParser : public http_parser
     {
@@ -5021,8 +5020,8 @@ namespace crow
             http_parser_init(this);
         }
 
-        // return false on error
-        /// Parse a buffer into the different sections of an HTTP request.
+        // Return false on error
+        // Parse a buffer into the different sections of an HTTP request.
         bool feed(const char* buffer, int length)
         {
             if (message_complete)
@@ -5097,9 +5096,9 @@ namespace crow
             req.upgrade = static_cast<bool>(upgrade);
         }
 
-        /// The final request that this parser outputs.
-        ///
-        /// Data parsed is put directly into this object as soon as the related callback returns. (e.g. the request will have the cooorect method as soon as on_method() returns)
+        // The final request that this parser outputs.
+
+        // Data parsed is put directly into this object as soon as the related callback returns. (e.g. the request will have the cooorect method as soon as on_method() returns)
         request req;
 
     private:
@@ -5108,7 +5107,7 @@ namespace crow
         std::string header_field;
         std::string header_value;
 
-        Handler* handler_; ///< This is currently an HTTP connection object (\ref crow.Connection).
+        Handler* handler_; //< This is currently an HTTP connection object (\ref crow.Connection).
     };
 } // namespace crow
 
@@ -5257,7 +5256,6 @@ namespace crow
             return current_handler;
         }
 
-        //
         std::ostringstream stringstream_;
         LogLevel level_;
     };
@@ -5391,7 +5389,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
         namespace detail
         {
-            /// A read string implementation with comparison functionality.
+            // A read string implementation with comparison functionality.
             struct r_string
             {
                 r_string(){};
@@ -5444,8 +5442,8 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 using iterator = const char*;
                 using const_iterator = const char*;
 
-                char* s_;         ///< Start.
-                mutable char* e_; ///< End.
+                char* s_;         //< Start.
+                mutable char* e_; //< End.
                 uint8_t owned_{0};
                 friend std::ostream& operator<<(std::ostream& os, const r_string& s)
                 {
@@ -5543,11 +5541,11 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             }
         } // namespace detail
 
-        /// JSON read value.
+        // JSON read value.
 
-        ///
-        /// Value can mean any json value, including a JSON object.
-        /// Read means this class is used to primarily read strings into a JSON value.
+        //
+        // Value can mean any json value, including a JSON object.
+        // Read means this class is used to primarily read strings into a JSON value.
         class rvalue
         {
             static const int cached_bit = 2;
@@ -5624,7 +5622,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return static_cast<int>(i());
             }
 
-            /// Return any json value (not object or list) as a string.
+            // Return any json value (not object or list) as a string.
             explicit operator std::string() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5646,7 +5644,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            /// The type of the JSON value.
+            // The type of the JSON value.
             type t() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5658,7 +5656,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return t_;
             }
 
-            /// The number type of the JSON value.
+            // The number type of the JSON value.
             num_type nt() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5670,7 +5668,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return nt_;
             }
 
-            /// The integer value.
+            // The integer value.
             int64_t i() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5687,7 +5685,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return utility::lexical_cast<int64_t>(start_, end_ - start_);
             }
 
-            /// The unsigned integer value.
+            // The unsigned integer value.
             uint64_t u() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5703,7 +5701,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return utility::lexical_cast<uint64_t>(start_, end_ - start_);
             }
 
-            /// The double precision floating-point number value.
+            // The double precision floating-point number value.
             double d() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5713,7 +5711,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return utility::lexical_cast<double>(start_, end_ - start_);
             }
 
-            /// The boolean value.
+            // The boolean value.
             bool b() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5723,7 +5721,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return t() == type::True;
             }
 
-            /// The string value.
+            // The string value.
             detail::r_string s() const
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5734,7 +5732,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return detail::r_string{start_, end_};
             }
 
-            /// The list or object value
+            // The list or object value
             std::vector<rvalue> lo()
             {
 #ifndef CROW_JSON_NO_ERROR_CHECK
@@ -5750,7 +5748,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return ret;
             }
 
-            /// Convert escaped string character to their original form ("\\n" -> '\n').
+            // Convert escaped string character to their original form ("\\n" -> '\n').
             void unescape() const
             {
                 if (*(start_ - 1))
@@ -5815,7 +5813,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            /// Check if the json object has the passed string as a key.
+            // Check if the json object has the passed string as a key.
             bool has(const char* str) const
             {
                 return has(std::string(str));
@@ -6013,7 +6011,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 lremain_--;
             }
 
-            /// Determines num_type from the string.
+            // Determines num_type from the string.
             void determine_num_type()
             {
                 if (t_ != type::Number)
@@ -6556,11 +6554,11 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
         struct wvalue_reader;
 
-        /// JSON write value.
+        // JSON write value.
 
-        ///
-        /// Value can mean any json value, including a JSON object.<br>
-        /// Write means this class is used to primarily assemble JSON objects using keys and values and export those into a string.
+        //
+        // Value can mean any json value, including a JSON object.<br>
+        // Write means this class is used to primarily assemble JSON objects using keys and values and export those into a string.
         class wvalue : public returnable
         {
             friend class crow::mustache::template_t;
@@ -6578,12 +6576,12 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
             type t() const { return t_; }
 
-            /// Create an empty json value (outputs "{}" instead of a "null" string)
+            // Create an empty json value (outputs "{}" instead of a "null" string)
             static crow::json::wvalue empty_object() { return crow::json::wvalue::object(); }
 
         private:
-            type t_{type::Null};         ///< The type of the value.
-            num_type nt{num_type::Null}; ///< The specific type of the number if \ref t_ is a number.
+            type t_{type::Null};         //< The type of the value.
+            num_type nt{num_type::Null}; //< The specific type of the number if \ref t_ is a number.
             union number
             {
                 double d;
@@ -6601,11 +6599,11 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                   d(value) {}
                 explicit constexpr number(float value) noexcept:
                   d(value) {}
-            } num;                                      ///< Value if type is a number.
-            std::string s;                              ///< Value if type is a string.
-            std::unique_ptr<list> l;                    ///< Value if type is a list.
-            std::unique_ptr<object> o;                  ///< Value if type is a JSON object.
-            std::function<std::string(std::string&)> f; ///< Value if type is a function (C++ lambda)
+            } num;                                      //< Value if type is a number.
+            std::string s;                              //< Value if type is a string.
+            std::unique_ptr<list> l;                    //< Value if type is a list.
+            std::unique_ptr<object> o;                  //< Value if type is a JSON object.
+            std::function<std::string(std::string&)> f; //< Value if type is a function (C++ lambda)
 
         public:
             wvalue():
@@ -6675,7 +6673,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                     l->emplace_back(*it);
             }
 
-            /// Create a write value from a read value (useful for editing JSON strings).
+            // Create a write value from a read value (useful for editing JSON strings).
             wvalue(const rvalue& r):
               returnable("application/json")
             {
@@ -6767,7 +6765,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return *this;
             }
 
-            /// Used for compatibility, same as \ref reset()
+            // Used for compatibility, same as \ref reset()
             void clear()
             {
                 reset();
@@ -7057,7 +7055,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return f(txt);
             }
 
-            /// If the wvalue is a list, it returns the length of the list, otherwise it returns 1.
+            // If the wvalue is a list, it returns the length of the list, otherwise it returns 1.
             std::size_t size() const
             {
                 if (t_ != type::List)
@@ -7065,7 +7063,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return l->size();
             }
 
-            /// Returns an estimated size of the value in bytes.
+            // Returns an estimated size of the value in bytes.
             size_t estimate_length() const
             {
                 switch (t_)
@@ -7175,7 +7173,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                                         if (ch == '.')
                                         {
                                             char fch = *(p + 1);
-                                            // if the first character is 0, leave it be (this is so that "1.00000" becomes "1.0" and not "1.")
+                                            // If the first character is 0, leave it be (this is so that "1.00000" becomes "1.0" and not "1.")
                                             if (fch != '\0' && fch == '0') p++;
                                             f_state = decp;
                                         }
@@ -7189,7 +7187,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                                         }
                                         p++;
                                         break;
-                                    case zero: // if a non 0 is found (e.g. 1.00004) remove the earlier recorded 0 position and look for more trailing 0s
+                                    case zero: // If a non 0 is found (e.g. 1.00004) remove the earlier recorded 0 position and look for more trailing 0s
                                         if (ch != '0')
                                         {
                                             o = nullptr;
@@ -7199,7 +7197,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                                         break;
                                 }
                             }
-                            if (o != nullptr) // if any trailing 0s are found, terminate the string where they begin
+                            if (o != nullptr) // If any trailing 0s are found, terminate the string where they begin
                                 *o = '\0';
                             out += outbuf;
                         }
@@ -7382,7 +7380,7 @@ namespace crow
 
     class Router;
 
-    /// HTTP response
+    // HTTP response
     struct response
     {
         template<typename Adaptor, typename Handler, typename... Middlewares>
@@ -7390,24 +7388,24 @@ namespace crow
 
         friend class Router;
 
-        int code{200};    ///< The Status code for the response.
-        std::string body; ///< The actual payload containing the response data.
-        ci_map headers;   ///< HTTP headers.
+        int code{200};    //< The Status code for the response.
+        std::string body; //< The actual payload containing the response data.
+        ci_map headers;   //< HTTP headers.
 
 #ifdef CROW_ENABLE_COMPRESSION
-        bool compressed = true; ///< If compression is enabled and this is false, the individual response will not be compressed.
+        bool compressed = true; //< If compression is enabled and this is false, the individual response will not be compressed.
 #endif
-        bool skip_body = false;            ///< Whether this is a response to a HEAD request.
-        bool manual_length_header = false; ///< Whether Crow should automatically add a "Content-Length" header.
+        bool skip_body = false;            //< Whether this is a response to a HEAD request.
+        bool manual_length_header = false; //< Whether Crow should automatically add a "Content-Length" header.
 
-        /// Set the value of an existing header in the response.
+        // Set the value of an existing header in the response.
         void set_header(std::string key, std::string value)
         {
             headers.erase(key);
             headers.emplace(std::move(key), std::move(value));
         }
 
-        /// Add a new header to the response.
+        // Add a new header to the response.
         void add_header(std::string key, std::string value)
         {
             headers.emplace(std::move(key), std::move(value));
@@ -7418,27 +7416,27 @@ namespace crow
             return crow::get_header_value(headers, key);
         }
 
-        // naive validation of a mime-type string
+        // Naive validation of a mime-type string
         static bool validate_mime_type(const std::string& candidate) noexcept
         {
-            // Here we simply check that the candidate type starts with
-            // a valid parent type, and has at least one character afterwards.
+            /*Here we simply check that the candidate type starts with
+            a valid parent type, and has at least one character afterwards.*/ 
             std::array<std::string, 10> valid_parent_types = {
               "application/", "audio/", "font/", "example/",
               "image/", "message/", "model/", "multipart/",
               "text/", "video/"};
             for (const std::string& parent : valid_parent_types)
             {
-                // ensure the candidate is *longer* than the parent,
-                // to avoid unnecessary string comparison and to
-                // reject zero-length subtypes.
+                /* ensure the candidate is *longer* than the parent,
+                 * to avoid unnecessary string comparison and to
+                 * reject zero-length subtypes.*/
                 if (candidate.size() <= parent.size())
                 {
                     continue;
                 }
-                // strncmp is used rather than substr to avoid allocation,
-                // but a string_view approach would be better if Crow
-                // migrates to C++17.
+                /* strncmp is used rather than substr to avoid allocation,
+                 * but a string_view approach would be better if Crow
+                 * migrates to C++17.*/
                 if (strncmp(parent.c_str(), candidate.c_str(), parent.size()) == 0)
                 {
                     return true;
@@ -7447,9 +7445,9 @@ namespace crow
             return false;
         }
 
-        // Find the mime type from the content type either by lookup,
-        // or by the content type itself, if it is a valid a mime type.
-        // Defaults to text/plain.
+        /* Find the mime type from the content type either by lookup,
+         * or by the content type itself, if it is a valid a mime type.
+         * Defaults to text/plain.*/
         static std::string get_mime_type(const std::string& contentType)
         {
             const auto mimeTypeIterator = mime_types.find(contentType);
@@ -7526,7 +7524,7 @@ namespace crow
             return *this;
         }
 
-        /// Check if the response has completed (whether response.end() has been called)
+        // Check if the response has completed (whether response.end() has been called)
         bool is_completed() const noexcept
         {
             return completed_;
@@ -7541,40 +7539,36 @@ namespace crow
             file_info = static_file_info{};
         }
 
-        /// Return a "Temporary Redirect" response.
+        // Return a "Temporary Redirect" response.
 
-        ///
-        /// Location can either be a route or a full URL.
+        // Location can either be a route or a full URL.
         void redirect(const std::string& location)
         {
             code = 307;
             set_header("Location", location);
         }
 
-        /// Return a "Permanent Redirect" response.
+        // Return a "Permanent Redirect" response.
 
-        ///
-        /// Location can either be a route or a full URL.
+        // Location can either be a route or a full URL.
         void redirect_perm(const std::string& location)
         {
             code = 308;
             set_header("Location", location);
         }
 
-        /// Return a "Found (Moved Temporarily)" response.
+        // Return a "Found (Moved Temporarily)" response.
 
-        ///
-        /// Location can either be a route or a full URL.
+        // Location can either be a route or a full URL.
         void moved(const std::string& location)
         {
             code = 302;
             set_header("Location", location);
         }
 
-        /// Return a "Moved Permanently" response.
+        // Return a "Moved Permanently" response.
 
-        ///
-        /// Location can either be a route or a full URL.
+        // Location can either be a route or a full URL.
         void moved_perm(const std::string& location)
         {
             code = 301;
@@ -7586,7 +7580,7 @@ namespace crow
             body += body_part;
         }
 
-        /// Set the response completion flag and call the handler (to send the response).
+        // Set the response completion flag and call the handler (to send the response).
         void end()
         {
             if (!completed_)
@@ -7607,29 +7601,28 @@ namespace crow
             }
         }
 
-        /// Same as end() except it adds a body part right before ending.
+        // Same as end() except it adds a body part right before ending.
         void end(const std::string& body_part)
         {
             body += body_part;
             end();
         }
 
-        /// Check if the connection is still alive (usually by checking the socket status).
+        // Check if the connection is still alive (usually by checking the socket status).
         bool is_alive()
         {
             return is_alive_helper_ && is_alive_helper_();
         }
 
-        /// Check whether the response has a static file defined.
+        // Check whether the response has a static file defined.
         bool is_static_type()
         {
             return file_info.path.size();
         }
 
-        /// This constains metadata (coming from the `stat` command) related to any static files associated with this response.
+        // This constains metadata (coming from the `stat` command) related to any static files associated with this response.
 
-        ///
-        /// Either a static file or a string body can be returned as 1 response.
+        // Either a static file or a string body can be returned as 1 response.
         struct static_file_info
         {
             std::string path = "";
@@ -7637,14 +7630,14 @@ namespace crow
             int statResult;
         };
 
-        /// Return a static file as the response body
+        // Return a static file as the response body
         void set_static_file_info(std::string path)
         {
             utility::sanitize_filename(path);
             set_static_file_info_unsafe(path);
         }
 
-        /// Return a static file as the response body without sanitizing the path (use set_static_file_info instead)
+        // Return a static file as the response body without sanitizing the path (use set_static_file_info instead)
         void set_static_file_info_unsafe(std::string path)
         {
             file_info.path = path;
@@ -7753,7 +7746,7 @@ namespace crow
             Cookie(const std::string& key):
               Cookie(key, "") {}
 
-            // format cookie to HTTP header format
+            // Format cookie to HTTP header format
             std::string dump() const
             {
                 const static char* HTTP_DATE_FORMAT = "%a, %d %b %Y %H:%M:%S GMT";
@@ -8031,7 +8024,7 @@ namespace crow
 
 namespace
 {
-    // convert all integer values to int64_t
+    // Convert all integer values to int64_t
     template<typename T>
     using wrap_integral_t = typename std::conditional<
       std::is_integral<T>::value && !std::is_same<bool, T>::value
@@ -8039,7 +8032,7 @@ namespace
         && !std::is_same<uint64_t, T>::value,
       int64_t, T>::type;
 
-    // convert char[]/char* to std::string
+    // Convert char[]/char* to std::string
     template<typename T>
     using wrap_char_t = typename std::conditional<
       std::is_same<typename std::decay<T>::type, char*>::value,
@@ -8058,7 +8051,7 @@ namespace crow
 #ifdef CROW_CAN_USE_CPP17
         using multi_value_types = black_magic::S<bool, int64_t, double, std::string>;
 
-        /// A multi_value is a safe variant wrapper with json conversion support
+        // A multi_value is a safe variant wrapper with json conversion support
         struct multi_value
         {
             json::wvalue json() const
@@ -8121,9 +8114,9 @@ namespace crow
             }
         }
 #else
-        // Fallback for C++11/14 that uses a raw json::wvalue internally.
-        // This implementation consumes significantly more memory
-        // than the variant-based version
+        /* Fallback for C++11/14 that uses a raw json::wvalue internally.
+         * This implementation consumes significantly more memory
+         * than the variant-based version*/
         struct multi_value
         {
             json::wvalue json() const { return v_; }
@@ -8153,13 +8146,13 @@ namespace crow
         }
 #endif
 
-        /// Expiration tracker keeps track of soonest-to-expire keys
+        // Expiration tracker keeps track of soonest-to-expire keys
         struct ExpirationTracker
         {
             using DataPair = std::pair<uint64_t /*time*/, std::string /*key*/>;
 
-            /// Add key with time to tracker.
-            /// If the key is already present, it will be updated
+            // Add key with time to tracker.
+            // If the key is already present, it will be updated
             void add(std::string key, uint64_t time)
             {
                 auto it = times_.find(key);
@@ -8178,7 +8171,7 @@ namespace crow
                 }
             }
 
-            /// Get expiration time of soonest-to-expire entry
+            // Get expiration time of soonest-to-expire entry
             uint64_t peek_first() const
             {
                 if (queue_.empty()) return std::numeric_limits<uint64_t>::max();
@@ -8205,19 +8198,19 @@ namespace crow
             std::unordered_map<std::string, uint64_t> times_;
         };
 
-        /// CachedSessions are shared across requests
+        // CachedSessions are shared across requests
         struct CachedSession
         {
             std::string session_id;
-            std::string requested_session_id; // session hasn't been created yet, but a key was requested
+            std::string requested_session_id; // Session hasn't been created yet, but a key was requested
 
             std::unordered_map<std::string, multi_value> entries;
-            std::unordered_set<std::string> dirty; // values that were changed after last load
+            std::unordered_set<std::string> dirty; // Values that were changed after last load
 
             void* store_data;
             bool requested_refresh;
 
-            // number of references held - used for correctly destroying the cache.
+            // Number of references held - used for correctly destroying the cache.
             // No need to be atomic, all SessionMiddleware accesses are synchronized
             int referrers;
             std::recursive_mutex mutex;
@@ -8328,8 +8321,8 @@ namespace crow
                 return out;
             }
 
-            // Delay expiration by issuing another cookie with an updated expiration time
-            // and notifying the store
+            /* Delay expiration by issuing another cookie with an updated expiration time
+             * and notifying the store */
             void refresh_expiration()
             {
                 if (!node) return;
@@ -8374,7 +8367,7 @@ namespace crow
             auto session_id = load_id(cookies);
             if (session_id == "") return;
 
-            // search entry in cache
+            // Search entry in cache
             auto it = cache_.find(session_id);
             if (it != cache_.end())
             {
@@ -8383,7 +8376,7 @@ namespace crow
                 return;
             }
 
-            // check this is a valid entry before loading
+            // Check this is a valid entry before loading
             if (!store_.contains(session_id)) return;
 
             auto node = std::make_shared<session::CachedSession>();
@@ -8411,10 +8404,10 @@ namespace crow
             if (!ctx.node || --ctx.node->referrers > 0) return;
             ctx.node->requested_refresh |= ctx.node->session_id == "";
 
-            // generate new id
+            // Generate new id
             if (ctx.node->session_id == "")
             {
-                // check for requested id
+                // Check for requested id
                 ctx.node->session_id = std::move(ctx.node->requested_session_id);
                 if (ctx.node->session_id == "")
                 {
@@ -8468,24 +8461,24 @@ namespace crow
     private:
         int id_length_;
 
-        // prototype for cookie
+        // Prototype for cookie
         CookieParser::Cookie cookie_;
 
         Store store_;
 
-        // mutexes are immovable
+        // Mutexes are immovable
         std::unique_ptr<std::mutex> mutex_;
         std::unordered_map<std::string, std::shared_ptr<session::CachedSession>> cache_;
     };
 
-    /// InMemoryStore stores all entries in memory
+    // InMemoryStore stores all entries in memory
     struct InMemoryStore
     {
         // Load a value into the session cache.
         // A load is always followed by a save, no loads happen consecutively
         void load(session::CachedSession& cn)
         {
-            // load & stores happen sequentially, so moving is safe
+            // Load & stores happen sequentially, so moving is safe
             cn.entries = std::move(entries[cn.session_id]);
         }
 
@@ -8615,7 +8608,7 @@ namespace crow
 namespace crow // NOTE: Already documented in "crow/app.h"
 {
 
-    /// Local middleware should extend ILocalMiddleware
+    // Local middleware should extend ILocalMiddleware
     struct ILocalMiddleware
     {
         using call_global = std::false_type;
@@ -9019,7 +9012,7 @@ namespace crow
     namespace detail
     {
 
-        /// A class for scheduling functions to be called after a specific amount of ticks. A tick is equal to 1 second.
+        // A class for scheduling functions to be called after a specific amount of ticks. A tick is equal to 1 second.
         class task_timer
         {
         public:
@@ -9047,13 +9040,12 @@ namespace crow
                 CROW_LOG_DEBUG << "task_timer cancelled: " << this << ' ' << id;
             }
 
-            /// Schedule the given task to be executed after the default amount of ticks.
+            // Schedule the given task to be executed after the default amount of ticks.
 
-            ///
-            /// \return identifier_type Used to cancel the thread.
-            /// It is not bound to this task_timer instance and in some cases could lead to
-            /// undefined behavior if used with other task_timer objects or after the task
-            /// has been successfully executed.
+            // \return identifier_type Used to cancel the thread.
+            /* It is not bound to this task_timer instance and in some cases could lead to
+             * undefined behavior if used with other task_timer objects or after the task
+             * has been successfully executed. */
             identifier_type schedule(const task_type& task)
             {
                 tasks_.insert(
@@ -9064,15 +9056,14 @@ namespace crow
                 return highest_id_;
             }
 
-            /// Schedule the given task to be executed after the given time.
+            // Schedule the given task to be executed after the given time.
 
-            ///
-            /// \param timeout The amount of ticks (seconds) to wait before execution.
-            ///
-            /// \return identifier_type Used to cancel the thread.
-            /// It is not bound to this task_timer instance and in some cases could lead to
-            /// undefined behavior if used with other task_timer objects or after the task
-            /// has been successfully executed.
+            // \param timeout The amount of ticks (seconds) to wait before execution.
+
+            // \return identifier_type Used to cancel the thread.
+            /* It is not bound to this task_timer instance and in some cases could lead to
+             * undefined behavior if used with other task_timer objects or after the task
+             * has been successfully executed.*/
             identifier_type schedule(const task_type& task, std::uint8_t timeout)
             {
                 tasks_.insert({++highest_id_,
@@ -9081,13 +9072,12 @@ namespace crow
                 return highest_id_;
             }
 
-            /// Set the default timeout for this task_timer instance. (Default: 5)
+            // Set the default timeout for this task_timer instance. (Default: 5)
 
-            ///
-            /// \param timeout The amount of ticks (seconds) to wait before execution.
+            // \param timeout The amount of ticks (seconds) to wait before execution.
             void set_default_timeout(std::uint8_t timeout) { default_timeout_ = timeout; }
 
-            /// Get the default timeout. (Default: 5)
+            // Get the default timeout. (Default: 5)
             std::uint8_t get_default_timeout() const { return default_timeout_; }
 
         private:
@@ -9168,7 +9158,7 @@ namespace crow
     static std::atomic<int> connectionCount;
 #endif
 
-    /// An HTTP connection.
+    // An HTTP connection.
     template<typename Adaptor, typename Handler, typename... Middlewares>
     class Connection: public std::enable_shared_from_this<Connection<Adaptor, Handler, Middlewares...>>
     {
@@ -9209,7 +9199,7 @@ namespace crow
 #endif
         }
 
-        /// The TCP socket on top of which the connection is established.
+        // The TCP socket on top of which the connection is established.
         decltype(std::declval<Adaptor>().raw_socket())& socket()
         {
             return adaptor_.raw_socket();
@@ -9236,7 +9226,7 @@ namespace crow
         void handle_url()
         {
             routing_handle_result_ = handler_->handle_initial(req_, res);
-            // if no route is found for the request method, return the response without parsing or processing anything further.
+            // If no route is found for the request method, return the response without parsing or processing anything further.
             if (!routing_handle_result_->rule_index)
             {
                 parser_.done();
@@ -9340,7 +9330,7 @@ namespace crow
             }
         }
 
-        /// Call the after handle middleware and send the write the response to the connection.
+        // Call the after handle middleware and send the write the response to the connection.
         void complete_request()
         {
             CROW_LOG_INFO << "Response: " << this << ' ' << req_.raw_url << ' ' << res.code << ' ' << close_connection_;
@@ -9350,7 +9340,7 @@ namespace crow
             {
                 need_to_call_after_handlers_ = false;
 
-                // call all after_handler of middlewares
+                // Call all after_handler of middlewares
                 detail::after_handlers_call_helper<
                   detail::middleware_call_criteria_only_global,
                   (static_cast<int>(sizeof...(Middlewares)) - 1),
@@ -9385,7 +9375,7 @@ namespace crow
                 }
             }
 #endif
-            //if there is a redirection with a partial URL, treat the URL as a route.
+            //If there is a redirection with a partial URL, treat the URL as a route.
             std::string location = res.get_header_value("Location");
             if (!location.empty() && location.find("://", 0) == std::string::npos)
             {
@@ -9634,7 +9624,7 @@ namespace crow
                   {
                       self->cancel_deadline_timer();
                       self->parser_.done();
-                      // adaptor will close after write
+                      // Adaptor will close after write
                   }
                   else if (!self->need_to_call_after_handlers_)
                   {
@@ -9790,7 +9780,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             Payload,
         };
 
-        /// A base class for websocket connection.
+        // A base class for websocket connection.
         struct connection
         {
             virtual void send_binary(std::string msg) = 0;
@@ -9831,17 +9821,16 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         // +---------------------------------------------------------------+
         //
 
-        /// A websocket connection.
+        // A websocket connection.
 
         template<typename Adaptor, typename Handler>
         class Connection : public connection
         {
         public:
-            /// Constructor for a connection.
+            // Constructor for a connection.
 
-            ///
-            /// Requires a request with an "Upgrade: websocket" header.<br>
-            /// Automatically handles the handshake.
+            // Requires a request with an "Upgrade: websocket" header.<br>
+            // Automatically handles the handshake.
             Connection(const crow::request& req, Adaptor&& adaptor, Handler* handler, uint64_t max_payload,
                        std::function<void(crow::websocket::connection&)> open_handler,
                        std::function<void(crow::websocket::connection&, const std::string&, bool)> message_handler,
@@ -9918,7 +9907,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             };
 
-            /// Send data through the socket.
+            // Send data through the socket.
             template<typename CompletionHandler>
             void dispatch(CompletionHandler&& handler)
             {
@@ -9927,7 +9916,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                                  std::forward<CompletionHandler>(handler), anchor_});
             }
 
-            /// Send data through the socket and return immediately.
+            // Send data through the socket and return immediately.
             template<typename CompletionHandler>
             void post(CompletionHandler&& handler)
             {
@@ -9936,40 +9925,38 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                              std::forward<CompletionHandler>(handler), anchor_});
             }
 
-            /// Send a "Ping" message.
+            // Send a "Ping" message.
 
-            ///
-            /// Usually invoked to check if the other point is still online.
+            //
+            // Usually invoked to check if the other point is still online.
             void send_ping(std::string msg) override
             {
                 send_data(0x9, std::move(msg));
             }
 
-            /// Send a "Pong" message.
+            // Send a "Pong" message.
 
-            ///
-            /// Usually automatically invoked as a response to a "Ping" message.
+            // Usually automatically invoked as a response to a "Ping" message.
             void send_pong(std::string msg) override
             {
                 send_data(0xA, std::move(msg));
             }
 
-            /// Send a binary encoded message.
+            // Send a binary encoded message.
             void send_binary(std::string msg) override
             {
                 send_data(0x2, std::move(msg));
             }
 
-            /// Send a plaintext message.
+            // Send a plaintext message.
             void send_text(std::string msg) override
             {
                 send_data(0x1, std::move(msg));
             }
 
-            /// Send a close signal.
+            // Send a close signal.
 
-            ///
-            /// Sets a flag to destroy the object once the message is sent.
+            // Sets a flag to destroy the object once the message is sent.
             void close(std::string const& msg) override
             {
                 dispatch([this, msg]() mutable {
@@ -9998,7 +9985,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             }
 
         protected:
-            /// Generate the websocket headers using an opcode and the message size (in bytes).
+            // Generate the websocket headers using an opcode and the message size (in bytes).
             std::string build_header(int opcode, size_t size)
             {
                 char buf[2 + 8] = "\x80\x00";
@@ -10022,10 +10009,9 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            /// Send the HTTP upgrade response.
+            // Send the HTTP upgrade response.
 
-            ///
-            /// Finishes the handshake process, then starts reading messages from the socket.
+            // Finishes the handshake process, then starts reading messages from the socket.
             void start(std::string&& hello)
             {
                 static const std::string header =
@@ -10043,13 +10029,12 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 do_read();
             }
 
-            /// Read a websocket message.
+            // Read a websocket message.
 
-            ///
-            /// Involves:<br>
-            /// Handling headers (opcodes, size).<br>
-            /// Unmasking the payload.<br>
-            /// Reading the actual payload.<br>
+            // Involves:<br>
+            // Handling headers (opcodes, size).<br>
+            // Unmasking the payload.<br>
+            // Reading the actual payload.<br>
             void do_read()
             {
                 if (has_sent_close_ && has_recv_close_)
@@ -10091,7 +10076,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                               {
                                   if ((mini_header_ & 0x80) == 0x80)
                                       has_mask_ = true;
-                                  else //if the websocket specification is enforced and the message isn't masked, terminate the connection
+                                  else //If the websocket specification is enforced and the message isn't masked, terminate the connection
                                   {
 #ifndef CROW_ENFORCE_WS_SPEC
                                       has_mask_ = false;
@@ -10293,22 +10278,22 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            /// Check if the FIN bit is set.
+            // Check if the FIN bit is set.
             bool is_FIN()
             {
                 return mini_header_ & 0x8000;
             }
 
-            /// Extract the opcode from the header.
+            // Extract the opcode from the header.
             int opcode()
             {
                 return (mini_header_ & 0x0f00) >> 8;
             }
 
-            /// Process the payload fragment.
+            // Process the payload fragment.
 
-            ///
-            /// Unmasks the fragment, checks the opcode, merges fragments into 1 message body, and calls the appropriate handler.
+            //
+            // Unmasks the fragment, checks the opcode, merges fragments into 1 message body, and calls the appropriate handler.
             bool handle_fragment()
             {
                 if (has_mask_)
@@ -10394,10 +10379,9 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 return true;
             }
 
-            /// Send the buffers' data through the socket.
+            // Send the buffers' data through the socket.
 
-            ///
-            /// Also destroys the object if the Close flag is set.
+            // Also destroys the object if the Close flag is set.
             void do_write()
             {
                 if (sending_buffers_.empty())
@@ -10434,7 +10418,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            /// Destroy the Connection.
+            // Destroy the Connection.
             void check_destroy()
             {
                 //if (has_sent_close_ && has_recv_close_)
@@ -10605,7 +10589,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 v.push_back(
                   std::async(
                     std::launch::async, [this, i, &init_count] {
-                        // thread local date string get function
+                        // Thread local date string get function
                         auto last = std::chrono::steady_clock::now();
 
                         std::string date_str;
@@ -10632,7 +10616,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                             return date_str;
                         };
 
-                        // initializing task timers
+                        //Initializing task timers
                         detail::task_timer task_timer(*io_service_pool_[i]);
                         task_timer.set_default_timeout(timeout_);
                         task_timer_pool_[i] = &task_timer;
@@ -10645,7 +10629,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                             {
                                 if (io_service_pool_[i]->run() == 0)
                                 {
-                                    // when io_service.run returns 0, there are no more works to do.
+                                    // When io_service.run returns 0, there are no more works to do.
                                     break;
                                 }
                             }
@@ -10709,7 +10693,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             io_service_.stop(); // Close main io_service
         }
 
-        /// Wait until the server has properly started
+        // Wait until the server has properly started
         void wait_for_start()
         {
             std::unique_lock<std::mutex> lock(start_mutex_);
@@ -10777,7 +10761,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             }
         }
 
-        /// Notify anything using `wait_for_start()` to proceed
+        // Notify anything using `wait_for_start()` to proceed
         void notify_start()
         {
             std::unique_lock<std::mutex> lock(start_mutex_);
@@ -10882,7 +10866,7 @@ namespace crow
             }
         };
 
-        /// A mustache template object.
+        // A mustache template object.
         class template_t
         {
         public:
@@ -11169,7 +11153,7 @@ namespace crow
             }
 
         public:
-            /// Output a returnable template from this mustache template
+            // Output a returnable template from this mustache template
             rendered_template render() const
             {
                 context empty_ctx;
@@ -11181,7 +11165,7 @@ namespace crow
                 return rendered_template(ret);
             }
 
-            /// Apply the values from the context provided and output a returnable template from this mustache template
+            // Apply the values from the context provided and output a returnable template from this mustache template
             rendered_template render(const context& ctx) const
             {
                 std::vector<const context*> stack;
@@ -11192,13 +11176,13 @@ namespace crow
                 return rendered_template(ret);
             }
 
-            /// Apply the values from the context provided and output a returnable template from this mustache template
+            // Apply the values from the context provided and output a returnable template from this mustache template
             rendered_template render(const context&& ctx) const
             {
                 return render(ctx);
             }
 
-            /// Output a returnable template from this mustache template
+            // Output a returnable template from this mustache template
             std::string render_string() const
             {
                 context empty_ctx;
@@ -11210,7 +11194,7 @@ namespace crow
                 return ret;
             }
 
-            /// Apply the values from the context provided and output a returnable template from this mustache template
+            // Apply the values from the context provided and output a returnable template from this mustache template
             std::string render_string(const context& ctx) const
             {
                 std::vector<const context*> stack;
@@ -11249,7 +11233,7 @@ namespace crow
                     }
                     if (endIdx == body_.npos)
                     {
-                        // error, no matching tag
+                        // Error, no matching tag
                         throw invalid_template_exception("not matched opening tag");
                     }
                     current = endIdx + tag_close.size();
@@ -11294,7 +11278,7 @@ namespace crow
                             actions_.emplace_back(ActionType::ElseBlock, idx, endIdx);
                             break;
                         case '!':
-                            // do nothing action
+                            // Do nothing action
                             actions_.emplace_back(ActionType::Ignore, idx + 1, endIdx);
                             break;
                         case '>': // partial
@@ -11330,7 +11314,7 @@ namespace crow
                             actions_.emplace_back(ActionType::UnescapeTag, idx, endIdx);
                             break;
                         case '=':
-                            // tag itself is no-op
+                            // Tag itself is no-op
                             idx++;
                             actions_.emplace_back(ActionType::Ignore, idx, endIdx);
                             endIdx--;
@@ -11368,7 +11352,7 @@ namespace crow
                             }
                             break;
                         default:
-                            // normal tag case;
+                            // Normal tag case;
                             while (body_[idx] == ' ')
                                 idx++;
                             while (body_[endIdx - 1] == ' ')
@@ -11378,7 +11362,7 @@ namespace crow
                     }
                 }
 
-                // removing standalones
+                // Removing standalones
                 for (int i = actions_.size() - 2; i >= 0; i--)
                 {
                     if (actions_[i].t == ActionType::Tag || actions_[i].t == ActionType::UnescapeTag)
@@ -11451,7 +11435,7 @@ namespace crow
                 return template_base_directory;
             }
 
-            /// A base directory not related to any blueprint
+            // A base directory not related to any blueprint
             inline std::string& get_global_template_base_directory_ref()
             {
                 static std::string template_base_directory = "templates";
@@ -11551,7 +11535,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
     namespace detail
     {
-        /// Typesafe wrapper for storing lists of middleware as their indices in the App
+        // Typesafe wrapper for storing lists of middleware as their indices in the App
         struct middleware_indices
         {
             template<typename App>
@@ -11606,11 +11590,10 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         };
     } // namespace detail
 
-    /// A base class for all rules.
+    // A base class for all rules.
 
-    ///
-    /// Used to provide a common interface for code dealing with different types of rules.<br>
-    /// A Rule provides a URL, allowed HTTP methods, and handlers.
+    // Used to provide a common interface for code dealing with different types of rules.<br>
+    // A Rule provides a URL, allowed HTTP methods, and handlers.
     class BaseRule
     {
     public:
@@ -11867,7 +11850,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
     class CatchallRule
     {
     public:
-        /// @cond SKIP
+        // @cond SKIP
         CatchallRule() {}
 
         template<typename Func>
@@ -11945,7 +11928,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
             handler_ = std::move(f);
         }
-        /// @endcond
+        // @endcond
         bool has_handler()
         {
             return (handler_ != nullptr);
@@ -11959,10 +11942,9 @@ namespace crow // NOTE: Already documented in "crow/app.h"
     };
 
 
-    /// A rule dealing with websockets.
+    // A rule dealing with websockets.
 
-    ///
-    /// Provides the interface for the user to put in the necessary handlers for a websocket to work.
+    // Provides the interface for the user to put in the necessary handlers for a websocket to work.
     template<typename App>
     class WebSocketRule : public BaseRule
     {
@@ -11996,7 +11978,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         }
 #endif
 
-        /// Override the global payload limit for this single WebSocket rule
+        // Override the global payload limit for this single WebSocket rule
         self_t& max_payload(uint64_t max_payload)
         {
             max_payload_ = max_payload;
@@ -12050,10 +12032,9 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         bool max_payload_override_ = false;
     };
 
-    /// Allows the user to assign parameters using functions.
+    // Allows the user to assign parameters using functions.
 
-    ///
-    /// `rule.name("name").methods(HTTPMethod::POST)`
+    // `rule.name("name").methods(HTTPMethod::POST)`
     template<typename T>
     struct RuleParameterTraits
     {
@@ -12087,7 +12068,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             return static_cast<self_t&>(*this);
         }
 
-        /// Enable local middleware for this handler
+        // Enable local middleware for this handler
         template<typename App, typename... Middlewares>
         self_t& middlewares()
         {
@@ -12096,7 +12077,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         }
     };
 
-    /// A rule that can change its parameters during runtime.
+    // A rule that can change its parameters during runtime.
     class DynamicRule : public BaseRule, public RuleParameterTraits<DynamicRule>
     {
     public:
@@ -12172,7 +12153,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         std::function<void(request&, response&, const routing_params&)> erased_handler_;
     };
 
-    /// Default rule created when CROW_ROUTE is called.
+    // Default rule created when CROW_ROUTE is called.
     template<typename... Args>
     class TaggedRule : public BaseRule, public RuleParameterTraits<TaggedRule<Args...>>
     {
@@ -12237,7 +12218,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
     const int RULE_SPECIAL_REDIRECT_SLASH = 1;
 
 
-    /// A search tree.
+    // A search tree.
     class Trie
     {
     public:
@@ -12272,7 +12253,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         Trie()
         {}
 
-        /// Check whether or not the trie is empty.
+        // Check whether or not the trie is empty.
         bool is_empty()
         {
             return head_.children.empty();
@@ -12370,11 +12351,11 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         //Rule_index, Blueprint_index, routing_params
         routing_handle_result find(const std::string& req_url, const Node& node, unsigned pos = 0, routing_params* params = nullptr, std::vector<uint16_t>* blueprints = nullptr) const
         {
-            //start params as an empty struct
+            //Start params as an empty struct
             routing_params empty;
             if (params == nullptr)
                 params = &empty;
-            //same for blueprint vector
+            //Same for blueprint vector
             std::vector<uint16_t> MT;
             if (blueprints == nullptr)
                 blueprints = &MT;
@@ -12392,7 +12373,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             };
 
-            //if the function was called on a node at the end of the string (the last recursion), return the nodes rule index, and whatever params were passed to the function
+            //If the function was called on a node at the end of the string (the last recursion), return the nodes rule index, and whatever params were passed to the function
             if (pos == req_url.size())
             {
                 found_BP = std::move(*blueprints);
@@ -12611,7 +12592,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
                 }
             }
 
-            //check if the last node already has a value (exact url already in Trie)
+            //Check if the last node already has a value (exact url already in Trie)
             if (idx->rule_index)
                 throw std::runtime_error("handler already exists for " + url);
             idx->rule_index = rule_index;
@@ -12621,11 +12602,10 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         Node head_;
     };
 
-    /// A blueprint can be considered a smaller section of a Crow app, specifically where the router is conecerned.
+    // A blueprint can be considered a smaller section of a Crow app, specifically where the router is conecerned.
 
-    ///
-    /// You can use blueprints to assign a common prefix to rules' prefix, set custom static and template folders, and set a custom catchall route.
-    /// You can also assign nest blueprints for maximum Compartmentalization.
+    // You can use blueprints to assign a common prefix to rules' prefix, set custom static and template folders, and set a custom catchall route.
+    // You can also assign nest blueprints for maximum Compartmentalization.
     class Blueprint
     {
     public:
@@ -12775,7 +12755,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
         friend class Router;
     };
 
-    /// Handles matching requests to existing rules and upgrade requests.
+    // Handles matching requests to existing rules and upgrade requests.
     class Router
     {
     public:
@@ -12851,7 +12831,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
         void get_recursive_child_methods(Blueprint* blueprint, std::vector<HTTPMethod>& methods)
         {
-            //we only need to deal with children if the blueprint has absolutely no methods (meaning its index won't be added to the trie)
+            //We only need to deal with children if the blueprint has absolutely no methods (meaning its index won't be added to the trie)
             if (blueprint->static_dir_.empty() && blueprint->all_rules_.empty())
             {
                 for (Blueprint* bp : blueprint->blueprints_)
@@ -13001,14 +12981,14 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
         void get_found_bp(std::vector<uint16_t>& bp_i, std::vector<Blueprint*>& blueprints, std::vector<Blueprint*>& found_bps, uint16_t index = 0)
         {
-            // This statement makes 3 assertions:
-            // 1. The index is above 0.
-            // 2. The index does not lie outside the given blueprint list.
-            // 3. The next blueprint we're adding has a prefix that starts the same as the already added blueprint + a slash (the rest is irrelevant).
-            //
-            // This is done to prevent a blueprint that has a prefix of "bp_prefix2" to be assumed as a child of one that has "bp_prefix".
-            //
-            // If any of the assertions is untrue, we delete the last item added, and continue using the blueprint list of the blueprint found before, the topmost being the router's list
+            /* This statement makes 3 assertions:
+             * 1. The index is above 0.
+             * 2. The index does not lie outside the given blueprint list.
+             * 3. The next blueprint we're adding has a prefix that starts the same as the already added blueprint + a slash (the rest is irrelevant).
+             *
+             * This is done to prevent a blueprint that has a prefix of "bp_prefix2" to be assumed as a child of one that has "bp_prefix".
+             *
+             * If any of the assertions is untrue, we delete the last item added, and continue using the blueprint list of the blueprint found before, the topmost being the router's list*/
             auto verify_prefix = [&bp_i, &index, &blueprints, &found_bps]() {
                 return index > 0 &&
                        bp_i[index] < blueprints.size() &&
@@ -13040,7 +13020,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             }
         }
 
-        /// Is used to handle errors, you insert the error code, found route, request, and response. and it'll either call the appropriate catchall route (considering the blueprint system) and send you a status string (which is mainly used for debug messages), or just set the response code to the proper error code.
+        // Is used to handle errors, you insert the error code, found route, request, and response. and it'll either call the appropriate catchall route (considering the blueprint system) and send you a status string (which is mainly used for debug messages), or just set the response code to the proper error code.
         std::string get_error(unsigned short code, routing_handle_result& found, const request& req, response& res)
         {
             res.code = code;
@@ -13102,7 +13082,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             else if (req.method == HTTPMethod::Head)
             {
                 *found = per_methods_[static_cast<int>(method_actual)].trie.find(req.url);
-                // support HEAD requests using GET if not defined as method for the requested URL
+                // Support HEAD requests using GET if not defined as method for the requested URL
                 if (!found->rule_index)
                 {
                     method_actual = HTTPMethod::Get;
@@ -13316,7 +13296,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
 
         static void default_exception_handler(response& res)
         {
-            // any uncaught exceptions become 500s
+            // Any uncaught exceptions become 500s
             res = response(500);
 
             try
@@ -13341,7 +13321,7 @@ namespace crow // NOTE: Already documented in "crow/app.h"
             std::vector<BaseRule*> rules;
             Trie trie;
 
-            // rule index 0, 1 has special meaning; preallocate it to avoid duplication.
+            // Rule index 0, 1 has special meaning; preallocate it to avoid duplication.
             PerMethod():
               rules(2) {}
         };
@@ -13357,26 +13337,26 @@ namespace crow
 {
     struct CORSHandler;
 
-    /// Used for tuning CORS policies
+    // Used for tuning CORS policies
     struct CORSRules
     {
         friend struct crow::CORSHandler;
 
-        /// Set Access-Control-Allow-Origin. Default is "*"
+        // Set Access-Control-Allow-Origin. Default is "*"
         CORSRules& origin(const std::string& origin)
         {
             origin_ = origin;
             return *this;
         }
 
-        /// Set Access-Control-Allow-Methods. Default is "*"
+        // Set Access-Control-Allow-Methods. Default is "*"
         CORSRules& methods(crow::HTTPMethod method)
         {
             add_list_item(methods_, crow::method_name(method));
             return *this;
         }
 
-        /// Set Access-Control-Allow-Methods. Default is "*"
+        // Set Access-Control-Allow-Methods. Default is "*"
         template<typename... Methods>
         CORSRules& methods(crow::HTTPMethod method, Methods... method_list)
         {
@@ -13385,14 +13365,14 @@ namespace crow
             return *this;
         }
 
-        /// Set Access-Control-Allow-Headers. Default is "*"
+        // Set Access-Control-Allow-Headers. Default is "*"
         CORSRules& headers(const std::string& header)
         {
             add_list_item(headers_, header);
             return *this;
         }
 
-        /// Set Access-Control-Allow-Headers. Default is "*"
+        // Set Access-Control-Allow-Headers. Default is "*"
         template<typename... Headers>
         CORSRules& headers(const std::string& header, Headers... header_list)
         {
@@ -13401,33 +13381,33 @@ namespace crow
             return *this;
         }
 
-        /// Set Access-Control-Max-Age. Default is none
+        // Set Access-Control-Max-Age. Default is none
         CORSRules& max_age(int max_age)
         {
             max_age_ = std::to_string(max_age);
             return *this;
         }
 
-        /// Enable Access-Control-Allow-Credentials
+        // Enable Access-Control-Allow-Credentials
         CORSRules& allow_credentials()
         {
             allow_credentials_ = true;
             return *this;
         }
 
-        /// Ignore CORS and don't send any headers
+        // Ignore CORS and don't send any headers
         void ignore()
         {
             ignore_ = true;
         }
 
-        /// Handle CORS on specific prefix path
+        // Handle CORS on specific prefix path
         CORSRules& prefix(const std::string& prefix);
 
-        /// Handle CORS for specific blueprint
+        // Handle CORS for specific blueprint
         CORSRules& blueprint(const Blueprint& bp);
 
-        /// Global CORS policy
+        // Global CORS policy
         CORSRules& global();
 
     private:
@@ -13435,7 +13415,7 @@ namespace crow
         CORSRules(CORSHandler* handler):
           handler_(handler) {}
 
-        /// build comma separated list
+        // Build comma separated list
         void add_list_item(std::string& list, const std::string& val)
         {
             if (list == "*") list = "";
@@ -13443,7 +13423,7 @@ namespace crow
             list += val;
         }
 
-        /// Set header `key` to `value` if it is not set
+        // Set header `key` to `value` if it is not set
         void set_header_no_override(const std::string& key, const std::string& value, crow::response& res)
         {
             if (value.size() == 0) return;
@@ -13451,7 +13431,7 @@ namespace crow
             res.add_header(key, value);
         }
 
-        /// Set response headers
+        // Set response headers
         void apply(crow::response& res)
         {
             if (ignore_) return;
@@ -13473,12 +13453,12 @@ namespace crow
         CORSHandler* handler_;
     };
 
-    /// CORSHandler is a global middleware for setting CORS headers.
+    // CORSHandler is a global middleware for setting CORS headers.
 
-    ///
-    /// By default, it sets Access-Control-Allow-Origin/Methods/Headers to "*".
-    /// The default behaviour can be changed with the `global()` cors rule.
-    /// Additional rules for prexies can be added with `prefix()`.
+    //
+    // By default, it sets Access-Control-Allow-Origin/Methods/Headers to "*".
+    // The default behaviour can be changed with the `global()` cors rule.
+    // Additional rules for prexies can be added with `prefix()`.
     struct CORSHandler
     {
         struct context
@@ -13493,21 +13473,21 @@ namespace crow
             rule.apply(res);
         }
 
-        /// Handle CORS on a specific prefix path
+        // Handle CORS on a specific prefix path
         CORSRules& prefix(const std::string& prefix)
         {
             rules.emplace_back(prefix, CORSRules(this));
             return rules.back().second;
         }
 
-        /// Handle CORS for a specific blueprint
+        // Handle CORS for a specific blueprint
         CORSRules& blueprint(const Blueprint& bp)
         {
             rules.emplace_back(bp.prefix(), CORSRules(this));
             return rules.back().second;
         }
 
-        /// Get the global CORS policy
+        // Get the global CORS policy
         CORSRules& global()
         {
             return default_;
@@ -13737,47 +13717,47 @@ namespace crow
     class Crow
     {
     public:
-        /// \brief This is the crow application
+        // \brief This is the crow application
         using self_t = Crow;
 
-        /// \brief The HTTP server
+        // \brief The HTTP server
         using server_t = Server<Crow, SocketAdaptor, Middlewares...>;
 
 #ifdef CROW_ENABLE_SSL
-        /// \brief An HTTP server that runs on SSL with an SSLAdaptor
+        // \brief An HTTP server that runs on SSL with an SSLAdaptor
         using ssl_server_t = Server<Crow, SSLAdaptor, Middlewares...>;
 #endif
         Crow()
         {}
 
-        /// \brief Construct Crow with a subset of middleware
+        // \brief Construct Crow with a subset of middleware
         template<typename... Ts>
         Crow(Ts&&... ts):
           middlewares_(make_middleware_tuple(std::forward<Ts>(ts)...))
         {}
 
-        /// \brief Process an Upgrade request
-        ///
-        /// Currently used to upgrade an HTTP connection to a WebSocket connection
+        // \brief Process an Upgrade request
+        //
+        // Currently used to upgrade an HTTP connection to a WebSocket connection
         template<typename Adaptor>
         void handle_upgrade(const request& req, response& res, Adaptor&& adaptor)
         {
             router_.handle_upgrade(req, res, adaptor);
         }
 
-        /// \brief Process only the method and URL of a request and provide a route (or an error response)
+        // \brief Process only the method and URL of a request and provide a route (or an error response)
         std::unique_ptr<routing_handle_result> handle_initial(request& req, response& res)
         {
             return router_.handle_initial(req, res);
         }
 
-        /// \brief Process the fully parsed request and generate a response for it
+        // \brief Process the fully parsed request and generate a response for it
         void handle(request& req, response& res, std::unique_ptr<routing_handle_result>& found)
         {
             router_.handle<self_t>(req, res, *found);
         }
 
-        /// \brief Process a fully parsed request from start to finish (primarily used for debugging)
+        // \brief Process a fully parsed request from start to finish (primarily used for debugging)
         void handle_full(request& req, response& res)
         {
             auto found = handle_initial(req, res);
@@ -13785,13 +13765,13 @@ namespace crow
                 handle(req, res, found);
         }
 
-        /// \brief Create a dynamic route using a rule (**Use CROW_ROUTE instead**)
+        // \brief Create a dynamic route using a rule (**Use CROW_ROUTE instead**)
         DynamicRule& route_dynamic(const std::string& rule)
         {
             return router_.new_rule_dynamic(rule);
         }
 
-        /// \brief Create a route using a rule (**Use CROW_ROUTE instead**)
+        // \brief Create a route using a rule (**Use CROW_ROUTE instead**)
         template<uint64_t Tag>
 #ifdef CROW_GCC83_WORKAROUND
         auto& route(const std::string& rule)
@@ -13807,20 +13787,20 @@ namespace crow
             return router_.new_rule_tagged<Tag>(rule);
         }
 
-        /// \brief Create a route for any requests without a proper route (**Use CROW_CATCHALL_ROUTE instead**)
+        // \brief Create a route for any requests without a proper route (**Use CROW_CATCHALL_ROUTE instead**)
         CatchallRule& catchall_route()
         {
             return router_.catchall_rule();
         }
 
-        /// \brief Set the default max payload size for websockets
+        // \brief Set the default max payload size for websockets
         self_t& websocket_max_payload(uint64_t max_payload)
         {
             max_payload_ = max_payload;
             return *this;
         }
 
-        /// \brief Get the default max payload size for websockets
+        // \brief Get the default max payload size for websockets
         uint64_t websocket_max_payload()
         {
             return max_payload_;
@@ -13843,53 +13823,53 @@ namespace crow
             return signals_;
         }
 
-        /// \brief Set the port that Crow will handle requests on
+        // \brief Set the port that Crow will handle requests on
         self_t& port(std::uint16_t port)
         {
             port_ = port;
             return *this;
         }
 
-        /// \brief Get the port that Crow will handle requests on
+        // \brief Get the port that Crow will handle requests on
         std::uint16_t port()
         {
             return port_;
         }
 
-        /// \brief Set the connection timeout in seconds (default is 5)
+        // \brief Set the connection timeout in seconds (default is 5)
         self_t& timeout(std::uint8_t timeout)
         {
             timeout_ = timeout;
             return *this;
         }
 
-        /// \brief Set the server name
+        // \brief Set the server name
         self_t& server_name(std::string server_name)
         {
             server_name_ = server_name;
             return *this;
         }
 
-        /// \brief The IP address that Crow will handle requests on (default is 0.0.0.0)
+        // \brief The IP address that Crow will handle requests on (default is 0.0.0.0)
         self_t& bindaddr(std::string bindaddr)
         {
             bindaddr_ = bindaddr;
             return *this;
         }
 
-        /// \brief Get the address that Crow will handle requests on
+        // \brief Get the address that Crow will handle requests on
         std::string bindaddr()
         {
             return bindaddr_;
         }
 
-        /// \brief Run the server on multiple threads using all available threads
+        // \brief Run the server on multiple threads using all available threads
         self_t& multithreaded()
         {
             return concurrency(std::thread::hardware_concurrency());
         }
 
-        /// \brief Run the server on multiple threads using a specific number
+        // \brief Run the server on multiple threads using a specific number
         self_t& concurrency(std::uint16_t concurrency)
         {
             if (concurrency < 2) // Crow can have a minimum of 2 threads running
@@ -13898,36 +13878,36 @@ namespace crow
             return *this;
         }
 
-        /// \brief Get the number of threads that server is using
+        // \brief Get the number of threads that server is using
         std::uint16_t concurrency()
         {
             return concurrency_;
         }
 
-        /// \brief Set the server's log level
-        ///
-        /// Possible values are:
-        /// - crow::LogLevel::Debug       (0)
-        /// - crow::LogLevel::Info        (1)
-        /// - crow::LogLevel::Warning     (2)
-        /// - crow::LogLevel::Error       (3)
-        /// - crow::LogLevel::Critical    (4)
+        // \brief Set the server's log level
+        //
+        /* Possible values are:
+         * - crow::LogLevel::Debug       (0)
+         * - crow::LogLevel::Info        (1)
+         * - crow::LogLevel::Warning     (2)
+         * - crow::LogLevel::Error       (3)
+         * - crow::LogLevel::Critical    (4) */
         self_t& loglevel(LogLevel level)
         {
             crow::logger::setLogLevel(level);
             return *this;
         }
 
-        /// \brief Set the response body size (in bytes) beyond which Crow automatically streams responses (Default is 1MiB)
-        ///
-        /// Any streamed response is unaffected by Crow's timer, and therefore won't timeout before a response is fully sent.
+        // \brief Set the response body size (in bytes) beyond which Crow automatically streams responses (Default is 1MiB)
+        //
+        // Any streamed response is unaffected by Crow's timer, and therefore won't timeout before a response is fully sent.
         self_t& stream_threshold(size_t threshold)
         {
             res_stream_threshold_ = threshold;
             return *this;
         }
 
-        /// \brief Get the response body size (in bytes) beyond which Crow automatically streams responses
+        // \brief Get the response body size (in bytes) beyond which Crow automatically streams responses
         size_t& stream_threshold()
         {
             return res_stream_threshold_;
@@ -13940,11 +13920,11 @@ namespace crow
             return *this;
         }
 
-        /// \brief Set the function to call to handle uncaught exceptions generated in routes (Default generates error 500).
-        ///
-        /// The function must have the following signature: void(crow::response&).
-        /// It must set the response passed in argument to the function, which will be sent back to the client.
-        /// See Router::default_exception_handler() for the default implementation.
+        // \brief Set the function to call to handle uncaught exceptions generated in routes (Default generates error 500).
+        //
+        // The function must have the following signature: void(crow::response&).
+        // It must set the response passed in argument to the function, which will be sent back to the client.
+        // See Router::default_exception_handler() for the default implementation.
         template<typename Func>
         self_t& exception_handler(Func&& f)
         {
@@ -13957,7 +13937,7 @@ namespace crow
             return router_.exception_handler();
         }
 
-        /// \brief Set a custom duration and function to run on every tick
+        // \brief Set a custom duration and function to run on every tick
         template<typename Duration, typename Func>
         self_t& tick(Duration d, Func f)
         {
@@ -13986,7 +13966,7 @@ namespace crow
         }
 #endif
 
-        /// \brief Apply blueprints
+        // \brief Apply blueprints
         void add_blueprint()
         {
 #if defined(__APPLE__) || defined(__MACH__)
@@ -14009,7 +13989,7 @@ namespace crow
             router_.validate_bp();
         }
 
-        /// \brief Go through the rules, upgrade them if possible, and add them to the list of rules
+        // \brief Go through the rules, upgrade them if possible, and add them to the list of rules
         void add_static_dir()
         {
             if (are_static_routes_added()) return;
@@ -14023,13 +14003,13 @@ namespace crow
             set_static_routes_added();
         }
 
-        /// \brief A wrapper for `validate()` in the router
+        // \brief A wrapper for `validate()` in the router
         void validate()
         {
             router_.validate();
         }
 
-        /// \brief Run the server
+        // \brief Run the server
         void run()
         {
 #ifndef CROW_DISABLE_STATIC_DIR
@@ -14065,10 +14045,10 @@ namespace crow
             }
         }
 
-        /// \brief Non-blocking version of \ref run()
-        ///
-        /// The output from this method needs to be saved into a variable!
-        /// Otherwise the call will be made on the same thread.
+        // \brief Non-blocking version of \ref run()
+        //
+        // The output from this method needs to be saved into a variable!
+        // Otherwise the call will be made on the same thread.
         std::future<void> run_async()
         {
             return std::async(std::launch::async, [&] {
@@ -14076,7 +14056,7 @@ namespace crow
             });
         }
 
-        /// \brief Stop the server
+        // \brief Stop the server
         void stop()
         {
 #ifdef CROW_ENABLE_SSL
@@ -14108,7 +14088,7 @@ namespace crow
             websockets_.erase(std::remove(websockets_.begin(), websockets_.end(), conn), websockets_.end());
         }
 
-        /// \brief Print the routing paths defined for each HTTP method
+        // \brief Print the routing paths defined for each HTTP method
         void debug_print()
         {
             CROW_LOG_DEBUG << "Routing:";
@@ -14118,7 +14098,7 @@ namespace crow
 
 #ifdef CROW_ENABLE_SSL
 
-        /// \brief Use certificate and key files for SSL
+        // \brief Use certificate and key files for SSL
         self_t& ssl_file(const std::string& crt_filename, const std::string& key_filename)
         {
             ssl_used_ = true;
@@ -14131,7 +14111,7 @@ namespace crow
             return *this;
         }
 
-        /// \brief Use `.pem` file for SSL
+        // \brief Use `.pem` file for SSL
         self_t& ssl_file(const std::string& pem_filename)
         {
             ssl_used_ = true;
@@ -14143,7 +14123,7 @@ namespace crow
             return *this;
         }
 
-        /// \brief Use certificate chain and key files for SSL
+        // \brief Use certificate chain and key files for SSL
         self_t& ssl_chainfile(const std::string& crt_filename, const std::string& key_filename)
         {
             ssl_used_ = true;
@@ -14185,7 +14165,7 @@ namespace crow
         {
             // We can't call .ssl() member function unless CROW_ENABLE_SSL is defined.
             static_assert(
-              // make static_assert dependent to T; always false
+              // Make static_assert dependent to T; always false
               std::is_base_of<T, void>::value,
               "Define CROW_ENABLE_SSL to enable ssl support.");
             return *this;
@@ -14196,7 +14176,7 @@ namespace crow
         {
             // We can't call .ssl() member function unless CROW_ENABLE_SSL is defined.
             static_assert(
-              // make static_assert dependent to T; always false
+              // Make static_assert dependent to T; always false
               std::is_base_of<T, void>::value,
               "Define CROW_ENABLE_SSL to enable ssl support.");
             return *this;
@@ -14225,7 +14205,7 @@ namespace crow
             return utility::get_element_by_type<T, Middlewares...>(middlewares_);
         }
 
-        /// \brief Wait until the server has properly started
+        // \brief Wait until the server has properly started
         void wait_for_server_start()
         {
             {
@@ -14251,7 +14231,7 @@ namespace crow
                 black_magic::tuple_extract<Middlewares, decltype(fwd)>(fwd))...);
         }
 
-        /// \brief Notify anything using \ref wait_for_server_start() to proceed
+        // \brief Notify anything using \ref wait_for_server_start() to proceed
         void notify_server_start()
         {
             std::unique_lock<std::mutex> lock(start_mutex_);
@@ -14304,13 +14284,13 @@ namespace crow
         std::vector<crow::websocket::connection*> websockets_;
     };
 
-    /// \brief Alias of Crow<Middlewares...>. Useful if you want
-    /// a instance of an Crow application that require Middlewares
+    // \brief Alias of Crow<Middlewares...>. Useful if you want
+    // a instance of an Crow application that require Middlewares
     template<typename... Middlewares>
     using App = Crow<Middlewares...>;
 
-    /// \brief Alias of Crow<>. Useful if you want a instance of
-    /// an Crow application that doesn't require of Middlewares
+    // \brief Alias of Crow<>. Useful if you want a instance of
+    // an Crow application that doesn't require of Middlewares
     using SimpleApp = Crow<>;
 } // namespace crow
 

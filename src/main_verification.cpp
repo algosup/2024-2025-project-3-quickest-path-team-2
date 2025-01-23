@@ -1,13 +1,14 @@
 /*
 Here is the main function for the verification program. It reads the data from the file and checks for errors.
-It serves to launch all the verification processes and display the results of the verification.
+It serves to launch all the verification processes and displays the verification results.
+
 To compile and run the program, open the terminal and use the following commands:
 
-cd src
-g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp
-./main_verification
+- cd until src folder
+- Write "g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp"
+- Write ""./main_verification"
 
-After running, wait for the result of the verification. This should take approximately 50 seconds to complete.
+After running, wait for the result of the verification. This should take approximately 50 seconds to complete on Mac.
 */
 
 #include "includes/verification.hpp"
@@ -35,7 +36,7 @@ void display_logo(const std::string& file_path) {
 
 // Function to check, for the tests cases
 void checkValueAndLog() {
-		std::cout << "Warning Test : Verification program failed." << std::endl QPS
+		std::cout << "Warning Test: Verification program failed." << std::endl QPS
 }
 
 // Main function for the verification program
