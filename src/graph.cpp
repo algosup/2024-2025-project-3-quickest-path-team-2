@@ -5,10 +5,10 @@
 #include <algorithm>
 #include <iostream>
 
-// Constructeur par défaut
+// Constructor by default
 Graph::Graph() : adjList() {}
 
-// Ajouter une arête au graphe
+// Add an edge to the graph
 void Graph::add_edge(int source, int target, int weight) {
     if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {
         adjList.resize(std::max(source, target) + 1);
@@ -17,7 +17,7 @@ void Graph::add_edge(int source, int target, int weight) {
     adjList[target].emplace_back(source, weight);
 }
 
-// Trouver le chemin le plus court entre deux nœuds
+// Find the shortest path between two nodes
 std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     constexpr int INF = std::numeric_limits<int>::max();
 
