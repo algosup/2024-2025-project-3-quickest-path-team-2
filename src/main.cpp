@@ -4,9 +4,28 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <fstream>
 #include <chrono> // Pour mesurer le temps d'exécution
 
+
+// Fonction pour afficher le logo
+void display_logo(const std::string& file_path) {
+    std::ifstream logo_file(file_path);
+    if (logo_file.is_open()) {
+        std::string line;
+        while (getline(logo_file, line)) {
+            std::cout << line << std::endl;
+        }
+        logo_file.close();
+    } else {
+        std::cerr << "Error: Unable to open logo file." << std::endl;
+    }
+}
+
 int main(int argc, char* argv[]) {
+    std::string logoFilePath = "logo/logo_qps.txt";  // Chemin du fichier contenant le logo
+    display_logo(logoFilePath);
+    
     if (argc != 4) {
         std::cerr << "Usage: " << argv[0] << " <input_file> <source> <target>\n";
         return 1;
