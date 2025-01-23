@@ -17,7 +17,7 @@ void Graph::add_edge(int source, int target, int weight) {
     adjList[target].emplace_back(source, weight);
 }
 
-// Trouver le chemin le plus court entre deux nœuds
+// Trouver le chemin le plus court entre deux nœuds avec une optimisation bidirectionnelle
 std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     constexpr int INF = std::numeric_limits<int>::max();
 
@@ -29,6 +29,7 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     size_t n = adjList.size();
     std::vector<int> distForward(n, INF), distBackward(n, INF);
     std::vector<int> prevForward(n, -1), prevBackward(n, -1);
+    std::vector<bool> processedForward(n, false), processedBackward(n, false);
 
     distForward[source] = 0;
     distBackward[target] = 0;
@@ -47,26 +48,30 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     int bestCost = INF;
     int meetingNode = -1;
 
-    // Process nodes alternately in forward and backward directions
-    while (!pqForward.empty() && !pqBackward.empty()) {
-        // Expand forward
+    // Processus bidirectionnel
+    while (!pqForward.empty() || !pqBackward.empty()) {
+        // Expansion dans la direction avant
         if (!pqForward.empty()) {
-            auto [currentF, current] = pqForward.top();
+            auto [currentDistF, currentNodeF] = pqForward.top();
             pqForward.pop();
 
-            if (currentF > distForward[current]) continue;
+            if (processedForward[currentNodeF]) continue;
+            processedForward[currentNodeF] = true;
 
-            for (const Edge& edge : adjList[current]) {
+            for (const Edge& edge : adjList[currentNodeF]) {
                 int neighbor = edge.target;
-                int newDist = distForward[current] + edge.weight;
+                int newDist = distForward[currentNodeF] + edge.weight;
 
                 if (newDist < distForward[neighbor]) {
                     distForward[neighbor] = newDist;
-                    prevForward[neighbor] = current;
-                    pqForward.emplace(newDist, neighbor);
+                    prevForward[neighbor] = currentNodeF;
+
+                    if (!processedForward[neighbor]) {
+                        pqForward.emplace(newDist, neighbor);
+                    }
                 }
 
-                if (distBackward[neighbor] < INF) {
+                if (processedBackward[neighbor]) {
                     int potentialCost = distForward[neighbor] + distBackward[neighbor];
                     if (potentialCost < bestCost) {
                         bestCost = potentialCost;
@@ -76,24 +81,28 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             }
         }
 
-        // Expand backward
+        // Expansion dans la direction arrière
         if (!pqBackward.empty()) {
-            auto [currentB, currentBack] = pqBackward.top();
+            auto [currentDistB, currentNodeB] = pqBackward.top();
             pqBackward.pop();
 
-            if (currentB > distBackward[currentBack]) continue;
+            if (processedBackward[currentNodeB]) continue;
+            processedBackward[currentNodeB] = true;
 
-            for (const Edge& edge : adjList[currentBack]) {
+            for (const Edge& edge : adjList[currentNodeB]) {
                 int neighbor = edge.target;
-                int newDist = distBackward[currentBack] + edge.weight;
+                int newDist = distBackward[currentNodeB] + edge.weight;
 
                 if (newDist < distBackward[neighbor]) {
                     distBackward[neighbor] = newDist;
-                    prevBackward[neighbor] = currentBack;
-                    pqBackward.emplace(newDist, neighbor);
+                    prevBackward[neighbor] = currentNodeB;
+
+                    if (!processedBackward[neighbor]) {
+                        pqBackward.emplace(newDist, neighbor);
+                    }
                 }
 
-                if (distForward[neighbor] < INF) {
+                if (processedForward[neighbor]) {
                     int potentialCost = distForward[neighbor] + distBackward[neighbor];
                     if (potentialCost < bestCost) {
                         bestCost = potentialCost;
@@ -103,7 +112,7 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             }
         }
 
-        // Finish if the best cost is finalized
+        // Sortie anticipée si on a trouvé un chemin
         if (meetingNode != -1) break;
     }
 
@@ -114,12 +123,21 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
 
     totalTime = bestCost;
 
-    // Reconstruct the path
+    // Reconstruction du chemin
     std::vector<int> path;
+    path.reserve(n); // Réserver la capacité maximale possible pour éviter les réallocations
+
+    // Construire le chemin avant et l'ajouter directement au chemin final
+    int forwardPathSize = 0;
     for (int node = meetingNode; node != -1; node = prevForward[node]) {
         path.push_back(node);
+        forwardPathSize++;
     }
-    std::reverse(path.begin(), path.end());
+
+    // Inverser la partie avant du chemin pour obtenir le chemin complet
+    std::reverse(path.begin(), path.begin() + forwardPathSize);
+
+    // Construire le chemin arrière et l'ajouter directement au chemin final
     for (int node = prevBackward[meetingNode]; node != -1; node = prevBackward[node]) {
         path.push_back(node);
     }

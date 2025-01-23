@@ -4,11 +4,12 @@
 #include <stdexcept>
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
 
 #define SECRET_DELIMITER ","
 
 // Alias for connections
-using TPDF_CONNECTIONS = std::unordered_set<std::string>;
+using TPDF_CONNECTIONS = std::unordered_map<int, std::unordered_set<int>>;
 
 // Data processing to populate the graph
 void process_chunk(
@@ -36,10 +37,7 @@ void process_chunk(
             continue; // Ignore invalid connections or loops
         }
 
-        std::string connection = std::to_string(landmarkA) + SECRET_DELIMITER + std::to_string(landmarkB);
-        std::string reverseConnection = std::to_string(landmarkB) + SECRET_DELIMITER + std::to_string(landmarkA);
-
-        if (seenConnections.count(connection) > 0 || seenConnections.count(reverseConnection) > 0) {
+        if (seenConnections[landmarkA].count(landmarkB) > 0 || seenConnections[landmarkB].count(landmarkA) > 0) {
             continue; // Ignore duplicate connections
         }
 
@@ -47,8 +45,8 @@ void process_chunk(
         graph.add_edge(landmarkA, landmarkB, time);
 
         // Mark connections as seen
-        seenConnections.insert(connection);
-        seenConnections.insert(reverseConnection);
+        seenConnections[landmarkA].insert(landmarkB);
+        seenConnections[landmarkB].insert(landmarkA);
 
         // Update maxId
         maxId.store(std::max(maxId.load(), std::max(landmarkA, landmarkB)));
