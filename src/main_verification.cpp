@@ -10,7 +10,7 @@ g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp
 After running, wait for the result of the verification. This should take approximately 50 seconds to complete.
 */
 
-#include "Includes/verification.hpp"
+#include "includes/verification.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
