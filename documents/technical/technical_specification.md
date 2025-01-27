@@ -6,7 +6,7 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
 **Last Time Modified:** 01/23/2025
 
 </div>
@@ -66,13 +66,13 @@
     - [13.2. Steps](#132-steps)
   - [14. Maintenance](#14-maintenance)
     - [14.1. Updates](#141-updates)
-  - [14. Glossary](#14-glossary)
+  - [15. Glossary](#15-glossary)
 
 </details>
 
 ## 3. Introduction
 
-The Quickest Path project aims to develop a software solution that calculates the fastest path between two nodes based on data provided in a CSV[^1] file using C++[^2], the program have to use an REST API[^3] and response in JSON[^4] and XML[^5] formats.
+The Quickest Path project aims to develop a software solution that calculates the fastest path between two nodes based on data provided in a CSV[^1] file using C++[^2], the program have to use an REST API[^3] and respond in JSON[^4] and XML[^5] formats.
 
 ## 4. Objectives
 
@@ -80,7 +80,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 - Ensure the software can handle large datasets.
 - Analyze the data given to ensure a proper integrity of data.
 - Provide a user-friendly interface for input and output.
-- Provide answer through an API[^3] using the GET[^6] methods.
+- Provide response through an API[^3] using the GET[^6] methods.
 
 ## 5. Project Folder Structure
 
@@ -88,7 +88,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 2024-2025-project-3-quickest-path-team-2
 ├── .gitignore  # ignore the file mentioned inside
 ├── bin # store all executable programs
-├── documents   # folder that store all the main files
+├── documents   # folder that stores all the main files
 │  ├── functional                               
 │  ├── images   # reserved for all images contained in files
 │  │  ├── functional                             
@@ -140,7 +140,7 @@ There are the conventions to follow during the project.
 ### 6.2. Files Conventions
 
 >[!NOTE]
-> Each .cpp file have to be joined with it's equivalent named .hpp, for instance if the file software.cpp is created the file software.hpp **HAVE** to be created.
+> Each .cpp file have to be joined with its equivalent named .hpp, for instance if the file software.cpp is created the file software.hpp **HAVE** to be created.
 
 There is an example to use the different files.
 
@@ -224,7 +224,7 @@ software.hpp
     int declare_the_function(int bestIntEver);
     
     /*
-        Permit the print the text given as parameter.
+        Allows printing the text given as parameter.
         params:
             string niceText;
     */
@@ -244,7 +244,7 @@ software.hpp
 
 ## 7. Requirements
 
-Before continuing reading, it is highest recommended to read the [functional specification](../functional/functional_specification.md) document.
+Before continuing to read, it is highest recommended to read the [functional specification](../functional/functional_specification.md) document.
 
 ## 8. System Architecture
 
@@ -934,7 +934,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
 
 #### 12.3.2. macOs
 
-1. You will have to install [Homebrew]("https://brew.sh") to install the dependencies.  
+1. You will have to install [Homebrew](https://brew.sh) to install the dependencies.  
 2. You will have to install the following dependencies:
 
     ```bash
@@ -1256,7 +1256,7 @@ To deploy the Quickest Path project, ensure the following environment setup:
 - **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
 - **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
-## 14. Glossary
+## 15. Glossary
 
 [^1]: Comma-Separated Values: A file format used to store tabular data.
 
