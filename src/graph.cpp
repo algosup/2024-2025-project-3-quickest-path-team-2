@@ -5,10 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
-// Constructeur par défaut
 Graph::Graph() : adjList() {}
 
-// Ajouter une arête au graphe
 void Graph::add_edge(int source, int target, int weight) {
     if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {
         adjList.resize(std::max(source, target) + 1);
@@ -17,12 +15,14 @@ void Graph::add_edge(int source, int target, int weight) {
     adjList[target].emplace_back(source, weight);
 }
 
-// Trouver le chemin le plus court entre deux nœuds avec une optimisation bidirectionnelle
+int Graph::get_max_node_id() const {
+    return static_cast<int>(adjList.size()) - 1;
+}
+
 std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     constexpr int INF = std::numeric_limits<int>::max();
 
-    if (source < 0 || source >= static_cast<int>(adjList.size()) ||
-        target < 0 || target >= static_cast<int>(adjList.size())) {
+    if (source < 0 || source > get_max_node_id() || target < 0 || target > get_max_node_id()) {
         throw std::out_of_range("Source or target node is out of bounds.");
     }
 
@@ -48,9 +48,7 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
     int bestCost = INF;
     int meetingNode = -1;
 
-    // Processus bidirectionnel
     while (!pqForward.empty() || !pqBackward.empty()) {
-        // Expansion dans la direction avant
         if (!pqForward.empty()) {
             auto [currentDistF, currentNodeF] = pqForward.top();
             pqForward.pop();
@@ -81,7 +79,6 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             }
         }
 
-        // Expansion dans la direction arrière
         if (!pqBackward.empty()) {
             auto [currentDistB, currentNodeB] = pqBackward.top();
             pqBackward.pop();
@@ -112,7 +109,6 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
             }
         }
 
-        // Sortie anticipée si on a trouvé un chemin
         if (meetingNode != -1) break;
     }
 
@@ -123,21 +119,17 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
 
     totalTime = bestCost;
 
-    // Reconstruction du chemin
     std::vector<int> path;
-    path.reserve(n); // Réserver la capacité maximale possible pour éviter les réallocations
+    path.reserve(n);
 
-    // Construire le chemin avant et l'ajouter directement au chemin final
     int forwardPathSize = 0;
     for (int node = meetingNode; node != -1; node = prevForward[node]) {
         path.push_back(node);
         forwardPathSize++;
     }
 
-    // Inverser la partie avant du chemin pour obtenir le chemin complet
     std::reverse(path.begin(), path.begin() + forwardPathSize);
 
-    // Construire le chemin arrière et l'ajouter directement au chemin final
     for (int node = prevBackward[meetingNode]; node != -1; node = prevBackward[node]) {
         path.push_back(node);
     }
