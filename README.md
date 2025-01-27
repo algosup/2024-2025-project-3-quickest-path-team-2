@@ -136,20 +136,20 @@ On macOS, the default clang++ compiler supports the -std=c++11 flag, so no addit
 - Compile the C++ Quickest Path System program using clang++ or g++:<br>
     - g++ -o shortest_path main.cpp graph.cpp preprocessing.cpp -std=c++17 -pthread
  - Run the compiled program:
-    - ./verification
+    - ./shortest_path data/usa_roads.csv < start road number > < end road number >
     <br><br>
 
 #### For Windows
 
 - Open a Command Prompt or Terminal and navigate to the directory containing the source code:
     - cd src
-- Compile the C++ verification program using g++ (or your preferred compiler):
+- Compile the C++ Quickest path program using g++ (or your preferred compiler):
     - g++ -std=c++11 main.cpp graph.cpp preprocessing.cpp -o shortest_path.exe
 - Run the compiled program:
-    - verification.exe
+    - shortest_path.exe data/usa_roads.csv < start road number > < end road number >
 
 
-#### Steps to Compile and Run the Program
+#### Steps to Compile and Run the Program On VScode
 
 You can compile and run the program directly in the terminal of Visual Studio Code after cloning the repository:
 
@@ -158,7 +158,7 @@ You can compile and run the program directly in the terminal of Visual Studio Co
 - Compile the program:
     - g++ -std=c++11 main.cpp graph.cpp preprocessing.cpp -o shortest_path.exe
 - Run the program:
-    - ./verification
+    - ./shortest_path data/usa_roads.csv < start road number > < end road number >
 
 #### Additional Notes:
 If you encounter any issues with the compiler setup on Windows, refer to the official
