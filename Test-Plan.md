@@ -134,7 +134,7 @@ Tests for extremely large datasets may require specialized hardware or offline s
 #### 2.2.4 Regression Testing
    - Runs automatically after each push to detect if any previously working functionality has broken. Re-running crucial tests after merges or fixes to prevent the reintroduction of old issues.
 
-> [IMPORTANT]**Error Severity**  
+> [!IMPORTANT]**Error Severity**  
 > - **Fatal errors** (via `checkValue(int actual, int expected)`)  
 >  Throw exceptions and halt the test. These must be fixed before release.  
 >- **Non-fatal errors** (via `checkAndLog(int actual, int expected)`)  
@@ -590,36 +590,36 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">Phase</th>
-      <th style="text-align: center;">Scope</th>
+      <th>Phase</th>
+      <th>Scope</th>
       <th>Approx. Date</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center;">Unit Testing</td>
+      <td>Unit Testing</td>
       <td>CSV parser, adjacency matrix builder, pathfinding algorithm</td>
-      <td style="text-align: center;">Weeks 3-4</td>
+      <td>Weeks 3-4</td>
     </tr>
     <tr>
-      <td style="text-align: center;">Integration</td>
+      <td>Integration</td>
       <td>Data validation tool + pathfinder + partial CSV usage</td>
-      <td style="text-align: center;">Week 4</td>
+      <td>Week 4</td>
     </tr>
     <tr>
-      <td style="text-align: center;">System Tests</td>
+      <td>System Tests</td>
       <td>End-to-end verification with a real or moderately sized CSV (~1M lines)</td>
-      <td style="text-align: center;">Weeks 3-4</td>
+      <td>Weeks 3-4</td>
     </tr>
     <tr>
-      <td style="text-align: center;">Performance</td>
+      <td>Performance</td>
       <td>Stress tests, 24+ million nodes if feasible, 1-second path queries check</td>
-      <td style="text-align: center;">Weeks 4-5</td>
+      <td>Weeks 4-5</td>
     </tr>
     <tr>
-      <td style="text-align: center;">Final QA</td>
+      <td>Final QA</td>
       <td>Polishing, final regression checks, sign-off for release</td>
-      <td style="text-align: center;">Week 5</td>
+      <td>Week 5</td>
     </tr>
   </tbody>
 </table>
