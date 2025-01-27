@@ -46,7 +46,7 @@ The project was an excellent opportunity to understand how data structures and a
 <details>
 <summary>Requirements</summary>
 
-#### A compiler
+### A compiler
 
 First, ensure you have a compiler installed:
 
