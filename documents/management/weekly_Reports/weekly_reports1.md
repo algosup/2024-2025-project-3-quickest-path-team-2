@@ -32,7 +32,7 @@ A first version of the data validation tool has been produced to check if all in
 
 ### Signature system
 
-For copyright purposes we established two different signatures, one obvious and the other one hidden so no one can just delete them of our code.
+For copyright purposes we established two different signatures, one obvious and the other one hidden so no one can just delete from our code.
 
 
 ## Project Planning and management
@@ -56,13 +56,13 @@ For copyright purposes we established two different signatures, one obvious and 
 
 A Gantt chart has been initiated to manage the project schedule in the most adventageous conditions as possible for our team.
 
-![Gantt Chart picture](/Documents/images/management/gantt_chart.png)
+![Gantt Chart picture](/documents/images/management/gantt_chart.png)
 
 A Gantt chart specific to the different aspects of the project code as also been added.
 
-![Code Gantt Chart picture](/Documents/images/management/code_gantt_chart.png)
+![Code Gantt Chart picture](/documents/images/management/code_gantt_chart.png)
 
-*You can get an acces to the two Gantt Charts [**here**](/Documents/management/documents/gantt_charts.pdf)*.
+*You can get an acces to the two Gantt Charts [**here**](/documents/management/documents/gantt_charts.pdf)*.
 
 ### Team members time management
 To follow-up team's time management, a table has been created allowing us:
@@ -71,7 +71,7 @@ To follow-up team's time management, a table has been created allowing us:
 - Record team's overtime and absences
 - Calculate how much time team members have to catch up
 
-![Time management table](/Documents/images/management/time_management_table.png)
+![Time management table](/documents/images/management/time_management_table.png)
 
 ## Objectives for next week
 

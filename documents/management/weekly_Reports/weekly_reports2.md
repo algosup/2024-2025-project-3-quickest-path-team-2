@@ -34,18 +34,18 @@ The Technical has been enhanced, adding more information about the code allowing
 
 ### Code of conduct
 
-A [**code of conduct**](/Documents/management/documents/code_of_conduct.md) has been designed to make sure all team members has a respectable behaviour.
+A [**code of conduct**](/documents/management/documents/code_of_conduct.md) has been designed to make sure all team members has a respectable behaviour.
 
 
 ### Communication plan
 
-The [**communication plan**](/Documents/management/documents/communication_plan.md) has been created, allowing us to have a proper explaination of our communication strategy within the team and with the client.
+The [**communication plan**](/documents/management/documents/communication_plan.md) has been created, allowing us to have a proper explaination of our communication strategy within the team and with the client.
 
 ### Work breakdown structure
 
-The [**work breakdown structure**](/Documents/management/documents/work_breakdown_structure.pdf) has been produced.
+The [**work breakdown structure**](/documents/management/documents/work_breakdown_structure.pdf) has been produced.
 
-![Work breakdown structure](/Documents/images/management/work_breakdown_structure.png)
+![Work breakdown structure](/documents/images/management/work_breakdown_structure.png)
 
 ## Objectives for next week
 
