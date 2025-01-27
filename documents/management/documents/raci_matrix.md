@@ -8,13 +8,13 @@ A RACI Matrix serves as a table that provides clear delineation of the impact an
 
 ## The Matrix
 
-| Name                      | Project Manager | Program Manager | Technical Leader | Software Engineer | Quality Assurance | Technical Writter| Client | Stakeholders |
+| Name                      | Project Manager | Program Manager | Technical Leader | Software Engineer | Quality Assurance | Technical Writer| Client | Stakeholders |
 | ------------------------- | --------------- | --------------- | ---------------- | ----------------- | ----------------- |--------------| ------ | ------------ |
 | Project brief             | I               | I               | I                | I                 | I                | I | A / R  | C            |
 | Project charter           | A / R           | C / I           | C / I            | C / I             | C / I             | C / I | C      | C / I        |
 | Schedule / Gantt chart    | A / R           | C / I           | C / I            | C / I             | C / I             | C / I |      | I            |
-| Functional specifications | C               | A / R           | C                |                   | C / I       |   A / R   | C      | I            |
-| Technical specifications  | C               | C               | A / R            | C         |C / I |    C    | C / I             | C      | I            |
+| Functional specification | C               | A / R           | C                |                   | C / I       |   A / R   | C      | I            |
+| Technical specification  | C               | C               | A / R            | C         |C / I |    C    | C / I             | C      | I            |
 | Code                      |                 |                 | R                | A / R             |                   |        |              |
 | Code review               | I               |                 | A / R            | R                 | R                 |        |              |
 | Code documentation        |                 | I               | C                | A / R             | C / I             | I |I      |              |

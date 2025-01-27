@@ -1,6 +1,6 @@
-# Code of conduct 
+# Code of Conduct 
 
-This document defines the way in which the team will work and collaborate together. It contains the behaviours to be adopted and encouraged, as well as those to be avoided and its consequences.
+This document defines the way in which the team will work and collaborate together. It contains the behaviours to be adopted and encouraged, as well as those to be avoided and their consequences.
 
 ## Expected Behaviours
 
@@ -12,14 +12,14 @@ This document defines the way in which the team will work and collaborate togeth
     
 ### Communication:
 
-- **Speaking in english is enforced and mandatory.**
+- **Speaking in English is enforced and mandatory.**
 - **Communicate openly and transparently** about project progress, challenges, and concerns.
 - **Respond** to messages and emails swiftly enough.
 - Ensure that **communication is clear, concise, and respectful between all team members.**
 
 ### Collaboration and Teamwork:
     
-- **Must work supportively and in collaboration with each team memebers.**
+- **Must work supportively and in collaboration with each team member.**
 - **Share knowledge, resources, and expertise to achieve common goals.**
 - **Be willing to assist others and seek help when needed.**
 - Maintain a **positive and supportive mood** within the team.
@@ -65,4 +65,4 @@ This document defines the way in which the team will work and collaborate togeth
         
 ### Escalation to Leadership
     
-- In the unfortunate event of a third violation, **the matter will be escalated to the director, and further actions will be at his discretion.**
+- In the unfortunate event of a third violation, **the matter will be escalated to the director, and further actions will be at their discretion.**

@@ -9,7 +9,7 @@
 
 ## Team Communication
 
-Our team conducts meetings every days we are all together. This meetings serves to:
+Our team conducts meetings every days we are all together. These meetings serve to:
 - Review the accomplishments of the previous workday.
 - Plan the objectives for the current day. 
 - Makes sure everyone is at the same page on the project.

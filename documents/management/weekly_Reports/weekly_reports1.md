@@ -1,15 +1,15 @@
-# Weekly report project: "Quickest Path". 
+# Weekly Report Project: "Quickest Path". 
 # Week 1 (6th of january to 10th of january).
 
 ## Overview
 
 ### Project discovery
 
-This week our client gave us the call for tender in which we must produce an Algoritm able to calculate in time the quickest path between two landmarks in this case the roads of the United States of America.
+This week our client gave us the call for tender in which we must produce an algoritm able to calculate in time the quickest path between two landmarks in this case the roads of the United States of America.
 
 ### Research procedure
 
-Since it's the beggining of a new project ressearch are mendatory to make sure that all requirement are understood with clarity by all team members.
+Since it's the beggining of a new project, research is mandatory to ensure that all requirements are understood with clarity by all team members.
 
 Most of us doesn't know how to create an algorithm, therefore we have done research about which type of algorithm shall we produce precisely. 
 
@@ -17,7 +17,7 @@ Most of us doesn't know how to create an algorithm, therefore we have done resea
 
 #### Coding covention
 
-The different coding conventions have been initiated to ensure clarity and conformity of the code and to make sur no issue are produced by coding differenciation.
+The different coding conventions have been initiated to ensure clarity and conformity of the code and to ensure no issues arise from code discrepancies.
 
 #### Folder organisation and conventions
 
@@ -28,11 +28,11 @@ The overall project organisation has been structured for coordination between te
 
 ### Data validation tool
 
-A first version of the data validation tool has been produced to check if all information in the datasource are correct.
+A first version of the data validation tool has been produced to check if all informations in the datasource are correct.
 
 ### Signature system
 
-For copyright purposes we established two different signature, one obvious and the other one hidden so no one can just delete them out of our code.
+For copyright purposes we established two different signatures, one obvious and the other one hidden so no one can just delete them of our code.
 
 
 ## Project Planning and management
@@ -50,7 +50,7 @@ For copyright purposes we established two different signature, one obvious and t
 |Pre procession            | 0%      |
 | Algorithm development    | 0%       |
 | REST API development     | 0%       |
-| Weekly reports           | 20%      |
+| Weekly Reports           | 20%      |
 
 ### Gantt Charts
 
@@ -58,18 +58,18 @@ A Gantt chart has been initiated to manage the project schedule in the most adve
 
 ![Gantt Chart picture](/Documents/images/management/gantt_chart.png)
 
-A Gantt chart specified to the different aspect of the project code as also been added.
+A Gantt chart specific to the different aspects of the project code as also been added.
 
 ![Code Gantt Chart picture](/Documents/images/management/code_gantt_chart.png)
 
-*You can get an acces to the two gantt charts [**here**](/Documents/management/documents/gantt_charts.pdf)*.
+*You can get an acces to the two Gantt Charts [**here**](/Documents/management/documents/gantt_charts.pdf)*.
 
 ### Team members time management
 To follow-up team's time management, a table has been created allowing us:
 
-- To track The different project time
-- Record team's overtime and absence
-- To calculate how much time team members have to catch up
+- Track The different project times
+- Record team's overtime and absences
+- Calculate how much time team members have to catch up
 
 ![Time management table](/Documents/images/management/time_management_table.png)
 
@@ -78,4 +78,4 @@ To follow-up team's time management, a table has been created allowing us:
 Our objectives for next week are :
 - Do most of the functional specification and Test Plan.
 
-- Start the Algorithm
+- Start developing the algorithm

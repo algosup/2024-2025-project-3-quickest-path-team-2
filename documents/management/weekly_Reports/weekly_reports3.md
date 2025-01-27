@@ -1,5 +1,5 @@
-# Weekly report project: "Quickest Path". 
-# Week 1 (20th of january to 27th of january).
+# Weekly Report Project: "Quickest Path". 
+# Week 3 (20th of January to 27th of January).
 
 ## Overview
 
@@ -15,14 +15,14 @@
 | ------------------------ | -------- |
 | Research                 | 100%     |
 | Functional specification | 100%     |
-| Technical specification  | 100%     |
-| Test Plan                | 100%     |
+| Technical specification  | 95%      |
+| Test Plan                | 90%      |
 | Data Validation Tool     | 90%      |
-| User manual              | 0%       |
+| User manual              | 50%      |
 |Pre procession            | 100%     |
-| Algorithm development    | 0%       |
-| REST API development     | 0%       |
-| Weekly reports           | 60%      |
+| Algorithm development    | %        |
+| REST API development     | 100%     |
+| Weekly Reports           | 60%      |
 
 
 ### README

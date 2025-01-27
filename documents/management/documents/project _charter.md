@@ -8,34 +8,31 @@
 
 The objective of this project is to develop a <u>high-performance software solution</u> that calculates the <u>quickest path between two landmarks in the United States of America</u>.
 
-### Description
-
-
 ### Objectives
 
-- Develop the project using C++ programing language for optimal performance.
+- Develop the project using C++ programming language for optimal performance.
 - Use the provided DataSource for Landmarks.
-- The software will expose its functionality through a REST API running on an HTTP server (localhost) The API will include a single GET endpoint with the following features: 
+- The software will expose its functionality through a REST API running on an HTTP server (localhost). The API will include a single GET endpoint with the following features: 
     - Input: IDs of the source and destination landmarks. 
     - Output: Travel time and the ordered list of landmarks in the path. 
-    - Response Formats: Support both XML and JSON for response payloads. . 
+    - Response Formats: Support both XML and JSON for response payloads.
 - The API must handle all queries within 1 second on a typical laptop.
 
 ### Project Specification
 
-- A DataSource indicating the different posibilities of landmark A's and B's
-- Develop an Algorithm that will select the quickest path using the DataSource.
+- A DataSource indicating the different possibilities of landmark A's and B's
+- Develop an algorithm that will select the quickest path using the DataSource.
 
 
 ### Deliverables
 
 | Name                               | Type                | Deadline     |
 | ---------------------------------- | ------------------- | ------------ |
-| Functional Specifications Document | Document (markdown) | 02/07/2025   |
-| Technical Specifications Document  | Document (markdown) | 02/07/2025   |
+| Functional Specification Document | Document (markdown) | 02/07/2025   |
+| Technical Specification Document  | Document (markdown) | 02/07/2025   |
 | Weekly Reports                     | Document (markdown) | Every Friday evening |
 | Test Plan                          | Document (markdown) | 02/07/2025   |
-| User Manual                        | Document (markdown) | 02/07/2025
+| User Manual                        | Document (markdown) | 02/07/2025   |
 | Final Product                      | Program             | 02/07/2025   |
 
 ### Project Scope
@@ -44,8 +41,8 @@ The objective of this project is to develop a <u>high-performance software solut
 | -------------------------------- |
 |REST API Implementation: Demonstrating the ability to handle multiple formats (XML and JSON). |
 |Do a Test Suite with the 10% approximation rule. |
-|Produce a Data Validation Tool to check the datas in the given datasource|
-The product must works swiftly on typical laptops |
+|Produce a Data Validation Tool to check the data in the given datasource|
+|The product must work swiftly on typical laptops |
 
 <br>
 
@@ -66,7 +63,7 @@ The product must works swiftly on typical laptops |
 | ------------------------ | --------- |
 | End of the project       | 02/07/2025|
 
-### Roles and Responsabilities
+### Roles and Responsibilities
 
 | Name                      | Role                     | Image                                                                           | Link                                                           | Responsabilities                                                                                                                                                                                                              |
 | ------------------------- | ------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,4 +72,4 @@ The product must works swiftly on typical laptops |
 | **Guillaume DESPAUX**           | <u>Technical Leader</u>         | [<img src="https://avatars.githubusercontent.com/u/146001117?s=64&v=4" width="75px">](https://github.com/GuillaumeDespaux)   | [Guillaume's Github Profile](https://github.com/GuillaumeDespaux)      | The Technical Leader will <u>oversee the technical aspects of the software engineering team by making architectural and design decisions</u>, <u>guiding team members in technical matters</u>, and <u>supervising system modifications</u>. |
 | **Mathis LEBEL** | <u>Software Engineer</u> | [<img src="https://avatars.githubusercontent.com/u/145991354?v=4" width="75px"> ](https://github.com/mathislebel)  | [Mathis Github Profile](https://github.com/mathislebel)       | The Software Engineer will <u>program the software</u> on the decided program languages.|
 | **Michel Riff**         | <u>Quality Assurance</u> | [<img src="https://avatars.githubusercontent.com/u/146001004?s=64&v=4" width="75px">](https://github.com/MichelRiff)  | [Michel's Github Profile](https://github.com/MichelRiff)    | The Quality Assurance will <u>ensure that the product meets the established quality standard and industry benchmarks</u>.|
-| **Camille GAYAT**      | <u>Technical Writter</u> | [<img src="https://avatars.githubusercontent.com/u/145991254?v=4" width="75px">](https://github.com/CamilleGayat)  | [Camille's Github Profile](https://github.com/CamilleGayat)     | The Technical Writter will <u>create a user-friendly document that explains how to use the product and some technical information to it</u>.                                                                                                                 |
+| **Camille GAYAT**      | <u>Technical Writer</u> | [<img src="https://avatars.githubusercontent.com/u/145991254?v=4" width="75px">](https://github.com/CamilleGayat)  | [Camille's Github Profile](https://github.com/CamilleGayat)     | The Technical Writer will <u>create a user-friendly document that explains how to use the product and some technical information to it</u>.                                                                                                                 |
