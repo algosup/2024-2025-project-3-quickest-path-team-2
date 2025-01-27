@@ -134,7 +134,8 @@ Tests for extremely large datasets may require specialized hardware or offline s
 #### 2.2.4 Regression Testing
    - Runs automatically after each push to detect if any previously working functionality has broken. Re-running crucial tests after merges or fixes to prevent the reintroduction of old issues.
 
-> [!IMPORTANT] **Error Severity**  
+> [!IMPORTANT] 
+> **Error Severity:**  
 > - **Fatal errors** (via `checkValue(int actual, int expected)`)  
 >  Throw exceptions and halt the test. These must be fixed before release.  
 >- **Non-fatal errors** (via `checkAndLog(int actual, int expected)`)  
