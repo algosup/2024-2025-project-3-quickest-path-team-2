@@ -7,8 +7,7 @@ cd /d "%~dp0\src" || (
 )
 
 :: Compile and run the shortest_path program
-echo Compiling and running shortest_path program...
-echo.
+echo Compiling and running Quickest Path System...
 g++ -o shortest_path main.cpp graph.cpp preprocessing.cpp -std=c++17 -pthread
 if %errorlevel% neq 0 (
     echo Compilation failed. Re-execute the program.
