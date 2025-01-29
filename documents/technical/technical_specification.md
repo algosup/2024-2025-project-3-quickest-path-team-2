@@ -6,7 +6,7 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)<br>
 **Last Time Modified:** 01/29/2025
 
 </div>
@@ -61,12 +61,14 @@
       - [12.5.2. Command Line](#1252-command-line)
       - [12.5.3. Application](#1253-application)
     - [12.6. API Endpoints \& Response](#126-api-endpoints--response)
-  - [13. Deployment](#13-deployment)
-    - [13.1. Environment](#131-environment)
-    - [13.2. Steps](#132-steps)
-  - [14. Maintenance](#14-maintenance)
-    - [14.1. Updates](#141-updates)
-  - [15. Glossary](#15-glossary)
+  - [13. Memory Management](#13-memory-management)
+    - [13.1. Preprocessing](#131-preprocessing)
+  - [14. Deployment](#14-deployment)
+    - [14.1. Environment](#141-environment)
+    - [14.2. Steps](#142-steps)
+  - [15. Maintenance](#15-maintenance)
+    - [15.1. Updates](#151-updates)
+  - [16. Glossary](#16-glossary)
 
 </details>
 
@@ -1068,17 +1070,17 @@ The following commands can be used to test the API[^3] using the command line:
 
 ```bash
 # Simplified Response
-curl http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000"
 ```
 
 ```bash
 # JSON[^4] Response
-curl http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000
+curl "http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000"
 ```
 
 ```bash
 # XML[^5] Response
-curl http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000
+curl "http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000"
 ```
 
 #### 12.5.3. Application
@@ -1223,9 +1225,15 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
 >[!IMPORTANT]
 > This can be modified and needed later.
 
-## 13. Deployment
+## 13. Memory Management
 
-### 13.1. Environment
+For this part we will see all the parts where the memory have and can  be managed.
+
+### 13.1. Preprocessing
+
+## 14. Deployment
+
+### 14.1. Environment
 
 To deploy the Quickest Path project, ensure the following environment setup:
 
@@ -1237,7 +1245,7 @@ To deploy the Quickest Path project, ensure the following environment setup:
     - Crow[^15]
 3. **Compiler:** A C++[^2]17 compatible compiler (e.g., GCC[^17] ...).
 
-### 13.2. Steps
+### 14.2. Steps
 
 1. **Clone the Repository:**
 
@@ -1261,16 +1269,16 @@ To deploy the Quickest Path project, ensure the following environment setup:
     ./QuickestPath
     ```
 
-## 14. Maintenance
+## 15. Maintenance
 
-### 14.1. Updates
+### 15.1. Updates
 
 - **Regular Updates:** Ensure the project dependencies are regularly updated to their latest versions.
 - **Bug Fixes:** Monitor and fix any reported bugs promptly.
 - **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
 - **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
-## 15. Glossary
+## 16. Glossary
 
 [^1]: Comma-Separated Values: A file format used to store tabular data.
 
