@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
         if (path.empty()) {
             std::cout << "No path found between " << source << " and " << target << std::endl;
         } else {
-            std::cout << "Shortest path found with total time: " << totalTime << "\n";
+            std::cout << "Shortest path found with total time: " << totalTime << " ms\n";
             std::cout << std::endl;
         }
 
