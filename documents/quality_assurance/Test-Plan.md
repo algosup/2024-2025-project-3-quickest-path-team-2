@@ -91,12 +91,12 @@ flowchart LR
 ### 1.3 Testing Scope
 
 <p align="justify"> This Test Plan addresses: </p>
-Data ingestion from CSV (including DAG verification, negative/zero time checks, and disconnected nodes)
-Graph construction (adjacency matrix or alternative structure) ensuring memory/performance constraints
-Pathfinding with heuristics that remain within 10% of the optimal route
-REST API correctness and performance for queries
-Edge-case scenarios like identical source/destination and malformed data
-Tests for extremely large datasets may require specialized hardware or offline scheduling. Routine checks (smaller CSV subsets) will run on GitHub Actions, ensuring continuous validation for daily integration.
+- Data ingestion from CSV (including DAG verification, negative/zero time checks, and disconnected nodes)
+- Graph construction (adjacency matrix or alternative structure) ensuring memory/performance constraints
+- Pathfinding with heuristics that remain within 10% of the optimal route
+- REST API correctness and performance for queries
+- Edge-case scenarios like identical source/destination and malformed data
+- Tests for extremely large datasets may require specialized hardware or offline scheduling. Routine checks (smaller CSV subsets) will run on GitHub Actions, ensuring continuous validation for daily integration.
 
 ---
 
@@ -105,7 +105,7 @@ Tests for extremely large datasets may require specialized hardware or offline s
 ### 2.1 Testing Levels
 
 #### 2.1.1 Unit Testing 
-   - Focuses on small modules—like CSV parsing or adjacency matrix building—verifying each function or class in isolation.
+   - Focuses on small modules, such as CSV parsing or adjacency matrix building, and verifies each function or class in isolation.
 
 #### 2.1.2 Integration Testing 
    - Checks whether these individual modules work cohesively (e.g., validated data transferring seamlessly to the pathfinding algorithm).
@@ -114,7 +114,7 @@ Tests for extremely large datasets may require specialized hardware or offline s
    - Involves sending genuine queries to the REST API using real or mock CSV files, assessing end-to-end behavior.
 
 #### 2.1.4 Performance Testing
-   - Ensures large data sets can be processed swiftly, verifying the 1-second query response and ~1-minute CSV validation.
+   - Ensures that large datasets can be processed swiftly, while verifying the 1-second query response and ~1-minute CSV validation.
 
 #### 2.1.5 API Testing
    - Specifically targets the single GET endpoint, ensuring correct input handling, JSON/XML response formats, and appropriate error codes for invalid parameters.
@@ -132,7 +132,7 @@ Tests for extremely large datasets may require specialized hardware or offline s
    - Confirming the graph remains a DAG, ensuring no disconnected subgraphs or invalid fields.  
 
 #### 2.2.4 Regression Testing
-   - Runs automatically after each push to detect if any previously working functionality has broken. Re-running crucial tests after merges or fixes to prevent the reintroduction of old issues.
+   - Automatically runs after each push to detect if any previously working functionality has broken. Re-running crucial tests after merges or fixes to prevent the reintroduction of old issues.
 
 > [!IMPORTANT] 
 > **Error Severity:**  
@@ -707,4 +707,4 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Tech Lead**: _____________________________ *(Date: ________)*  
 - **Software Engineer**: _____________________ *(Date: ________)*  
 - **QA (Author)**: Approved *(Date: 01/27/2025)* 
-- **Technical Writer**: ______________________ *(Date: ________)*  
+- **Technical Writer**: ______________________ *(Date: ________)*   
