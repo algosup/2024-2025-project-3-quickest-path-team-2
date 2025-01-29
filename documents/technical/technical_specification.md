@@ -53,22 +53,20 @@
     - [12.2. Dependencies](#122-dependencies)
     - [12.3. Installation](#123-installation)
       - [12.3.1. Windows](#1231-windows)
-      - [12.3.2. macOs](#1232-macos)
+      - [12.3.2. macOS](#1232-macos)
       - [12.3.3. Linux](#1233-linux)
     - [12.4. Template](#124-template)
     - [12.5. Accessibility](#125-accessibility)
-      - [12.5.1. HTML (prototype)](#1251-html-prototype)
+      - [12.5.1. HTML](#1251-html)
       - [12.5.2. Command Line](#1252-command-line)
       - [12.5.3. Application](#1253-application)
     - [12.6. API Endpoints \& Response](#126-api-endpoints--response)
-  - [13. Memory Management](#13-memory-management)
-    - [13.1. Preprocessing](#131-preprocessing)
-  - [14. Deployment](#14-deployment)
-    - [14.1. Environment](#141-environment)
-    - [14.2. Steps](#142-steps)
-  - [15. Maintenance](#15-maintenance)
-    - [15.1. Updates](#151-updates)
-  - [16. Glossary](#16-glossary)
+  - [13. Deployment](#13-deployment)
+    - [13.1. Environment](#131-environment)
+    - [13.2. Steps](#132-steps)
+  - [14. Maintenance](#14-maintenance)
+    - [14.1. Updates](#141-updates)
+  - [15. Glossary](#15-glossary)
 
 </details>
 
@@ -830,19 +828,15 @@ There is an example of the algorithm in action:
 
 The nodes will be created as a structure with the following attributes:
 
-- **landmark1:** The starting node.
 - **landmark2:** The ending node.
 - **weight:** The time taken to travel between the nodes.
 
 ```cpp
-typedef struct Edge {   // Define the current Edge
-    int landmark2;    // Define the connection to the next node
-    int weight;         // Define the weight of the edge
-} s_Node;
+typedef struct Edge {   // Define the current Edge from
+    uint32_t landmark2;      // Define the connection to the next node
+    uint32_t weight;         // Define the weight of the edge
+} s_Edge;
 ```
-
->[!CAUTION]
-> This current structure can be modified to fit the needs of the Adjacency List or the Graph Structure.
 
 #### 11.2.2. Adjacency List / Graph Structure
 
@@ -948,7 +942,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
 
 #### 12.3.1. Windows
 
-#### 12.3.2. macOs
+#### 12.3.2. macOS
 
 1. You will have to install [Homebrew](https://brew.sh) to install the dependencies.  
 2. You will have to install the following dependencies:
@@ -1058,7 +1052,7 @@ graph TD
     E --> G
 ```
 
-#### 12.5.1. HTML (prototype)
+#### 12.5.1. HTML
 
 The following HTML code can be used to test the API[^3] using a web browser:
 
@@ -1225,15 +1219,9 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
 >[!IMPORTANT]
 > This can be modified and needed later.
 
-## 13. Memory Management
+## 13. Deployment
 
-For this part we will see all the parts where the memory have and can  be managed.
-
-### 13.1. Preprocessing
-
-## 14. Deployment
-
-### 14.1. Environment
+### 13.1. Environment
 
 To deploy the Quickest Path project, ensure the following environment setup:
 
@@ -1245,7 +1233,7 @@ To deploy the Quickest Path project, ensure the following environment setup:
     - Crow[^15]
 3. **Compiler:** A C++[^2]17 compatible compiler (e.g., GCC[^17] ...).
 
-### 14.2. Steps
+### 13.2. Steps
 
 1. **Clone the Repository:**
 
@@ -1269,16 +1257,16 @@ To deploy the Quickest Path project, ensure the following environment setup:
     ./QuickestPath
     ```
 
-## 15. Maintenance
+## 14. Maintenance
 
-### 15.1. Updates
+### 14.1. Updates
 
 - **Regular Updates:** Ensure the project dependencies are regularly updated to their latest versions.
 - **Bug Fixes:** Monitor and fix any reported bugs promptly.
 - **Feature Enhancements:** Periodically review and implement new features or improvements based on user feedback.
 - **Documentation:** Keep the project documentation up-to-date with any changes or new features.
 
-## 16. Glossary
+## 15. Glossary
 
 [^1]: Comma-Separated Values: A file format used to store tabular data.
 
