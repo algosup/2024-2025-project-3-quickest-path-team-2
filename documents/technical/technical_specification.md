@@ -6,7 +6,7 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
 **Last Time Modified:** 01/23/2025
 
 </div>
@@ -914,8 +914,17 @@ unordered_map<int, vector<pair<int, int>>> graph; // Adjacency list for unordere
 > - Automatic memory management by the unordered_map class
 > - Faster than vector due to constant time lookup
 > - Requires more memory than vector due to hash table overhead
->
 
+---
+
+>[!CAUTION]
+> Since we got the structure Edge defined as a pair of int, int we can use something like:
+>
+>```cpp
+> unordered_map<int, vector<Edge>> graph; 
+>```
+>
+---
 >[!NOTE]
 > This specific methods can also be used to create hash table then the BigO[^16] notation will be O(1) for each edge and O(V) for finding an edge where V is the number of vertices.
 ---
