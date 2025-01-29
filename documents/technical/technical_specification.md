@@ -6,8 +6,8 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
-**Last Time Modified:** 01/23/2025
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)
+**Last Time Modified:** 01/29/2025
 
 </div>
 
@@ -484,6 +484,8 @@ graph
 
 ### 10.3 Organization
 
+To ensure the proper verification of the data, we have to transform the data into a Adjacency List to make the edges directional.
+
 #### 10.3.1. Graph Validation
 
 To check if the data provided by the CSV[^1] is a DAG[^8] we have to use the DFS[^9] (Depth First Search) algorithm to check if the graph is not a cycle.
@@ -831,8 +833,8 @@ The nodes will be created as a structure with the following attributes:
 - **weight:** The time taken to travel between the nodes.
 
 ```cpp
-typedef struct Node {   // Define the current Node
-    Node *landmark2;    // Define where the Node is going
+typedef struct Edge {   // Define the current Edge
+    int landmark2;    // Define the connection to the next node
     int weight;         // Define the weight of the edge
 } s_Node;
 ```
@@ -875,7 +877,7 @@ typedef struct AdjacencyList {
 </div>
 
 ```cpp
-vector<vector<pair<int, int> > > adj[N]; // Adjacency list for vector of vector of pair of int, int
+vector<vector<pair<int, int> > > adj; // Adjacency list for vector of vector of pair of int, int
 ```
 
 >[!IMPORTANT]
@@ -897,7 +899,7 @@ vector<vector<pair<int, int> > > adj[N]; // Adjacency list for vector of vector 
 </div>
 
 ```cpp
-unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordered_map of int, unordered_map of int, int
+unordered_map<int, vector<pair<int, int>>> graph; // Adjacency list for unordered_map of int, unordered_map of int, int
 ```
 
 >[!IMPORTANT]
@@ -912,7 +914,19 @@ unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordere
 > - Automatic memory management by the unordered_map class
 > - Faster than vector due to constant time lookup
 > - Requires more memory than vector due to hash table overhead
+
+---
+
+>[!CAUTION]
+> Since we got the structure Edge defined as a pair of int, int we can use something like:
 >
+>```cpp
+> unordered_map<int, vector<Edge>> graph; 
+>```
+>
+---
+>[!NOTE]
+> This specific methods can also be used to create hash table then the BigO[^16] notation will be O(1) for each edge and O(V) for finding an edge where V is the number of vertices.
 ---
 
 ## 12. REST API
