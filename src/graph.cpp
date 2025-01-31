@@ -1,115 +1,108 @@
 #include "includes/graph.hpp"
-#include <vector>
-#include <limits>
-#include <queue>
-#include <algorithm>
-#include <iostream>
 
-Graph::Graph() : adjList() {}
+/**
+ * Default constructor for the Graph class.
+ */
+Graph::Graph() {}
 
+/**
+ * Adds an edge to the graph.
+ * 
+ * @param source Source node of the edge.
+ * @param target Target node of the edge.
+ * @param weight Weight of the edge.
+ */
 void Graph::add_edge(int source, int target, int weight) {
-    if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {
+    if (std::max(source, target) >= adjList.size()) {
         adjList.resize(std::max(source, target) + 1);
     }
     adjList[source].emplace_back(target, weight);
     adjList[target].emplace_back(source, weight);
 }
 
+/**
+ * Returns the maximum node ID in the graph.
+ * 
+ * @return Maximum node ID.
+ */
 int Graph::get_max_node_id() const {
-    return static_cast<int>(adjList.size()) - 1;
+    return adjList.size() - 1;
 }
 
-std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
-    constexpr int INF = std::numeric_limits<int>::max();
+/**
+ * Finds the shortest path between two nodes using bidirectional Dijkstra's algorithm.
+ * 
+ * @param source Source node.
+ * @param target Target node.
+ * @param totalTime Reference to store the total time of the shortest path.
+ * @return Vector of node IDs representing the shortest path.
+ */
+std::vector<int> Graph::shortest_path(int source, int target, long long& totalTime) {
+    constexpr long long INF = std::numeric_limits<long long>::max();
+    int maxNodeId = get_max_node_id();
 
-    if (source < 0 || source > get_max_node_id() || target < 0 || target > get_max_node_id()) {
+    if (source >= adjList.size() || target >= adjList.size()) {
         throw std::out_of_range("Source or target node is out of bounds.");
     }
 
-    size_t n = adjList.size();
-    std::vector<int> distForward(n, INF), distBackward(n, INF);
-    std::vector<int> prevForward(n, -1), prevBackward(n, -1);
-    std::vector<bool> processedForward(n, false), processedBackward(n, false);
+    // Initialize distance and previous node arrays for forward and backward searches
+    std::vector<long long> distForward(maxNodeId + 1, INF);
+    std::vector<long long> distBackward(maxNodeId + 1, INF);
+    std::vector<int> prevForward(maxNodeId + 1, -1);
+    std::vector<int> prevBackward(maxNodeId + 1, -1);
+    std::vector<bool> processedForward(maxNodeId + 1, false);
+    std::vector<bool> processedBackward(maxNodeId + 1, false);
 
     distForward[source] = 0;
     distBackward[target] = 0;
 
-    using NodeDistPair = std::pair<int, int>;
+    // Priority queues for forward and backward searches
+    using NodeDistPair = std::pair<long long, int>;
     auto comparator = [](const NodeDistPair& a, const NodeDistPair& b) {
         return a.first > b.first;
     };
 
-    std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, decltype(comparator)>
-        pqForward(comparator), pqBackward(comparator);
+    std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, decltype(comparator)> pqForward(comparator), pqBackward(comparator);
 
     pqForward.emplace(0, source);
     pqBackward.emplace(0, target);
 
-    int bestCost = INF;
+    long long bestCost = INF;
     int meetingNode = -1;
 
-    while (!pqForward.empty() || !pqBackward.empty()) {
-        if (!pqForward.empty()) {
-            auto [currentDistF, currentNodeF] = pqForward.top();
-            pqForward.pop();
+    // Bidirectional Dijkstra's algorithm
+    while (!pqForward.empty() && !pqBackward.empty()) {
+        auto process = [&](std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, decltype(comparator)>& pq,
+                           std::vector<long long>& dist, std::vector<int>& prev, std::vector<bool>& processed,
+                           std::vector<long long>& otherDist, std::vector<bool>& otherProcessed, bool isForward) {
+            if (!pq.empty()) {
+                auto [currentDist, currentNode] = pq.top();
+                pq.pop();
 
-            if (processedForward[currentNodeF]) continue;
-            processedForward[currentNodeF] = true;
+                if (processed[currentNode]) return;
+                processed[currentNode] = true;
 
-            for (const Edge& edge : adjList[currentNodeF]) {
-                int neighbor = edge.target;
-                int newDist = distForward[currentNodeF] + edge.weight;
-
-                if (newDist < distForward[neighbor]) {
-                    distForward[neighbor] = newDist;
-                    prevForward[neighbor] = currentNodeF;
-
-                    if (!processedForward[neighbor]) {
-                        pqForward.emplace(newDist, neighbor);
+                for (const auto& [neighbor, weight] : adjList[currentNode]) {
+                    long long newDist = currentDist + weight;
+                    if (newDist < dist[neighbor]) {
+                        dist[neighbor] = newDist;
+                        prev[neighbor] = currentNode;
+                        pq.emplace(newDist, neighbor);
                     }
-                }
-
-                if (processedBackward[neighbor]) {
-                    int potentialCost = distForward[neighbor] + distBackward[neighbor];
-                    if (potentialCost < bestCost) {
-                        bestCost = potentialCost;
+                    if (otherProcessed[neighbor] && dist[neighbor] + otherDist[neighbor] < bestCost) {
+                        bestCost = dist[neighbor] + otherDist[neighbor];
                         meetingNode = neighbor;
                     }
                 }
             }
+        };
+
+        process(pqForward, distForward, prevForward, processedForward, distBackward, processedBackward, true);
+        process(pqBackward, distBackward, prevBackward, processedBackward, distForward, processedForward, false);
+
+        if (meetingNode != -1 && bestCost < pqForward.top().first + pqBackward.top().first) {
+            break;
         }
-
-        if (!pqBackward.empty()) {
-            auto [currentDistB, currentNodeB] = pqBackward.top();
-            pqBackward.pop();
-
-            if (processedBackward[currentNodeB]) continue;
-            processedBackward[currentNodeB] = true;
-
-            for (const Edge& edge : adjList[currentNodeB]) {
-                int neighbor = edge.target;
-                int newDist = distBackward[currentNodeB] + edge.weight;
-
-                if (newDist < distBackward[neighbor]) {
-                    distBackward[neighbor] = newDist;
-                    prevBackward[neighbor] = currentNodeB;
-
-                    if (!processedBackward[neighbor]) {
-                        pqBackward.emplace(newDist, neighbor);
-                    }
-                }
-
-                if (processedForward[neighbor]) {
-                    int potentialCost = distForward[neighbor] + distBackward[neighbor];
-                    if (potentialCost < bestCost) {
-                        bestCost = potentialCost;
-                        meetingNode = neighbor;
-                    }
-                }
-            }
-        }
-
-        if (meetingNode != -1) break;
     }
 
     if (meetingNode == -1) {
@@ -119,16 +112,12 @@ std::vector<int> Graph::shortest_path(int source, int target, int& totalTime) {
 
     totalTime = bestCost;
 
+    // Reconstruct the path
     std::vector<int> path;
-    path.reserve(n);
-
-    int forwardPathSize = 0;
     for (int node = meetingNode; node != -1; node = prevForward[node]) {
         path.push_back(node);
-        forwardPathSize++;
     }
-
-    std::reverse(path.begin(), path.begin() + forwardPathSize);
+    std::reverse(path.begin(), path.end());
 
     for (int node = prevBackward[meetingNode]; node != -1; node = prevBackward[node]) {
         path.push_back(node);

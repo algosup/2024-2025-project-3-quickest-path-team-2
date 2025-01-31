@@ -1,68 +1,77 @@
 #include "includes/graph.hpp"
 #include "includes/preprocessing.hpp"
 #include <iostream>
-#include <vector>
-#include <string>
-#include <stdexcept>
-#include <fstream>
-#include <chrono> // To measure the execution time
+#include <chrono>
+#include <iomanip> // For std::setprecision
 
-void display_logo(const std::string& file_path) {
-    std::ifstream logo_file(file_path);
-    if (logo_file.is_open()) {
-        std::string line;
-        while (getline(logo_file, line)) {
-            std::cout << line << std::endl;
-        }
-        logo_file.close();
-    } else {
-        std::cerr << "Error: Unable to open logo file." << std::endl;
-    }
-}
-
+/**
+ * Main function to preprocess data and find the shortest path in the graph.
+ * 
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return 0 on success, 1 on error.
+ */
 int main(int argc, char* argv[]) {
-    std::string logoFilePath = "logo/logo_qps.txt";  // File path containing the logo
-    display_logo(logoFilePath);
-    
-    if (argc != 4) {
-        std::cerr << "Usage: " << argv[0] << " <input_file> <source> <target>\n";
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <input_file>\n";
         return 1;
     }
 
     std::string inputFilePath = argv[1];
-    int source = std::stoi(argv[2]);
-    int target = std::stoi(argv[3]);
-
     Graph graph;
 
     try {
-        int maxLines = 28854314;
-        preprocess_data(inputFilePath, maxLines, graph);
+        int maxLines = 28854314; // Total number of lines to process
+        std::cout << "Starting preprocessing..." << std::endl;
 
-        // Check if source and target are within bounds
-        if (source < 0 || source > graph.get_max_node_id() || target < 0 || target > graph.get_max_node_id()) {
-            std::cerr << "Error: Source or target node is out of bounds. Source: " 
-                      << source << ", Target: " << target << std::endl;
+        auto startPreprocess = std::chrono::steady_clock::now();
+        preprocess_data(inputFilePath, maxLines, graph);
+        auto endPreprocess = std::chrono::steady_clock::now();
+
+        auto preprocessDuration = std::chrono::duration_cast<std::chrono::seconds>(endPreprocess - startPreprocess);
+        std::cout << "\nPreprocessing completed in " << preprocessDuration.count() << " seconds." << std::endl;
+
+        // Verify the graph
+        int maxNode = graph.get_max_node_id();
+        std::cout << "Graph loaded with max node ID: " << maxNode << std::endl;
+
+        // Prompt user for source and target nodes
+        int source, target;
+        std::cout << "Enter the source node: ";
+        std::cin >> source;
+        std::cout << "Enter the target node: ";
+        std::cin >> target;
+
+        // Validate the nodes
+        if (source < 0 || source > maxNode || target < 0 || target > maxNode) {
+            std::cerr << "Error: Source or target node is out of bounds." << std::endl;
             return 1;
         }
 
-        int totalTime = 0;
-        auto start = std::chrono::high_resolution_clock::now();
-        std::vector<int> path = graph.shortest_path(source, target, totalTime);
-        auto end = std::chrono::high_resolution_clock::now();
+        std::cout << "Finding shortest path from " << source << " to " << target << "..." << std::endl;
 
+        // Calculate the shortest path
+        long long totalTime = 0;  // Use long long for total time
+        auto startPath = std::chrono::steady_clock::now();
+        std::vector<int> path = graph.shortest_path(source, target, totalTime);
+        auto endPath = std::chrono::steady_clock::now();
+
+        auto pathDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endPath - startPath);
+
+        // Display the results
         if (path.empty()) {
-            std::cout << "No path found between " << source << " and " << target << std::endl;
+            std::cout << "No path found between " << source << " and " << target << "." << std::endl;
         } else {
             std::cout << "Shortest path found with total time " << totalTime << ":\n";
-            for (int node : path) {
-                std::cout << node << " ";
+            for (size_t i = 0; i < path.size(); ++i) {
+                std::cout << path[i];
+                if (i != path.size() - 1) std::cout << " -> ";
             }
             std::cout << std::endl;
         }
 
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-        std::cout << "Execution time: " << duration.count() << " ms" << std::endl;
+        std::cout << "Path calculation took " << pathDuration.count() << " ms." << std::endl;
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
