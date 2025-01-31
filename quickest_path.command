@@ -29,11 +29,14 @@ else
     exit 1
 fi
 
-# Compile and run the shortest_path program
+# Compile the shortest_path program
 echo
-echo "Running Quickest Path System..."
+echo "Compiling Quickest Path System..."
 echo
-g++ -o shortest_path main.cpp graph.cpp preprocessing.cpp -std=c++17 -pthread
+g++ -std=c++17 -O3 -o shortest_path main.cpp graph.cpp preprocessing.cpp -pthread
+
+# Run the shortest_path program
+
 if ./shortest_path data/usa_roads.csv 1 1000000; then
   echo
   echo "Shortest Path System executed successfully."
