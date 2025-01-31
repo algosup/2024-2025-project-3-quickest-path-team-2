@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.10)
-project(CrowExample)
-set(CMAKE_CXX_STANDARD 14)
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS} ./include)
-add_executable(CrowExample api.cpp)
