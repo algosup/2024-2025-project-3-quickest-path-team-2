@@ -69,11 +69,5 @@
         "valarray": "cpp",
         "variant": "cpp",
         "algorithm": "cpp"
-    },
-    "files.exclude": {
-        "**/*.rpyc": true,
-        "**/*.rpa": true,
-        "**/*.rpymc": true,
-        "**/cache/": true
     }
 }
