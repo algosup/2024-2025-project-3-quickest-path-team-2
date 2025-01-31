@@ -133,7 +133,7 @@ There are the conventions to follow during the project.
 
 > [!WARNING]  
 > The types **DEFINE** and **typedef** uses the same convention, however typedef have for the first word an abbreviation then we indicate the type used.
-
+---
 >[!CAUTION]
 > Each structure have to have in their name the pre-fix "s_".
 
@@ -233,7 +233,7 @@ software.hpp
 
 >[!CAUTION]
 >The .hpp file permit only to declare functions and comment the utility of each ones, explaining also the parameters and what it return.
-
+---
 > [!NOTE]
 >
 > ```cpp
@@ -334,8 +334,6 @@ loop =  landmark_1, landmark_2, time
         501, 105, 250 -> Second time declared
 ```
 
-<div align="center">
-
 ```mermaid
 graph
     subgraph Not Good DAG
@@ -358,8 +356,6 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.2. Landmark Missing
 
 ```csv
@@ -367,8 +363,6 @@ landmark missing =  landmark_1, landmark_2, time
             , 501, 200  -> landmark_1 is missing
             321, , 200  -> landmark_2 is missing
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -386,16 +380,12 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.3. Time Missing
 
 ```csv
 time missing = landmark_1, landmark_2, time
             501, 105,   -> time is missing
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -404,16 +394,12 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.4. Negative Time
 
 ```csv
 time negative = landmark_1, landmark_2, time
                 501, 105, -200 -> time can not be negative
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -422,8 +408,6 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.4. Time Equal to 0
 
 ```csv
@@ -431,16 +415,12 @@ time equal 0 = landmark_1, landmark_2, time
                 501, 105, 0 -> time can not be equal to 0 
 ```
 
-<div align="center">
-
 ```mermaid
 graph
     subgraph Not Good DAG
         a((200)) <-- 0 ---> b((250))
     end
 ```
-
-</div>
 
 #### 10.2.5. Graph disconnected
 
@@ -452,8 +432,6 @@ disconnected =  landmark_1, landmark_2, time
                 456, 321, 105
                 654, 123, 105
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -480,8 +458,6 @@ graph
     end
 ```
 
-</div>
-
 ### 10.3 Organization
 
 To ensure the proper verification of the data, we have to transform the data into a Adjacency List to make the edges directional.
@@ -489,8 +465,6 @@ To ensure the proper verification of the data, we have to transform the data int
 #### 10.3.1. Graph Validation
 
 To check if the data provided by the CSV[^1] is a DAG[^8] we have to use the DFS[^9] (Depth First Search) algorithm to check if the graph is not a cycle.
-
-<div align="center">
 
 ```mermaid
 graph TD
@@ -531,15 +505,11 @@ graph TD
     
 ```
 
-</div>
-
 >[!IMPORTANT]
 > If the data given have a cyclic path the algorithm will not work properly. To do so we have to transform each edges into directional edges, even if the data provided is defined as by-directional.
-
+---
 >[!NOTE]
 > For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG[^8].
-
-<div align="center">
 
 ```mermaid
 graph TD
@@ -576,8 +546,6 @@ graph TD
     end
 
 ```
-
-</div>
 
 >[!NOTE]
 > By definition, a cycle occurs if a vertex is visited twice within the same path during traversal. Additionally, if a parent node has no unvisited child nodes but revisits a node already in the current path, a cycle is confirmed.
@@ -1215,7 +1183,7 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
 
 >[!CAUTION]
 > The previous endpoints for the `JSON`[^4] and `XML`[^5] format will not provide file download option. The user will have to copy the response and save it in a file.
-
+---
 >[!IMPORTANT]
 > This can be modified and needed later.
 
