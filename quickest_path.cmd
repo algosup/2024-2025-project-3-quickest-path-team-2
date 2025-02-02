@@ -22,8 +22,7 @@ echo Running verification program...
 verification.exe
 if %errorlevel% equ 0 (
     echo Verification completed successfully.
-)
-else (
+) else (
     echo Verification failed. Re-execute the verification process. 
     pause >nul
     exit /b
@@ -47,8 +46,7 @@ if %errorlevel% neq 0 (
     echo Shortest path program failed. Re-execute the program.
     pause >nul
     exit /b
-)
-else (
+) else (
     echo Shortest path program executed successfully. You can close the window.
     pause >nul
     exit /b
