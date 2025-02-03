@@ -149,39 +149,43 @@ Since this algorithm is needed to be implemented by each person when he created 
 
 ## 3. Software Aspects
 
-This section will treat about the software performances, its interface and how we have turned the technical aspects into a user friendly interface into the command prompt[^6], an important aspect to avoid the user to be lost.
+This section will treat about the software performances, its interface and how we have turned the technical aspects into a user friendly interface into the terminal[^6], an important aspect to avoid the user to be lost.
 
 ### 3.1 Performance
 
-The software has to respect criteria to be competitive and follow our objectives. Once you've initialized the verification process (including the file with landmarks), the command prompt must finish the checking, following the number of lines there are in your file (1 minute for 30,000,000 lines), so depending on the file size. <br>
-Before you're writing your route, a pre-processing method has to be made to ensure the rapidity of the program when you want to search for the quickest path. <br>
+The software has to respect criteria to be competitive and follow our objectives. Once you've initialized the verification process (including the file with landmarks), the terminal must finish the checking, following the number of lines there are in your file (1 minute 30 maximum for 30,000,000 lines), so depending on the file size. This process executes itself in the pre-treatment process. <br>
+Before you're writing your route on the local page, a pre-processing method into the command prompt has to be made to ensure the rapidity of the program when you want to search for the quickest path. <br>
 When you enter your departure point and your destination, the API[^7] must respond within 1 second. <br>
 Finally, the software has to indicate the most optimized path/the quickest path, without exceeding a margin of error of 10%. This isn't verifiable on your side, which is why we strive to offer you the best service possible!
 
 ### 3.2 User Interface (aka UI)
 
 #### 3.2.1 Definition
-Here, we will more speak as an interface than an UI[^12] strictly speaking because the latter is a nice to have, a future improvement (please take a gaze to the [future improvements](#8-future-improvements) to know all enhancements we have planned to add so far).
+Here, the UI is an HTML page where you can enter your departure as well as your arrival point. Additionally, you will have the choice between different formats (explained below).
 
 #### 3.2.2 Verification
 While you're waiting for the verification process, a percentage bar will be displayed to avoid leaving you in the dark. After 10 seconds, if the bar didn't progress of any percent, please restart the verification.
 
 #### 3.2.3 Main Program
-All the operations will happen on the command prompt (the major interface of the software). Once the pre-processing is done and your starting point defined as well as your arrival point on the command prompt, an answer in the form of the JSON[^4] format (by default) will be displayed.
+The first part of the program takes place in the terminal. Indeed the program have to be compiled first through it. Afterwards, you will have to launch the executable file created by the compilation. When all is done, the data pre-treatment process will start in a terminal prompt and just after this process, the API will start and proving you a link to go to the local page.
+The second part is launching on a page of your browser. The interface is quite simple: in the middle you can write your starting point and your destination. Below, there is a drop-down menu in which you can choose your format between Java and XML.
+You can see what the HTML page looks like below :
+
+![The HTML page](../images/functional/html_page.png)
 
 ### 3.3 Logo
 
-To ensure you have correctly downloaded our software, we added a logo into the interface on the command prompt as you can see just below
+To ensure you have correctly downloaded our software, we added a logo into the interface on the terminal as you can see just below
 
-![The command prompt Signature](../images/functional/cmd_signature.png)
+![The terminal Signature](../images/functional/terminal_signature.png)
 
 If this logo isn't here, you've probably downloaded a counterfeit software!
 
 ## 4. How To Use It?
 
-To use the software, you firstly need to verify the CSV[^8] file you want to use in order to check if it isn't corrupt.
-After this verification and if your file is safe to use, you can start the data pre-treatment process to minimize the research of the quickest way between your 2 points.
-Once it is done, you can write the command to receive the JSON type data (by default) for the most optimized route you want to know.
+To use the software, the CSV[^8] file you want to use is verified in order to check if it isn't corrupt.
+After this verification and if your file is safe to use, the data pre-treatment process will start, in order to minimize the research of the quickest way between your 2 points.
+Once it is done, the API will launch and you will be able to indicate your points to find the most optimized route you want to know.
 
 For further information and/or more precise steps, please refer to the [User Manual](../user_Manual/user_manual.pdf).
 
@@ -216,7 +220,7 @@ In this section, we will discuss all the functional requirements of the project.
 
 | Name       | Type    | Value                            |
 | ---------- | ------- | -------------------------------- |
-| format     | string  | json or xml (as indicated above) |
+| format     | string  | simplify, json or xml (as indicated above) |
 | landmark_1 | integer | Number between 1 and 23947347    |
 | landmark_2 | integer | Number between 1 and 23947347    |
 
@@ -224,14 +228,31 @@ In this section, we will discuss all the functional requirements of the project.
 
 Here are examples of the requests[^10] you can write to obtain a valid response.
 
+**JSON formats**:
+
+*Simplify:*
 ```
-GET /api/shortest-path?landmark_1=1&landmark_2=1000/json
+GET /api/shortest-path/?landmark_1=1&landmark_2=1000&format=simplify
 ```
 >[!NOTE]
 > - Host: 127.0.0.1:8080 (localhost) <br>
 > - Accept: application/json
+
+<br>
+
+*Classic:*
 ```
-GET /api/shortest-path?landmark_1=1&landmark_2=1000/xml
+GET /api/shortest-path/?landmark_1=1&landmark_2=1000&format=json
+```
+>[!NOTE]
+> - Host: 127.0.0.1:8080 (localhost) <br>
+> - Accept: application/json
+
+<br>
+
+**XML format**:
+```
+GET /api/shortest-path/?landmark_1=1&landmark_2=1000&format=xml
 ```
 >[!NOTE]
 > - Host: 127.0.0.1:8080 (localhost) <br>
@@ -241,7 +262,17 @@ GET /api/shortest-path?landmark_1=1&landmark_2=1000/xml
 
 Here are examples of the response format the API[^7] can send you (related to the examples above).
 
-**JSON format**:
+**JSON formats**:
+
+*Simplify:*
+```json
+{
+    "path": [1, 250, 200, 1000],
+    "time": 65429
+}
+```
+
+*Classic:*
  ```json
 {
   "path": [
@@ -296,7 +327,7 @@ The verification process makes sure that the CSV[^8] file you provide and want t
 - Check if the Landmark 1 and 2 are not the same.
 
 If your file is invalid and can't be used with our software, the error will be shown in detail with the error type and the problematic line.
-However, if your file is usable and don't comport any errors or issues, the process will complete and indicate that there are no errors.
+However, if your file is usable and don't comport any errors or issues, the process will complete, proceed to launching the API and indicate that there are no errors.
 
 ## 7. Non-functional Requirements
 
@@ -362,8 +393,7 @@ This list might contain features that will be implemented after the deadlines or
     <tr>
       <td>
         - A functional Dijkstra algorithm written in C++. <br>
-        - Verification process of the CSV File. <br>
-        - A verification process. <br>
+        - A verification process for the CSV file. <br>
         - A pre-treatment process. <br>
         - A REST API able to accept requests and send responses in a JSON/XML format. <br>
         - The time between 2 landmarks without exceeding a margin of error of 10%.
@@ -386,15 +416,15 @@ This list might contain features that will be implemented after the deadlines or
   <tbody>
     <tr>
       <td>
-        - A downloadable method of the JSON<sup>[3]</sup>/XML<sup>[4]</sup> format response. <br>
-        - Before starting the pre-treatment process, a choice of the CSV<sup>[8]</sup> file the user wants to utilize. <br> 
-        - User friendly requests to write on the command prompt. <br>
-        -  A local tab (kind of internet page) displaying the response. <br>
+        - A downloadable method of the JSON/XML format response. <br>
+        - Before starting the pre-treatment process, a choice of the CSV file the user wants to utilize. <br> 
+        - User friendly requests to write on the terminal. <br>
+        - A local tab (kind of internet page) displaying the response. <br>
         - Indicate the margin of error of the process (if it exists). <br>
         - A history feature for the user.
       </td> 
       <td>
-        - An application with graphical UI<sup>[12]</sup> and so on. <br>
+        - An application with graphical UI and so on. <br>
         - The obligation to execute the verification file each time the user want to search for the quickest path between 2 landmarks. <br>
         - A mobile version.
       </td>
@@ -429,7 +459,7 @@ A series of well-defined instructions or rules that you follow to solve a proble
 [^5]: Dijkstra:
 An algorithm for finding the shortest paths between nodes in a weighted graph, which may represent, a road network.
 
-[^6]: Command Prompt:
+[^6]: Terminal:
 A command-line interpreter application used to execute entered commands, which can automate tasks via scripts files, perform advanced administrative functions, and troubleshoot or solve certain kinds of computer issues.
 
 [^7]:API:
