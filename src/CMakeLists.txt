@@ -13,6 +13,10 @@ find_package(Boost REQUIRED)
 # Include the directories for Boost and the project's header files
 include_directories(${Boost_INCLUDE_DIRS} ./include)
 
+# Set compiler flags for different build types
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -DNDEBUG")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+
 # Set the directory for archive files (static libraries)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 

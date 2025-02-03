@@ -13,6 +13,11 @@
 #include <fcntl.h> // For file control options to open files
 #include <sys/mman.h> // For mmap and munmap functions to map files to memory
 #include <unistd.h> // For close function to close file descriptors
+#include <filesystem>
+#include <fstream>
+
+using namespace std;
+namespace fs = std::filesystem;
 
 using TPDF_CONNECTIONS = std::unordered_map<int, std::unordered_set<int>>; // Type alias for seen connections
 
@@ -23,10 +28,21 @@ void process_chunk(
     Graph& graph, // Reference to the Graph object where edges will be added
     TPDF_CONNECTIONS& seenConnections, // Map to track already processed connections
     std::atomic<int>& maxId,// Atomic integer to keep track of the maximum node ID
-    int maxLines,// Maximum number of lines to process (if <= 0, process all lines)
+    int max_lines,// Maximum number of lines to process (if <= 0, process all lines)
     std::mutex& mutex// Mutex for synchronization
 );
 
-bool preprocess_data(const std::string& filePath, int maxLines, Graph& graph); // Preprocess the data from the input file
+/**
+ * Preprocesses the data from the input file and builds the graph.
+ * 
+ */
+bool preprocess_data(const std::string& filePath, int max_lines, Graph& graph); // Preprocess the data from the input file
+
+/**
+ * Function to get the maximum number of lines in the .csv files in the data folder
+ * @param dataFolderPath fs::path
+ * @return int
+ */
+int get_max_lines(const fs::path& dataFolderPath);
 
 #endif // PREPROCESSING_HPP

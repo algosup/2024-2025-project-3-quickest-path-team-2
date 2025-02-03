@@ -1,5 +1,6 @@
 #include "includes/preprocessing.hpp"
 
+
 /**
  * Processes a chunk of the file to extract and store graph edges.
  * 
@@ -76,7 +77,7 @@ void process_chunk(
  * @param graph Reference to the Graph object to be populated.
  * @return True if preprocessing is successful, otherwise throws an exception.
  */
-bool preprocess_data(const std::string& filePath, int maxLines, Graph& graph) {
+bool preprocess_data(const std::string& filePath, int max_lines, Graph& graph) {
     TPDF_CONNECTIONS seenConnections;
     std::atomic<int> maxId(0);
 
@@ -100,11 +101,25 @@ bool preprocess_data(const std::string& filePath, int maxLines, Graph& graph) {
     std::cout << "File mapped successfully. Size: " << fileSize << " bytes." << std::endl;
 
     // Process the file
-    process_chunk(fileData, fileSize, graph, seenConnections, maxId, maxLines);
+    process_chunk(fileData, fileSize, graph, seenConnections, maxId, max_lines);
 
     // Clean up
     munmap(fileData, fileSize);
     close(fd);
 
     return true;
+}
+
+int get_max_lines(const fs::path& dataFolderPath) {
+    int maxLines = 0;
+    for (const auto& entry : fs::directory_iterator(dataFolderPath)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".csv") {
+            std::ifstream file(entry.path());
+            if (file.is_open()) {
+                maxLines += std::count(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>(), '\n');
+                file.close();
+            }
+        }
+    }
+    return maxLines;
 }

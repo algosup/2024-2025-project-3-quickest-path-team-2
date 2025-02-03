@@ -13,6 +13,9 @@ src/bin/*
 */obj/
 */lib/
 
+# Ignore generated files
+src/data/*
+
 # Ignore macOS specific files
 .DS_Store
 .AppleDouble
