@@ -981,13 +981,15 @@ The REST API will respond to the user request with the shortest path and the tot
 
 ### 12.4. Template
 
-The library `crow` have a template system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `templates` and contains `.html` files. To use this templates you have to use the `crow::mustache::load` function like [here](https://crowcpp.org/master/guides/templating/).
+The library `crow` have a page system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `static` and contains `.html`, `.css`, `.png` ect... files. To use this pages you have to create a route like [here](https://crowcpp.org/master/guides/static/).
 
 ```bash
 ├── src # folder where all the code will be implemented
 │  ├── api # folder where all the api code will be stored
 │  │  └── static # folder where all the pages will be stored                           
 │  │    └── index.html # file that will be used when the home page is requested
+│  │    └── style.css # file that will be used to style the page
+│  │    └── img.png # file that will be used to display an image
 │  ├── build # folder where all the build files will be stored
 etc...  
 
@@ -1032,17 +1034,17 @@ The following commands can be used to test the API using the command line:
 
 ```bash
 # Simplified Response
-curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000"
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=simplify"
 ```
 
 ```bash
 # JSON Response
-curl "http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000"
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=json"
 ```
 
 ```bash
 # XML Response
-curl "http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000"
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=xml"
 ```
 
 #### 12.5.3. Application
@@ -1075,21 +1077,21 @@ do {
             switch (format) {
                 case 1:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path/json?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path/landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(json);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 2:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(xml);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 3:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(simplify);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
@@ -1121,7 +1123,7 @@ do {
 
 Since the API will be using only the GET methods, for a unique endpoint GET, the following endpoints will be used:
 
-- **GET `/api/shortest-path?:landmark_1&:landmark_2`** Returns the shortest path and total time between two nodes in JSON format like this:
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the shortest path and total time between two nodes in JSON format like this:
 
     ```json
     {
@@ -1131,9 +1133,9 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
     ```
 
 >[!NOTE]
-> When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&:landmark_2=1000`
+> When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000?format=simplify`
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/json`** Returns the paths and time between each nodes in JSON format.
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the paths and time between each nodes in JSON format.
 
     ```json
     {
@@ -1157,7 +1159,7 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
     }
     ```
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/xml`** Returns the paths and time between each nodes in XML format.
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the paths and time between each nodes in XML format.
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
