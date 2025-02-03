@@ -8,10 +8,10 @@
 *.vscode
 
 # Ignore build directories
-/build/
-/bin/
-/obj/
-/lib/
+src/build/*
+src/bin/*
+*/obj/
+*/lib/
 
 # Ignore macOS specific files
 .DS_Store
@@ -26,3 +26,10 @@ Icon?
 .Spotlight-V100
 .Trashes
 *.DS_store
+
+# Ignore CMake build files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
