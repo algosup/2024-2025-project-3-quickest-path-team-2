@@ -8,10 +8,10 @@
 *.vscode
 
 # Ignore build directories
-/build/
-/bin/
-/obj/
-/lib/
+src/build/*
+src/bin/*
+*/obj/
+*/lib/
 
 # Ignore macOS specific files
 .DS_Store
