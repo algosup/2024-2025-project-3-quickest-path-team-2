@@ -8,8 +8,8 @@
 *.vscode
 
 # Ignore build directories
-/build/
-/bin/
+*build/
+*bin/
 /obj/
 /lib/
 
