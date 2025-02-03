@@ -6,8 +6,8 @@
 
 **Project Name:** Quickest Path  
 **Team:** Team 2  
-**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)    
-**Last Time Modified:** 01/23/2025
+**Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)<br>
+**Last Time Modified:** 01/29/2025
 
 </div>
 
@@ -53,11 +53,11 @@
     - [12.2. Dependencies](#122-dependencies)
     - [12.3. Installation](#123-installation)
       - [12.3.1. Windows](#1231-windows)
-      - [12.3.2. macOs](#1232-macos)
+      - [12.3.2. macOS](#1232-macos)
       - [12.3.3. Linux](#1233-linux)
     - [12.4. Template](#124-template)
     - [12.5. Accessibility](#125-accessibility)
-      - [12.5.1. HTML (prototype)](#1251-html-prototype)
+      - [12.5.1. HTML](#1251-html)
       - [12.5.2. Command Line](#1252-command-line)
       - [12.5.3. Application](#1253-application)
     - [12.6. API Endpoints \& Response](#126-api-endpoints--response)
@@ -80,7 +80,7 @@ The Quickest Path project aims to develop a software solution that calculates th
 - Ensure the software can handle large datasets.
 - Analyze the data given to ensure a proper integrity of data.
 - Provide a user-friendly interface for input and output.
-- Provide response through an API[^3] using the GET[^6] methods.
+- Provide response through an API using the GET[^6] methods.
 
 ## 5. Project Folder Structure
 
@@ -133,7 +133,7 @@ There are the conventions to follow during the project.
 
 > [!WARNING]  
 > The types **DEFINE** and **typedef** uses the same convention, however typedef have for the first word an abbreviation then we indicate the type used.
-
+---
 >[!CAUTION]
 > Each structure have to have in their name the pre-fix "s_".
 
@@ -233,7 +233,7 @@ software.hpp
 
 >[!CAUTION]
 >The .hpp file permit only to declare functions and comment the utility of each ones, explaining also the parameters and what it return.
-
+---
 > [!NOTE]
 >
 > ```cpp
@@ -250,13 +250,13 @@ Before continuing to read, it is highest recommended to read the [functional spe
 
 ### 8.1. Overview
 
-- **Input:** CSV[^1] file containing node connections and times.
+- **Input:** CSV file containing node connections and times.
 - **Processing:** Algorithm to calculate the quickest path.
 - **Output:** Display of the quickest path and time.
 
 ### 8.2. Components
 
-1. **Data Importer:** Reads and parses the CSV[^1] file.
+1. **Data Importer:** Reads and parses the CSV file.
 2. **Path Calculator:** Implements the algorithm to find the quickest path.
 3. **User Interface:** Allows users to input nodes and view results.
 
@@ -264,17 +264,17 @@ Before continuing to read, it is highest recommended to read the [functional spe
 
 We will use the following technologies:
 
-- C++[^2]
+- C++
   - C++17[^7]
   - Standard libraries
 - REST API
   - Libraries
   - GET method
-- CSV[^1]
+- CSV
   - .csv file format
-- JSON[^4]
+- JSON
   - .json file format
-- XML[^5]
+- XML
   - .xml file format
 
 ## 9. Processing Flow
@@ -323,7 +323,7 @@ sequenceDiagram
 
 ### 10.2. Data Validation
 
-When CSV[^1] provided we have to make different checks to ensure the data are correct and usable and follows the connectivity check rules. We also have to check if the data provided is a Directed Acyclic Graph (DAG[^8]) to ensure the algorithm will work properly.
+When CSV provided we have to make different checks to ensure the data are correct and usable and follows the connectivity check rules. We also have to check if the data provided is a Directed Acyclic Graph (DAG[^8]) to ensure the algorithm will work properly.
 
 #### 10.2.1. Loops
 
@@ -333,8 +333,6 @@ loop =  landmark_1, landmark_2, time
         321, 123, 200
         501, 105, 250 -> Second time declared
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -358,8 +356,6 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.2. Landmark Missing
 
 ```csv
@@ -367,8 +363,6 @@ landmark missing =  landmark_1, landmark_2, time
             , 501, 200  -> landmark_1 is missing
             321, , 200  -> landmark_2 is missing
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -386,16 +380,12 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.3. Time Missing
 
 ```csv
 time missing = landmark_1, landmark_2, time
             501, 105,   -> time is missing
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -404,16 +394,12 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.4. Negative Time
 
 ```csv
 time negative = landmark_1, landmark_2, time
                 501, 105, -200 -> time can not be negative
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -422,8 +408,6 @@ graph
     end
 ```
 
-</div>
-
 #### 10.2.4. Time Equal to 0
 
 ```csv
@@ -431,16 +415,12 @@ time equal 0 = landmark_1, landmark_2, time
                 501, 105, 0 -> time can not be equal to 0 
 ```
 
-<div align="center">
-
 ```mermaid
 graph
     subgraph Not Good DAG
         a((200)) <-- 0 ---> b((250))
     end
 ```
-
-</div>
 
 #### 10.2.5. Graph disconnected
 
@@ -452,8 +432,6 @@ disconnected =  landmark_1, landmark_2, time
                 456, 321, 105
                 654, 123, 105
 ```
-
-<div align="center">
 
 ```mermaid
 graph
@@ -480,15 +458,13 @@ graph
     end
 ```
 
-</div>
-
 ### 10.3 Organization
+
+To ensure the proper verification of the data, we have to transform the data into a Adjacency List to make the edges directional.
 
 #### 10.3.1. Graph Validation
 
-To check if the data provided by the CSV[^1] is a DAG[^8] we have to use the DFS[^9] (Depth First Search) algorithm to check if the graph is not a cycle.
-
-<div align="center">
+To check if the data provided by the CSV is a DAG we have to use the DFS[^9] (Depth First Search) algorithm to check if the graph is not a cycle.
 
 ```mermaid
 graph TD
@@ -529,15 +505,11 @@ graph TD
     
 ```
 
-</div>
-
 >[!IMPORTANT]
 > If the data given have a cyclic path the algorithm will not work properly. To do so we have to transform each edges into directional edges, even if the data provided is defined as by-directional.
-
+---
 >[!NOTE]
-> For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG[^8].
-
-<div align="center">
+> For this specific part the weight of the edges is not important since we only have to check if the graph is a DAG.
 
 ```mermaid
 graph TD
@@ -575,14 +547,12 @@ graph TD
 
 ```
 
-</div>
-
 >[!NOTE]
 > By definition, a cycle occurs if a vertex is visited twice within the same path during traversal. Additionally, if a parent node has no unvisited child nodes but revisits a node already in the current path, a cycle is confirmed.
 
 #### 10.3.2. Connectivity Check
 
-To ensure the graph is connected, we need to verify that all nodes are reachable from any starting node. This can be achieved using the BFS[^10] (Breadth First Search) algorithm. The BFS[^10] algorithm will traverse the graph level by level, starting from a given node, and visit all its neighbors before moving to the next level. If all nodes are visited during this traversal, the graph is connected. Otherwise, it is disconnected.
+To ensure the graph is connected, we need to verify that all nodes are reachable from any starting node. This can be achieved using the BFS[^10] (Breadth First Search) algorithm. The BFS algorithm will traverse the graph level by level, starting from a given node, and visit all its neighbors before moving to the next level. If all nodes are visited during this traversal, the graph is connected. Otherwise, it is disconnected.
 
 Here is a visual representation of a disconnected graph:
 
@@ -797,7 +767,7 @@ graph TD
 There is an example of the algorithm in action:
 
 <div align="center">
-<img src="../images/technical/dijkstra.gif" alt="Dijkstra[^11] Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
+<img src="../images/technical/dijkstra.gif" alt="Dijkstra Animated Explanation" style="border-radius: 50px; max-width: 75%"/>
 <p>Final Path of weight 28: <span style="color:lime">A -> B -> D -> F -> G -> H -> I -> L -> M -> N -> T</span></p>
 </div>
 
@@ -826,19 +796,15 @@ There is an example of the algorithm in action:
 
 The nodes will be created as a structure with the following attributes:
 
-- **landmark1:** The starting node.
 - **landmark2:** The ending node.
 - **weight:** The time taken to travel between the nodes.
 
 ```cpp
-typedef struct Node {   // Define the current Node
-    Node *landmark2;    // Define where the Node is going
-    int weight;         // Define the weight of the edge
-} s_Node;
+typedef struct Edge {   // Define the current Edge from
+    uint32_t landmark2;      // Define the connection to the next node
+    uint32_t weight;         // Define the weight of the edge
+} s_Edge;
 ```
-
->[!CAUTION]
-> This current structure can be modified to fit the needs of the Adjacency List or the Graph Structure.
 
 #### 11.2.2. Adjacency List / Graph Structure
 
@@ -875,7 +841,7 @@ typedef struct AdjacencyList {
 </div>
 
 ```cpp
-vector<vector<pair<int, int> > > adj[N]; // Adjacency list for vector of vector of pair of int, int
+vector<vector<pair<int, int> > > adj; // Adjacency list for vector of vector of pair of int, int
 ```
 
 >[!IMPORTANT]
@@ -897,7 +863,7 @@ vector<vector<pair<int, int> > > adj[N]; // Adjacency list for vector of vector 
 </div>
 
 ```cpp
-unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordered_map of int, unordered_map of int, int
+unordered_map<int, vector<pair<int, int>>> graph; // Adjacency list for unordered_map of int, unordered_map of int, int
 ```
 
 >[!IMPORTANT]
@@ -912,14 +878,26 @@ unordered_map<int, unordered_map<int, int> > adj; // Adjacency list for unordere
 > - Automatic memory management by the unordered_map class
 > - Faster than vector due to constant time lookup
 > - Requires more memory than vector due to hash table overhead
+
+---
+
+>[!CAUTION]
+> Since we got the structure Edge defined as a pair of int, int we can use something like:
 >
+>```cpp
+> unordered_map<int, vector<Edge>> graph; 
+>```
+>
+---
+>[!NOTE]
+> This specific methods can also be used to create hash table then the BigO notation will be O(1) for each edge and O(V) for finding an edge where V is the number of vertices.
 ---
 
 ## 12. REST API
 
 ### 12.1. Overview
 
-The REST API[^3] will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON[^4] and XML[^5]. The response have to be less than one second.
+The REST API will respond to the user request with the shortest path and the total time taken to travel between the nodes. It will also give two file formats to the user, JSON and XML. The response have to be less than one second.
 
 ### 12.2. Dependencies
 
@@ -932,7 +910,7 @@ The REST API[^3] will respond to the user request with the shortest path and the
 
 #### 12.3.1. Windows
 
-#### 12.3.2. macOs
+#### 12.3.2. macOS
 
 1. You will have to install [Homebrew](https://brew.sh) to install the dependencies.  
 2. You will have to install the following dependencies:
@@ -1003,13 +981,15 @@ The REST API[^3] will respond to the user request with the shortest path and the
 
 ### 12.4. Template
 
-The library `crow` have a template system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `templates` and contains `.html` files. To use this templates you have to use the `crow::mustache::load` function like [here](https://crowcpp.org/master/guides/templating/).
+The library `crow` have a page system that can be used to respond to the user request depending on the status code. This file is located in the api folder and have to be named exactly `static` and contains `.html`, `.css`, `.png` ect... files. To use this pages you have to create a route like [here](https://crowcpp.org/master/guides/static/).
 
 ```bash
 ├── src # folder where all the code will be implemented
 │  ├── api # folder where all the api code will be stored
 │  │  └── static # folder where all the pages will be stored                           
 │  │    └── index.html # file that will be used when the home page is requested
+│  │    └── style.css # file that will be used to style the page
+│  │    └── img.png # file that will be used to display an image
 │  ├── build # folder where all the build files will be stored
 etc...  
 
@@ -1042,29 +1022,29 @@ graph TD
     E --> G
 ```
 
-#### 12.5.1. HTML (prototype)
+#### 12.5.1. HTML
 
-The following HTML code can be used to test the API[^3] using a web browser:
+The following HTML code can be used to test the API using a web browser:
 
 [Click here to see the HTML file.](../images/technical/index.md)
 
 #### 12.5.2. Command Line
 
-The following commands can be used to test the API[^3] using the command line:
+The following commands can be used to test the API using the command line:
 
 ```bash
 # Simplified Response
-curl http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=simplify"
 ```
 
 ```bash
-# JSON[^4] Response
-curl http://localhost:8080/api/shortest-path/json?landmark_1=1&landmark_2=1000
+# JSON Response
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=json"
 ```
 
 ```bash
-# XML[^5] Response
-curl http://localhost:8080/api/shortest-path/xml?landmark_1=1&landmark_2=1000
+# XML Response
+curl "http://localhost:8080/api/shortest-path/?landmark_1=1&landmark_2=1000&format=xml"
 ```
 
 #### 12.5.3. Application
@@ -1088,8 +1068,8 @@ do {
     if (confirmation == "Y" || confirmation == "y") {
         short format;
         cout << string("Select the format of the response:\n");
-        cout << string("1. JSON[^4]\n");
-        cout << string("2. XML[^5]\n");
+        cout << string("1. JSON\n");
+        cout << string("2. XML\n");
         cout << string("3. Simplify\n");
         cout << string("0. Cancel\n");
         cin >> format;
@@ -1097,21 +1077,21 @@ do {
             switch (format) {
                 case 1:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path/json?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path/landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(json);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 2:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path/xml?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(xml);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
                     break;
                 case 3:
                     // Send the request to the API
-                    string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2);
+                    string url = "http://localhost:8080/api/shortest-path?landmark_1=" + to_string(landmark_1) + "&landmark_2=" + to_string(landmark_2) + "&format=" + to_string(simplify);
                     cout << string("Request sent to the API: ") << url << endl;
                     // Wait for the response
                     // Display the response
@@ -1141,9 +1121,9 @@ do {
 
 ### 12.6. API Endpoints & Response
 
-Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint GET[^6], the following endpoints will be used:
+Since the API will be using only the GET methods, for a unique endpoint GET, the following endpoints will be used:
 
-- **GET `/api/shortest-path?:landmark_1&:landmark_2`** Returns the shortest path and total time between two nodes in JSON[^4] format like this:
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the shortest path and total time between two nodes in JSON format like this:
 
     ```json
     {
@@ -1153,9 +1133,9 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
     ```
 
 >[!NOTE]
-> When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&:landmark_2=1000`
+> When request will be complete the URL should look like this: `http://localhost:8080/api/shortest-path?landmark_1=1&landmark_2=1000?format=simplify`
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/json`** Returns the paths and time between each nodes in JSON[^4] format.
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the paths and time between each nodes in JSON format.
 
     ```json
     {
@@ -1179,7 +1159,7 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
     }
     ```
 
-- **GET `/api/shortest-path?:landmark_1&landmark_2/xml`** Returns the paths and time between each nodes in XML[^5] format.
+- **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the paths and time between each nodes in XML format.
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -1204,8 +1184,8 @@ Since the API[^3] will be using only the GET[^6] methods, for a unique endpoint 
     ```
 
 >[!CAUTION]
-> The previous endpoints for the `JSON`[^4] and `XML`[^5] format will not provide file download option. The user will have to copy the response and save it in a file.
-
+> The previous endpoints for the `JSON` and `XML` format will not provide file download option. The user will have to copy the response and save it in a file.
+---
 >[!IMPORTANT]
 > This can be modified and needed later.
 
@@ -1217,11 +1197,11 @@ To deploy the Quickest Path project, ensure the following environment setup:
 
 1. **Operating System:** The project can be deployed on Windows, macOS, or Linux.
 2. **Dependencies:** Ensure all dependencies are installed:
-    - CMake[^12]
-    - Asio[^13]
-    - Boost[^14]
-    - Crow[^15]
-3. **Compiler:** A C++[^2]17 compatible compiler (e.g., GCC[^17] ...).
+    - CMake
+    - Asio
+    - Boost
+    - Crow
+3. **Compiler:** A C++17 compatible compiler (e.g., GCC[^17] ...).
 
 ### 13.2. Steps
 
