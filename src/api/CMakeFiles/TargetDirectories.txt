@@ -1,0 +1,3 @@
+/Users/guillaume_despaux/Desktop/cpp/exercise/api/CMakeFiles/QPSAPI.dir
+/Users/guillaume_despaux/Desktop/cpp/exercise/api/CMakeFiles/edit_cache.dir
+/Users/guillaume_despaux/Desktop/cpp/exercise/api/CMakeFiles/rebuild_cache.dir

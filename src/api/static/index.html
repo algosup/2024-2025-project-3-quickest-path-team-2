@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>QPS</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <img id="background"src="/static/like.jpg" alt="Fullscreen Image">
+    <nav>
+        <img id="logo" src="/static/logo_icon.png" alt="Page Image">
+    </nav>
+    <main>
+        <container>
+            <div class="content">
+            <form action="http://localhost:8080/api/shortest-path/?:landmark1&landmark2&:format" method="get">
+                <div id="landmarks">
+                    <label for="landmark_1">Departure landmark</label>
+                    <input class="landmark" name="landmark_1" type="number" placeholder="Landmark 1" required>
+                    <label for="landmark_2">Destination landmark</label>
+                    <input class="landmark" name="landmark_2" type="number" placeholder="Landmark 2" required>
+                </div>
+                <select name="format" id="format">
+                    <option value="classical">Classical</option>
+                    <option value="json">JSON</option>
+                    <option value="xml">XML</option>
+                </select>
+                <input type="submit" value="Confirm">
+            </form>
+            </div>
+            <div class="content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore reiciendis esse at aliquid tempore praesentium, placeat aliquam est facere dolorum! Quae, consectetur? Numquam ratione, nam reiciendis aliquam alias odit repellendus.
+            </div>
+        </container>
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

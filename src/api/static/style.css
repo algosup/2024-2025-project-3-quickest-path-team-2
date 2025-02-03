@@ -1,0 +1,127 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    /* background-color: #f4f4f4; */
+    font-family: Arial, sans-serif;
+    color: #000;
+}
+#background{
+    background: linear-gradient(to right, #6a9e49, #a2df75);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+}
+nav {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background: rgba(220, 204, 204, 0.8);
+}
+
+#logo {
+    width: 30%;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+main{
+    height: 100%;
+    
+}
+
+container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100vh;
+}
+
+container div {
+    height: 100%;
+    margin: 20px;
+}
+#readme {
+    padding: 10px;
+    overflow: scroll;
+}
+
+main div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: azure;
+    border-radius: 10px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.main-section {
+    flex: 2;
+    text-align: center;
+}
+.description {
+    flex: 1;
+    background: #f4f4f4;
+}
+.location-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.location-icons span {
+    background: #b54336;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+input, button, select{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 200px;
+    border: none;
+    background: #ddd;
+    text-align: center;
+}
+button {
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+#landmarks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    border: 2px solid #f3c142;
+    padding: 20px;
+}
+
+.landmark {
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #f3c142;
+    width: 50%;
+    text-align: center;
+    border-radius: 20px;
+    min-width: 50px;
+}
+
+.content{
+    padding: 20px;
+    opacity: 0.95;
+    height: 50%;
+}
