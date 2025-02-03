@@ -28,7 +28,7 @@ The user Manual has been completed, including English and French.
 | Data Validation Tool     | 100%     |
 | User manual              | 100%     |
 | Pre-procession           | 100%     |
-| Algorithm development    | 100%     |
+| Algorithm development    | 80%     |
 | REST API development     | 80%      |
 | Weekly Reports           | 80%      |
 
