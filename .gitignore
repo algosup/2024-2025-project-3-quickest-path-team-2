@@ -1,0 +1,35 @@
+# Ignore object files, libraries, executables, and other build artifacts
+*.o
+*.a
+*.out
+*.exe
+*.dylib
+*.so
+*.vscode
+
+# Ignore build directories
+/build/
+/bin/
+/obj/
+/lib/
+
+# Ignore macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore macOS Finder attributes
+Icon?
+._*
+
+# Ignore macOS resource fork files
+.Spotlight-V100
+.Trashes
+*.DS_store
+
+# Ignore CMake build files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
