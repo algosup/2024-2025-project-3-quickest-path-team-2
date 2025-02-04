@@ -69,9 +69,9 @@ In order to validate the **Quickest Path in C++** project, this document outline
 ### 1.2 Project Overview
 
 This project focuses on computing the quickest path between two landmarks within the United States. 
-Implemented in C++, the application processes a large CSV file (*USA-roads.csv*) that contains landmark IDs and associated travel times. The system exposes a single REST API endpoint accepting a source and destination landmark, then returning the total travel time and the series of landmarks constituting the path. Given the data size of approximately 24 million nodes, performance optimization is paramount, and approximation heuristics are allowed as long as the travel time does not exceed 10% of the shortest possible route. 
+Implemented in C++, the application processes a large CSV file (*USA-roads.csv*) that contains landmark IDs and associated travel times. The system exposes a single REST API endpoint accepting a source and destination landmark, then returning the total travel time and the series of landmarks constituting the path. Given the data size of approximately 24 millions nodes, performance optimization is paramount, and approximation heuristics are allowed as long as the travel time does not exceed 10% of the shortest possible route. 
 
-Additionally, the project provides a data validation tool to confirm that the CSV file forms a Directed Acyclic Graph (DAG) and that the graph is fully connected. Verification of extremely large CSV files (e.g., up to 30 million lines) should ideally complete in about one minute. A progress bar in the command prompt will show the verification status, and if it remains stuck for more than 10 seconds, a warning is logged for potential issues.
+Additionally, the project provides a data validation tool to confirm that the CSV file forms a Directed Acyclic Graph (DAG) and that the graph is fully connected. Verification of extremely large CSV files (e.g., up to 30 millions lines) should ideally complete in about one minute. A progress bar in the command prompt will show the verification status, and if it remains stuck for more than 10 seconds, a warning is logged for potential issues.
 
 Below is a simplified schematic of how CSV data flows through validation and graph-building processes to the REST API, which ultimately serves client requests:
 
@@ -135,9 +135,9 @@ flowchart LR
 
 > [!IMPORTANT] 
 > **Error Severity:**  
-> - **Fatal errors** (via `checkValue(int actual, int expected)`)  
+> - **Fatal errors** (with `checkValue(int actual, int expected)`)  
 >  Throw exceptions and halt the test. These must be fixed before release.  
->- **Non-fatal errors** (via `checkAndLog(int actual, int expected)`)  
+>- **Non-fatal errors** (with `checkAndLog(int actual, int expected)`)  
 >  Log warnings but let the test pipeline continue. These are tracked and should be resolved.
 
 ### 2.3 Testing Tools
@@ -204,7 +204,7 @@ A living document enumerating each test with:
 - Expected outcome
 - Severity classification (fatal vs. non-fatal)
 
-This may be maintained in .md files or via a GitHub Issues “TestCase” template.
+This may be maintained in .md files or with a GitHub Issues “TestCase” template.
 
 </details> <details> <summary><ins>CI Workflow Scripts</ins></summary>
 The YAML configs that specify build steps (install g++, compile the code, run tests).
@@ -241,7 +241,7 @@ A curated set of smaller CSV files (some valid, some intentionally malformed) fo
 
 - **Response Times**: Must remain under 1 second for typical pathfinding queries on a standard laptop.  
 - **Load / Stress**: If resources allow, test concurrent requests.  
-- **CSV Verification**: In ideal conditions, verifying 30 million lines in ~1 minute. A progress bar indicates the state; if no progress after 10 seconds, warn the user.
+- **CSV Verification**: In ideal conditions, verifying 30 millions lines in ~1 minute. A progress bar indicates the state; if no progress after 10 seconds, warn the user.
 
 ### 5.3 Data Integrity Testing
 
@@ -300,7 +300,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #CV-4: Large CSV Performance Check</ins>**  
-- **Goal**: Validate that processing ~30 million lines completes in ~1 minute on recommended hardware.  
+- **Goal**: Validate that processing ~30 millions lines completes in ~1 minute on recommended hardware.  
 - **Preconditions**: A large synthetic or real CSV file is available; environment must meet minimal hardware specs.  
 - **Steps**:  
   1. Provide the large CSV to the validation tool.  
@@ -391,7 +391,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 
 **<ins>Test Case #PT-1: Single Query Baseline</ins>**  
 - **Goal**: Validate that an average query completes under 1 second on typical hardware.  
-- **Preconditions**: The server is running with a mid-sized CSV (1–5 million lines).  
+- **Preconditions**: The server is running with a mid-sized CSV (1–5 millions lines).  
 - **Steps**:  
   1. Issue a GET request from cURL or Postman to the path endpoint.  
   2. Record the time from request to first byte or full response.  
@@ -412,7 +412,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #PT-3: CSV Verification Throughput</ins>**  
-- **Goal**: Confirm the validation tool processes ~30 million lines in about 1 minute.  
+- **Goal**: Confirm the validation tool processes ~30 millions lines in about 1 minute.  
 - **Preconditions**: High-powered local or cloud environment, large CSV.  
 - **Steps**:  
   1. Time the validation run from start to finish.  
@@ -509,8 +509,8 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #PC-5: Large Node IDs with Realistic Times</ins>**  
-- **Goal**: Confirm the system can handle queries for high-range landmarks (e.g., 20 million) in the CSV index.  
-- **Preconditions**: A CSV file enumerating node IDs that go up to ~20 million or more.  
+- **Goal**: Confirm the system can handle queries for high-range landmarks (e.g., 20 millions) in the CSV index.  
+- **Preconditions**: A CSV file enumerating node IDs that go up to ~20 millions or more.  
 - **Steps**:  
   1. Query a valid route that uses high IDs.  
   2. Ensure system responds in <1 second.  
@@ -612,7 +612,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
     </tr>
     <tr>
       <td>Performance</td>
-      <td>Stress tests, 24+ million nodes if feasible, 1-second path queries check</td>
+      <td>Stress tests, 24+ millions nodes if feasible, 1-second path queries check</td>
       <td>Weeks 4-5</td>
     </tr>
     <tr>
