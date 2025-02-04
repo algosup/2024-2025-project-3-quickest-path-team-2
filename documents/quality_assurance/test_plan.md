@@ -231,7 +231,7 @@ A curated set of smaller CSV files (some valid, some intentionally malformed) fo
 
 ### 5.1 REST API Testing
 
-- **Endpoints**: `/api/shortest-path/?:landmark_1&:landmark_2&:format`  
+- **Endpoints**: `/api/shortest-path/?landmark_1=<id>&landmark_2=<id>&format=json|xml`  
 - **Checks**:  
   1. Valid inputs produce a JSON/XML response with correct travel time and path.  
   2. Invalid inputs (e.g., missing parameters, nonexistent landmarks) produce appropriate HTTP error codes and messages.  
@@ -331,7 +331,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that a valid GET request returns a JSON response with the correct time and path.  
 - **Preconditions**: A properly validated CSV is loaded, server is running on `localhost:8080`.  
 - **Steps**:  
-  1. `/api/shortest-path/?:landmark_1=100&:landmark_2=200&:json`  
+  1. `/api/shortest-path/?landmark_1=100&landmark_2=200&format=json`  
   2. Check response time and format.  
 - **Expected**:  
   - 200 OK status, JSON body including `"time": <int>` and `"steps": [...]` structure.  
@@ -367,7 +367,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Verify incomplete queries produce a proper error rather than a silent fail.  
 - **Preconditions**: Normal environment.  
 - **Steps**:  
-  1. `/api/shortest_path/?:landmark_1=300` with no `landmark_2`.  
+  1. `/api/shortest_path/?landmark_1=300` with no `landmark_2`.  
   2. Observe the result.  
 - **Expected**:  
   - HTTP error code (400 or 422), with a message about missing parameters.  
@@ -491,7 +491,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that if the same landmark is used for start and end, the travel time is `0`, and the route is trivially that single landmark.  
 - **Preconditions**: The CSV is valid.  
 - **Steps**:  
-  1. `/api/shortest_path&?:landmark_1=500&:landmark_2=500&:json`  
+  1. `/api/shortest_path/?landmark_1=500&landmark_2=500:format=json`  
 - **Expected**:  
   - The JSON or XML returns `"time": 0` and steps of length 1 (just `500`).  
 
