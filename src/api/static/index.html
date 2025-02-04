@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
     <title>QPS</title>
-    <style>
-
-
-    </style>
 </head>
 <body>
-    <img id="background"src="/static/like.jpg" alt="Fullscreen Image">
-    <nav>
-        <img id="logo" src="/static/logo_icon.png" alt="Page Image">
-    </nav>
-    <main>
-        <container>
-            <div class="content">
-            <form action="http://localhost:8080/api/shortest-path/?:landmark1&landmark2&:format" method="get">
-                <div id="landmarks">
-                    <label for="landmark_1">Departure landmark</label>
-                    <input class="landmark" name="landmark_1" type="number" placeholder="Landmark 1" required>
-                    <label for="landmark_2">Destination landmark</label>
-                    <input class="landmark" name="landmark_2" type="number" placeholder="Landmark 2" required>
+    <!-- Loader -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="container-fluid fixed-top header disable-selection">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col">
+                    </div>
                 </div>
-                <select name="format" id="format">
-                    <option value="classical">Classical</option>
-                    <option value="json">JSON</option>
-                    <option value="xml">XML</option>
-                </select>
-                <input type="submit" value="Confirm">
-            </form>
             </div>
-            <div class="content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore reiciendis esse at aliquid tempore praesentium, placeat aliquam est facere dolorum! Quae, consectetur? Numquam ratione, nam reiciendis aliquam alias odit repellendus.
-            </div>
-        </container>
-    </main>
+            <div class="col"></div>
+        </div>
+    </div>
 
-    <footer>
+    <div id="overlay"></div>
 
-    </footer>
+    <div id="qps-box">
+        <h1>QPS</h1>
+        <select id="qps-select">
+            <option value="1">JSON</option>
+            <option value="2">XML</option>
+        <input type="text" placeholder="Champ 1">
+        <input type="text" placeholder="Champ 2">
+        <button id="submit-qps">Valider</button>
+        <button id="close-qps">Fermer</button>
+    </div>
+
+    <button id="qps-button">QPS</button>
+
+    <script src="loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
