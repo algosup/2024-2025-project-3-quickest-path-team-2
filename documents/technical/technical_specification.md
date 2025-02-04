@@ -978,8 +978,8 @@ The REST API will respond to the user request with the shortest path and the tot
    Download and install [Boost](https://www.boost.org/users/download/) at the root of your computer.
 
 3. **Configure PATH for CMake and Make**:  
-   Follow the steps to configure the PATH in MSYS2 to use the installed CMake and Make:
-   
+   Follow the steps to configure the PATH in MSYS2[^18] to use the installed CMake and Make:
+
    - ![Step 1](../images/technical/step1.png)
    - ![Step 2](../images/technical/step2.png)
    - ![Step 3](../images/technical/step3.png)
@@ -1011,6 +1011,7 @@ The REST API will respond to the user request with the shortest path and the tot
    ```bash
    brew install cmake asio boost
     ```
+
 2. **Download `crow_all.h`:**
     Download the `crow_all.h` file from the Crow repository [here](https://crowcpp.org/master/) and place it in the same directory as your `main.cpp`.
 3. **Build the Project:**
@@ -1031,7 +1032,7 @@ The REST API will respond to the user request with the shortest path and the tot
 
 #### 12.3.3. Linux
 
-To do since we don't have the information yet.
+Unfortunately, we do not have access to a Linux environment to test or build the project at this time.
 
 ### 12.4. Template
 
@@ -1326,4 +1327,4 @@ To deploy the Quickest Path project, ensure the following environment setup:
 
 [^17]: GNU Compiler Collection: A compiler system produced by the GNU Project.
 
-[^18]: MSYS2: A software distribution and building platform for Windows.
+[^18]: MSYS2 a software distribution and building platform for Windows.
