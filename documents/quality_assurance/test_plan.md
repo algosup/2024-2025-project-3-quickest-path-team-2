@@ -231,7 +231,7 @@ A curated set of smaller CSV files (some valid, some intentionally malformed) fo
 
 ### 5.1 REST API Testing
 
-- **Endpoints**: `/shortest_path?start=<id>&end=<id>/json|xml`  
+- **Endpoints**: `/api/shortest-path/?:landmark_1&:landmark_2&:format`  
 - **Checks**:  
   1. Valid inputs produce a JSON/XML response with correct travel time and path.  
   2. Invalid inputs (e.g., missing parameters, nonexistent landmarks) produce appropriate HTTP error codes and messages.  
@@ -331,7 +331,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that a valid GET request returns a JSON response with the correct time and path.  
 - **Preconditions**: A properly validated CSV is loaded, server is running on `localhost:8080`.  
 - **Steps**:  
-  1. `GET /shortest_path?landmark_1=100&landmark_2=200/json`  
+  1. `/api/shortest-path/?:landmark_1=100&:landmark_2=200&:json`  
   2. Check response time and format.  
 - **Expected**:  
   - 200 OK status, JSON body including `"time": <int>` and `"steps": [...]` structure.  
@@ -343,7 +343,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Ensure that XML output is correct when format=xml is requested.  
 - **Preconditions**: Same environment as above.  
 - **Steps**:  
-  1. `GET /shortest_path?landmark_1=123&landmark_2=456/xml`  
+  1. `/api/shortest_path/?:landmark_1=123&:landmark_2=456&:xml`  
   2. Observe the returned XML.  
 - **Expected**:  
   - Well-formed XML with root `<response>` tag, `<time>` element, and `<steps>` sub-elements.  
@@ -355,7 +355,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm the server gracefully handles requests where the landmarks are out of range or missing.  
 - **Preconditions**: CSV loaded, server is listening.  
 - **Steps**:  
-  1. `GET /shortest_path?landmark_1=-1&landmark_2=9999999999/json`  
+  1. `/api/shortest_path&?:landmark_1=-1&:landmark_2=9999999999&:json`  
   2. Check HTTP response code and body.  
 - **Expected**:  
   - Possibly `400 Bad Request` or `404 Not Found`, with a short message stating the request is invalid.  
@@ -367,7 +367,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Verify incomplete queries produce a proper error rather than a silent fail.  
 - **Preconditions**: Normal environment.  
 - **Steps**:  
-  1. `GET /shortest_path?start=300` with no `end`.  
+  1. `/api/shortest_path/?:landmark_1=300` with no `landmark_2`.  
   2. Observe the result.  
 - **Expected**:  
   - HTTP error code (400 or 422), with a message about missing parameters.  
@@ -403,7 +403,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 **<ins>Test Case #PT-2: Extended Load Simulation</ins>**  
 - **Goal**: Check if repeated queries (e.g., 100 requests in quick succession) degrade the server’s performance.   
 - **Steps**:  
-  1. Launch 100–200 requests, each to a typical path (e.g., `start=50,end=900`).  
+  1. Launch 100–200 requests, each to a typical path (e.g., `landmark_1=50,landmark_2=900`).  
   2. Collect average and 95th percentile response times.  
 - **Expected**:  
   - No meltdown or out-of-memory errors.  
@@ -480,7 +480,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Verify that with heuristics enabled, the route does not exceed 110% of the absolute shortest path.  
 - **Preconditions**: A CSV where we can approximate the true shortest path or have an authoritative reference.  
 - **Steps**:  
-  1. Query a path that might have multiple routes (e.g., `start=1000, end=2000`).  
+  1. Query a path that might have multiple routes (e.g., `landmark_1=1000, landmark_2=2000`).  
   2. Compare the returned travel time to the best known route.  
 - **Expected**:  
   - The system does not exceed 110% of the known optimal.  
@@ -491,7 +491,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that if the same landmark is used for start and end, the travel time is `0`, and the route is trivially that single landmark.  
 - **Preconditions**: The CSV is valid.  
 - **Steps**:  
-  1. `GET /shortest_path?start=500&end=500/json`  
+  1. `/api/shortest_path&?:landmark_1=500&:landmark_2=500&:json`  
 - **Expected**:  
   - The JSON or XML returns `"time": 0` and steps of length 1 (just `500`).  
 
