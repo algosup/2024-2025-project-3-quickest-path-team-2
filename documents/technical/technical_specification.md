@@ -60,6 +60,8 @@
       - [12.5.2. Command Line](#1252-command-line)
       - [12.5.3. Application](#1253-application)
     - [12.6. API Endpoints \& Response](#126-api-endpoints--response)
+      - [12.6.1. Endpoints](#1261-endpoints)
+      - [12.6.2. Response](#1262-response)
   - [13. Deployment](#13-deployment)
     - [13.1. Environment](#131-environment)
     - [13.2. Steps](#132-steps)
@@ -299,7 +301,8 @@ sequenceDiagram
     D-->>F: Start the API
     F-->>D: Respond when API ready
     D->>A: Listen the input from the user
-    A->>F: Send the data to the API
+    A->>B: Send user's input
+    B->>F: Send the data to the API
     F->>E: Calculate the shortest path
     E->>F: Send the result to the API
     F->>B: Display the results
@@ -328,18 +331,18 @@ When CSV provided we have to make different checks to ensure the data are correc
 
 ```csv
 loop =  landmark_1, landmark_2, time
-        105, 501, 200 -> First time declared
-        321, 123, 200
-        501, 105, 250 -> Second time declared
+        105, 360, 200 -> First time declared
+        555, 900, 100
+        360, 105, 200 -> Second time declared
 ```
 
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)) -- 100 <--> b((105))
-        a((200)) -- 200 <--> d((321))
-        f((123)) -- 200 <--> d((321))
-        d((321)) -- 50 <--> e((105)):::no
+        a((105)) -- 200 --> b((360))
+        a((555)) -- 100 --> d((900))
+        b((360)) -- 200 --> a
+        d((321)) -- 50 --> e((105)):::no
         classDef no fill:#f00,stroke:#333,stroke-width:2px;
     end
 ```
@@ -347,10 +350,10 @@ graph
 ```mermaid
 graph
     subgraph Good DAG
-        a((200)) -- 100 <--> b((105))
-        a((200)) -- 200 <--> d((321))
-        f((123)) -- 200 <--> d((321))
-        d((321)) -- 50 <--> b((105)):::yes
+        a((200)) -- 100 --> b((105))
+        a((200)) -- 200 --> d((321))
+        f((123)) -- 200 --> d((321))
+        d((321)) -- 50 --> b((105)):::yes
         classDef yes fill:#0b0,stroke:#333,stroke-width:2px;
     end
 ```
@@ -366,7 +369,7 @@ landmark missing =  landmark_1, landmark_2, time
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)) -- 100 <--> b((....)):::no
+        a((...)):::no -- 200 --> b((501))
         classDef no fill:#f00,stroke:#333,stroke-width:2px;
     end
 ```
@@ -374,7 +377,7 @@ graph
 ```mermaid
 graph
     subgraph Good DAG
-        a((200)) -- 100 <--> b((250)):::yes
+        a((200)):::yes -- 200 --> b((501))
         classDef yes fill:#0b0,stroke:#333,stroke-width:2px;
     end
 ```
@@ -383,13 +386,13 @@ graph
 
 ```csv
 time missing = landmark_1, landmark_2, time
-            501, 105,   -> time is missing
+            200, 250,   -> time is missing
 ```
 
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)) <-- NULL --> b((250))
+        a((200)) -- NULL --> b((250))
     end
 ```
 
@@ -397,13 +400,13 @@ graph
 
 ```csv
 time negative = landmark_1, landmark_2, time
-                501, 105, -200 -> time can not be negative
+                200, 250, -200 -> time can not be negative
 ```
 
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)) <-- -200 ---> b((250))
+        a((200)) -- -200 ---> b((250))
     end
 ```
 
@@ -411,13 +414,13 @@ graph
 
 ```csv
 time equal 0 = landmark_1, landmark_2, time
-                501, 105, 0 -> time can not be equal to 0 
+                200, 250, 0 -> time can not be equal to 0 
 ```
 
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)) <-- 0 ---> b((250))
+        a((200)) -- 0 ---> b((250))
     end
 ```
 
@@ -428,32 +431,32 @@ disconnected =  landmark_1, landmark_2, time
                 200 ,250, 100 -> Those two nodes are not connected
                 321, 123, 200 
                 456, 654, 250
-                456, 321, 105
+                456, 123, 105
                 654, 123, 105
 ```
 
 ```mermaid
 graph
     subgraph Not Good DAG
-        a((200)):::no -- 100 <--> b((250)):::no
+        a((200)):::no -- 100 --> b((250)):::no
         classDef no fill:#f00,stroke:#333,stroke-width:2px;
-        c((321)) -- 200 <--> d((123))
-        e((456)) -- 250 <--> f((654))
-        e -- 105 <--> d
-        f -- 105 <--> d
+        c((321)) -- 200 --> d((123))
+        e((456)) -- 250 --> f((654))
+        e -- 105 --> d
+        f -- 105 --> d
     end
 ```
 
 ```mermaid
 graph
     subgraph Good DAG
-        a((200)):::yes -- 100 <--> b((250)):::yes
+        a((200)):::yes -- 100 --> b((250)):::yes
         classDef yes fill:#0b0,stroke:#333,stroke-width:2px;
-        c((321)) -- 200 <--> d((123))
-        e((456)) -- 250 <--> f((654))
-        e -- 105 <--> d
-        f -- 105 <--> d
-        a -- 100 <--> c
+        c((321)) -- 200 --> d((123))
+        e((456)) -- 250 --> f((654))
+        e -- 105 --> d
+        f -- 105 --> d
+        a -- 100 --> c
     end
 ```
 
@@ -569,26 +572,26 @@ graph
         I((I))
         J((J))
         
-        A <--> B
-        B <--> C
-        C <--> D
-        D <--> E
-        B <--> F
-        F <--> G
-        G <--> H
-        H <--> C
-        E <--> I
-        F <--> J
+        A --> B
+        B --> C
+        C --> D
+        D --> E
+        B --> F
+        F --> G
+        G --> H
+        H --> C
+        E --> I
+        F --> J
 
         X((X))
         Y((Y))
         Z((Z))
         W((W))
         
-        X <--> Y
-        Y <--> Z
-        Z <--> W
-        W <--> X
+        X --> Y
+        Y --> Z
+        Z --> W
+        W --> X
         D x-. Not connected .-x Y
 
     end
@@ -613,28 +616,28 @@ graph
         I((I))
         J((J))
         
-        A <--> B
-        B <--> C
-        C <--> D
-        D <--> E
-        B <--> F
-        F <--> G
-        G <--> H
-        H <--> C
-        E <--> I
-        F <--> J
+        A --> B
+        B --> C
+        C --> D
+        D --> E
+        B --> F
+        F --> G
+        G --> H
+        H --> C
+        E --> I
+        F --> J
 
         X((X))
         Y((Y))
         Z((Z))
         W((W))
         
-        X <--> Y
-        Y <--> Z
-        Z <--> W
-        W <--> X
+        X --> Y
+        Y --> Z
+        Z --> W
+        W --> X
 
-        D <--Connection--> Y
+        D --Connection--> Y
     end
 ```
 
@@ -817,7 +820,7 @@ The adjacency list will be created as an array of nodes with the following attri
 
 ```cpp
 typedef struct AdjacencyList {
-    int size;       // Number of nodes in the graph
+    uint32_t size;       // Number of nodes in the graph
     s_Node *list;   // Array of nodes representing the adjacency list
 } s_AdjacencyList;
 ```
@@ -840,7 +843,7 @@ typedef struct AdjacencyList {
 </div>
 
 ```cpp
-vector<vector<pair<int, int> > > adj; // Adjacency list for vector of vector of pair of int, int
+vector<vector<pair<uint32_t, uint32_t> > > adj; // Adjacency list for vector of vector of pair of int, int
 ```
 
 >[!IMPORTANT]
@@ -862,7 +865,7 @@ vector<vector<pair<int, int> > > adj; // Adjacency list for vector of vector of 
 </div>
 
 ```cpp
-unordered_map<int, vector<pair<int, int>>> graph; // Adjacency list for unordered_map of int, unordered_map of int, int
+vector<uint32_t, vector<pair<uint32_t, uint32_t>>> graph; // Adjacency list for vector of uint32_t, vector of uint32_t, uint32_t
 ```
 
 >[!IMPORTANT]
@@ -881,10 +884,10 @@ unordered_map<int, vector<pair<int, int>>> graph; // Adjacency list for unordere
 ---
 
 >[!CAUTION]
-> Since we got the structure Edge defined as a pair of int, int we can use something like:
+> Since we got the structure Edge defined as a pair of uint32_t, uint32_t we can use something like:
 >
 >```cpp
-> unordered_map<int, vector<Edge>> graph; 
+> vector<uint32_t, vector<s_Edge>> graph; 
 >```
 >
 ---
@@ -935,25 +938,42 @@ The REST API will respond to the user request with the shortest path and the tot
     }
     ```
 
-2. **Create the `CMakeLists.txt` file**:  
+2. **Download `crow_all.h`:**
+    Download the `crow_all.h` file from the Crow repository [here](https://github.com/CrowCpp/Crow/releases) and place it in the same directory as your `main.cpp`.
+
+3. **Create the `CMakeLists.txt` file**:  
    In the same directory as your `main.cpp`, create a `CMakeLists.txt` file with the following content:
 
     ```cmake
+    # Specify the minimum version of CMake required to build this project
     cmake_minimum_required(VERSION 3.10)
-    project(CrowExample)
 
-    set(CMAKE_CXX_STANDARD 14)
+    # Define the project name
+    project(QuickestPath)
 
+    # Set the C++ standard to C++17
+    set(CMAKE_CXX_STANDARD 17)
+
+    # Find and include the Boost library, which is required for this project
     find_package(Boost REQUIRED)
 
+    # Include the directories for Boost and the project's header files
     include_directories(${Boost_INCLUDE_DIRS} ./include)
 
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+    # Set the directory for archive files (static libraries)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 
-    add_executable(CrowExample main.cpp)  # Replace `main.cpp` with your main file name
+    # Set the directory for library files (shared libraries)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+
+    # Set the directory for executable files
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
+
+    # Add an executable target named QPS with the specified source files
+    add_executable(QPS main.cpp graph.cpp preprocessing.cpp verification.cpp)
     ```
 
-3. **Build the project**:  
+4. **Build the project**:  
    In your terminal, follow the steps below based on your operating system.
 
 #### 12.3.2. Windows
@@ -1012,9 +1032,7 @@ The REST API will respond to the user request with the shortest path and the tot
    brew install cmake asio boost
     ```
 
-2. **Download `crow_all.h`:**
-    Download the `crow_all.h` file from the Crow repository [here](https://crowcpp.org/master/) and place it in the same directory as your `main.cpp`.
-3. **Build the Project:**
+2. **Build the Project:**
     From the root of your project, execute the following commands:
     - Generate build files and compile the project using `make`:
 
@@ -1023,7 +1041,7 @@ The REST API will respond to the user request with the shortest path and the tot
     cmake .. && make # From the build folder
     ```
 
-4. **Run the Project:**
+3. **Run the Project:**
     After building the project, you can run it from the build folder:
 
     ```bash
@@ -1176,6 +1194,8 @@ do {
 
 ### 12.6. API Endpoints & Response
 
+#### 12.6.1. Endpoints
+
 Since the API will be using only the GET methods, for a unique endpoint GET, the following endpoints will be used:
 
 - **GET `/api/shortest-path/?:landmark_1&:landmark_2&:format`** Returns the shortest path and total time between two nodes in JSON format like this:
@@ -1243,6 +1263,61 @@ Since the API will be using only the GET methods, for a unique endpoint GET, the
 ---
 >[!IMPORTANT]
 > This can be modified and needed later.
+
+#### 12.6.2. Response
+
+The status code will be used to determine the response to the user request such as:
+
+```cpp
+enum status
+{
+    CONTINUE                      = 100,
+    SWITCHING_PROTOCOLS           = 101,
+
+    OK                            = 200,
+    CREATED                       = 201,
+    ACCEPTED                      = 202,
+    NON_AUTHORITATIVE_INFORMATION = 203,
+    NO_CONTENT                    = 204,
+    RESET_CONTENT                 = 205,
+    PARTIAL_CONTENT               = 206,
+
+    MULTIPLE_CHOICES              = 300,
+    MOVED_PERMANENTLY             = 301,
+    FOUND                         = 302,
+    SEE_OTHER                     = 303,
+    NOT_MODIFIED                  = 304,
+    TEMPORARY_REDIRECT            = 307,
+    PERMANENT_REDIRECT            = 308,
+
+    BAD_REQUEST                   = 400,
+    UNAUTHORIZED                  = 401,
+    FORBIDDEN                     = 403,
+    NOT_FOUND                     = 404,
+    METHOD_NOT_ALLOWED            = 405,
+    NOT_ACCEPTABLE                = 406,
+    PROXY_AUTHENTICATION_REQUIRED = 407,
+    CONFLICT                      = 409,
+    GONE                          = 410,
+    PAYLOAD_TOO_LARGE             = 413,
+    UNSUPPORTED_MEDIA_TYPE        = 415,
+    RANGE_NOT_SATISFIABLE         = 416,
+    EXPECTATION_FAILED            = 417,
+    PRECONDITION_REQUIRED         = 428,
+    TOO_MANY_REQUESTS             = 429,
+    UNAVAILABLE_FOR_LEGAL_REASONS = 451,
+
+    INTERNAL_SERVER_ERROR         = 500,
+    NOT_IMPLEMENTED               = 501,
+    BAD_GATEWAY                   = 502,
+    SERVICE_UNAVAILABLE           = 503,
+    GATEWAY_TIMEOUT               = 504,
+    VARIANT_ALSO_NEGOTIATES       = 506
+};
+```
+
+> [!NOTE]
+> This current enum comes from the `crow_all.h` file, it cannot be modified.
 
 ## 13. Deployment
 
