@@ -935,7 +935,10 @@ The REST API will respond to the user request with the shortest path and the tot
     }
     ```
 
-2. **Create the `CMakeLists.txt` file**:  
+2. **Download `crow_all.h`:**
+    Download the `crow_all.h` file from the Crow repository [here](https://github.com/CrowCpp/Crow/releases) and place it in the same directory as your `main.cpp`.
+
+3. **Create the `CMakeLists.txt` file**:  
    In the same directory as your `main.cpp`, create a `CMakeLists.txt` file with the following content:
 
     ```cmake
@@ -953,7 +956,7 @@ The REST API will respond to the user request with the shortest path and the tot
     add_executable(CrowExample main.cpp)  # Replace `main.cpp` with your main file name
     ```
 
-3. **Build the project**:  
+4. **Build the project**:  
    In your terminal, follow the steps below based on your operating system.
 
 #### 12.3.2. Windows
@@ -1012,9 +1015,7 @@ The REST API will respond to the user request with the shortest path and the tot
    brew install cmake asio boost
     ```
 
-2. **Download `crow_all.h`:**
-    Download the `crow_all.h` file from the Crow repository [here](https://crowcpp.org/master/) and place it in the same directory as your `main.cpp`.
-3. **Build the Project:**
+2. **Build the Project:**
     From the root of your project, execute the following commands:
     - Generate build files and compile the project using `make`:
 
@@ -1023,7 +1024,7 @@ The REST API will respond to the user request with the shortest path and the tot
     cmake .. && make # From the build folder
     ```
 
-4. **Run the Project:**
+3. **Run the Project:**
     After building the project, you can run it from the build folder:
 
     ```bash
