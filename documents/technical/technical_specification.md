@@ -7,7 +7,7 @@
 **Project Name:** Quickest Path  
 **Team:** Team 2  
 **Document Edited by:** [Guillaume DESPAUX](https://github.com/guillaumedespaux)<br>
-**Last Time Modified:** 01/29/2025
+**Last Time Modified:** 02/04/2025
 
 </div>
 
@@ -51,11 +51,10 @@
   - [12. REST API](#12-rest-api)
     - [12.1. Overview](#121-overview)
     - [12.2. Dependencies](#122-dependencies)
-    - [12.3. Installation](#123-installation)
-      - [12.3.1. Windows](#1231-windows)
-      - [12.3.2. macOS](#1232-macos)
-      - [12.3.3. Linux](#1233-linux)
-    - [12.4. Template](#124-template)
+    - [12.3. Installation \& Build](#123-installation--build)
+      - [12.3.1. Common Steps](#1231-common-steps)
+      - [12.3.2. Windows](#1232-windows)
+      - [12.3.3. macOS](#1233-macos)
     - [12.5. Accessibility](#125-accessibility)
       - [12.5.1. HTML](#1251-html)
       - [12.5.2. Command Line](#1252-command-line)
@@ -906,44 +905,16 @@ The REST API will respond to the user request with the shortest path and the tot
 - Boost[^14]
 - Crow[^15]
 
-### 12.3. Installation
+### 12.3. Installation & Build
 
-#### 12.3.1. Windows
+#### 12.3.1. Common Steps
 
-#### 12.3.2. macOS
-
-1. You will have to install [Homebrew](https://brew.sh) to install the dependencies.  
-2. You will have to install the following dependencies:
-
-    ```bash
-    brew install cmake asio boost   #Install cmake, asio and boost
-    ```
-
-3. Download the `crow_all.h` file from the Crow repository by clicking [here](https://github.com/CrowCpp/crow/releases/tag/v1.2.0).
-4. Place the `crow_all.h` at the same root from your `main.cpp` of your api.
-5. Create a file `CMakeLists.txt` at the same root from your `main.cpp` of your api that will contains the following:
-
-    ```cmake
-    cmake_minimum_required(VERSION 3.10)
-    project(CrowExample)
-
-    set(CMAKE_CXX_STANDARD 14)
-
-    find_package(Boost REQUIRED)
-
-    include_directories(${Boost_INCLUDE_DIRS} ./include)
-
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-
-    add_executable(CrowExample main.cpp)  # Replace `main.cpp` by the name of your main file
-
-    ```
-
-6. Create a file `main.cpp` at the same root from your `CMakeLists.txt` that will contains the following:
+1. **Create the `main.cpp` file**:  
+   Create a file `main.cpp` at the root of your project (next to your `CMakeLists.txt`) with the following content:
 
     ```cpp
     #include "crow_all.h"
-        int main() {
+    int main() {
         // Create an instance of the Crow application
         crow::SimpleApp app;
 
@@ -964,20 +935,104 @@ The REST API will respond to the user request with the shortest path and the tot
     }
     ```
 
-7. Run the following command to build the project:
+2. **Create the `CMakeLists.txt` file**:  
+   In the same directory as your `main.cpp`, create a `CMakeLists.txt` file with the following content:
 
-    ```bash
-    cmake .; make       #From the root folder   (execute the CMakeLists.txt)
-    cmake ..; make      #From the build folder  (execute the CMakeLists.txt)
+    ```cmake
+    cmake_minimum_required(VERSION 3.10)
+    project(CrowExample)
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    find_package(Boost REQUIRED)
+
+    include_directories(${Boost_INCLUDE_DIRS} ./include)
+
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+
+    add_executable(CrowExample main.cpp)  # Replace `main.cpp` with your main file name
     ```
 
-8. Run the following command to run the project:
+3. **Build the project**:  
+   In your terminal, follow the steps below based on your operating system.
+
+#### 12.3.2. Windows
+
+1. **Install Dependencies**:  
+   Install [MSYS2](https://www.msys2.org) to manage dependencies.  
+   Install CMake and Make using the following commands:
+
+   - CMake:
+
+     ```bash
+     pacman -S mingw-w64-x86_64-cmake
+     ```
+
+   - Make:
+
+     ```bash
+     pacman -S mingw-w64-x86_64-make
+     ```
+
+2. **Download and Install Boost**:  
+   Download and install [Boost](https://www.boost.org/users/download/) at the root of your computer.
+
+3. **Configure PATH for CMake and Make**:  
+   Follow the steps to configure the PATH in MSYS2[^18] to use the installed CMake and Make:
+
+   - ![Step 1](../images/technical/step1.png)
+   - ![Step 2](../images/technical/step2.png)
+   - ![Step 3](../images/technical/step3.png)
+   - ![Step 4](../images/technical/step4.png)
+
+4. **Build the Project**:
+
+   At the root of your project, execute the following commands:
+
+   - Create the `build` folder:
+
+     ```bash
+     mkdir build
+     cd build
+     ```
+
+   - Generate build files using CMake and build the project with Make:
+
+     ```bash
+     cmake -S .. -G "MinGW Makefiles" && mingw32-make
+     ```
+
+#### 12.3.3. macOS
+
+1. **Install Dependencies:**  
+   Install [Homebrew](https://brew.sh) to manage dependencies.  
+   Install CMake, Asio, and Boost using the following command:
+
+   ```bash
+   brew install cmake asio boost
+    ```
+
+2. **Download `crow_all.h`:**
+    Download the `crow_all.h` file from the Crow repository [here](https://crowcpp.org/master/) and place it in the same directory as your `main.cpp`.
+3. **Build the Project:**
+    From the root of your project, execute the following commands:
+    - Generate build files and compile the project using `make`:
+
+    ```cmake
+    cmake . && make  # From the root folder
+    cmake .. && make # From the build folder
+    ```
+
+4. **Run the Project:**
+    After building the project, you can run it from the build folder:
 
     ```bash
-    ./CrowExample      #From the build folder   
+    ./CrowExample
     ```
 
 #### 12.3.3. Linux
+
+Unfortunately, we do not have access to a Linux environment to test or build the project at this time.
 
 ### 12.4. Template
 
@@ -1271,3 +1326,5 @@ To deploy the Quickest Path project, ensure the following environment setup:
 [^16]: Big O Notation: A mathematical notation that describes the limiting behavior of a function.
 
 [^17]: GNU Compiler Collection: A compiler system produced by the GNU Project.
+
+[^18]: MSYS2 a software distribution and building platform for Windows.
