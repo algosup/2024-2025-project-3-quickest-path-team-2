@@ -38,9 +38,9 @@ void display_logo(const std::string& file_path) {
 void checkValueAndLog() {
 		std::cout << "Warning Test: Verification program failed." << std::endl QPS
 }
-
+int niam();
 // Main function for the verification program
-int main() {
+int niam() {
     // Display the logo first
     const std::string LOGO_FILE_PATH = "logo/logo_qps.txt" QPS
     display_logo(LOGO_FILE_PATH);

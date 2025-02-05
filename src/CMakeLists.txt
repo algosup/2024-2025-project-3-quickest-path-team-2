@@ -27,4 +27,4 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 
 # Add an executable target named QPS with the specified source files
-add_executable(QPS main.cpp graph.cpp preprocessing.cpp verification.cpp)
+add_executable(QPS main.cpp graph.cpp preprocessing.cpp verification.cpp main_verification.cpp)

@@ -11,8 +11,12 @@
 #include <mutex> 
 #include <iostream>
 #include <fcntl.h> // For file control options to open files
+#ifdef _WIN32
+#include <windows.h> // For VirtualAlloc and VirtualFree functions
+#else
 #include <sys/mman.h> // For mmap and munmap functions to map files to memory
 #include <unistd.h> // For close function to close file descriptors
+#endif
 #include <filesystem>
 #include <fstream>
 

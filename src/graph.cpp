@@ -1,4 +1,5 @@
 #include "includes/graph.hpp"
+#include <stdexcept>
 
 /**
  * Default constructor for the Graph class.
@@ -37,8 +38,8 @@ int Graph::get_max_node_id() const {
  * @param totalTime Reference to store the total time of the shortest path.
  * @return Vector of node IDs representing the shortest path.
  */
-std::vector<int> Graph::shortest_path(int source, int target, long long& totalTime) {
-    constexpr long long INF = std::numeric_limits<long long>::max();
+std::vector<int> Graph::shortest_path(int source, int target, uint32_t& totalTime) {
+    constexpr uint32_t INF = std::numeric_limits<uint32_t>::max();
     int maxNodeId = get_max_node_id();
 
     if (source >= adjList.size() || target >= adjList.size()) {
@@ -46,8 +47,8 @@ std::vector<int> Graph::shortest_path(int source, int target, long long& totalTi
     }
 
     // Initialize distance and previous node arrays for forward and backward searches
-    std::vector<long long> distForward(maxNodeId + 1, INF);
-    std::vector<long long> distBackward(maxNodeId + 1, INF);
+    std::vector<uint32_t> distForward(maxNodeId + 1, INF);
+    std::vector<uint32_t> distBackward(maxNodeId + 1, INF);
     std::vector<int> prevForward(maxNodeId + 1, -1);
     std::vector<int> prevBackward(maxNodeId + 1, -1);
     std::vector<bool> processedForward(maxNodeId + 1, false);
@@ -57,7 +58,7 @@ std::vector<int> Graph::shortest_path(int source, int target, long long& totalTi
     distBackward[target] = 0;
 
     // Priority queues for forward and backward searches
-    using NodeDistPair = std::pair<long long, int>;
+    using NodeDistPair = std::pair<uint32_t, int>;
     auto comparator = [](const NodeDistPair& a, const NodeDistPair& b) {
         return a.first > b.first;
     };
@@ -67,14 +68,14 @@ std::vector<int> Graph::shortest_path(int source, int target, long long& totalTi
     pqForward.emplace(0, source);
     pqBackward.emplace(0, target);
 
-    long long bestCost = INF;
+    uint32_t bestCost = INF;
     int meetingNode = -1;
 
     // Bidirectional Dijkstra's algorithm
     while (!pqForward.empty() && !pqBackward.empty()) {
         auto process = [&](std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, decltype(comparator)>& pq,
-                           std::vector<long long>& dist, std::vector<int>& prev, std::vector<bool>& processed,
-                           std::vector<long long>& otherDist, std::vector<bool>& otherProcessed, bool isForward) {
+                           std::vector<uint32_t>& dist, std::vector<int>& prev, std::vector<bool>& processed,
+                           std::vector<uint32_t>& otherDist, std::vector<bool>& otherProcessed, bool isForward) {
             if (!pq.empty()) {
                 auto [currentDist, currentNode] = pq.top();
                 pq.pop();
@@ -83,7 +84,7 @@ std::vector<int> Graph::shortest_path(int source, int target, long long& totalTi
                 processed[currentNode] = true;
 
                 for (const auto& [neighbor, weight] : adjList[currentNode]) {
-                    long long newDist = currentDist + weight;
+                    uint32_t newDist = currentDist + weight;
                     if (newDist < dist[neighbor]) {
                         dist[neighbor] = newDist;
                         prev[neighbor] = currentNode;

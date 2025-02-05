@@ -1,5 +1,15 @@
 #include "includes/preprocessing.hpp"
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#endif
+
+#include <sstream>
+#include <algorithm>
 
 /**
  * Processes a chunk of the file to extract and store graph edges.
@@ -63,7 +73,7 @@ void process_chunk(
         seenConnections[landmarkB].insert(landmarkA);
 
         // Update the maximum node ID
-        maxId.store(std::max(maxId.load(), std::max(landmarkA, landmarkB)));
+        maxId.store(std::max(maxId.load(), (int)std::max(landmarkA, landmarkB)));
     }
 
     std::cout << "Processed " << lineCount << " lines." << std::endl;
@@ -81,22 +91,40 @@ bool preprocess_data(const std::string& filePath, int max_lines, Graph& graph) {
     TPDF_CONNECTIONS seenConnections;
     std::atomic<int> maxId(0);
 
-    // Open the file
+#ifdef _WIN32
+    HANDLE fileHandle = CreateFileA(filePath.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (fileHandle == INVALID_HANDLE_VALUE) {
+        throw std::runtime_error("Error: Impossible to open the CSV file: " + filePath);
+    }
+
+    DWORD fileSize = GetFileSize(fileHandle, NULL);
+    HANDLE fileMapping = CreateFileMapping(fileHandle, NULL, PAGE_READONLY, 0, fileSize, NULL);
+    if (!fileMapping) {
+        CloseHandle(fileHandle);
+        throw std::runtime_error("Error: Failed to create file mapping for " + filePath);
+    }
+
+    char* fileData = static_cast<char*>(MapViewOfFile(fileMapping, FILE_MAP_READ, 0, 0, fileSize));
+    if (!fileData) {
+        CloseHandle(fileMapping);
+        CloseHandle(fileHandle);
+        throw std::runtime_error("Error: Failed to map the CSV file: " + filePath);
+    }
+#else
     int fd = open(filePath.c_str(), O_RDONLY);
     if (fd == -1) {
         throw std::runtime_error("Error: Impossible to open the CSV file: " + filePath);
     }
 
-    // Get the file size
     size_t fileSize = lseek(fd, 0, SEEK_END);
     lseek(fd, 0, SEEK_SET);
 
-    // Map the file into memory
     char* fileData = static_cast<char*>(mmap(nullptr, fileSize, PROT_READ, MAP_PRIVATE, fd, 0));
     if (fileData == MAP_FAILED) {
         close(fd);
         throw std::runtime_error("Error: Failed to mmap the CSV file: " + filePath);
     }
+#endif
 
     std::cout << "File mapped successfully. Size: " << fileSize << " bytes." << std::endl;
 
@@ -104,8 +132,14 @@ bool preprocess_data(const std::string& filePath, int max_lines, Graph& graph) {
     process_chunk(fileData, fileSize, graph, seenConnections, maxId, max_lines);
 
     // Clean up
+#ifdef _WIN32
+    UnmapViewOfFile(fileData);
+    CloseHandle(fileMapping);
+    CloseHandle(fileHandle);
+#else
     munmap(fileData, fileSize);
     close(fd);
+#endif
 
     return true;
 }

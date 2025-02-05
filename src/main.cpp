@@ -6,7 +6,7 @@
 #include <iomanip> // For std::setprecision
 
 int choice;
-long long totalTime;
+uint32_t totalTime;
 bool preprocess_done = false;
 bool graph_loaded = false;
 bool data_loaded = false;
@@ -172,7 +172,7 @@ int main(void) {
     //     std::cout << "Finding shortest path from " << source << " to " << target << "..." << std::endl;
 
     //     // Calculate the shortest path
-    //     long long totalTime = 0;  // Use long long for total time
+    //     uint32_t totalTime = 0;  // Use uint32_t for total time
     //     auto startPath = std::chrono::steady_clock::now();
     //     std::vector<int> path = graph.shortest_path(source, target, totalTime);
     //     auto endPath = std::chrono::steady_clock::now();
