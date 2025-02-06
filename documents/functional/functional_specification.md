@@ -169,9 +169,13 @@ While you're waiting for the verification process, a percentage bar will be disp
 #### 3.2.3 Main Program
 The first part of the program takes place in the terminal. Indeed the program have to be compiled first through it. Afterwards, you will have to launch the executable file created by the compilation. When all is done, the data pre-treatment process will start in a terminal prompt and just after this process, the API will start and proving you a link to go to the local page.
 The second part is launching on a page of your browser. The interface is quite simple: in the middle you can write your starting point and your destination. Below, there is a drop-down menu in which you can choose your format between Java and XML.
-You can see what the HTML page looks like below :
+You can see what the HTML page looks like below in the main menu:
 
-![The HTML page](../images/functional/html_page.png)
+![The HTML page](../images/functional/main_page_html.jpeg)
+
+And here, you can see the interface to search the quickest path between your 2 points:
+
+![The Search page](../images/functional/search_page_html.jpeg)
 
 ### 3.3 Logo
 
