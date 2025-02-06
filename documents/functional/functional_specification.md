@@ -7,8 +7,8 @@
 **Project** : Quickest Path <br>
 **Team** : 2 <br>
 **Created by** : Enoal ADAM <br>
-**Creation Date** : 01/06/2024 <br>
-**Updated** : 01/20/2024 <br>
+**Creation Date** : 01/06/2025 <br>
+**Updated** : 02/06/2025 <br>
 
 ---
 
@@ -168,12 +168,12 @@ While you're waiting for the verification process, a percentage bar will be disp
 
 #### 3.2.3 Main Program
 The first part of the program takes place in the terminal. Indeed the program have to be compiled first through it. Afterwards, you will have to launch the executable file created by the compilation. When all is done, the data pre-treatment process will start in a terminal prompt and just after this process, the API will start and proving you a link to go to the local page.
-The second part is launching on a page of your browser. The interface is quite simple: in the middle you can write your starting point and your destination. Below, there is a drop-down menu in which you can choose your format between Java and XML.
-You can see what the HTML page looks like below in the main menu:
+The second part is launching on a page of your browser. The interface is quite simple: at the bottom right-hand corner a QPS button is displayed. When you click on it, you can write in the order, your departure point, then your arrival point, and finally do the choice between all the formats available (Simplify, JSON and XML). <br>
+This is what the HTML page looks like in the main menu:
 
 ![The HTML page](../images/functional/main_page_html.jpeg)
 
-And here, you can see the interface to search the quickest path between your 2 points:
+<br> And here, you can see the interface to search the quickest path between your 2 points:
 
 ![The Search page](../images/functional/search_page_html.jpeg)
 
