@@ -45,7 +45,7 @@ int main() {
     });
 
 
-    CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::GET)
+    CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::Get)
         ([](const crow::request& req, crow::response& res) {
             auto format = req.url_params.get("format");
             auto landmark_1 = req.url_params.get("landmark_1");
