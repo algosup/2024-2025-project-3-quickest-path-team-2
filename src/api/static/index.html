@@ -33,16 +33,21 @@
 
     <div id="overlay"></div>
 
-    <div id="qps-box">
-        <h1>QPS</h1>
-        <select id="qps-select">
-            <option value="1">JSON</option>
-            <option value="2">XML</option>
-        <input type="text" placeholder="Champ 1">
-        <input type="text" placeholder="Champ 2">
-        <button id="submit-qps">Valider</button>
-        <button id="close-qps">Fermer</button>
-    </div>
+    <form id="qps-box" action="http://localhost:8080/api/shortest-path/" method="get">
+        <label for="source">Departure landmark</label>
+        <input class="landmark" name="source" type="number" placeholder="Landmark 1" required>
+        <label for="target">Destination landmark</label>
+        <input class="landmark" name="target" type="number" placeholder="Landmark 2" required>
+        <input id="qps-select" list="formats" name="format">
+        <datalist id="formats">
+            <option value="simplify">Simplify</option>
+            <option value="json">JSON</option>
+            <option value="xml">XML</option>
+            <option value="csv">CSV</option>
+        </datalist>
+        <input type="submit" value="Confirm">
+    </form>
+    
 
     <button id="qps-button">QPS</button>
 

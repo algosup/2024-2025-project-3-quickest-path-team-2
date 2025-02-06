@@ -63,11 +63,11 @@ CMAKE_BINARY_DIR = /Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quic
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/CrowExample.dir/all
+all: CMakeFiles/QPS.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/CrowExample.dir/codegen
+codegen: CMakeFiles/QPS.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/CrowExample.dir/clean
+clean: CMakeFiles/QPS.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/CrowExample.dir
+# Target rules for target CMakeFiles/QPS.dir
 
 # All Build rule for target.
-CMakeFiles/CrowExample.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles --progress-num=1,2 "Built target CrowExample"
-.PHONY : CMakeFiles/CrowExample.dir/all
+CMakeFiles/QPS.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target QPS"
+.PHONY : CMakeFiles/QPS.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/CrowExample.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CrowExample.dir/all
+CMakeFiles/QPS.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/QPS.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles 0
-.PHONY : CMakeFiles/CrowExample.dir/rule
+.PHONY : CMakeFiles/QPS.dir/rule
 
 # Convenience name for target.
-CrowExample: CMakeFiles/CrowExample.dir/rule
-.PHONY : CrowExample
+QPS: CMakeFiles/QPS.dir/rule
+.PHONY : QPS
 
 # codegen rule for target.
-CMakeFiles/CrowExample.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles --progress-num=1,2 "Finished codegen for target CrowExample"
-.PHONY : CMakeFiles/CrowExample.dir/codegen
+CMakeFiles/QPS.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target QPS"
+.PHONY : CMakeFiles/QPS.dir/codegen
 
 # clean rule for target.
-CMakeFiles/CrowExample.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/clean
-.PHONY : CMakeFiles/CrowExample.dir/clean
+CMakeFiles/QPS.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/clean
+.PHONY : CMakeFiles/QPS.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

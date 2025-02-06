@@ -1,131 +1,122 @@
+#include "api.hpp"
+#include "../includes/graph.hpp"  // Inclure le fichier du graphe
 #include "crow_all.h"
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <iostream>
+#include <map>
 
-#define STATIC_DIR "../static/"
+#define STATIC_DIR "static/"
 
 // Fonction pour lire un fichier
 std::string readFile(const std::string& filePath) {
     std::ifstream file(filePath);
     if (!file.is_open()) {
-        throw std::runtime_error("Unable to open file: " + filePath);
+        throw std::runtime_error("Impossible d'ouvrir le fichier : " + filePath);
     }
     std::stringstream buffer;
     buffer << file.rdbuf();
     return buffer.str();
 }
 
-int main() {
+// Fonction pour démarrer l'API
+void start_api(Graph& graph) {
     crow::SimpleApp app;
 
-    // Route pour la page d'accueil
     CROW_ROUTE(app, "/")([]() {
-        // Chargerichier index.html
-        std::string filePath = STATIC_DIR "index.html";
         try {
-            return crow::response(readFile(filePath));
+            return crow::response(readFile(STATIC_DIR "index.html"));
         } catch (const std::exception& e) {
             return crow::response(500, e.what());
         }
     });
 
-    CROW_ROUTE(app, "/static/<string>")([](const crow::request& req, std::string fileName) {
-        std::string filePath = STATIC_DIR + fileName;
-        std::cout << "Looking for file: " << filePath << std::endl;
-
-
+    CROW_ROUTE(app, "static/<string>")([](const crow::request&, std::string fileName) {
         try {
-            std::ifstream file(filePath, std::ios::binary);
-            std::stringstream buffer;
-            buffer << file.rdbuf();
-            return crow::response(200, buffer.str());
+            return crow::response(readFile(STATIC_DIR + fileName));
         } catch (const std::exception& e) {
-            return crow::response(500, "Error reading file: " + std::string(e.what()));
+            return crow::response(500, "Erreur lecture fichier: " + std::string(e.what()));
         }
     });
 
+   CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::GET)([&graph](const crow::request& req) {
+    const char* source = req.url_params.get("source");
+    const char* target = req.url_params.get("target");
+    const char* format = req.url_params.get("format");
 
-    CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::GET)
-        ([](const crow::request& req, crow::response& res) {
-            auto format = req.url_params.get("format");
-            auto landmark_1 = req.url_params.get("landmark_1");
-            auto landmark_2 = req.url_params.get("landmark_2");
-            crow::json::wvalue response;
-            std::ostringstream oss;
+    crow::json::wvalue response_json;
+    if (!source || !target) {
+        response_json["status"] = "error";
+        response_json["message"] = "Missing parameters";
+        return crow::response(400, response_json);
+    }
 
-            if (std::string(format) == "classical") {
-                if (landmark_1 && landmark_2) {
-                    // Dummy data for the path and time
-                    std::vector<int> path = {1, 250, 200, 1000};
-                    int total_time = 65429;
+    int src = std::stoi(source);
+    int tgt = std::stoi(target);
 
-                    response["path"] = path;
-                    response["time"] = total_time;
-                    res.code = crow::status::OK;
-                } else {
-                    response["status"] = "error";
-                    response["message"] = "Missing parameters";
-                    res.code = crow::status::BAD_REQUEST;
-                }
-                res.set_header("Content-Type", "application/json");
-                res.write(response.dump());
-                res.end();
-            } else if (std::string(format) == "json") {
-                if (landmark_1 && landmark_2) {
-                    crow::json::wvalue::list paths;
-                    for (int i = 0; i < 100; i++) {
-                        crow::json::wvalue path;
-                        path["landmark_1"] = std::to_string(i + 1);
-                        path["landmark_2"] = std::to_string(i + 1000);
-                        path["time"] = 65429;
-                        paths.push_back(path);
-                    }
-                    response["paths"] = std::move(paths);
-                    res.code = crow::status::OK;
-                    response["status"] = std::to_string(res.code);
-                } else {
-                    response["status"] = "error";
-                    response["message"] = "Missing parameters";
-                    res.code = crow::status::BAD_REQUEST;
-                }
-                res.set_header("Content-Type", "application/json");
-                res.write(response.dump());
-                res.end();
-            } else if (std::string(format) == "xml") {
-                if (landmark_1 && landmark_2) {
-                    oss << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                        << "<paths>\n";
-                    for (int i = 0; i < 100; i++) {
-                        oss << "\t<path>\n"
-                            << "\t\t<landmark_1>" << (i + 1) << "</landmark_1>\n"
-                            << "\t\t<landmark_2>" << (i + 1000) << "</landmark_2>\n"
-                            << "\t\t<time>65429</time>\n"
-                            << "\t</path>\n";
-                    }
-                    oss << "</paths>";
-                    res.code = crow::status::OK;
-                } else {
-                    oss << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                        << "<response>\n"
-                        << "\t<status>error</status>\n"
-                        << "\t<message>Missing parameters</message>\n"
-                        << "</response>";
-                    res.code = crow::status::BAD_REQUEST;
-                }
-                res.set_header("Content-Type", "application/xml");
-                res.write(oss.str());
-                res.end();
-            } else {
-                response["status"] = "error";
-                response["message"] = "Invalid format parameter";
-                res.code = crow::status::BAD_REQUEST;
-                res.set_header("Content-Type", "application/json");
-                res.write(response.dump());
-                res.end();
-            }
-        });
+    int totalTime;
+    std::vector<int> path = graph.shortest_path(src, tgt, totalTime);
 
-    // Démarrer le serveur
+    if (path.empty()) {
+        response_json["status"] = "error";
+        response_json["message"] = "No path found";
+        return crow::response(404, response_json);
+    }
+
+    if (!format) format = "json";
+
+    // Define 'res' here to ensure it can be used in all branches
+    crow::response res;
+
+    if (std::string(format) == "simplify") {
+        response_json["path"] = std::move(path);
+        response_json["time"] = totalTime;
+        res = crow::response(200, response_json);
+        return res;
+    }
+
+    if (std::string(format) == "json") {
+        crow::json::wvalue detailed_path;
+        crow::json::wvalue path_array;
+
+        for (size_t i = 0; i < path.size() - 1; ++i) {
+            crow::json::wvalue step;
+            step["landmark_1"] = path[i];
+            step["landmark_2"] = path[i + 1];
+            step["time"] = graph.get_travel_time(path[i], path[i + 1]);
+            path_array[static_cast<int>(path_array.size())] = std::move(step);
+        }
+
+        detailed_path["path"] = std::move(path_array);
+        res = crow::response(200, detailed_path);
+        return res;
+    }
+
+    if (std::string(format) == "xml") {
+        std::ostringstream xml_response;
+        xml_response << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<paths>\n";
+        for (size_t i = 0; i < path.size() - 1; ++i) {
+            xml_response << "    <path>\n"
+                        << "        <landmark_1>" << path[i] << "</landmark_1>\n"
+                        << "        <landmark_2>" << path[i + 1] << "</landmark_2>\n"
+                        << "        <time>" << graph.get_travel_time(path[i], path[i + 1]) << "</time>\n"
+                        << "    </path>\n";
+        }
+        xml_response << "</paths>\n";
+
+        res = crow::response(200);
+        res.set_header("Content-Type", "application/xml");
+        res.body = xml_response.str();
+        return res;
+    }
+
+    response_json["status"] = "error";
+    response_json["message"] = "Invalid format specified";
+    return crow::response(400, response_json);
+});
+
+
+    std::cout << "Démarrage de l'API sur le port 8080..." << std::endl;
     app.port(8080).multithreaded().run();
-    return 0;
 }

@@ -117,41 +117,137 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named CrowExample
+# Target rules for targets named QPS
 
 # Build rule for target.
-CrowExample: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CrowExample
-.PHONY : CrowExample
+QPS: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 QPS
+.PHONY : QPS
 
 # fast build rule for target.
-CrowExample/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/build
-.PHONY : CrowExample/fast
+QPS/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/build
+.PHONY : QPS/fast
 
-api.o: api.cpp.o
-.PHONY : api.o
+api/api.o: api/api.cpp.o
+.PHONY : api/api.o
 
 # target to build an object file
-api.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/api.cpp.o
-.PHONY : api.cpp.o
+api/api.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/api/api.cpp.o
+.PHONY : api/api.cpp.o
 
-api.i: api.cpp.i
-.PHONY : api.i
+api/api.i: api/api.cpp.i
+.PHONY : api/api.i
 
 # target to preprocess a source file
-api.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/api.cpp.i
-.PHONY : api.cpp.i
+api/api.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/api/api.cpp.i
+.PHONY : api/api.cpp.i
 
-api.s: api.cpp.s
-.PHONY : api.s
+api/api.s: api/api.cpp.s
+.PHONY : api/api.s
 
 # target to generate assembly for a file
-api.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CrowExample.dir/build.make CMakeFiles/CrowExample.dir/api.cpp.s
-.PHONY : api.cpp.s
+api/api.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/api/api.cpp.s
+.PHONY : api/api.cpp.s
+
+graph.o: graph.cpp.o
+.PHONY : graph.o
+
+# target to build an object file
+graph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/graph.cpp.o
+.PHONY : graph.cpp.o
+
+graph.i: graph.cpp.i
+.PHONY : graph.i
+
+# target to preprocess a source file
+graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/graph.cpp.i
+.PHONY : graph.cpp.i
+
+graph.s: graph.cpp.s
+.PHONY : graph.s
+
+# target to generate assembly for a file
+graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/graph.cpp.s
+.PHONY : graph.cpp.s
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+preprocessing.o: preprocessing.cpp.o
+.PHONY : preprocessing.o
+
+# target to build an object file
+preprocessing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/preprocessing.cpp.o
+.PHONY : preprocessing.cpp.o
+
+preprocessing.i: preprocessing.cpp.i
+.PHONY : preprocessing.i
+
+# target to preprocess a source file
+preprocessing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/preprocessing.cpp.i
+.PHONY : preprocessing.cpp.i
+
+preprocessing.s: preprocessing.cpp.s
+.PHONY : preprocessing.s
+
+# target to generate assembly for a file
+preprocessing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/preprocessing.cpp.s
+.PHONY : preprocessing.cpp.s
+
+verification.o: verification.cpp.o
+.PHONY : verification.o
+
+# target to build an object file
+verification.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/verification.cpp.o
+.PHONY : verification.cpp.o
+
+verification.i: verification.cpp.i
+.PHONY : verification.i
+
+# target to preprocess a source file
+verification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/verification.cpp.i
+.PHONY : verification.cpp.i
+
+verification.s: verification.cpp.s
+.PHONY : verification.s
+
+# target to generate assembly for a file
+verification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QPS.dir/build.make CMakeFiles/QPS.dir/verification.cpp.s
+.PHONY : verification.cpp.s
 
 # Help Target
 help:
@@ -161,10 +257,22 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... CrowExample"
-	@echo "... api.o"
-	@echo "... api.i"
-	@echo "... api.s"
+	@echo "... QPS"
+	@echo "... api/api.o"
+	@echo "... api/api.i"
+	@echo "... api/api.s"
+	@echo "... graph.o"
+	@echo "... graph.i"
+	@echo "... graph.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... preprocessing.o"
+	@echo "... preprocessing.i"
+	@echo "... preprocessing.s"
+	@echo "... verification.o"
+	@echo "... verification.i"
+	@echo "... verification.s"
 .PHONY : help
 
 

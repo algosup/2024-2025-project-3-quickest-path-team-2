@@ -152,7 +152,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=CrowExample
+CMAKE_PROJECT_NAME:STATIC=QuickestPath
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
@@ -227,6 +227,15 @@ CrowExample_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 CrowExample_SOURCE_DIR:STATIC=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src
+
+//Value Computed by CMake
+QuickestPath_BINARY_DIR:STATIC=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src/build
+
+//Value Computed by CMake
+QuickestPath_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+QuickestPath_SOURCE_DIR:STATIC=/Users/mathis_lebel/Documents/GitHub/2024-2025-project-3-quickest-path-team-2/src
 
 //The directory containing a CMake configuration file for boost_headers.
 boost_headers_DIR:PATH=/opt/homebrew/lib/cmake/boost_headers-1.87.0

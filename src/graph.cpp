@@ -8,6 +8,22 @@
 // Constructeur par défaut
 Graph::Graph() : adjList() {}
 
+// Obtenir le temps de trajet entre deux nœuds
+int Graph::get_travel_time(int landmark_1, int landmark_2) const {
+    if (landmark_1 < 0 || landmark_1 >= static_cast<int>(adjList.size()) ||
+        landmark_2 < 0 || landmark_2 >= static_cast<int>(adjList.size())) {
+        throw std::out_of_range("Landmark ID is out of bounds.");
+    }
+
+    for (const Edge& edge : adjList[landmark_1]) {
+        if (edge.target == landmark_2) {
+            return edge.weight;
+        }
+    }
+
+    return -1;
+}
+
 // Ajouter une arête au graphe
 void Graph::add_edge(int source, int target, int weight) {
     if (source >= static_cast<int>(adjList.size()) || target >= static_cast<int>(adjList.size())) {

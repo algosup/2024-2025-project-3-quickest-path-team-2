@@ -16,6 +16,9 @@ public:
 
     void add_edge(int source, int target, int weight);
     std::vector<int> shortest_path(int source, int target, int& totalTime);
+    int get_travel_time(int landmark_1, int landmark_2) const;
+
+
 
 
 

@@ -63,5 +63,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/CrowExample.dir/DependInfo.cmake"
+  "CMakeFiles/QPS.dir/DependInfo.cmake"
   )
