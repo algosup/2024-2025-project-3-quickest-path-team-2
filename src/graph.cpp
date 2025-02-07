@@ -4,6 +4,7 @@
 #include <queue>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 
 /**
  * Default constructor for the Graph class.
@@ -81,34 +82,55 @@ std::vector<int> Graph::shortest_path(int source, int target, uint32_t& totalTim
     int meetingNode = -1;
 
     while (!pqForward.empty() && !pqBackward.empty()) {
-        auto process = [&](std::priority_queue<NodeDistPair, std::vector<NodeDistPair>, decltype(comparator)>& pq,
-                           std::vector<uint32_t>& dist, std::vector<int>& prev, std::vector<bool>& processed,
-                           std::vector<uint32_t>& otherDist, std::vector<bool>& otherProcessed, bool isForward) {
-            if (!pq.empty()) {
-                auto [currentDist, currentNode] = pq.top();
-                pq.pop();
+        // Process forward search
+        if (!pqForward.empty()) {
+            auto [currentDist, currentNode] = pqForward.top();
+            pqForward.pop();
 
-                if (processed[currentNode]) return;
-                processed[currentNode] = true;
+            if (!processedForward[currentNode]) {
+                processedForward[currentNode] = true;
 
                 for (const Edge& edge : adjList[currentNode]) {
                     uint32_t newDist = currentDist + edge.weight;
-                    if (newDist < dist[edge.target]) {
-                        dist[edge.target] = newDist;
-                        prev[edge.target] = currentNode;
-                        pq.emplace(newDist, edge.target);
+                    if (newDist < distForward[edge.target]) {
+                        distForward[edge.target] = newDist;
+                        prevForward[edge.target] = currentNode;
+                        pqForward.emplace(newDist, edge.target);
                     }
-                    if (otherProcessed[edge.target] && dist[edge.target] + otherDist[edge.target] < bestCost) {
-                        bestCost = dist[edge.target] + otherDist[edge.target];
+
+                    if (processedBackward[edge.target] && distForward[edge.target] + distBackward[edge.target] < bestCost) {
+                        bestCost = distForward[edge.target] + distBackward[edge.target];
                         meetingNode = edge.target;
                     }
                 }
             }
-        };
+        }
 
-        process(pqForward, distForward, prevForward, processedForward, distBackward, processedBackward, true);
-        process(pqBackward, distBackward, prevBackward, processedBackward, distForward, processedForward, false);
+        // Process backward search
+        if (!pqBackward.empty()) {
+            auto [currentDist, currentNode] = pqBackward.top();
+            pqBackward.pop();
 
+            if (!processedBackward[currentNode]) {
+                processedBackward[currentNode] = true;
+
+                for (const Edge& edge : adjList[currentNode]) {
+                    uint32_t newDist = currentDist + edge.weight;
+                    if (newDist < distBackward[edge.target]) {
+                        distBackward[edge.target] = newDist;
+                        prevBackward[edge.target] = currentNode;
+                        pqBackward.emplace(newDist, edge.target);
+                    }
+
+                    if (processedForward[edge.target] && distForward[edge.target] + distBackward[edge.target] < bestCost) {
+                        bestCost = distForward[edge.target] + distBackward[edge.target];
+                        meetingNode = edge.target;
+                    }
+                }
+            }
+        }
+
+        // Early termination condition
         if (meetingNode != -1 && bestCost < pqForward.top().first + pqBackward.top().first) {
             break;
         }
@@ -121,6 +143,7 @@ std::vector<int> Graph::shortest_path(int source, int target, uint32_t& totalTim
 
     totalTime = bestCost;
 
+    // Reconstruct the path
     std::vector<int> path;
     for (int node = meetingNode; node != -1; node = prevForward[node]) {
         path.push_back(node);

@@ -6,23 +6,37 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <unordered_map>
+#include <mutex>
 
 #define STATIC_DIR "static/"
 
+std::mutex cache_mutex;
+std::unordered_map<std::string, std::string> file_cache;
+
+// Function to read a file and return its content as a string, with caching
 std::string readFile(const std::string& filePath) {
+    std::lock_guard<std::mutex> lock(cache_mutex);
+    auto it = file_cache.find(filePath);
+    if (it != file_cache.end()) {
+        return it->second;
+    }
     std::ifstream file(filePath);
     if (!file.is_open()) {
-        throw std::runtime_error("Impossible d'ouvrir le fichier : " + filePath);
+        throw std::runtime_error("Unable to open file: " + filePath);
     }
     std::stringstream buffer;
     buffer << file.rdbuf();
-    return buffer.str();
+    std::string content = buffer.str();
+    file_cache[filePath] = content;
+    return content;
 }
 
+// Function to start the API
 void start_api(Graph& graph) {
     crow::SimpleApp app;
 
-    // Route pour la page d'accueil
+    // Route for the home page
     CROW_ROUTE(app, "/")([]() {
         try {
             return crow::response(readFile(STATIC_DIR "index.html"));
@@ -31,16 +45,16 @@ void start_api(Graph& graph) {
         }
     });
 
-    // Route pour les fichiers statiques
+    // Route for serving static files
     CROW_ROUTE(app, "/static/<string>")([](const crow::request&, std::string fileName) {
         try {
             return crow::response(readFile(STATIC_DIR + fileName));
         } catch (const std::exception& e) {
-            return crow::response(500, "Erreur lecture fichier: " + std::string(e.what()));
+            return crow::response(500, "Error reading file: " + std::string(e.what()));
         }
     });
 
-    // Route pour calculer le plus court chemin
+    // Route for computing the shortest path
     CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::GET)([&graph](const crow::request& req) {
         const char* source = req.url_params.get("source");
         const char* target = req.url_params.get("target");
@@ -48,7 +62,6 @@ void start_api(Graph& graph) {
 
         crow::json::wvalue response_json;
 
-        // Vérification des paramètres
         if (!source || !target) {
             response_json["status"] = "error";
             response_json["message"] = "Missing parameters: source and target are required.";
@@ -65,7 +78,6 @@ void start_api(Graph& graph) {
             return crow::response(400, response_json);
         }
 
-        // Calcul du plus court chemin
         uint32_t totalTime = 0;
         std::vector<int> path;
         try {
@@ -76,7 +88,6 @@ void start_api(Graph& graph) {
             return crow::response(500, response_json);
         }
 
-        // Vérification si un chemin a été trouvé
         if (path.empty()) {
             response_json["status"] = "error";
             response_json["message"] = "No path found between the given nodes.";
@@ -85,37 +96,28 @@ void start_api(Graph& graph) {
 
         if (!format) format = "json";
 
-        crow::response res;
-
-        // Format simplifié
         if (std::string(format) == "simplify") {
             response_json["status"] = "success";
-            response_json["path"] = std::move(path);
+            response_json["path"] = path;
             response_json["time"] = totalTime;
-            res = crow::response(200, response_json);
-            return res;
+            return crow::response(200, response_json);
         }
 
-        // Format JSON détaillé
         if (std::string(format) == "json") {
-            crow::json::wvalue detailed_path;
             crow::json::wvalue path_array;
-
             for (size_t i = 0; i < path.size() - 1; ++i) {
-                crow::json::wvalue step;
-                step["landmark_1"] = path[i];
-                step["landmark_2"] = path[i + 1];
-                step["time"] = graph.get_travel_time(path[i], path[i + 1]);
-                path_array[static_cast<int>(path_array.size())] = std::move(step);
+                crow::json::wvalue segment;
+                segment["landmark_1"] = path[i];
+                segment["landmark_2"] = path[i + 1];
+                segment["time"] = graph.get_travel_time(path[i], path[i + 1]);
+                path_array[i] = std::move(segment);
             }
 
-            detailed_path["status"] = "success";
-            detailed_path["path"] = std::move(path_array);
-            res = crow::response(200, detailed_path);
-            return res;
+            response_json["status"] = "success";
+            response_json["path"] = std::move(path_array);
+            return crow::response(200, response_json);
         }
 
-        // Format XML
         if (std::string(format) == "xml") {
             std::ostringstream xml_response;
             xml_response << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<paths>\n";
@@ -128,18 +130,17 @@ void start_api(Graph& graph) {
             }
             xml_response << "</paths>\n";
 
-            res = crow::response(200);
+            crow::response res(200);
             res.set_header("Content-Type", "application/xml");
             res.body = xml_response.str();
             return res;
         }
 
-        // Format non supporté
         response_json["status"] = "error";
         response_json["message"] = "Invalid format specified";
         return crow::response(400, response_json);
     });
 
-    std::cout << "Démarrage de l'API sur le port 8080..." << std::endl;
+    std::cout << "Starting API on port 8080..." << std::endl;
     app.port(8080).multithreaded().run();
 }
