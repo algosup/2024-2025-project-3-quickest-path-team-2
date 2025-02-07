@@ -9,7 +9,7 @@
 #include <thread>
 #include <chrono>
 
-// Fonction pour afficher le logo
+// Function to display the logo of the project
 // void display_logo(const std::string& file_path) {
 //     std::ifstream logo_file(file_path);
 //     if (logo_file.is_open()) {
@@ -19,7 +19,7 @@
 //         }
 //         logo_file.close();
 //     } else {
-//         std::cerr << "Erreur : Impossible d'ouvrir le fichier logo." << std::endl;
+//         std::cerr << "Error : Impossible to load the file." << std::endl;
 //     }
 // }
 
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     Graph graph;
 
     try {
-        // Lancer le preprocessing
+        // Launch the preprocessing
         auto preprocessingStart = std::chrono::high_resolution_clock::now();
         preprocess_data(inputFilePath, 0, graph);
         auto preprocessingEnd = std::chrono::high_resolution_clock::now();
@@ -45,10 +45,10 @@ int main(int argc, char* argv[]) {
         std::cout << "Preprocess finished. Data loaded in memory.\n";
         std::cout << "Preprocess time: " << preprocessingTime.count() << " seconds.\n";
 
-        // Lancer l'API dans un thread séparé
+        // Launch the API in a separate thread
         std::thread apiThread(start_api, std::ref(graph));
 
-        // Attendre que l'API se termine
+        // Wait for the API thread to finish
         apiThread.join();
 
     } catch (const std::exception& e) {
