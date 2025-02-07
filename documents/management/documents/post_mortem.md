@@ -31,14 +31,14 @@ Wanted a project that had a professional. However, we still wanted a to do a pro
 |Achivement|Obstacle|
 |----------|--------|
 |- Successfull documents|- Windows importation|
-|- 3d on the website | - Algorithm finding the path under a second criteria|
+|- 3D on the website | - Algorithm finding the path under a second criteria|
 |- Higly efficient at the project begining | - |
 |- CMD's for launching the program swiftly | - |
 
 
 ## Roadblocks, Risks and Barriers
 
-- Communication between teamates, needs to stay focused without creating it's bubble.
+- Communication between teammates, needs to stay focused without creating a social bubble around them.
 
 - Too much use of phone, chatting system for non-imoprtant matters.
   
