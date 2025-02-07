@@ -42,8 +42,8 @@ int main(int argc, char* argv[]) {
         auto preprocessingEnd = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> preprocessingTime = preprocessingEnd - preprocessingStart;
 
-        std::cout << "Prétraitement terminé. Données chargées en mémoire.\n";
-        std::cout << "Temps de prétraitement : " << preprocessingTime.count() << " secondes.\n";
+        std::cout << "Preprocess finished. Data loaded in memory.\n";
+        std::cout << "Preprocess time: " << preprocessingTime.count() << " seconds.\n";
 
         // Lancer l'API dans un thread séparé
         std::thread apiThread(start_api, std::ref(graph));
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
         apiThread.join();
 
     } catch (const std::exception& e) {
-        std::cerr << "Erreur : " << e.what() << "\n";
+        std::cerr << "Error : " << e.what() << "\n";
         return 1;
     }
 
