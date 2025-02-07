@@ -83,7 +83,7 @@ echo
 # Launch the web page after a delay
 echo
 echo "Launching web page..."
-sleep 2 && open "http://localhost:8080"
+sleep 2 && open "http://localhost:5501"
 echo
 
 echo
