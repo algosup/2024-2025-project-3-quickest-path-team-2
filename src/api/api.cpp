@@ -55,7 +55,7 @@ void start_api(Graph& graph) {
     });
 
     // Route for computing the shortest path
-    CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::GET)([&graph](const crow::request& req) {
+    CROW_ROUTE(app, "/api/shortest-path/").methods(crow::HTTPMethod::Get)([&graph](const crow::request& req) {
         const char* source = req.url_params.get("source");
         const char* target = req.url_params.get("target");
         const char* format = req.url_params.get("format");
