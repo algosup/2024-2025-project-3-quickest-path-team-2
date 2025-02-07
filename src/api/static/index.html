@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+    <title>QPS</title>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="container-fluid fixed-top header disable-selection">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <form id="qps-box" action="http://localhost:8080/api/shortest-path/" method="get">
+        <label for="source">Departure landmark</label>
+        <input class="landmark" name="source" type="number" placeholder="Landmark 1" required>
+        <label for="target">Destination landmark</label>
+        <input class="landmark" name="target" type="number" placeholder="Landmark 2" required>
+        <input id="qps-select" list="formats" name="format">
+        <datalist id="formats">
+            <option value="simplify">Simplify</option>
+            <option value="json">JSON</option>
+            <option value="xml">XML</option>
+            <option value="csv">CSV</option>
+        </datalist>
+        <input type="submit" value="Confirm">
+    </form>
+    
+
+    <button id="qps-button">QPS</button>
+
+    <script src="loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

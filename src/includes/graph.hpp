@@ -5,15 +5,16 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <cstdint>
 
 /**
  * Represents an edge in the graph.
  */
 struct Edge {
     int target;
-    int weight;
+    uint32_t weight;
     
-    Edge(int target, int weight) : target(target), weight(weight) {}
+    Edge(int target, uint32_t weight) : target(target), weight(weight) {}
 };
 
 /**
@@ -23,11 +24,12 @@ class Graph {
 public:
     Graph();
     void add_edge(int source, int target, int weight);
-    std::vector<int> shortest_path(int source, int target, long long& totalTime);
+    std::vector<int> shortest_path(int source, int target, uint32_t& totalTime);
     int get_max_node_id() const;
+    int get_travel_time(int landmark_1, int landmark_2) const;
 
 private:
-    std::vector<std::vector<std::pair<int, int>>> adjList; // Adjacency list representation of the graph
+    std::vector<std::vector<Edge>> adjList; // Storage of Edge directly instead of std::pair<int, int>
 };
 
 #endif // GRAPH_HPP

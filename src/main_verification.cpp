@@ -1,14 +1,13 @@
 /*
 Here is the main function for the verification program. It reads the data from the file and checks for errors.
-It serves to launch all the verification processes and displays the verification results.
-
+It serves to launch all the verification processes and display the results of the verification.
 To compile and run the program, open the terminal and use the following commands:
 
-- cd until src folder
-- Write "g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp"
-- Write ""./main_verification"
+cd src
+g++ -std=c++11 -o main_verification main_verification.cpp verification.cpp
+./main_verification
 
-After running, wait for the result of the verification. This should take approximately 50 seconds to complete on Mac.
+After running, wait for the result of the verification. This should take approximately 50 seconds to complete.
 */
 
 #include "includes/verification.hpp"

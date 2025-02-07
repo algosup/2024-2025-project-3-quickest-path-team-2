@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.10)
 # Define the project name
 project(QuickestPath)
 
+include_directories(/usr/local/include)  # Pour Intel mac
+include_directories(/opt/homebrew/include)
+
 # Set the C++ standard to C++17
 set(CMAKE_CXX_STANDARD 17)
 
@@ -23,4 +26,4 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 
 # Add an executable target named QPS with the specified source files
-add_executable(QPS main.cpp graph.cpp preprocessing.cpp verification.cpp)
+add_executable(QPS main.cpp graph.cpp preprocessing.cpp verification.cpp api/api.cpp)
