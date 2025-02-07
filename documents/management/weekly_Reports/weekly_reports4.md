@@ -28,7 +28,7 @@ The user Manual has been completed, including English and French.
 | Data Validation Tool     | 100%     |
 | User manual              | 100%     |
 | Pre-procession           | 100%     |
-| Algorithm development    | 80%     |
+| Algorithm development    | 80%      |
 | REST API development     | 80%      |
 | Weekly Reports           | 80%      |
 
@@ -36,3 +36,7 @@ The user Manual has been completed, including English and French.
 ### Project post-mortem
 
 A project post-mortem template has been created and shall be filled by the end of the project.
+
+## Objectives for next week
+
+Finish the Algorithm once and for all.
