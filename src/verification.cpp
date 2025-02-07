@@ -1,8 +1,9 @@
 /*
-Here is the cpp file for the verification module which is the continuation of the header file for the verification module.
-I explain all in the header file
+here is the cpp file for the verification module
+is the continuation of the header file for the verification module
+I explane all in the header file
 
-I use the different includes for the cpp file:
+just I include the different includes for the cpp file:
 1. verification.hpp: To include the declarations of the functions and types used in the verification module
 2. fstream: To read the input CSV file
 3. sstream: To parse the input data

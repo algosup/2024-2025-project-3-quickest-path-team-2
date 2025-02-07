@@ -52,7 +52,8 @@ int main(int argc, char* argv[]) {
         apiThread.join();
 
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Erreur : " << e.what() << "\n";
+        return 1;
     }
 
     return 0;

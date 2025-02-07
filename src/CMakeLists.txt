@@ -1,5 +1,4 @@
 # Specify the minimum version of CMake required to build this project
-# Specify the minimum version of CMake required to build this project
 cmake_minimum_required(VERSION 3.10)
 
 # Define the project name
@@ -13,8 +12,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Find and include the Boost library, which is required for this project
 find_package(Boost REQUIRED)
-
-# Include the directories for Boost and the project's header files
 
 # Include the directories for Boost and the project's header files
 include_directories(${Boost_INCLUDE_DIRS} ./include)

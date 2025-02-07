@@ -10,9 +10,6 @@
 /**
  * Represents an edge in the graph.
  */
-/**
- * Represents an edge in the graph.
- */
 struct Edge {
     int target;
     uint32_t weight;
@@ -23,12 +20,8 @@ struct Edge {
 /**
  * Graph class to represent a weighted undirected graph.
  */
-/**
- * Graph class to represent a weighted undirected graph.
- */
 class Graph {
 public:
-    Graph();
     Graph();
     void add_edge(int source, int target, int weight);
     std::vector<int> shortest_path(int source, int target, uint32_t& totalTime);

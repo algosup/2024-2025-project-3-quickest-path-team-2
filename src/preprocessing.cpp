@@ -10,20 +10,7 @@
  * @param maxId Atomic integer to keep track of the maximum node ID.
  * @param maxLines Maximum number of lines to process (if <= 0, process all lines).
  */
-
-/**
- * Processes a chunk of the file to extract and store graph edges.
- * 
- * @param fileData Pointer to the start of the file data in memory.
- * @param fileSize Size of the file data.
- * @param graph Reference to the Graph object where edges will be added.
- * @param seenConnections Map to track already processed connections.
- * @param maxId Atomic integer to keep track of the maximum node ID.
- * @param maxLines Maximum number of lines to process (if <= 0, process all lines).
- */
 void process_chunk(
-    const char* fileData,
-    size_t fileSize,
     const char* fileData,
     size_t fileSize,
     Graph& graph,
@@ -31,8 +18,6 @@ void process_chunk(
     std::atomic<int>& maxId,
     int maxLines
 ) {
-    const char* fileEnd = fileData + fileSize;
-    const char* lineStart = fileData;
     const char* fileEnd = fileData + fileSize;
     const char* lineStart = fileData;
     int lineCount = 0;
@@ -47,34 +32,19 @@ void process_chunk(
         // Extract the line as a string
         std::string line(lineStart, lineEnd - lineStart);
         lineStart = lineEnd + 1; // Move to the next line
-    // Process each line in the chunk
-    while (lineStart < fileEnd && (maxLines <= 0 || lineCount < maxLines)) {
-        const char* lineEnd = std::find(lineStart, fileEnd, '\n');
-        if (lineEnd == fileEnd) {
-            break; // End of file
-        }
-
-        // Extract the line as a string
-        std::string line(lineStart, lineEnd - lineStart);
-        lineStart = lineEnd + 1; // Move to the next line
         lineCount++;
 
-        // Parse the line into landmarkA, landmarkB, and time
         // Parse the line into landmarkA, landmarkB, and time
         std::istringstream ss(line);
         int landmarkA, landmarkB, time;
         char delimiter;
 
         // Check if the line is well-formed
-        // Check if the line is well-formed
         if (!(ss >> landmarkA >> delimiter >> landmarkB >> delimiter >> time) || delimiter != ',') {
-            std::cerr << "Skipping malformed line: " << line << std::endl;
-            continue;
             std::cerr << "Skipping malformed line: " << line << std::endl;
             continue;
         }
 
-        // Validate the data
         // Validate the data
         if (landmarkA <= 0 || landmarkB <= 0 || time <= 0 || landmarkA == landmarkB) {
             std::cerr << "Skipping invalid data: " << line << std::endl;
@@ -84,28 +54,16 @@ void process_chunk(
         // Skip if the connection has already been processed
         if (seenConnections[landmarkA].count(landmarkB) > 0 || seenConnections[landmarkB].count(landmarkA) > 0) {
             continue;
-            std::cerr << "Skipping invalid data: " << line << std::endl;
-            continue;
         }
 
-        // Skip if the connection has already been processed
-        if (seenConnections[landmarkA].count(landmarkB) > 0 || seenConnections[landmarkB].count(landmarkA) > 0) {
-            continue;
-        }
-
-        // Add the edge to the graph and mark the connection as seen
         // Add the edge to the graph and mark the connection as seen
         graph.add_edge(landmarkA, landmarkB, time);
-        seenConnections[landmarkA].insert(landmarkB);
-        seenConnections[landmarkB].insert(landmarkA);
         seenConnections[landmarkA].insert(landmarkB);
         seenConnections[landmarkB].insert(landmarkA);
 
         // Update the maximum node ID
         maxId.store(std::max(maxId.load(), (int)std::max(landmarkA, landmarkB)));
     }
-
-    std::cout << "Processed " << lineCount << " lines." << std::endl;
 
     std::cout << "Processed " << lineCount << " lines." << std::endl;
 }

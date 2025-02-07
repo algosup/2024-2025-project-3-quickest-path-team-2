@@ -128,7 +128,7 @@ std::vector<int> Graph::shortest_path(int source, int target, uint32_t& totalTim
                     }
                 }
             }
-        };
+        }
 
         // Early termination condition
         if (meetingNode != -1 && bestCost < pqForward.top().first + pqBackward.top().first) {
