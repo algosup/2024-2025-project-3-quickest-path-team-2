@@ -35,3 +35,7 @@ echo The project has been built successfully.
 echo.
 echo Executing the project...
 run ""
+echo.
+echo The project has been executed successfully. Click on any key to close the terminal.
+pause<nul
+exit /b
