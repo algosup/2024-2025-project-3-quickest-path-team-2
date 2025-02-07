@@ -6,7 +6,7 @@
 std::string readFile(const std::string& filePath) {
     std::ifstream file(filePath);
     if (!file.is_open()) {
-        throw std::runtime_error("Impossible d'ouvrir le fichier : " + filePath);
+        throw std::runtime_error("Impossible to open the file: " + filePath);
     }
 
     std::stringstream buffer;

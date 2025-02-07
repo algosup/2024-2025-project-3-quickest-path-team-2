@@ -1,4 +1,4 @@
-/* Style général */
+/* General style */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -12,7 +12,7 @@ body {
     overflow: hidden;
 }
 
-/* Boîte QPS */
+/* QPS Box */
 #qps-box {
     position: fixed;
     top: 50%;
@@ -31,7 +31,7 @@ body {
     border: 2px solid transparent;
 }
 
-/* Effet néon */
+/* Neon effect */
 #qps-box.active {
     opacity: 1;
     visibility: visible;
@@ -40,7 +40,7 @@ body {
     box-shadow: 0 0 15px #FF9800;
 }
 
-/* Effet de flou derrière */
+/* Blur effect behind */
 #overlay {
     position: fixed;
     top: 0;
@@ -59,7 +59,7 @@ body {
     visibility: visible;
 }
 
-/* Champs de saisie */
+/* Input fields */
 #qps-box input {
     width: 100%;
     padding: 12px;
@@ -74,13 +74,13 @@ body {
     border: 2px solid transparent;
 }
 
-/* Effet focus */
+/* Focus effect */
 #qps-box input:focus {
     border-color: #FF9800;
     box-shadow: 0 0 10px #FF9800;
 }
 
-/* Bouton de fermeture */
+/* Close button */
 #close-qps {
     background: linear-gradient(45deg, #FF416C, #FF4B2B);
     color: white;
@@ -103,7 +103,7 @@ body {
     transform: scale(0.95);
 }
 
-/* Bouton QPS */
+/* QPS Button */
 #qps-button {
     position: fixed;
     bottom: 20px;

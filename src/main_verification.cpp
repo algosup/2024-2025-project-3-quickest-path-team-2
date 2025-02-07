@@ -35,7 +35,7 @@ void display_logo(const std::string& file_path) {
 
 // Function to check, for the tests cases
 void checkValueAndLog() {
-		std::cout << "Warning Test : Verification program failed." << std::endl QPS
+		std::cout << "Warning Test: Verification program failed." << std::endl QPS
 }
 
 // Main function for the verification program

@@ -29,7 +29,7 @@ public:
     int get_travel_time(int landmark_1, int landmark_2) const;
 
 private:
-    std::vector<std::vector<Edge>> adjList; // Stockage direct des Edge au lieu de std::pair<int, int>
+    std::vector<std::vector<Edge>> adjList; // Storage of Edge directly instead of std::pair<int, int>
 };
 
 #endif // GRAPH_HPP
