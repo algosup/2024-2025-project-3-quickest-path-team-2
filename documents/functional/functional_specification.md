@@ -421,7 +421,7 @@ This list might contain features that will be implemented after the deadlines or
     <tr>
       <td>
         - A downloadable method of the JSON/XML format response. <br>
-        - Before starting the pre-treatment process, a choice of the CSV file the user wants to utilize. <br> 
+        - Before starting the pre-treatment process, a choice of the CSV file the user wants to use. <br> 
         - User friendly requests to write on the terminal. <br>
         - A local tab (kind of internet page) displaying the response. <br>
         - Indicate the margin of error of the process (if it exists). <br>
