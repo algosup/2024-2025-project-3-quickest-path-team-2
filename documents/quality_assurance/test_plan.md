@@ -54,7 +54,6 @@
 - [10. Reporting](#10-reporting)
   - [10.1 Test Results](#101-test-results)
   - [10.2 Status Reports](#102-status-reports)
-- [11. Approval \& Sign-Off](#11-approval--sign-off)
 
  
 </details>
@@ -70,9 +69,9 @@ In order to validate the **Quickest Path in C++** project, this document outline
 ### 1.2 Project Overview
 
 This project focuses on computing the quickest path between two landmarks within the United States. 
-Implemented in C++, the application processes a large CSV file (*USA-roads.csv*) that contains landmark IDs and associated travel times. The system exposes a single REST API endpoint accepting a source and destination landmark, then returning the total travel time and the series of landmarks constituting the path. Given the data size of approximately 24 million nodes, performance optimization is paramount, and approximation heuristics are allowed as long as the travel time does not exceed 10% of the shortest possible route. 
+Implemented in C++, the application processes a large CSV file (*USA-roads.csv*) that contains landmark IDs and associated travel times. The system exposes a single REST API endpoint accepting a source and destination landmark, then returning the total travel time and the series of landmarks constituting the path. Given the data size of approximately 24 millions nodes, performance optimization is paramount, and approximation heuristics are allowed as long as the travel time does not exceed 10% of the shortest possible route. 
 
-Additionally, the project provides a data validation tool to confirm that the CSV file forms a Directed Acyclic Graph (DAG) and that the graph is fully connected. Verification of extremely large CSV files (e.g., up to 30 million lines) should ideally complete in about one minute. A progress bar in the command prompt will show the verification status, and if it remains stuck for more than 10 seconds, a warning is logged for potential issues.
+Additionally, the project provides a data validation tool to confirm that the CSV file forms a Directed Acyclic Graph (DAG) and that the graph is fully connected. Verification of extremely large CSV files (e.g., up to 30 millions lines) should ideally complete in about one minute. A progress bar in the command prompt will show the verification status, and if it remains stuck for more than 10 seconds, a warning is logged for potential issues.
 
 Below is a simplified schematic of how CSV data flows through validation and graph-building processes to the REST API, which ultimately serves client requests:
 
@@ -136,9 +135,9 @@ flowchart LR
 
 > [!IMPORTANT] 
 > **Error Severity:**  
-> - **Fatal errors** (via `checkValue(int actual, int expected)`)  
+> - **Fatal errors** (with `checkValue(int actual, int expected)`)  
 >  Throw exceptions and halt the test. These must be fixed before release.  
->- **Non-fatal errors** (via `checkAndLog(int actual, int expected)`)  
+>- **Non-fatal errors** (with `checkAndLog(int actual, int expected)`)  
 >  Log warnings but let the test pipeline continue. These are tracked and should be resolved.
 
 ### 2.3 Testing Tools
@@ -205,7 +204,7 @@ A living document enumerating each test with:
 - Expected outcome
 - Severity classification (fatal vs. non-fatal)
 
-This may be maintained in .md files or via a GitHub Issues “TestCase” template.
+This may be maintained in .md files or with a GitHub Issues “TestCase” template.
 
 </details> <details> <summary><ins>CI Workflow Scripts</ins></summary>
 The YAML configs that specify build steps (install g++, compile the code, run tests).
@@ -232,7 +231,7 @@ A curated set of smaller CSV files (some valid, some intentionally malformed) fo
 
 ### 5.1 REST API Testing
 
-- **Endpoints**: `/quickest_path_system?format=<json|xml>&landmark_1=<id>&landmark_2=<id>`  
+- **Endpoints**: `/api/shortest-path/?landmark_1=<id>&landmark_2=<id>&format=json|xml`  
 - **Checks**:  
   1. Valid inputs produce a JSON/XML response with correct travel time and path.  
   2. Invalid inputs (e.g., missing parameters, nonexistent landmarks) produce appropriate HTTP error codes and messages.  
@@ -242,7 +241,7 @@ A curated set of smaller CSV files (some valid, some intentionally malformed) fo
 
 - **Response Times**: Must remain under 1 second for typical pathfinding queries on a standard laptop.  
 - **Load / Stress**: If resources allow, test concurrent requests.  
-- **CSV Verification**: In ideal conditions, verifying 30 million lines in ~1 minute. A progress bar indicates the state; if no progress after 10 seconds, warn the user.
+- **CSV Verification**: In ideal conditions, verifying 30 millions lines in ~1 minute. A progress bar indicates the state; if no progress after 10 seconds, warn the user.
 
 ### 5.3 Data Integrity Testing
 
@@ -267,9 +266,9 @@ This section provides a comprehensive set of test cases covering CSV validation,
 
 **<ins>Test Case #CV-1: Negative or Zero Times</ins>**  
 - **Goal**: Confirm that lines with negative or zero travel times are flagged as fatal errors.  
-- **Preconditions**: The project is compiled, and a CSV file named `MixedValidity.csv` (or any file known to contain negative/zero times) is in the `/src/data` directory.  
+- **Preconditions**: The project is compiled, and a CSV file named `test_roads.csv` (or any file known to contain negative/zero times) is in the `/src/data` directory.  
 - **Steps**:  
-  1. Run the data validation tool on `MixedValidity.csv`.  
+  1. Run the data validation tool on your csv file (e.g.`test_roads.csv`.)
   2. Observe the console output.  
 - **Expected**:  
   - The tool logs an error message indicating a negative/zero time was detected.  
@@ -301,7 +300,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #CV-4: Large CSV Performance Check</ins>**  
-- **Goal**: Validate that processing ~30 million lines completes in ~1 minute on recommended hardware.  
+- **Goal**: Validate that processing ~30 millions lines completes in ~1 minute on recommended hardware.  
 - **Preconditions**: A large synthetic or real CSV file is available; environment must meet minimal hardware specs.  
 - **Steps**:  
   1. Provide the large CSV to the validation tool.  
@@ -332,7 +331,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that a valid GET request returns a JSON response with the correct time and path.  
 - **Preconditions**: A properly validated CSV is loaded, server is running on `localhost:8080`.  
 - **Steps**:  
-  1. `GET /quickest_path_system?format=json&landmark_1=100&landmark_2=200`  
+  1. `/api/shortest-path/?landmark_1=100&landmark_2=200&format=json`  
   2. Check response time and format.  
 - **Expected**:  
   - 200 OK status, JSON body including `"time": <int>` and `"steps": [...]` structure.  
@@ -344,7 +343,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Ensure that XML output is correct when format=xml is requested.  
 - **Preconditions**: Same environment as above.  
 - **Steps**:  
-  1. `GET /quickest_path_system?format=xml&landmark_1=123&landmark_2=456`  
+  1. `/api/shortest_path/?:landmark_1=123&:landmark_2=456&:xml`  
   2. Observe the returned XML.  
 - **Expected**:  
   - Well-formed XML with root `<response>` tag, `<time>` element, and `<steps>` sub-elements.  
@@ -356,7 +355,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm the server gracefully handles requests where the landmarks are out of range or missing.  
 - **Preconditions**: CSV loaded, server is listening.  
 - **Steps**:  
-  1. `GET /quickest_path_system?format=json&landmark_1=-1&landmark_2=9999999999`  
+  1. `/api/shortest_path&?:landmark_1=-1&:landmark_2=9999999999&:json`  
   2. Check HTTP response code and body.  
 - **Expected**:  
   - Possibly `400 Bad Request` or `404 Not Found`, with a short message stating the request is invalid.  
@@ -368,7 +367,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Verify incomplete queries produce a proper error rather than a silent fail.  
 - **Preconditions**: Normal environment.  
 - **Steps**:  
-  1. `GET /quickest_path_system?landmark_1=300` with no `landmark_2`.  
+  1. `/api/shortest_path/?landmark_1=300` with no `landmark_2`.  
   2. Observe the result.  
 - **Expected**:  
   - HTTP error code (400 or 422), with a message about missing parameters.  
@@ -392,7 +391,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 
 **<ins>Test Case #PT-1: Single Query Baseline</ins>**  
 - **Goal**: Validate that an average query completes under 1 second on typical hardware.  
-- **Preconditions**: The server is running with a mid-sized CSV (1–5 million lines).  
+- **Preconditions**: The server is running with a mid-sized CSV (1–5 millions lines).  
 - **Steps**:  
   1. Issue a GET request from cURL or Postman to the path endpoint.  
   2. Record the time from request to first byte or full response.  
@@ -402,8 +401,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #PT-2: Extended Load Simulation</ins>**  
-- **Goal**: Check if repeated queries (e.g., 100 requests in quick succession) degrade the server’s performance.  
-- **Preconditions**: Use a simple script or load tool like `ab` (ApacheBench) or `hey`.  
+- **Goal**: Check if repeated queries (e.g., 100 requests in quick succession) degrade the server’s performance.   
 - **Steps**:  
   1. Launch 100–200 requests, each to a typical path (e.g., `landmark_1=50,landmark_2=900`).  
   2. Collect average and 95th percentile response times.  
@@ -414,7 +412,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #PT-3: CSV Verification Throughput</ins>**  
-- **Goal**: Confirm the validation tool processes ~30 million lines in about 1 minute.  
+- **Goal**: Confirm the validation tool processes ~30 millions lines in about 1 minute.  
 - **Preconditions**: High-powered local or cloud environment, large CSV.  
 - **Steps**:  
   1. Time the validation run from start to finish.  
@@ -493,7 +491,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Goal**: Confirm that if the same landmark is used for start and end, the travel time is `0`, and the route is trivially that single landmark.  
 - **Preconditions**: The CSV is valid.  
 - **Steps**:  
-  1. `GET /quickest_path_system?format=json&landmark_1=500&landmark_2=500`  
+  1. `/api/shortest_path/?landmark_1=500&landmark_2=500:format=json`  
 - **Expected**:  
   - The JSON or XML returns `"time": 0` and steps of length 1 (just `500`).  
 
@@ -511,8 +509,8 @@ This section provides a comprehensive set of test cases covering CSV validation,
 <br/>
 
 **<ins>Test Case #PC-5: Large Node IDs with Realistic Times</ins>**  
-- **Goal**: Confirm the system can handle queries for high-range landmarks (e.g., 20 million) in the CSV index.  
-- **Preconditions**: A CSV file enumerating node IDs that go up to ~20 million or more.  
+- **Goal**: Confirm the system can handle queries for high-range landmarks (e.g., 20 millions) in the CSV index.  
+- **Preconditions**: A CSV file enumerating node IDs that go up to ~20 millions or more.  
 - **Steps**:  
   1. Query a valid route that uses high IDs.  
   2. Ensure system responds in <1 second.  
@@ -614,7 +612,7 @@ This section provides a comprehensive set of test cases covering CSV validation,
     </tr>
     <tr>
       <td>Performance</td>
-      <td>Stress tests, 24+ million nodes if feasible, 1-second path queries check</td>
+      <td>Stress tests, 24+ millions nodes if feasible, 1-second path queries check</td>
       <td>Weeks 4-5</td>
     </tr>
     <tr>
@@ -697,14 +695,3 @@ This section provides a comprehensive set of test cases covering CSV validation,
 - **Frequency**: Each push.  
 - **Content**: Number of tests passing, open bugs, performance changes.  
 - **Distribution**: Tech Lead, Software Engineer and Quality Assurance.
-
----
-
-## 11. Approval & Sign-Off
-
-- **Project Manager**: _______________________ *(Date: ________)*
-- **Program Manager**: _______________________ *(Date: ________)*  
-- **Tech Lead**: _____________________________ *(Date: ________)*  
-- **Software Engineer**: _____________________ *(Date: ________)*  
-- **QA (Author)**: Approved *(Date: 01/27/2025)* 
-- **Technical Writer**: ______________________ *(Date: ________)*   
