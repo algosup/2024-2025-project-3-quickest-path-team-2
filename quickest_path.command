@@ -18,51 +18,34 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Compile the verification program
-echo
-echo "Compiling verification program..."
-echo
-g++ -o verification main_verification.cpp verification.cpp -std=c++17 -pthread
-if [ $? -ne 0 ]; then
-    echo
-    echo "Compilation failed. Exiting..."
-    echo
-    exit 1
-fi
-
-# Make the verification program executable
-chmod +x verification
-
-# Run the verification program
-echo
-echo "Running verification program..."
-echo
-./verification
-if [ $? -eq 0 ]; then
-    echo
-    echo "Verification completed successfully."
-    echo
-else
-    echo
-    echo "Verification failed. Exiting..."
-    echo
-    exit 1
-fi
-
-# Run cmake and make
-echo
-echo "Running cmake and make..."
-echo
-cmake . && make
-if [ $? -ne 0 ]; then
-    echo
-    echo "CMake or make failed. Exiting..."
-    echo
-    exit 1
-fi
-
 # Navigate to the build directory
+rm build
+mkdir build
 cd build
+
+# Run cmake
+echo
+echo "Running cmake..."
+echo
+cmake ..
+if [ $? -ne 0 ]; then
+    echo
+    echo "CMake failed. Exiting..."
+    echo
+    exit 1
+fi
+
+# Run make
+echo
+echo "Running make..."
+echo
+make 
+if [ $? -ne 0 ]; then
+    echo
+    echo "Make failed. Exiting..."
+    echo
+    exit 1
+fi
 
 # Check if CrowExample exists and is executable
 if [ ! -x ./CrowExample ]; then
@@ -74,16 +57,16 @@ fi
 
 # Run the CrowExample program
 echo
-echo "Running CrowExample program..."
+echo "Running QPS program..."
 echo
-./CrowExample &
+./QPS
 sleep 2  # Give the server time to start
 echo
 
 # Launch the web page after a delay
 echo
 echo "Launching web page..."
-sleep 2 && open "http://localhost:5501"
+sleep 2 && open "http://127.0.0.1:5501/src/api/static/"
 echo
 
 echo

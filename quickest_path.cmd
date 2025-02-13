@@ -238,6 +238,7 @@ run "mingw64.exe"
 echo Write the bellowing command in the MINGW64 terminal:
 echo pacman -Syu
 echo pacman -S mingw-w64-x86_64-make
+echo pacman -S mingw-w64-x86_64-gcc
 echo.
 echo Follow the steps indicated in the MINGW64 terminal.
 echo Once is done, press any key to continue...
