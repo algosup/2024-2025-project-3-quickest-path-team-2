@@ -47,10 +47,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Check if CrowExample exists and is executable
-if [ ! -x ./CrowExample ]; then
+# Check if QPS exists and is executable
+if [ ! -x ./QPS ]; then
     echo
-    echo "CrowExample not found or not executable. Exiting..."
+    echo "QPS not found or not executable. Exiting..."
     echo
     exit 1
 fi
